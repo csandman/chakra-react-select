@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "A chakra-ui wrapper for the popular select library react-select",
   "source": "src/chakra-react-select.js",
-  "main": "dist/chakra-react-select.cjs.js",
+  "main": "dist/chakra-react-select.js",
   "module": "dist/chakra-react-select.esm.js",
   "scripts": {
     "build": "microbundle",
