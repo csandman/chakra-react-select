@@ -1,0 +1,51 @@
+{
+  "name": "chakra-react-select",
+  "version": "1.0.0",
+  "description": "A chakra-ui wrapper for the popular select library react-select",
+  "type": "module",
+  "source": "src/chakra-react-select.js",
+  "exports": "./dist/chakra-react-select.modern.js",
+  "main": "./dist/chakra-react-select.cjs",
+  "module": "./dist/chakra-react-select.esm.js",
+  "unpkg": "./dist/chakra-react-select.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "start": "microbundle watch"
+  },
+  "keywords": [
+    "chakra",
+    "chakra-ui",
+    "react",
+    "react-select",
+    "multi select",
+    "input"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csandman/chakra-react-select.git"
+  },
+  "author": "Chris Sandvik <chris.sandvik@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csandman/chakra-react-select/issues"
+  },
+  "homepage": "https://github.com/csandman/chakra-react-select#readme",
+  "dependencies": {
+    "react-select": "^4.3.1"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": "^1.6.3",
+    "react": ">=16.8.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "microbundle": "^0.13.3",
+    "prettier": "^2.4.0"
+  }
+}
