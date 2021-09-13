@@ -2,12 +2,9 @@
   "name": "chakra-react-select",
   "version": "1.0.1",
   "description": "A chakra-ui wrapper for the popular select library react-select",
-  "type": "module",
   "source": "src/chakra-react-select.js",
-  "exports": "./dist/chakra-react-select.modern.js",
-  "main": "./dist/chakra-react-select.cjs",
-  "module": "./dist/chakra-react-select.esm.js",
-  "unpkg": "./dist/chakra-react-select.umd.js",
+  "main": "dist/chakra-react-select.cjs.js",
+  "module": "dist/chakra-react-select.esm.js",
   "scripts": {
     "build": "microbundle",
     "start": "microbundle watch"
@@ -34,6 +31,7 @@
     "react-select": "^4.3.1"
   },
   "devDependencies": {
+    "@chakra-ui/react": "^1.6.7",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -42,7 +40,9 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "microbundle": "^0.13.3",
-    "prettier": "^2.4.0"
+    "prettier": "^2.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "peerDependencies": {
     "@chakra-ui/react": "^1.6.0",
