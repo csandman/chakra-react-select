@@ -33,10 +33,6 @@
   "dependencies": {
     "react-select": "^4.3.1"
   },
-  "peerDependencies": {
-    "@chakra-ui/react": "^1.6.3",
-    "react": ">=16.8.6"
-  },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -47,5 +43,9 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "microbundle": "^0.13.3",
     "prettier": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": "^1.6.0",
+    "react": ">=16.8.6"
   }
 }
