@@ -353,16 +353,16 @@ const Select = forwardRef((props, ref) => (
   </ChakraReactSelect>
 ));
 
-const AsyncSelect = forwardRef((props, ref) => (
+export default Select;
+
+export const AsyncSelect = forwardRef((props, ref) => (
   <ChakraReactSelect {...props}>
     <AsyncReactSelect ref={ref} />
   </ChakraReactSelect>
 ));
 
-const CreatableSelect = forwardRef((props, ref) => (
+export const CreatableSelect = forwardRef((props, ref) => (
   <ChakraReactSelect {...props}>
     <CreatableReactSelect ref={ref} />
   </ChakraReactSelect>
 ));
-
-export { Select as default, AsyncSelect, CreatableSelect };
