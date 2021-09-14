@@ -1,7 +1,7 @@
-import React, { cloneElement, forwardRef } from "react";
+import { cloneElement, forwardRef } from "react";
 import ReactSelect, { components as selectComponents } from "react-select";
-import AsyncReactSelect from "react-select/async";
-import CreatableReactSelect from "react-select/creatable";
+// import AsyncReactSelect from "react-select/async";
+// import CreatableReactSelect from "react-select/creatable";
 import {
   Flex,
   Tag,
@@ -267,7 +267,7 @@ const chakraComponents = {
   },
 };
 
-const ChakraReactSelect = ({
+const Select = ({
   children,
   styles = {},
   components = {},
@@ -347,22 +347,22 @@ const ChakraReactSelect = ({
   return select;
 };
 
-const Select = forwardRef((props, ref) => (
-  <ChakraReactSelect {...props}>
+const ChakraReactSelect = forwardRef((props, ref) => (
+  <Select {...props}>
     <ReactSelect ref={ref} />
-  </ChakraReactSelect>
+  </Select>
 ));
 
-export default Select;
+export default ChakraReactSelect;
 
-export const AsyncSelect = forwardRef((props, ref) => (
-  <ChakraReactSelect {...props}>
-    <AsyncReactSelect ref={ref} />
-  </ChakraReactSelect>
-));
+// export const AsyncSelect = forwardRef((props, ref) => (
+//   <Select {...props}>
+//     <AsyncReactSelect ref={ref} />
+//   </Select>
+// ));
 
-export const CreatableSelect = forwardRef((props, ref) => (
-  <ChakraReactSelect {...props}>
-    <CreatableReactSelect ref={ref} />
-  </ChakraReactSelect>
-));
+// export const CreatableSelect = forwardRef((props, ref) => (
+//   <Select {...props}>
+//     <CreatableReactSelect ref={ref} />
+//   </Select>
+// ));

@@ -16,6 +16,7 @@
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "no-underscore-dangle": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       1,
       {
