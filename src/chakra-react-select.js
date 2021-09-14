@@ -1,7 +1,7 @@
 import React, { cloneElement, forwardRef } from "react";
 import ReactSelect, { components as selectComponents } from "react-select";
-// import AsyncReactSelect from "react-select/async";
-// import CreatableReactSelect from "react-select/creatable";
+import AsyncReactSelect from "react-select/async";
+import CreatableReactSelect from "react-select/creatable";
 import {
   Flex,
   Tag,
@@ -355,14 +355,14 @@ const ChakraReactSelect = forwardRef((props, ref) => (
 
 export default ChakraReactSelect;
 
-// export const AsyncSelect = forwardRef((props, ref) => (
-//   <Select {...props}>
-//     <AsyncReactSelect ref={ref} />
-//   </Select>
-// ));
+export const AsyncSelect = forwardRef((props, ref) => (
+  <Select {...props}>
+    <AsyncReactSelect ref={ref} />
+  </Select>
+));
 
-// export const CreatableSelect = forwardRef((props, ref) => (
-//   <Select {...props}>
-//     <CreatableReactSelect ref={ref} />
-//   </Select>
-// ));
+export const CreatableSelect = forwardRef((props, ref) => (
+  <Select {...props}>
+    <CreatableReactSelect ref={ref} />
+  </Select>
+));
