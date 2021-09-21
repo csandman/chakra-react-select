@@ -3,7 +3,7 @@
   "version": "1.1.0-beta.0",
   "description": "A chakra-ui wrapper for the popular select library react-select",
   "source": "src/index.js",
-  "main": "dist/chakra-react-select.js",
+  "main": "dist/chakra-react-select.cjs.js",
   "module": "dist/chakra-react-select.esm.js",
   "scripts": {
     "build": "rollup -c",
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@babel/plugin-syntax-jsx": "^7.14.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
     "@rollup/plugin-babel": "^5.3.0",
@@ -48,6 +49,7 @@
     "microbundle": "^0.13.3",
     "prettier": "^2.4.0",
     "rollup": "^2.56.3",
+    "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "peerDependencies": {

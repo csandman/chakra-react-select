@@ -13,7 +13,7 @@ npm i chakra-react-select
 Then you can import the base select package, the async select, or the creatable select:
 
 ```js
-import Select, { AsyncSelect, CreatableSelect } from "chakra-react-select";
+import { Select, AsyncSelect, CreatableSelect } from "chakra-react-select";
 ```
 
 In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept all of the props that the original takes, however customizing the `theme` or the `components` could break this implementation so change them at your own risk. There are also a few extra things you can do with this wrapper that pull from the chakra library.
