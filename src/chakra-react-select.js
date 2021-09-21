@@ -15,7 +15,7 @@ import {
   useStyles,
   useTheme,
   useColorModeValue,
-  useFormControl,
+  useFormControlContext,
   createIcon,
 } from "@chakra-ui/react";
 
@@ -281,7 +281,8 @@ const ChakraReactSelect = ({
   // Combine the props passed into the component with the props
   // that can be set on a surrounding form control to get
   // the values of `isDisabled` and `isInvalid`
-  const inputProps = useFormControl({ isDisabled, isInvalid });
+  const { isDisabled: isFormControlDisabled, isInvalid: isFormControlInvalid } =
+    useFormControlContext();
 
   // The chakra theme styles for TagCloseButton when focused
   const closeButtonFocus =
@@ -337,8 +338,8 @@ const ChakraReactSelect = ({
     multiValueRemoveFocusStyle,
     // isDisabled and isInvalid can be set on the component
     // or on a surrounding form control
-    isDisabled: inputProps.disabled,
-    isInvalid: !!inputProps["aria-invalid"],
+    isDisabled: isDisabled ?? isFormControlDisabled,
+    isInvalid: isInvalid ?? isFormControlInvalid,
     ...props,
   });
 
