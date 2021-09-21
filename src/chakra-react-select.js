@@ -1,7 +1,5 @@
-import React, { cloneElement, forwardRef } from "react";
-import ReactSelect, { components as selectComponents } from "react-select";
-import AsyncReactSelect from "react-select/async";
-import CreatableReactSelect from "react-select/creatable";
+import React, { cloneElement } from "react";
+import { components as selectComponents } from "react-select";
 import {
   Flex,
   Tag,
@@ -210,9 +208,9 @@ const chakraComponents = {
     const chakraTheme = useTheme();
 
     const borderRadii = {
-      sm: chakraTheme.radii.sm,
-      md: chakraTheme.radii.md,
-      lg: chakraTheme.radii.md,
+      sm: chakraTheme.radii?.sm,
+      md: chakraTheme.radii?.md,
+      lg: chakraTheme.radii?.md,
     };
 
     return (
@@ -267,7 +265,7 @@ const chakraComponents = {
   },
 };
 
-const Select = ({
+const ChakraReactSelect = ({
   children,
   styles = {},
   components = {},
@@ -287,17 +285,17 @@ const Select = ({
 
   // The chakra theme styles for TagCloseButton when focused
   const closeButtonFocus =
-    chakraTheme.components.Tag.baseStyle.closeButton._focus;
+    chakraTheme.components?.Tag?.baseStyle?.closeButton?._focus;
   const multiValueRemoveFocusStyle = {
-    background: closeButtonFocus.bg,
-    boxShadow: chakraTheme.shadows[closeButtonFocus.boxShadow],
+    background: closeButtonFocus?.bg,
+    boxShadow: chakraTheme.shadows?.[closeButtonFocus?.boxShadow],
   };
 
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
   const placeholderColor = useColorModeValue(
-    chakraTheme.colors.gray[400],
-    chakraTheme.colors.whiteAlpha[400]
+    chakraTheme.colors?.gray?.[400],
+    chakraTheme.colors?.whiteAlpha?.[400]
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
@@ -347,22 +345,4 @@ const Select = ({
   return select;
 };
 
-const ChakraReactSelect = forwardRef((props, ref) => (
-  <Select {...props}>
-    <ReactSelect ref={ref} />
-  </Select>
-));
-
 export default ChakraReactSelect;
-
-export const AsyncSelect = forwardRef((props, ref) => (
-  <Select {...props}>
-    <AsyncReactSelect ref={ref} />
-  </Select>
-));
-
-export const CreatableSelect = forwardRef((props, ref) => (
-  <Select {...props}>
-    <CreatableReactSelect ref={ref} />
-  </Select>
-));
