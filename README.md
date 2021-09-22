@@ -8,7 +8,7 @@
 
 This component is a wrapper for the popular react component [react-select](https://react-select.com/home) made using the UI library [Chakra UI](https://chakra-ui.com/).
 
-![](github/chakra-react-select)
+![Chakra React Select Banner](github/chakra-react-select.png)
 
 ## Usage
 
