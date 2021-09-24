@@ -10,10 +10,11 @@ export type Size = "sm" | "md" | "lg";
 export type TagVariant = "subtle" | "solid" | "outline" | undefined;
 
 export interface ChakraSelectProps extends Props {
-  size: Size;
-  colorScheme: string;
-  isInvalid: boolean;
+  size?: Size;
+  colorScheme?: string;
+  isInvalid?: boolean;
   tagVariant?: TagVariant;
+  hasStickyGroupHeaders?: boolean;
 }
 
 export type OptionalTheme = {

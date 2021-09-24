@@ -8,7 +8,7 @@
 
 This component is a wrapper for the popular react component [react-select](https://react-select.com/home) made using the UI library [Chakra UI](https://chakra-ui.com/).
 
-![Chakra React Select Banner](https://raw.githubusercontent.com/csandman/chakra-react-select/main/github/chakra-react-select.png)
+![Chakra React Select Banner](./github/chakra-react-select.png)
 
 Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
 
@@ -49,7 +49,8 @@ return (
 ```js
 return (
   <Select
-    colorScheme="purple" // The global color scheme
+    {/* The global color scheme */}
+    colorScheme="purple"
     options={[
       {
         label: "I am red",
@@ -71,7 +72,8 @@ return (
 ```js
 return (
   <Select
-    tagVariant="solid" // The global variant
+    {/* The global variant */}
+    tagVariant="solid"
     options={[
       {
         label: "I have the outline style",
@@ -108,7 +110,15 @@ return (
 );
 ```
 
-- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti`
+- One thing I added which isn't specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+
+```js
+return <Select hasStickyGroupHeaders />;
+```
+
+![Chakra React Select Banner](./github/sticky-group-headers.png)
+
+- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti` is passed.
 
 ```js
 return (

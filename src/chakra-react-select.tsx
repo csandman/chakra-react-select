@@ -266,8 +266,15 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Box>
     );
   },
-  GroupHeading: ({ innerProps, children, selectProps: { size } }) => {
-    const { groupTitle } = useStyles();
+  GroupHeading: ({
+    innerProps,
+    children,
+    selectProps: { size, hasStickyGroupHeaders },
+  }) => {
+    const {
+      groupTitle,
+      list: { bg },
+    } = useStyles();
 
     const chakraTheme = useTheme();
     const fontSizes: SizeProps = {
@@ -288,6 +295,10 @@ const chakraComponents: ChakraSelectProps["components"] = {
           fontSize: fontSizes[size as Size],
           p: paddings[size as Size],
           m: 0,
+          borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
+          position: hasStickyGroupHeaders ? "sticky" : "static",
+          top: -2,
+          bg,
         }}
         {...innerProps}
       >
@@ -346,6 +357,7 @@ const ChakraReactSelect = ({
   isInvalid,
   inputId,
   tagVariant,
+  hasStickyGroupHeaders = false,
   ...props
 }: ChakraSelectProps): ReactElement => {
   const chakraTheme = useTheme();
@@ -426,6 +438,7 @@ const ChakraReactSelect = ({
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputId || inputProps.id,
+    hasStickyGroupHeaders,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
