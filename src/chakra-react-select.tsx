@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { cloneElement, ReactElement } from "react";
-import { components as selectComponents } from "react-select";
 import {
   Flex,
   Tag,
@@ -216,12 +215,31 @@ const chakraComponents: ChakraSelectProps["components"] = {
   },
   // Menu components
   MenuPortal: ({ children }) => <Portal>{children}</Portal>,
-  Menu: ({ children, ...props }) => {
+  Menu: ({ children, innerProps, selectProps: { size } }) => {
     const menuStyles = useMultiStyleConfig("Menu", {});
+
+    const chakraTheme = useTheme();
+    const borderRadii: SizeProps = {
+      sm: chakraTheme.radii.sm,
+      md: chakraTheme.radii.md,
+      lg: chakraTheme.radii.md,
+    };
+
     return (
-      <selectComponents.Menu {...props}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "100%",
+          my: "8px",
+          w: "100%",
+          zIndex: 1,
+          overflow: "hidden",
+          rounded: borderRadii[size as Size],
+        }}
+        {...innerProps}
+      >
         <StylesProvider value={menuStyles}>{children}</StylesProvider>
-      </selectComponents.Menu>
+      </Box>
     );
   },
   MenuList: ({ innerRef, children, maxHeight, selectProps: { size } }) => {
