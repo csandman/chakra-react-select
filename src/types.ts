@@ -7,10 +7,13 @@ export { RecursiveCSSObject } from "@chakra-ui/react";
 
 export type Size = "sm" | "md" | "lg";
 
+export type TagVariant = "subtle" | "solid" | "outline" | undefined;
+
 export interface ChakraSelectProps extends Props {
   size: Size;
   colorScheme: string;
   isInvalid: boolean;
+  tagVariant?: TagVariant;
 }
 
 export type OptionalTheme = {
