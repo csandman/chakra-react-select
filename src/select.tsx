@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import ReactSelect from "react-select";
+import ReactSelect, { Props } from "react-select";
 import ChakraReactSelect from "./chakra-react-select";
 
-const Select = forwardRef((props, ref) => (
+const Select = forwardRef<any, Props>((props, ref) => (
   <ChakraReactSelect {...props}>
     <ReactSelect ref={ref} />
   </ChakraReactSelect>

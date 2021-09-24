@@ -2,13 +2,33 @@
   "name": "chakra-react-select",
   "version": "1.1.4",
   "description": "A chakra-ui wrapper for the popular select library react-select",
-  "type": "module",
-  "source": "src/index.js",
-  "main": "dist/chakra-react-select.cjs",
-  "module": "dist/chakra-react-select.esm.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -cw"
+    "prebuild": "rimraf dist",
+    "start": "nodemon --watch src --exec npm run build -e ts,tsx",
+    "build": "concurrently npm:build:*",
+    "lint": "concurrently npm:lint:*",
+    "build:esm": "cross-env BABEL_ENV=esm babel src --root-mode upward --extensions .ts,.tsx -d dist/esm --source-maps",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel src --root-mode upward --extensions .ts,.tsx -d dist/cjs --source-maps",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "lint:src": "eslint src --ext .ts,.tsx",
+    "lint:types": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "keywords": [
     "chakra",
@@ -32,32 +52,44 @@
     "react-select": "^4.3.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.5",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^17.1.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@rollup/plugin-replace": "^3.0.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/react": "^17.0.24",
+    "@types/react-select": "^4.0.17",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^6.2.1",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react": "^1.1.7",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "nodemon": "^2.0.13",
     "prettier": "^2.4.0",
-    "rollup": "^2.56.3",
-    "rollup-plugin-filesize": "^9.1.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-terser": "^7.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.3"
   },
   "peerDependencies": {
     "@chakra-ui/react": "^1.6.0",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
-    "framer-motion": "^4.0.0",
+    "framer-motion": "3.x || 4.x",
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }

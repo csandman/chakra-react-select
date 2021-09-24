@@ -1,5 +1,10 @@
-import React, { cloneElement } from "react";
-import { components as selectComponents } from "react-select";
+import React, { cloneElement, ReactElement } from "react";
+import {
+  components as selectComponents,
+  Props as SelectProps,
+  Theme,
+  ThemeSpacing,
+} from "react-select";
 import {
   Flex,
   Tag,
@@ -17,7 +22,20 @@ import {
   useColorModeValue,
   useFormControl,
   createIcon,
+  RecursiveCSSObject,
+  CSSWithMultiValues,
 } from "@chakra-ui/react";
+
+type OptionalTheme = {
+  borderRadius?: number;
+  colors?: { [key: string]: string };
+  spacing?: ThemeSpacing;
+};
+
+interface ItemProps extends CSSWithMultiValues {
+  _disabled: CSSWithMultiValues;
+  _focus: CSSWithMultiValues;
+}
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
@@ -27,7 +45,7 @@ const ChevronDown = createIcon({
 });
 
 // Custom styles for components which do not have a chakra equivalent
-const chakraStyles = {
+const chakraStyles: SelectProps["styles"] = {
   // When disabled, react-select sets the pointer-state to none
   // which prevents the `not-allowed` cursor style from chakra
   // from getting applied to the Control
@@ -78,6 +96,7 @@ const chakraStyles = {
   // Add the chakra style for when a TagCloseButton has focus
   multiValueRemove: (
     provided,
+    // @ts-ignore For some reason isFocused is not recognized as a prop here but it works
     { isFocused, selectProps: { multiValueRemoveFocusStyle } }
   ) => (isFocused ? multiValueRemoveFocusStyle : {}),
   control: () => ({}),
@@ -88,7 +107,7 @@ const chakraStyles = {
   group: () => ({}),
 };
 
-const chakraComponents = {
+const chakraComponents: SelectProps["components"] = {
   // Control components
   Control: ({
     children,
@@ -196,7 +215,7 @@ const chakraComponents = {
   // Menu components
   MenuPortal: ({ children }) => <Portal>{children}</Portal>,
   Menu: ({ children, ...props }) => {
-    const menuStyles = useMultiStyleConfig("Menu");
+    const menuStyles = useMultiStyleConfig("Menu", {});
     return (
       <selectComponents.Menu {...props}>
         <StylesProvider value={menuStyles}>{children}</StylesProvider>
@@ -251,13 +270,15 @@ const chakraComponents = {
           ...item,
           w: "100%",
           textAlign: "start",
-          bg: isFocused ? item._focus.bg : "transparent",
           fontSize: size,
-          ...(isDisabled && item._disabled),
+          bg: isFocused
+            ? (item as RecursiveCSSObject<ItemProps>)._focus.bg
+            : "transparent",
+          ...(isDisabled && (item as RecursiveCSSObject<ItemProps>)._disabled),
         }}
         ref={innerRef}
         {...innerProps}
-        {...(isDisabled && { disabled: true })}
+        disabled={isDisabled ? true : undefined}
       >
         {children}
       </Box>
@@ -269,13 +290,13 @@ const ChakraReactSelect = ({
   children,
   styles = {},
   components = {},
-  theme = () => ({}),
+  theme,
   size = "md",
   colorScheme = "gray",
   isDisabled,
   isInvalid,
   ...props
-}) => {
+}: SelectProps): ReactElement => {
   const chakraTheme = useTheme();
 
   // Combine the props passed into the component with the props
@@ -314,8 +335,11 @@ const ChakraReactSelect = ({
       ...chakraStyles,
       ...styles,
     },
-    theme: (baseTheme) => {
-      const propTheme = theme(baseTheme);
+    theme: (baseTheme: Theme) => {
+      let propTheme: OptionalTheme = {};
+      if (typeof theme === "function") {
+        propTheme = theme(baseTheme);
+      }
 
       return {
         ...baseTheme,
@@ -339,6 +363,7 @@ const ChakraReactSelect = ({
     // or on a surrounding form control
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
+    "aria-labelledby": inputProps["aria-labelledby"],
     ...props,
   });
 
