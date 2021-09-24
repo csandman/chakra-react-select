@@ -6,9 +6,11 @@
     "node": true
   },
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
     "prettier"
@@ -28,9 +30,9 @@
     "no-underscore-dangle": "off",
     "react/jsx-filename-extension": [
       "error",
-      { "extensions": [".ts", ".tsx"] }
-    ],
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+      {
+        "extensions": [".ts", ".tsx"]
+      }
+    ]
   }
 }

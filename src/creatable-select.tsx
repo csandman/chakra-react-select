@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { forwardRef } from "react";
 import CreatableReactSelect from "react-select/creatable";
 import { Props } from "react-select";
