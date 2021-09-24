@@ -367,6 +367,8 @@ const ChakraReactSelect = ({
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputId || inputProps.id,
     ...props,
+    "aria-invalid":
+      props["aria-invalid"] ?? inputProps["aria-invalid"] ? true : undefined,
   });
 
   return select;
