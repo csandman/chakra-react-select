@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { cloneElement, ReactElement } from "react";
-import {
-  components as selectComponents,
-  Props as SelectProps,
-  Theme,
-  ThemeSpacing,
-} from "react-select";
+import { components as selectComponents } from "react-select";
 import {
   Flex,
   Tag,
@@ -23,20 +18,16 @@ import {
   useColorModeValue,
   useFormControl,
   createIcon,
-  RecursiveCSSObject,
-  CSSWithMultiValues,
 } from "@chakra-ui/react";
-
-type OptionalTheme = {
-  borderRadius?: number;
-  colors?: { [key: string]: string };
-  spacing?: ThemeSpacing;
-};
-
-interface ItemProps extends CSSWithMultiValues {
-  _disabled: CSSWithMultiValues;
-  _focus: CSSWithMultiValues;
-}
+import {
+  ChakraSelectProps,
+  Size,
+  Theme,
+  RecursiveCSSObject,
+  SxProps,
+  SizeProps,
+  OptionalTheme,
+} from "./types";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
@@ -46,10 +37,10 @@ const ChevronDown = createIcon({
 });
 
 // Custom styles for components which do not have a chakra equivalent
-const chakraStyles: SelectProps["styles"] = {
-  // When disabled, react-select sets the pointer-state to none
-  // which prevents the `not-allowed` cursor style from chakra
-  // from getting applied to the Control
+const chakraStyles: ChakraSelectProps["styles"] = {
+  // When disabled, react-select sets the pointer-state to none which prevents
+  // the `not-allowed` cursor style from chakra from getting applied to the
+  // Control
   container: (provided) => ({
     ...provided,
     pointerEvents: "auto",
@@ -64,7 +55,7 @@ const chakraStyles: SelectProps["styles"] = {
     boxShadow: "none",
   }),
   valueContainer: (provided, { selectProps: { size } }) => {
-    const px = {
+    const px: SizeProps = {
       sm: "0.75rem",
       md: "1rem",
       lg: "1rem",
@@ -72,17 +63,17 @@ const chakraStyles: SelectProps["styles"] = {
 
     return {
       ...provided,
-      padding: `0.125rem ${px[size]}`,
+      padding: `0.125rem ${px[size as Size]}`,
     };
   },
   loadingMessage: (provided, { selectProps: { size } }) => {
-    const fontSizes = {
+    const fontSizes: SizeProps = {
       sm: "0.875rem",
       md: "1rem",
       lg: "1.125rem",
     };
 
-    const paddings = {
+    const paddings: SizeProps = {
       sm: "6px 9px",
       md: "8px 12px",
       lg: "10px 15px",
@@ -90,15 +81,16 @@ const chakraStyles: SelectProps["styles"] = {
 
     return {
       ...provided,
-      fontSize: fontSizes[size],
-      padding: paddings[size],
+      fontSize: fontSizes[size as Size],
+      padding: paddings[size as Size],
     };
   },
   // Add the chakra style for when a TagCloseButton has focus
   multiValueRemove: (
     provided,
     {
-      // @ts-ignore For some reason isFocused is not recognized as a prop here but it works
+      // @ts-ignore For some reason isFocused is not recognized as a prop here
+      // but it works
       isFocused,
       selectProps: { multiValueRemoveFocusStyle },
     }
@@ -111,7 +103,7 @@ const chakraStyles: SelectProps["styles"] = {
   group: () => ({}),
 };
 
-const chakraComponents: SelectProps["components"] = {
+const chakraComponents: ChakraSelectProps["components"] = {
   // Control components
   Control: ({
     children,
@@ -123,7 +115,7 @@ const chakraComponents: SelectProps["components"] = {
   }) => {
     const inputStyles = useMultiStyleConfig("Input", { size });
 
-    const heights = {
+    const heights: SizeProps = {
       sm: 8,
       md: 10,
       lg: 12,
@@ -138,7 +130,7 @@ const chakraComponents: SelectProps["components"] = {
             p: 0,
             overflow: "hidden",
             h: "auto",
-            minH: heights[size],
+            minH: heights[size as Size],
           }}
           {...innerProps}
           data-focus={isFocused ? true : undefined}
@@ -161,7 +153,8 @@ const chakraComponents: SelectProps["components"] = {
       ref={innerRef}
       {...innerProps}
       m="0.125rem"
-      // react-select Fixed Options example: https://react-select.com/home#fixed-options
+      // react-select Fixed Options example:
+      // https://react-select.com/home#fixed-options
       variant={data.isFixed ? "solid" : "subtle"}
       colorScheme={data.colorScheme || selectProps.colorScheme}
       size={selectProps.size}
@@ -194,12 +187,12 @@ const chakraComponents: SelectProps["components"] = {
   DropdownIndicator: ({ innerProps, selectProps: { size } }) => {
     const { addon } = useStyles();
 
-    const iconSizes = {
+    const iconSizes: SizeProps = {
       sm: 4,
       md: 5,
       lg: 6,
     };
-    const iconSize = iconSizes[size];
+    const iconSize = iconSizes[size as Size];
 
     return (
       <Center
@@ -230,7 +223,7 @@ const chakraComponents: SelectProps["components"] = {
     const { list } = useStyles();
 
     const chakraTheme = useTheme();
-    const borderRadii = {
+    const borderRadii: SizeProps = {
       sm: chakraTheme.radii.sm,
       md: chakraTheme.radii.md,
       lg: chakraTheme.radii.md,
@@ -242,7 +235,7 @@ const chakraComponents: SelectProps["components"] = {
           ...list,
           maxH: `${maxHeight}px`,
           overflowY: "auto",
-          borderRadius: borderRadii[size],
+          borderRadius: borderRadii[size as Size],
         }}
         ref={innerRef}
       >
@@ -250,10 +243,31 @@ const chakraComponents: SelectProps["components"] = {
       </Box>
     );
   },
-  GroupHeading: ({ innerProps, children }) => {
+  GroupHeading: ({ innerProps, children, selectProps: { size } }) => {
     const { groupTitle } = useStyles();
+
+    const chakraTheme = useTheme();
+    const fontSizes: SizeProps = {
+      sm: chakraTheme.fontSizes.xs,
+      md: chakraTheme.fontSizes.sm,
+      lg: chakraTheme.fontSizes.md,
+    };
+    const paddings: SizeProps = {
+      sm: "0.4rem 0.8rem",
+      md: "0.5rem 1rem",
+      lg: "0.6rem 1.2rem",
+    };
+
     return (
-      <Box sx={groupTitle} {...innerProps}>
+      <Box
+        sx={{
+          ...groupTitle,
+          fontSize: fontSizes[size as Size],
+          p: paddings[size as Size],
+          m: 0,
+        }}
+        {...innerProps}
+      >
         {children}
       </Box>
     );
@@ -267,6 +281,13 @@ const chakraComponents: SelectProps["components"] = {
     selectProps: { size },
   }) => {
     const { item } = useStyles();
+
+    const paddings: SizeProps = {
+      sm: "0.3rem 0.6rem",
+      md: "0.4rem 0.8rem",
+      lg: "0.5rem 1rem",
+    };
+
     return (
       <Box
         role="button"
@@ -275,10 +296,11 @@ const chakraComponents: SelectProps["components"] = {
           w: "100%",
           textAlign: "start",
           fontSize: size,
+          p: paddings[size as Size],
           bg: isFocused
-            ? (item as RecursiveCSSObject<ItemProps>)._focus.bg
+            ? (item as RecursiveCSSObject<SxProps>)._focus.bg
             : "transparent",
-          ...(isDisabled && (item as RecursiveCSSObject<ItemProps>)._disabled),
+          ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
         }}
         ref={innerRef}
         {...innerProps}
@@ -301,12 +323,12 @@ const ChakraReactSelect = ({
   isInvalid,
   inputId,
   ...props
-}: SelectProps): ReactElement => {
+}: ChakraSelectProps): ReactElement => {
   const chakraTheme = useTheme();
 
-  // Combine the props passed into the component with the props
-  // that can be set on a surrounding form control to get
-  // the values of `isDisabled` and `isInvalid`
+  // Combine the props passed into the component with the props that can be set
+  // on a surrounding form control to get the values of `isDisabled` and
+  // `isInvalid`
   const inputProps = useFormControl({ isDisabled, isInvalid });
 
   // The chakra theme styles for TagCloseButton when focused
@@ -370,6 +392,8 @@ const ChakraReactSelect = ({
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputId || inputProps.id,
     ...props,
+    // aria-invalid can be passed to react-select, so we allow that to
+    // override the `isInvalid` prop
     "aria-invalid":
       props["aria-invalid"] ?? inputProps["aria-invalid"] ? true : undefined,
   });

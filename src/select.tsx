@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { forwardRef } from "react";
-import ReactSelect, { Props } from "react-select";
+import ReactSelect from "react-select";
 import ChakraReactSelect from "./chakra-react-select";
+import { ChakraSelectProps } from "./types";
 
-const Select = forwardRef<any, Props>((props, ref) => (
+const Select = forwardRef<any, ChakraSelectProps>((props, ref) => (
   <ChakraReactSelect {...props}>
     <ReactSelect ref={ref} />
   </ChakraReactSelect>
