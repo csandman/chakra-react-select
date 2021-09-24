@@ -42,7 +42,7 @@ In order to use this component, you can implement it and use it like you would n
 ```
 
 - You can pass the `colorScheme` prop to the select component to change all of the selected options tags' colors. You can view the whole list of available color schemes in [the Chakra docs](https://chakra-ui.com/docs/data-display/tag#props), or if you have a custom color palette, any of the custom color names in that will be available instead.
-  - Alternatively you can add the `colorScheme` value to any of your options objects and it will only style that option when selected.
+  - Alternatively you can add the `colorScheme` key to any of your options objects and it will only style that option when selected.
 
 ```js
 <Select
@@ -56,6 +56,26 @@ In order to use this component, you can implement it and use it like you would n
     {
       label: "I fallback to purple",
       value: "i-am-purple",
+    },
+  ]}
+/>
+```
+
+- You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline` (default is `subtle`). These will reflect the `variant` prop available on the [Chakra `<Tag />` component](https://chakra-ui.com/docs/data-display/tag#props).
+  - Alternatively you can add the `variant` key to any of your options objects and it will only style that option when selected. This will override the `tagVariant` prop on the select if both are set
+
+```js
+<Select
+  tagVariant="solid" // The global variant
+  options={[
+    {
+      label: "I have the outline style",
+      value: "i-am-outlined",
+      variant: "outline", // The option variant overrides the global
+    },
+    {
+      label: "I fallback to the global `solid`",
+      value: "i-am-solid",
     },
   ]}
 />

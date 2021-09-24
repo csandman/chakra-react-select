@@ -23,6 +23,7 @@ import {
   ChakraSelectProps,
   Size,
   Theme,
+  TagVariant,
   RecursiveCSSObject,
   SxProps,
   SizeProps,
@@ -155,7 +156,11 @@ const chakraComponents: ChakraSelectProps["components"] = {
       m="0.125rem"
       // react-select Fixed Options example:
       // https://react-select.com/home#fixed-options
-      variant={data.isFixed ? "solid" : "subtle"}
+      variant={
+        data.variant || selectProps.tagVariant || data.isFixed
+          ? "solid"
+          : "subtle"
+      }
       colorScheme={data.colorScheme || selectProps.colorScheme}
       size={selectProps.size}
     >
@@ -322,6 +327,7 @@ const ChakraReactSelect = ({
   isDisabled,
   isInvalid,
   inputId,
+  tagVariant,
   ...props
 }: ChakraSelectProps): ReactElement => {
   const chakraTheme = useTheme();
@@ -347,10 +353,20 @@ const ChakraReactSelect = ({
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
-  let realSize = size;
+  let realSize: Size = size;
   const sizeOptions = ["sm", "md", "lg"];
   if (!sizeOptions.includes(size)) {
     realSize = "md";
+  }
+
+  // Ensure that the tag variant used is one of the options, either `subtle`,
+  // `solid`, or `outline` (or )
+  let realTagVariant: TagVariant = tagVariant;
+  const tagVariantOptions = ["subtle", "solid", "outline"];
+  if (typeof tagVariant !== undefined) {
+    if (!tagVariantOptions.includes(tagVariant as string)) {
+      realTagVariant = "subtle";
+    }
   }
 
   const select = cloneElement(children, {
@@ -385,6 +401,7 @@ const ChakraReactSelect = ({
     },
     colorScheme,
     size: realSize,
+    tagVariant: realTagVariant,
     multiValueRemoveFocusStyle,
     // isDisabled and isInvalid can be set on the component
     // or on a surrounding form control
