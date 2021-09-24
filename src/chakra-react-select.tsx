@@ -97,8 +97,11 @@ const chakraStyles: SelectProps["styles"] = {
   // Add the chakra style for when a TagCloseButton has focus
   multiValueRemove: (
     provided,
-    // @ts-ignore For some reason isFocused is not recognized as a prop here but it works
-    { isFocused, selectProps: { multiValueRemoveFocusStyle } }
+    {
+      // @ts-ignore For some reason isFocused is not recognized as a prop here but it works
+      isFocused,
+      selectProps: { multiValueRemoveFocusStyle },
+    }
   ) => (isFocused ? multiValueRemoveFocusStyle : {}),
   control: () => ({}),
   menuList: () => ({}),
@@ -225,12 +228,12 @@ const chakraComponents: SelectProps["components"] = {
   },
   MenuList: ({ innerRef, children, maxHeight, selectProps: { size } }) => {
     const { list } = useStyles();
-    const chakraTheme = useTheme();
 
+    const chakraTheme = useTheme();
     const borderRadii = {
-      sm: chakraTheme.radii?.sm,
-      md: chakraTheme.radii?.md,
-      lg: chakraTheme.radii?.md,
+      sm: chakraTheme.radii.sm,
+      md: chakraTheme.radii.md,
+      lg: chakraTheme.radii.md,
     };
 
     return (
@@ -308,17 +311,17 @@ const ChakraReactSelect = ({
 
   // The chakra theme styles for TagCloseButton when focused
   const closeButtonFocus =
-    chakraTheme.components?.Tag?.baseStyle?.closeButton?._focus;
+    chakraTheme.components.Tag.baseStyle.closeButton._focus;
   const multiValueRemoveFocusStyle = {
-    background: closeButtonFocus?.bg,
-    boxShadow: chakraTheme.shadows?.[closeButtonFocus?.boxShadow],
+    background: closeButtonFocus.bg,
+    boxShadow: chakraTheme.shadows[closeButtonFocus.boxShadow],
   };
 
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
   const placeholderColor = useColorModeValue(
-    chakraTheme.colors?.gray?.[400],
-    chakraTheme.colors?.whiteAlpha?.[400]
+    chakraTheme.colors.gray[400],
+    chakraTheme.colors.whiteAlpha[400]
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
