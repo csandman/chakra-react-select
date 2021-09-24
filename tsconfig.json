@@ -19,7 +19,9 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true
   },
   "include": ["src"],
   "exclude": ["node_modules"],
