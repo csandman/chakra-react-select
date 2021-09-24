@@ -296,6 +296,7 @@ const ChakraReactSelect = ({
   colorScheme = "gray",
   isDisabled,
   isInvalid,
+  inputId,
   ...props
 }: SelectProps): ReactElement => {
   const chakraTheme = useTheme();
@@ -364,6 +365,7 @@ const ChakraReactSelect = ({
     // or on a surrounding form control
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
+    inputId: inputId || inputProps.id,
     ...props,
   });
 
