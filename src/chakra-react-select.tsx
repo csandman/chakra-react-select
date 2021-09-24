@@ -364,7 +364,6 @@ const ChakraReactSelect = ({
     // or on a surrounding form control
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
-    "aria-labelledby": inputProps["aria-labelledby"],
     ...props,
   });
 
