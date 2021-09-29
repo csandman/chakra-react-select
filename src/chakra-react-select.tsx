@@ -95,6 +95,7 @@ const chakraStyles: ChakraSelectProps["styles"] = {
       selectProps: { multiValueRemoveFocusStyle },
     }
   ) => (isFocused ? multiValueRemoveFocusStyle : {}),
+  singleValue: ({ color, ...provided }) => provided,
   control: () => ({}),
   menuList: () => ({}),
   option: () => ({}),
