@@ -37,10 +37,12 @@ In order to use this component, you can implement it and use it like you would n
 
 ```js
 return (
-  <Select size="sm" />
-  <Select size="md" /> {/* Default */}
-  <Select size="lg" />
-)
+  <>
+    <Select size="sm" />
+    <Select size="md" /> {/* Default */}
+    <Select size="lg" />
+  </>
+);
 ```
 
 - You can pass the `colorScheme` prop to the select component to change all of the selected options tags' colors. You can view the whole list of available color schemes in [the Chakra docs](https://chakra-ui.com/docs/data-display/tag#props), or if you have a custom color palette, any of the custom color names in that will be available instead.
