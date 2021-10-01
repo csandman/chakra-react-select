@@ -157,9 +157,9 @@ const chakraComponents: ChakraSelectProps["components"] = {
       // react-select Fixed Options example:
       // https://react-select.com/home#fixed-options
       variant={
-        data.variant || selectProps.tagVariant || data.isFixed
-          ? "solid"
-          : "subtle"
+        data.variant ||
+        selectProps.tagVariant ||
+        (data.isFixed ? "solid" : "subtle")
       }
       colorScheme={data.colorScheme || selectProps.colorScheme}
       size={selectProps.size}
@@ -394,7 +394,7 @@ const ChakraReactSelect = ({
   // `solid`, or `outline` (or )
   let realTagVariant: TagVariant = tagVariant;
   const tagVariantOptions = ["subtle", "solid", "outline"];
-  if (typeof tagVariant !== undefined) {
+  if (tagVariant !== undefined) {
     if (!tagVariantOptions.includes(tagVariant as string)) {
       realTagVariant = "subtle";
     }
