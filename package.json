@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A chakra-ui wrapper for the popular select library react-select",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
