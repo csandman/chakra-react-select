@@ -38,7 +38,7 @@ In order to use this component, you can implement it and use it like you would n
 ```js
 return (
   <Select size="sm" />
-  <Select size="md" /> // default
+  <Select size="md" /> {/* Default */}
   <Select size="lg" />
 )
 ```
