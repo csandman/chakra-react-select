@@ -118,7 +118,7 @@ return (
 return <Select hasStickyGroupHeaders />;
 ```
 
-![Chakra React Select Banner](./github/sticky-group-headers.png)
+![Sticky Group Headers](./github/sticky-group-headers.png)
 
 - In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti` is passed.
 
@@ -140,6 +140,36 @@ return (
   />
 );
 ```
+
+- In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). Until this version I had forgotten to style the selected options in the menu for both the single select, or the multi-select with `hideSelectedOptions` set to `false`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
+
+```js
+return (
+  <>
+    <Select selectedOptionStyle="color" /> {/* Default */}
+    <Select selectedOptionStyle="check" /> {/* Chakra UI Menu Style */}
+  </>
+);
+```
+
+![Color Highlighted Selected Option](./github/color-selected-option.png)
+
+![Check Highlighted Selected Option](./github/check-selected-option.png)
+
+- If you choose to stick with the default `selectedOptionStyle="color"`, you have one additional styling option. If you do not like the default of blue for the highlight color, you can pass the `selectedOptionColor` prop to change it. This prop will accept any named color from your color theme, and it will use the `500` value in light mode or the `300` value in dark mode.
+
+```js
+return (
+  <>
+    <Select selectedOptionColor="blue" /> {/* Default */}
+    <Select selectedOptionColor="purple" />
+  </>
+);
+```
+
+![Purple Selected Option Color (light mode)](./github/purple-selected-option-light.png)
+
+![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
 
 If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
 
