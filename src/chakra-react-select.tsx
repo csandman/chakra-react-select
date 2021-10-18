@@ -10,6 +10,8 @@ import {
   Center,
   Box,
   Portal,
+  MenuIcon,
+  PropsOf,
   StylesProvider,
   useMultiStyleConfig,
   useStyles,
@@ -23,6 +25,7 @@ import {
   Size,
   Theme,
   TagVariant,
+  SelectedOptionStyle,
   RecursiveCSSObject,
   SxProps,
   SizeProps,
@@ -35,6 +38,17 @@ const ChevronDown = createIcon({
   displayName: "ChevronDownIcon",
   d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
 });
+
+// Use the CheckIcon component from the chakra menu
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
+const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
+  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
+    <polygon
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+    />
+  </svg>
+);
 
 // Custom styles for components which do not have a chakra equivalent
 const chakraStyles: ChakraSelectProps["styles"] = {
@@ -313,7 +327,14 @@ const chakraComponents: ChakraSelectProps["components"] = {
     children,
     isFocused,
     isDisabled,
-    selectProps: { size },
+    isSelected,
+    selectProps: {
+      size,
+      isMulti,
+      hideSelectedOptions,
+      selectedOptionStyle,
+      selectedOptionColor,
+    },
   }) => {
     const { item } = useStyles();
 
@@ -323,11 +344,29 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: "0.5rem 1rem",
     };
 
+    // Use the same selected color as the border of the select component
+    // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts#L73
+    const selectedBg = useColorModeValue(
+      `${selectedOptionColor}.500`,
+      `${selectedOptionColor}.300`
+    );
+    const selectedColor = useColorModeValue("white", "black");
+
+    // Don't create exta space for the checkmark if using a multi select with
+    // options that dissapear when they're selected
+    const showCheckIcon: boolean =
+      selectedOptionStyle === "check" &&
+      (!isMulti || hideSelectedOptions === false);
+
+    const shouldHighlight: boolean =
+      selectedOptionStyle === "color" && isSelected;
+
     return (
-      <Box
+      <Flex
         role="button"
         sx={{
           ...item,
+          alignItems: "center",
           w: "100%",
           textAlign: "start",
           fontSize: size,
@@ -335,14 +374,28 @@ const chakraComponents: ChakraSelectProps["components"] = {
           bg: isFocused
             ? (item as RecursiveCSSObject<SxProps>)._focus.bg
             : "transparent",
+          ...(shouldHighlight && {
+            bg: selectedBg,
+            color: selectedColor,
+            _active: { bg: selectedBg },
+          }),
           ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
         }}
         ref={innerRef}
         {...innerProps}
         disabled={isDisabled ? true : undefined}
       >
+        {showCheckIcon && (
+          <MenuIcon
+            fontSize="0.8em"
+            marginEnd="0.75rem"
+            opacity={isSelected ? 1 : 0}
+          >
+            <CheckIcon />
+          </MenuIcon>
+        )}
         {children}
-      </Box>
+      </Flex>
     );
   },
 };
@@ -357,8 +410,10 @@ const ChakraReactSelect = ({
   isDisabled,
   isInvalid,
   inputId,
-  tagVariant,
-  hasStickyGroupHeaders = false,
+  tagVariant = undefined as TagVariant,
+  hasStickyGroupHeaders = false as boolean,
+  selectedOptionStyle = "color" as SelectedOptionStyle,
+  selectedOptionColor = "blue",
   ...props
 }: ChakraSelectProps): ReactElement => {
   const chakraTheme = useTheme();
@@ -385,19 +440,33 @@ const ChakraReactSelect = ({
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
   let realSize: Size = size;
-  const sizeOptions = ["sm", "md", "lg"];
+  const sizeOptions: Size[] = ["sm", "md", "lg"];
   if (!sizeOptions.includes(size)) {
     realSize = "md";
   }
 
   // Ensure that the tag variant used is one of the options, either `subtle`,
-  // `solid`, or `outline` (or )
+  // `solid`, or `outline` (or undefined)
   let realTagVariant: TagVariant = tagVariant;
-  const tagVariantOptions = ["subtle", "solid", "outline"];
+  const tagVariantOptions: TagVariant[] = ["subtle", "solid", "outline"];
   if (tagVariant !== undefined) {
-    if (!tagVariantOptions.includes(tagVariant as string)) {
+    if (!tagVariantOptions.includes(tagVariant)) {
       realTagVariant = "subtle";
     }
+  }
+
+  // Ensure that the tag variant used is one of the options, either `subtle`,
+  // `solid`, or `outline` (or undefined)
+  let realSelectedOptionStyle: SelectedOptionStyle = selectedOptionStyle;
+  const selectedOptionStyleOptions: SelectedOptionStyle[] = ["color", "check"];
+  if (!selectedOptionStyleOptions.includes(selectedOptionStyle)) {
+    realSelectedOptionStyle = "color";
+  }
+
+  // Ensure that the color used for the selected options is a string
+  let realSelectedOptionColor: string = selectedOptionColor;
+  if (typeof selectedOptionColor !== "string") {
+    realSelectedOptionColor = "blue";
   }
 
   const select = cloneElement(children, {
@@ -433,6 +502,8 @@ const ChakraReactSelect = ({
     colorScheme,
     size: realSize,
     tagVariant: realTagVariant,
+    selectedOptionStyle: realSelectedOptionStyle,
+    selectedOptionColor: realSelectedOptionColor,
     multiValueRemoveFocusStyle,
     // isDisabled and isInvalid can be set on the component
     // or on a surrounding form control
