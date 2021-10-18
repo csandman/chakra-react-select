@@ -142,3 +142,17 @@ return (
 ```
 
 If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
+
+## Roadmap
+
+Since releasing this project, there have been a few things brought to my attention from users that I would like to update in the near future.
+
+#### [react-select v5](https://github.com/JedWatson/react-select/releases/tag/react-select%405.0.0)
+
+It was brought to my attention in [this issue](https://github.com/csandman/chakra-react-select/issues/5) that react-select had a version 5 release almost immediately after I released this package (great timing right 😏). This version is rebuilt in TypeScript so you no longer need to install `@types/react-select` to access the types. I made a first pass at upgrading to the new version, and the errors I faced along with [some](https://github.com/csandman/chakra-react-select/issues/8) [comments](https://github.com/chakra-ui/chakra-ui/issues/1293#issuecomment-928934615) I have been receiving from people have made me realize that I probably set up the types incorrectly when I first made this project. I still plan to make the switch soon, however I will need to take a deep dive into the inner workings of react-select's TypeScript support along with how TypeScript works itself, as i am very new to it. If anyone would like to help me make the upgrade/fix the way my types are implemented, I'd greatly appreciate it!
+
+#### [Better Customization](https://github.com/csandman/chakra-react-select/issues/2)
+
+It has been requested multiple times for me to include some way to customize the components to the same degree that they can be customized in the original react-select package. This will involve a great deal of improvement to the flexibility of this wrapper which was originally intended to be a basic wrapper in order to match Chakra UI's styles. I plan to do this, however I am still working out the implementation details.
+
+As of right now, my plan is to nix the `theme` prop and rely on passing custom `components` which extend the components I have made for this wrapper. If I had both, I believe there would be too much room for error and I wouldn't be confident that everything would look right. Besides, Chakra has a built in prop system for styling ([style props](https://chakra-ui.com/docs/features/style-props), [`sx`](https://chakra-ui.com/docs/features/the-sx-prop), and [`__css`](https://chakra-ui.com/docs/theming/component-style)) so implementing the theme prop on top of that would most likely be overkill.
