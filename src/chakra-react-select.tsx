@@ -228,16 +228,16 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Center>
     );
   },
-  LoadingIndicator: ({ innerProps, selectProps, theme, size, ...props }) => {
+  LoadingIndicator: ({ innerProps, selectProps: { size } }) => {
     const spinnerSizes: SizeProps = {
       sm: "xs",
       md: "sm",
       lg: "md",
     };
 
-    const spinnerSize = spinnerSizes[selectProps.size as Size];
+    const spinnerSize = spinnerSizes[size as Size];
 
-    return <Spinner mr={3} {...innerProps} size={spinnerSize} {...props} />;
+    return <Spinner mr={3} {...innerProps} size={spinnerSize} />;
   },
   // Menu components
   Menu: ({ children, innerProps, selectProps: { size } }) => {
