@@ -9,7 +9,6 @@ import {
   CloseButton,
   Center,
   Box,
-  Portal,
   MenuIcon,
   PropsOf,
   StylesProvider,
@@ -229,7 +228,6 @@ const chakraComponents: ChakraSelectProps["components"] = {
     );
   },
   // Menu components
-  MenuPortal: ({ children }) => <Portal>{children}</Portal>,
   Menu: ({ children, innerProps, selectProps: { size } }) => {
     const menuStyles = useMultiStyleConfig("Menu", {});
 
