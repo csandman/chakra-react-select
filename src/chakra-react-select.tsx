@@ -10,6 +10,7 @@ import {
   Center,
   Box,
   MenuIcon,
+  Spinner,
   PropsOf,
   StylesProvider,
   useMultiStyleConfig,
@@ -226,6 +227,17 @@ const chakraComponents: ChakraSelectProps["components"] = {
         <ChevronDown h={iconSize} w={iconSize} />
       </Center>
     );
+  },
+  LoadingIndicator: ({ innerProps, selectProps, theme, size, ...props }) => {
+    const spinnerSizes: SizeProps = {
+      sm: "xs",
+      md: "sm",
+      lg: "md",
+    };
+
+    const spinnerSize = spinnerSizes[selectProps.size as Size];
+
+    return <Spinner mr={3} {...innerProps} size={spinnerSize} {...props} />;
   },
   // Menu components
   Menu: ({ children, innerProps, selectProps: { size } }) => {
