@@ -9,8 +9,8 @@ import {
   CloseButton,
   Center,
   Box,
-  Portal,
   MenuIcon,
+  Spinner,
   PropsOf,
   StylesProvider,
   useMultiStyleConfig,
@@ -228,8 +228,18 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Center>
     );
   },
+  LoadingIndicator: ({ innerProps, selectProps, theme, size, ...props }) => {
+    const spinnerSizes: SizeProps = {
+      sm: "xs",
+      md: "sm",
+      lg: "md",
+    };
+
+    const spinnerSize = spinnerSizes[selectProps.size as Size];
+
+    return <Spinner mr={3} {...innerProps} size={spinnerSize} {...props} />;
+  },
   // Menu components
-  MenuPortal: ({ children }) => <Portal>{children}</Portal>,
   Menu: ({ children, innerProps, selectProps: { size } }) => {
     const menuStyles = useMultiStyleConfig("Menu", {});
 
