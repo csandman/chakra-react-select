@@ -92,7 +92,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
     "*.{ts,tsx,js,css,md}": "prettier --write",
     "package.json": [
       "npm run format:package",
