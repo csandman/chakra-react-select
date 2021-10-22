@@ -42,8 +42,8 @@
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "framer-motion": "3.x || 4.x",
-    "react": ">=16.8.6",
-    "react-dom": ">=16.8.6"
+    "react": "^16.8.6 || ^17.0.0",
+    "react-dom": "^16.8.6 || ^17.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
