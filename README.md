@@ -173,6 +173,15 @@ return (
 
 If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
 
+## CodeSandbox Templates
+
+When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
+
+- React Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
+- React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
+- Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
+- Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
+
 ## Roadmap
 
 Since releasing this project, there have been a few things brought to my attention from users that I would like to update in the near future.
