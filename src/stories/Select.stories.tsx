@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from "react";
 import { Container, FormControl, FormLabel } from "@chakra-ui/react";
 import ChakraReactSelect from "../select";
