@@ -29,17 +29,6 @@ export default {
         defaultValue: { summary: "md" },
       },
     },
-    selectedOptionColor: {
-      options: defaultColorOptions,
-      control: { type: "select" },
-      defaultValue: "blue",
-      description:
-        "The color key from your theme that styles the selected option",
-      table: {
-        type: { summary: "string" },
-        defaultValue: { summary: "blue" },
-      },
-    },
     selectedOptionStyle: {
       options: ["color", "check"],
       control: { type: "inline-radio" },
@@ -49,6 +38,17 @@ export default {
       table: {
         type: { summary: "string" },
         defaultValue: { summary: "color" },
+      },
+    },
+    selectedOptionColor: {
+      options: defaultColorOptions,
+      control: { type: "select" },
+      defaultValue: "blue",
+      description:
+        "The color key from your theme that styles the selected option",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "blue" },
       },
     },
     tagVariant: {
