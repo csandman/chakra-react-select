@@ -240,7 +240,15 @@ const chakraComponents: ChakraSelectProps["components"] = {
     return <Spinner mr={3} {...innerProps} size={spinnerSize} />;
   },
   // Menu components
-  Menu: ({ children, innerProps, selectProps: { size } }) => {
+  Menu: ({
+    children,
+    innerProps,
+    innerRef,
+    // @ts-ignore `placement` is not recognized as a prop but it's essential
+    // for the menu placement (and it is passed)
+    placement,
+    selectProps: { size },
+  }) => {
     const menuStyles = useMultiStyleConfig("Menu", {});
 
     const chakraTheme = useTheme();
@@ -252,9 +260,11 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     return (
       <Box
+        ref={innerRef}
         sx={{
           position: "absolute",
-          top: "100%",
+          ...(placement === "bottom" && { top: "100%" }),
+          ...(placement === "top" && { bottom: "100%" }),
           my: "8px",
           w: "100%",
           zIndex: 1,
