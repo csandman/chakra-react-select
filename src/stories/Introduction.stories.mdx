@@ -1,211 +1,213 @@
-import { Meta } from '@storybook/addon-docs';
-import Code from './assets/code-brackets.svg';
-import Colors from './assets/colors.svg';
-import Comments from './assets/comments.svg';
-import Direction from './assets/direction.svg';
-import Flow from './assets/flow.svg';
-import Plugin from './assets/plugin.svg';
-import Repo from './assets/repo.svg';
-import StackAlt from './assets/stackalt.svg';
+import { Meta } from "@storybook/addon-docs";
 
-<Meta title="Example/Introduction" />
+import banner from "./assets/chakra-react-select.png";
+import stickyGroupHeaders from "./assets/sticky-group-headers.png";
+import colorHighlight from "./assets/color-selected-option.png";
+import checkHighlight from "./assets/check-selected-option.png";
+import purpleHighlightLight from "./assets/purple-selected-option-light.png";
+import purpleHighlightDark from "./assets/purple-selected-option-dark.png";
 
-<style>{`
-  .subheading {
-    --mediumdark: '#999999';
-    font-weight: 900;
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 6px;
-    line-height: 24px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 40px;
-  }
+<Meta title="Introduction" />
 
-  .link-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 10px;
-  }
+# chakra-react-select
 
-  @media (min-width: 620px) {
-    .link-list {
-      row-gap: 20px;
-      column-gap: 20px;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+[![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE)
+[![npm - chakra-react-select](https://img.shields.io/npm/v/chakra-react-select "chakra-react-select npm")](https://www.npmjs.com/package/chakra-react-select)
+[![bundle size - chakra-react-select](https://badgen.net/bundlephobia/min/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
+[![bundle size - chakra-react-select](https://badgen.net/bundlephobia/minzip/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
+[![Total Downloads - chakra-react-select](https://badgen.net/npm/dt/chakra-react-select?color=blue "chakra-react-select npm downloads")](https://bundlephobia.com/result?p=chakra-react-select)
 
-  @media all and (-ms-high-contrast:none) {
-  .link-list {
-      display: -ms-grid;
-      -ms-grid-columns: 1fr 1fr;
-      -ms-grid-rows: 1fr 1fr;
-    }
-  }
+This component is a wrapper for the popular react component [react-select](https://react-select.com/home) made using the UI library [Chakra UI](https://chakra-ui.com/).
 
-  .link-item {
-    display: block;
-    padding: 20px 30px 20px 15px;
-    border: 1px solid #00000010;
-    border-radius: 5px;
-    transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
-    color: #333333;
-    display: flex;
-    align-items: flex-start;
-  }
+<img src={banner} alt="Chakra React Select Banner" />
 
-  .link-item:hover {
-    border-color: #1EA7FD50;
-    transform: translate3d(0, -3px, 0);
-    box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
-  }
+Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
 
-  .link-item:active {
-    border-color: #1EA7FD;
-    transform: translate3d(0, 0, 0);
-  }
+## Usage
 
-  .link-item strong {
-    font-weight: 700;
-    display: block;
-    margin-bottom: 2px;
-  }
-  
-  .link-item img {
-    height: 40px;
-    width: 40px;
-    margin-right: 15px;
-    flex: none;
-  }
+In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then install this package:
 
-  .link-item span {
-    font-size: 14px;
-    line-height: 20px;
-  }
+```bash
+npm i chakra-react-select
+# or
+yarn add chakra-react-select
+```
 
-  .tip {
-    display: inline-block;
-    border-radius: 1em;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: 700;
-    background: #E7FDD8;
-    color: #66BF3C;
-    padding: 4px 12px;
-    margin-right: 10px;
-    vertical-align: top;
-  }
+Then you can import the base `<Select />` component, the `<AsyncSelect />`, the `<CreatableSelect />` or the `<AsyncCreatableSelect />`:
 
-  .tip-wrapper {
-    font-size: 13px;
-    line-height: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
+```js
+import {
+  Select,
+  AsyncSelect,
+  CreatableSelect,
+  AsyncCreatableSelect,
+} from "chakra-react-select";
+```
 
-  .tip-wrapper code {
-    font-size: 12px;
-    display: inline-block;
-  }
+In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept all of the props that the original takes, however customizing the `theme` or the `components` could break this implementation so change them at your own risk. There are also a few extra things you can do with this wrapper that pull from the chakra library.
 
-  
-`}</style>
+- You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
 
-# Welcome to Storybook
+```js
+return (
+  <>
+    <Select size="sm" />
+    <Select size="md" /> {/* Default */}
+    <Select size="lg" />
+  </>
+);
+```
 
-Storybook helps you build UI components in isolation from your app's business logic, data, and context.
-That makes it easy to develop hard-to-reach states. Save these UI states as **stories** to revisit during development, testing, or QA.
+- You can pass the `colorScheme` prop to the select component to change all of the selected options tags' colors. You can view the whole list of available color schemes in [the Chakra docs](https://chakra-ui.com/docs/data-display/tag#props), or if you have a custom color palette, any of the custom color names in that will be available instead.
+  - Alternatively you can add the `colorScheme` key to any of your options objects and it will only style that option when selected.
 
-Browse example stories now by navigating to them in the sidebar.
-View their code in the `src/stories` directory to learn how they work.
-We recommend building UIs with a [**component-driven**](https://componentdriven.org) process starting with atomic components and ending with pages.
+```js
+return (
+  <Select
+    {/* The global color scheme */}
+    colorScheme="purple"
+    options={[
+      {
+        label: "I am red",
+        value: "i-am-red",
+        colorScheme: "red", // The option color scheme overrides the global
+      },
+      {
+        label: "I fallback to purple",
+        value: "i-am-purple",
+      },
+    ]}
+  />
+);
+```
 
-<div className="subheading">Configure</div>
+- You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline` (default is `subtle`). These will reflect the `variant` prop available on the [Chakra `<Tag />` component](https://chakra-ui.com/docs/data-display/tag#props).
+  - Alternatively you can add the `variant` key to any of your options objects and it will only style that option when selected. This will override the `tagVariant` prop on the select if both are set
 
-<div className="link-list">
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/addons/addon-types"
-    target="_blank"
-  >
-    <img src={Plugin} alt="plugin" />
-    <span>
-      <strong>Presets for popular tools</strong>
-      Easy setup for TypeScript, SCSS and more.
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/webpack"
-    target="_blank"
-  >
-    <img src={StackAlt} alt="Build" />
-    <span>
-      <strong>Build configuration</strong>
-      How to customize webpack and Babel
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/styling-and-css"
-    target="_blank"
-  >
-    <img src={Colors} alt="colors" />
-    <span>
-      <strong>Styling</strong>
-      How to load and configure CSS libraries
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/get-started/setup#configure-storybook-for-your-stack"
-    target="_blank"
-  >
-    <img src={Flow} alt="flow" />
-    <span>
-      <strong>Data</strong>
-      Providers and mocking for data libraries
-    </span>
-  </a>
-</div>
+```js
+return (
+  <Select
+    {/* The global variant */}
+    tagVariant="solid"
+    options={[
+      {
+        label: "I have the outline style",
+        value: "i-am-outlined",
+        variant: "outline", // The option variant overrides the global
+      },
+      {
+        label: "I fallback to the global `solid`",
+        value: "i-am-solid",
+      },
+    ]}
+  />
+);
+```
 
-<div className="subheading">Learn</div>
+- You can pass `isInvalid` to the select component to style it like the Chakra `<Input />` is styled when it receives the same prop.
+  - You can pass `isInvalid` or `isDisabled` to a `<FormControl />` which surrounds this component and it will output their corresponding `<Input />` styles.
 
-<div className="link-list">
-  <a className="link-item" href="https://storybook.js.org/docs" target="_blank">
-    <img src={Repo} alt="repo" />
-    <span>
-      <strong>Storybook documentation</strong>
-      Configure, customize, and extend
-    </span>
-  </a>
-  <a className="link-item" href="https://storybook.js.org/tutorials/" target="_blank">
-    <img src={Direction} alt="direction" />
-    <span>
-      <strong>In-depth guides</strong>
-      Best practices from leading teams
-    </span>
-  </a>
-  <a className="link-item" href="https://github.com/storybookjs/storybook" target="_blank">
-    <img src={Code} alt="code" />
-    <span>
-      <strong>GitHub project</strong>
-      View the source and add issues
-    </span>
-  </a>
-  <a className="link-item" href="https://discord.gg/storybook" target="_blank">
-    <img src={Comments} alt="comments" />
-    <span>
-      <strong>Discord chat</strong>
-      Chat with maintainers and the community
-    </span>
-  </a>
-</div>
+```js
+return (
+  <>
+    {/* This will show up with a red border */}
+    <Select isInvalid />
 
-<div className="tip-wrapper">
-  <span className="tip">Tip</span>Edit the Markdown in{' '}
-  <code>src/stories/Introduction.stories.mdx</code>
-</div>
+    {/* This will show up with a red border, and grayed out */}
+    <FormControl isInvalid isDisabled>
+      <FormLabel>Invalid & Disabled Select</FormLabel>
+      <Select />
+      <FormErrorMessage>
+        This error message shows because of an invalid FormControl
+      </FormErrorMessage>
+    </FormControl>
+  </>
+);
+```
+
+- One thing I added which isn't specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+
+```js
+return <Select hasStickyGroupHeaders />;
+```
+
+<img src={stickyGroupHeaders} alt="Sticky Group Headers" />
+
+- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti` is passed.
+
+```js
+return (
+  <Select
+    isMulti
+    options={[
+      {
+        label: "I can't be removed",
+        value: "fixed",
+        isFixed: true,
+      },
+      {
+        label: "I can be removed",
+        value: "not-fixed",
+      },
+    ]}
+  />
+);
+```
+
+- In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). Until this version I had forgotten to style the selected options in the menu for both the single select, or the multi-select with `hideSelectedOptions` set to `false`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
+
+```js
+return (
+  <>
+    <Select selectedOptionStyle="color" /> {/* Default */}
+    <Select selectedOptionStyle="check" /> {/* Chakra UI Menu Style */}
+  </>
+);
+```
+
+<img src={colorHighlight} alt="Color Highlighted Selected Option" />
+
+<img src={checkHighlight} alt="Check Highlighted Selected Option" />
+
+- If you choose to stick with the default `selectedOptionStyle="color"`, you have one additional styling option. If you do not like the default of blue for the highlight color, you can pass the `selectedOptionColor` prop to change it. This prop will accept any named color from your color theme, and it will use the `500` value in light mode or the `300` value in dark mode.
+
+```js
+return (
+  <>
+    <Select selectedOptionColor="blue" /> {/* Default */}
+    <Select selectedOptionColor="purple" />
+  </>
+);
+```
+
+<img
+  src={purpleHighlightLight}
+  alt="Purple Selected Option Color (light mode)"
+/>
+
+<img src={purpleHighlightDark} alt="Purple Selected Option Color (dark mode)" />
+
+If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
+
+## CodeSandbox Templates
+
+When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
+
+- React Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
+- React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
+- Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
+- Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
+
+## Roadmap
+
+Since releasing this project, there have been a few things brought to my attention from users that I would like to update in the near future.
+
+#### [react-select v5](https://github.com/JedWatson/react-select/releases/tag/react-select%405.0.0)
+
+It was brought to my attention in [this issue](https://github.com/csandman/chakra-react-select/issues/5) that react-select had a version 5 release almost immediately after I released this package (great timing right 😏). This version is rebuilt in TypeScript so you no longer need to install `@types/react-select` to access the types. I made a first pass at upgrading to the new version, and the errors I faced along with [some](https://github.com/csandman/chakra-react-select/issues/8) [comments](https://github.com/chakra-ui/chakra-ui/issues/1293#issuecomment-928934615) I have been receiving from people have made me realize that I probably set up the types incorrectly when I first made this project. I still plan to make the switch soon, however I will need to take a deep dive into the inner workings of react-select's TypeScript support along with how TypeScript works itself, as i am very new to it. If anyone would like to help me make the upgrade/fix the way my types are implemented, I'd greatly appreciate it!
+
+#### [Better Customization](https://github.com/csandman/chakra-react-select/issues/2)
+
+It has been requested multiple times for me to include some way to customize the components to the same degree that they can be customized in the original react-select package. This will involve a great deal of improvement to the flexibility of this wrapper which was originally intended to be a basic wrapper in order to match Chakra UI's styles. I plan to do this, however I am still working out the implementation details.
+
+As of right now, my plan is to nix the `theme` prop and rely on passing custom `components` which extend the components I have made for this wrapper. If I had both, I believe there would be too much room for error and I wouldn't be confident that everything would look right. Besides, Chakra has a built in prop system for styling ([style props](https://chakra-ui.com/docs/features/style-props), [`sx`](https://chakra-ui.com/docs/features/the-sx-prop), and [`__css`](https://chakra-ui.com/docs/theming/component-style)) so implementing the theme prop on top of that would most likely be overkill.
