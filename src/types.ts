@@ -1,9 +1,9 @@
 import { Props, ThemeSpacing } from "react-select";
 import { CSSWithMultiValues } from "@chakra-ui/react";
 
-export { Theme } from "react-select";
+export type { Theme } from "react-select";
 
-export { RecursiveCSSObject } from "@chakra-ui/react";
+export type { RecursiveCSSObject } from "@chakra-ui/react";
 
 export type Size = "sm" | "md" | "lg";
 
