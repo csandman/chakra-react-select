@@ -121,11 +121,14 @@ const chakraStyles: ChakraSelectProps["styles"] = {
 const chakraComponents: ChakraSelectProps["components"] = {
   // Control components
   Control: ({
+    className,
+    cx,
     children,
     innerRef,
     innerProps,
     isDisabled,
     isFocused,
+    menuIsOpen,
     selectProps: { size, isInvalid },
   }) => {
     const inputStyles = useMultiStyleConfig("Input", { size });
@@ -140,6 +143,15 @@ const chakraComponents: ChakraSelectProps["components"] = {
       <StylesProvider value={inputStyles}>
         <Flex
           ref={innerRef}
+          className={cx(
+            {
+              control: true,
+              "control--is-disabled": isDisabled,
+              "control--is-focused": isFocused,
+              "control--menu-is-open": menuIsOpen,
+            },
+            className
+          )}
           sx={{
             ...inputStyles.field,
             p: 0,
@@ -197,13 +209,30 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </TagCloseButton>
     );
   },
-  IndicatorSeparator: ({ innerProps }) => (
-    <Divider {...innerProps} orientation="vertical" opacity="1" />
+  IndicatorSeparator: ({ className, cx, innerProps }) => (
+    <Divider
+      {...innerProps}
+      className={cx({ "indicator-separator": true }, className)}
+      orientation="vertical"
+      opacity="1"
+    />
   ),
-  ClearIndicator: ({ innerProps, selectProps: { size } }) => (
-    <CloseButton {...innerProps} size={size} mx={2} tabIndex={-1} />
+  ClearIndicator: ({ className, cx, innerProps, selectProps: { size } }) => (
+    <CloseButton
+      {...innerProps}
+      className={cx(
+        {
+          indicator: true,
+          "clear-indicator": true,
+        },
+        className
+      )}
+      size={size}
+      mx={2}
+      tabIndex={-1}
+    />
   ),
-  DropdownIndicator: ({ innerProps, selectProps: { size } }) => {
+  DropdownIndicator: ({ className, cx, innerProps, selectProps: { size } }) => {
     const { addon } = useStyles();
 
     const iconSizes: SizeProps = {
@@ -216,6 +245,13 @@ const chakraComponents: ChakraSelectProps["components"] = {
     return (
       <Center
         {...innerProps}
+        className={cx(
+          {
+            indicator: true,
+            "dropdown-indicator": true,
+          },
+          className
+        )}
         sx={{
           ...addon,
           h: "100%",
@@ -228,7 +264,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Center>
     );
   },
-  LoadingIndicator: ({ innerProps, selectProps: { size } }) => {
+  LoadingIndicator: ({ className, cx, innerProps, selectProps: { size } }) => {
     const spinnerSizes: SizeProps = {
       sm: "xs",
       md: "sm",
@@ -237,10 +273,25 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     const spinnerSize = spinnerSizes[size as Size];
 
-    return <Spinner mr={3} {...innerProps} size={spinnerSize} />;
+    return (
+      <Spinner
+        className={cx(
+          {
+            indicator: true,
+            "loading-indicator": true,
+          },
+          className
+        )}
+        mr={3}
+        {...innerProps}
+        size={spinnerSize}
+      />
+    );
   },
   // Menu components
   Menu: ({
+    className,
+    cx,
     children,
     innerProps,
     innerRef,
@@ -261,6 +312,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
     return (
       <Box
         ref={innerRef}
+        className={cx({ menu: true }, className)}
         sx={{
           position: "absolute",
           ...(placement === "bottom" && { top: "100%" }),
@@ -277,7 +329,15 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Box>
     );
   },
-  MenuList: ({ innerRef, children, maxHeight, selectProps: { size } }) => {
+  MenuList: ({
+    className,
+    cx,
+    innerRef,
+    children,
+    maxHeight,
+    isMulti,
+    selectProps: { size },
+  }) => {
     const { list } = useStyles();
 
     const chakraTheme = useTheme();
@@ -289,6 +349,13 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     return (
       <Box
+        className={cx(
+          {
+            "menu-list": true,
+            "menu-list--is-multi": isMulti,
+          },
+          className
+        )}
         sx={{
           ...list,
           maxH: `${maxHeight}px`,
@@ -302,6 +369,8 @@ const chakraComponents: ChakraSelectProps["components"] = {
     );
   },
   GroupHeading: ({
+    cx,
+    className,
     innerProps,
     children,
     selectProps: { size, hasStickyGroupHeaders },
@@ -325,6 +394,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     return (
       <Box
+        className={cx({ "group-heading": true }, className)}
         sx={{
           ...groupTitle,
           fontSize: fontSizes[size as Size],
@@ -342,6 +412,8 @@ const chakraComponents: ChakraSelectProps["components"] = {
     );
   },
   Option: ({
+    className,
+    cx,
     innerRef,
     innerProps,
     children,
@@ -384,6 +456,15 @@ const chakraComponents: ChakraSelectProps["components"] = {
     return (
       <Flex
         role="button"
+        className={cx(
+          {
+            option: true,
+            "option--is-disabled": isDisabled,
+            "option--is-focused": isFocused,
+            "option--is-selected": isSelected,
+          },
+          className
+        )}
         sx={{
           ...item,
           alignItems: "center",
