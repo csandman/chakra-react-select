@@ -24,10 +24,10 @@ Then you can import the base select package, the async select, the creatable sel
 
 ```js
 import {
-  Select,
+  AsyncCreatableSelect,
   AsyncSelect,
   CreatableSelect,
-  AsyncCreatableSelect,
+  Select,
 } from "chakra-react-select";
 ```
 
@@ -240,7 +240,7 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 If you're using typescript, define your `chakraStyles` object before passing it into your component using the `ChakraStylesConfig` type exported from this package:
 
 ```ts
-import { Select, ChakraStylesConfig } from "chakra-react-select";
+import { ChakraStylesConfig, Select } from "chakra-react-select";
 
 const App: React.FC = () => {
   const chakraStyles: ChakraStylesConfig = {
@@ -249,13 +249,10 @@ const App: React.FC = () => {
       background: state.isFocused ? "blue.100" : provided.background,
       p: 0,
       w: "40px",
-    }),
-    // ...
+    }), / ...
   };
-
   return <Select chakraStyles={chakraStyles} />;
 };
-
 export default App;
 ```
 

@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import {
+  Box,
+  CloseButton,
+  Divider,
+  MenuIcon,
+  PropsOf,
+  RecursiveCSSObject,
+  Spinner,
+  StylesProvider,
   Tag,
   TagCloseButton,
   TagLabel,
-  Divider,
-  CloseButton,
-  Box,
-  MenuIcon,
-  Spinner,
-  PropsOf,
-  StylesProvider,
-  RecursiveCSSObject,
+  chakra,
+  createIcon,
+  useColorModeValue,
   useMultiStyleConfig,
   useStyles,
   useTheme,
-  useColorModeValue,
-  createIcon,
-  chakra,
 } from "@chakra-ui/react";
 import { components as selectComponents } from "react-select";
-import { ChakraSelectProps, Size, SxProps, SizeProps } from "./types";
+import { ChakraSelectProps, Size, SizeProps, SxProps } from "./types";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx

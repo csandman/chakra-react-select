@@ -1,11 +1,11 @@
-import { cloneElement, ReactElement } from "react";
-import { useTheme, useColorModeValue, useFormControl } from "@chakra-ui/react";
+import { ReactElement, cloneElement } from "react";
+import { useColorModeValue, useFormControl, useTheme } from "@chakra-ui/react";
 import chakraComponents from "./chakra-components";
 import {
   ChakraSelectProps,
+  SelectedOptionStyle,
   Size,
   TagVariant,
-  SelectedOptionStyle,
 } from "./types";
 
 const ChakraReactSelect = ({

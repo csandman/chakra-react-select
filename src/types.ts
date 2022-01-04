@@ -1,5 +1,5 @@
-import { Props } from "react-select";
 import { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
+import { Props } from "react-select";
 
 export interface SxProps extends CSSWithMultiValues {
   _disabled: CSSWithMultiValues;
