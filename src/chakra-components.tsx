@@ -9,6 +9,7 @@ import {
   RecursiveCSSObject,
   Spinner,
   StylesProvider,
+  SystemStyleObject,
   Tag,
   TagCloseButton,
   TagLabel,
@@ -52,7 +53,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { chakraStyles },
     } = props;
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       position: "relative",
       direction: isRtl ? "rtl" : undefined,
       // When disabled, react-select sets the pointer-state to none which prevents
@@ -61,7 +62,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       pointerEvents: "auto",
     };
 
-    const sx = chakraStyles?.container
+    const sx: SystemStyleObject = chakraStyles?.container
       ? chakraStyles.container(initialStyles, props)
       : initialStyles;
 
@@ -113,7 +114,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: 12,
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       ...inputStyles.field,
       d: "flex",
       p: 0,
@@ -122,7 +123,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       minH: heights[size as Size],
     };
 
-    const sx = chakraStyles?.control
+    const sx: SystemStyleObject = chakraStyles?.control
       ? chakraStyles.control(initialStyles, props)
       : initialStyles;
 
@@ -166,7 +167,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: "1rem",
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       d: "flex",
       alignItems: "center",
       flex: 1,
@@ -177,7 +178,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       overflow: "hidden",
     };
 
-    const sx = chakraStyles?.valueContainer
+    const sx: SystemStyleObject = chakraStyles?.valueContainer
       ? chakraStyles.valueContainer(initialStyles, props)
       : initialStyles;
 
@@ -206,7 +207,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { placeholderColor, chakraStyles },
     } = props;
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       color: placeholderColor,
       mx: "0.125rem",
       position: "absolute",
@@ -214,7 +215,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       transform: "translateY(-50%)",
     };
 
-    const sx = chakraStyles?.placeholder
+    const sx: SystemStyleObject = chakraStyles?.placeholder
       ? chakraStyles.placeholder(initialStyles, props)
       : initialStyles;
 
@@ -252,16 +253,16 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     const { chakraStyles } = selectProps;
 
-    const containerInitialStyles = { m: "0.125rem" };
-    const containerSx = chakraStyles?.multiValue
+    const containerInitialStyles: SystemStyleObject = { m: "0.125rem" };
+    const containerSx: SystemStyleObject = chakraStyles?.multiValue
       ? chakraStyles.multiValue(containerInitialStyles, props)
       : containerInitialStyles;
 
-    const labelSx = chakraStyles?.multiValueLabel
+    const labelSx: SystemStyleObject = chakraStyles?.multiValueLabel
       ? chakraStyles.multiValueLabel({}, props)
       : {};
 
-    const removeSx = chakraStyles?.multiValueRemove
+    const removeSx: SystemStyleObject = chakraStyles?.multiValueRemove
       ? chakraStyles.multiValueRemove({}, props)
       : {};
 
@@ -375,7 +376,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { chakraStyles },
     } = props;
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       label: "singleValue",
       mx: "0.125rem",
       maxWidth: `calc(100% - 0.5rem)`,
@@ -387,7 +388,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       transform: "translateY(-50%)",
     };
 
-    const sx = chakraStyles?.singleValue
+    const sx: SystemStyleObject = chakraStyles?.singleValue
       ? chakraStyles.singleValue(initialStyles, props)
       : initialStyles;
 
@@ -416,14 +417,14 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { chakraStyles },
     } = props;
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       d: "flex",
       alignItems: "center",
       alignSelf: "stretch",
       flexShrink: 0,
     };
 
-    const sx = chakraStyles?.indicatorsContainer
+    const sx: SystemStyleObject = chakraStyles?.indicatorsContainer
       ? chakraStyles.indicatorsContainer(initialStyles, props)
       : initialStyles;
 
@@ -449,9 +450,9 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { chakraStyles },
     } = props;
 
-    const initialStyles = { opacity: 1 };
+    const initialStyles: SystemStyleObject = { opacity: 1 };
 
-    const sx = chakraStyles?.indicatorSeparator
+    const sx: SystemStyleObject = chakraStyles?.indicatorSeparator
       ? chakraStyles.indicatorSeparator(initialStyles, props)
       : initialStyles;
 
@@ -472,9 +473,9 @@ const chakraComponents: ChakraSelectProps["components"] = {
       selectProps: { size, chakraStyles },
     } = props;
 
-    const initialStyles = { mx: 1 };
+    const initialStyles: SystemStyleObject = { mx: 1 };
 
-    const sx = chakraStyles?.clearIndicator
+    const sx: SystemStyleObject = chakraStyles?.clearIndicator
       ? chakraStyles.clearIndicator(initialStyles, props)
       : initialStyles;
 
@@ -511,7 +512,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
     };
     const iconSize = iconSizes[size as Size];
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       ...addon,
       d: "flex",
       alignItems: "center",
@@ -522,7 +523,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       cursor: "pointer",
     };
 
-    const sx = chakraStyles?.dropdownIndicator
+    const sx: SystemStyleObject = chakraStyles?.dropdownIndicator
       ? chakraStyles.dropdownIndicator(initialStyles, props)
       : initialStyles;
 
@@ -558,9 +559,9 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     const spinnerSize = spinnerSizes[size as Size];
 
-    const initialStyles = { mr: 3 };
+    const initialStyles: SystemStyleObject = { mr: 3 };
 
-    const sx = chakraStyles?.loadingIndicator
+    const sx: SystemStyleObject = chakraStyles?.loadingIndicator
       ? chakraStyles.loadingIndicator(initialStyles, props)
       : initialStyles;
 
@@ -602,7 +603,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: chakraTheme.radii.md,
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       position: "absolute",
       ...(placement === "bottom" && { top: "100%" }),
       ...(placement === "top" && { bottom: "100%" }),
@@ -613,7 +614,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       rounded: borderRadii[size as Size],
     };
 
-    const sx = chakraStyles?.menu
+    const sx: SystemStyleObject = chakraStyles?.menu
       ? chakraStyles.menu(initialStyles, props)
       : initialStyles;
 
@@ -648,14 +649,14 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: chakraTheme.radii.md,
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       ...list,
       maxH: `${maxHeight}px`,
       overflowY: "auto",
       borderRadius: borderRadii[size as Size],
     };
 
-    const sx = chakraStyles?.menuList
+    const sx: SystemStyleObject = chakraStyles?.menuList
       ? chakraStyles.menuList(initialStyles, props)
       : initialStyles;
 
@@ -689,7 +690,9 @@ const chakraComponents: ChakraSelectProps["components"] = {
 
     const { chakraStyles } = selectProps;
 
-    const sx = chakraStyles?.group ? chakraStyles.group({}, props) : {};
+    const sx: SystemStyleObject = chakraStyles?.group
+      ? chakraStyles.group({}, props)
+      : {};
 
     return (
       <Box className={cx({ group: true }, className)} sx={sx}>
@@ -731,7 +734,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: "0.6rem 1.2rem",
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       ...groupTitle,
       fontSize: fontSizes[size as Size],
       p: paddings[size as Size],
@@ -742,7 +745,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       bg,
     };
 
-    const sx = chakraStyles?.groupHeading
+    const sx: SystemStyleObject = chakraStyles?.groupHeading
       ? chakraStyles.groupHeading(initialStyles, props)
       : initialStyles;
 
@@ -801,7 +804,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
     const shouldHighlight: boolean =
       selectedOptionStyle === "color" && isSelected;
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       ...item,
       d: "flex",
       alignItems: "center",
@@ -820,7 +823,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
     };
 
-    const sx = chakraStyles?.option
+    const sx: SystemStyleObject = chakraStyles?.option
       ? chakraStyles.option(initialStyles, props)
       : initialStyles;
 
@@ -876,14 +879,14 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: "10px 15px",
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       color: placeholderColor,
       textAlign: "center",
       p: paddings[size as Size],
       fontSize: fontSizes[size as Size],
     };
 
-    const sx = chakraStyles?.loadingMessage
+    const sx: SystemStyleObject = chakraStyles?.loadingMessage
       ? chakraStyles.loadingMessage(initialStyles, props)
       : initialStyles;
 
@@ -924,14 +927,14 @@ const chakraComponents: ChakraSelectProps["components"] = {
       lg: "10px 15px",
     };
 
-    const initialStyles = {
+    const initialStyles: SystemStyleObject = {
       color: placeholderColor,
       textAlign: "center",
       p: paddings[size as Size],
       fontSize: fontSizes[size as Size],
     };
 
-    const sx = chakraStyles?.noOptionsMessage
+    const sx: SystemStyleObject = chakraStyles?.noOptionsMessage
       ? chakraStyles.noOptionsMessage(initialStyles, props)
       : initialStyles;
 
