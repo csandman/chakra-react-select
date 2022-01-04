@@ -3,6 +3,17 @@ import { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
 
 export type { RecursiveCSSObject } from "@chakra-ui/react";
 
+export interface SxProps extends CSSWithMultiValues {
+  _disabled: CSSWithMultiValues;
+  _focus: CSSWithMultiValues;
+}
+
+export type SizeProps = {
+  sm: string | number;
+  md: string | number;
+  lg: string | number;
+};
+
 export type Size = "sm" | "md" | "lg";
 
 export type TagVariant = "subtle" | "solid" | "outline" | undefined;
@@ -14,7 +25,7 @@ type StylesFunction = (
   state: Record<string, unknown>
 ) => SystemStyleObject;
 
-export type ChakraStyles = {
+export type ChakraStylesConfig = {
   clearIndicator?: StylesFunction;
   container?: StylesFunction;
   control?: StylesFunction;
@@ -49,16 +60,5 @@ export interface ChakraSelectProps extends Props {
   selectedOptionColor?: string;
   focusBorderColor?: string;
   errorBorderColor?: string;
-  chakraStyles?: ChakraStyles;
+  chakraStyles?: ChakraStylesConfig;
 }
-
-export interface SxProps extends CSSWithMultiValues {
-  _disabled: CSSWithMultiValues;
-  _focus: CSSWithMultiValues;
-}
-
-export type SizeProps = {
-  sm: string | number;
-  md: string | number;
-  lg: string | number;
-};
