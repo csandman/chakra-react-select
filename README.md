@@ -203,36 +203,39 @@ The API for an individual style function looks like this:
 
 ```js
 /**
- * @param {SystemStyleObject} provided -- the component's default styles
- * @param {Object} state -- the component's current state e.g. `isFocused` (this gives all of the same props that are passed into the component)
- * @returns {Object}
+ * @param {SystemStyleObject} provided -- The component's default Chakra styles
+ * @param {Object} state -- The component's current state e.g. `isFocused` (this gives all of the same props that are passed into the component)
+ * @returns {SystemStyleObject} An output style object which is forwarded to the component's `sx` prop
  */
 function option(provided, state) {
-  return { ...provided, color: state.isFocused ? "blue.500" : "red.400" };
+  return {
+    ...provided,
+    color: state.isFocused ? "blue.500" : "red.400",
+  };
 }
 ```
 
 All of the style keys offered in the original package can be used here, except for `input` as that does not allow me to use the `chakraStyles` from the select props. The `input` styles are also much more dynamic and should be left alone for the most part.
 
-Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/layout/box) except for a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered by that component:
+Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/layout/box) with a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered:
 
 - `clearIndicator` - `CloseButton`
 - `container` - `Box`
-- `control` - `Box`
-- `dropdownIndicator` - `Box`
+- `control` - `Box` (uses theme styles for Chakra's `Input`)
+- `dropdownIndicator` - `Box` (uses theme styles for Chrakra's `InputRightAddon`)
 - `group` - `Box`
-- `groupHeading` - `Box`
+- `groupHeading` - `Box` (uses theme styles for Chakra's `Menu` group title)
 - `indicatorsContainer` - `Box`
 - `indicatorSeparator` - `Divider`
 - `loadingIndicator` - `Spinner`
 - `loadingMessage` - `Box`
 - `menu` - `Box`
-- `menuList` - `Box`
+- `menuList` - `Box` (uses theme styles for Chakra's `Menu`)
 - `multiValue` - `Tag`
 - `multiValueLabel` - `TagLabel`
 - `multiValueRemove` - `TagCloseButton`
 - `noOptionsMessage` - `Box`
-- `option` - `Box`
+- `option` - `Box` (uses theme styles for Chakra's `MenuItem`)
 - `placeholder` - `Box`
 - `singleValue` - `Box`
 - `valueContainer` - `Box`
@@ -249,15 +252,36 @@ const App: React.FC = () => {
       background: state.isFocused ? "blue.100" : provided.background,
       p: 0,
       w: "40px",
-    }), / ...
+    }),
   };
   return <Select chakraStyles={chakraStyles} />;
 };
-export default App;
 ```
 
 - Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-example-5yh6q?file=/app.tsx
 - Vanilla JS Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+
+### Theme Styles
+
+As mentioned above, a few of the custom components this package implements either use styles from the global [Chakra component theme](https://chakra-ui.com/docs/theming/customize-theme#customizing-component-styles) or are themselves those components. As this package pulls directly from your Chakra theme, any changes you make to those components' themes will propagate to the components in this package. Here is a list of all components that will be affected by changes to your global styles:
+
+| `react-select` component | `chakra-ui` component styles                                                                                    |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `ClearIndicator`         | [`CloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/close-button.ts) |
+| `Control`                | [`Input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts)              |
+| `DropdownIndicator`      | [`InputRightAddon`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts)    |
+| `GroupHeading`           | [`Menu` group title](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)    |
+| `IndicatorSeparator`     | [`Divider`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/divider.ts)          |
+| `LoadingIndicator`       | [`Spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/spinner.ts)          |
+| `MenuList`               | [`MenuList`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)            |
+| `MultiValueContainer`    | [`Tag`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)                  |
+| `MultiValueLabel`        | [`TagLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)             |
+| `MultiValueRemove`       | [`TagCloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)       |
+| `Option`                 | [`MenuItem`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)            |
+
+In addition to specific component styles, any changes you make to your global color scheme will also be reflected in these custom components.
+
+**NOTE:** Only make changes to your global component themes if you want them to appear in all instances of that component. Otherwise, just change the individual components' styles using the `chakraStyles` prop.
 
 ### `className`
 
