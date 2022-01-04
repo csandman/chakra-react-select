@@ -11,6 +11,7 @@ import {
   Spinner,
   PropsOf,
   StylesProvider,
+  RecursiveCSSObject,
   useMultiStyleConfig,
   useStyles,
   useTheme,
@@ -19,13 +20,7 @@ import {
   chakra,
 } from "@chakra-ui/react";
 import { components as selectComponents } from "react-select";
-import {
-  ChakraSelectProps,
-  Size,
-  RecursiveCSSObject,
-  SxProps,
-  SizeProps,
-} from "./types";
+import { ChakraSelectProps, Size, SxProps, SizeProps } from "./types";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx

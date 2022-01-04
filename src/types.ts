@@ -1,8 +1,6 @@
 import { Props } from "react-select";
 import { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
 
-export type { RecursiveCSSObject } from "@chakra-ui/react";
-
 export interface SxProps extends CSSWithMultiValues {
   _disabled: CSSWithMultiValues;
   _focus: CSSWithMultiValues;
@@ -20,7 +18,7 @@ export type TagVariant = "subtle" | "solid" | "outline" | undefined;
 
 export type SelectedOptionStyle = "color" | "check";
 
-type StylesFunction = (
+export type StylesFunction = (
   provided: SystemStyleObject,
   state: Record<string, unknown>
 ) => SystemStyleObject;
