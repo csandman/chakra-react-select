@@ -12,6 +12,26 @@ This component is a wrapper for the popular react component [react-select](https
 
 Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
 
+## Contents
+
+- [Usage](#usage)
+- [Extra Props](#extra-props)
+  - [`size`](#size--options-sm-md-lg--default-md)
+  - [`colorScheme`](#colorscheme)
+  - [`tagVariant`](#tagvariant--options-subtle-solid-outline--default-subtle)
+  - [`isInvalid`](#isinvalid--default-false)
+  - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
+  - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
+  - [`selectedOptionStyle`](#selectedoptionstyle--options-color-check--default-color)
+  - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
+  - [`isFixed`](#isfixed)
+- [Styling](#styling)
+  - [`chakraStyles`](#chakrastyles)
+  - [Theme Styles](#theme-styles)
+  - [`className`](#classname)
+- [CodeSandbox Templates](#codesandbox-templates)
+- [Roadmap](#roadmap)
+
 ## Usage
 
 In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then install this package:
@@ -35,7 +55,9 @@ In order to use this component, you can implement it and use it like you would n
 
 ## Extra Props
 
-- You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
+### `size` — Options: `sm`, `md`, `lg` — Default: `md`
+
+You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
 
 ```js
 return (
@@ -47,8 +69,11 @@ return (
 );
 ```
 
-- You can pass the `colorScheme` prop to the select component to change all of the selected options tags' colors. You can view the whole list of available color schemes in [the Chakra docs](https://chakra-ui.com/docs/data-display/tag#props), or if you have a custom color palette, any of the custom color names in that will be available instead.
-  - Alternatively you can add the `colorScheme` key to any of your options objects and it will only style that option when selected.
+### `colorScheme`
+
+You can pass the `colorScheme` prop to the select component to change all of the selected options tags' colors. You can view the whole list of available color schemes in [the Chakra docs](https://chakra-ui.com/docs/data-display/tag#props), or if you have a custom color palette, any of the custom color names in that will be available instead.
+
+Alternatively you can add the `colorScheme` key to any of your options objects and it will only style that option when selected.
 
 ```js
 return (
@@ -70,8 +95,11 @@ return (
 );
 ```
 
-- You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline` (default is `subtle`). These will reflect the `variant` prop available on the [Chakra `<Tag />` component](https://chakra-ui.com/docs/data-display/tag#props).
-  - Alternatively you can add the `variant` key to any of your options objects and it will only style that option when selected. This will override the `tagVariant` prop on the select if both are set
+### `tagVariant` — Options: `subtle`, `solid`, `outline` — Default: `subtle`
+
+You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline` (default is `subtle`). These will reflect the `variant` prop available on the [Chakra `<Tag />` component](https://chakra-ui.com/docs/data-display/tag#props).
+
+Alternatively you can add the `variant` key to any of your options objects and it will only style that option when selected. This will override the `tagVariant` prop on the select if both are set
 
 ```js
 return (
@@ -93,8 +121,11 @@ return (
 );
 ```
 
-- You can pass `isInvalid` to the select component to style it like the Chakra `<Input />` is styled when it receives the same prop.
-  - You can pass `isInvalid` or `isDisabled` to a `<FormControl />` which surrounds this component and it will output their corresponding `<Input />` styles.
+### `isInvalid` — Default: `false`
+
+You can pass `isInvalid` to the select component to style it like the Chakra `<Input />` is styled when it receives the same prop.
+
+You can pass also pass `isInvalid` or `isDisabled` to a wrapping `<FormControl />` and it will output their corresponding `<Input />` on the select.
 
 ```js
 return (
@@ -114,8 +145,26 @@ return (
 );
 ```
 
-- One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
-  - Example: https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js
+### `focusBorderColor` — Default: `blue.500` | `errorBorderColor` — Default: `red.500`
+
+The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra color strings which will emulate the respective props being passed to [Chakra's `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors).
+
+```js
+return (
+  <>
+    <Select focusBorderColor="green.500" />
+    <Select errorBorderColor="orange.500" />
+  </>
+);
+```
+
+![Orange errorBorderColor](./github/custom-error-border.png)
+
+### `hasStickyGroupHeaders` — Default: `false`
+
+One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+
+- Example: https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js
 
 ```js
 return <Select hasStickyGroupHeaders />;
@@ -123,7 +172,43 @@ return <Select hasStickyGroupHeaders />;
 
 ![Sticky Group Headers](./github/sticky-group-headers.png)
 
-- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti`.
+### `selectedOptionStyle` — Options: `color`, `check` — Default: `color`
+
+In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
+
+```js
+return (
+  <>
+    <Select selectedOptionStyle="color" /> {/* Default */}
+    <Select selectedOptionStyle="check" /> {/* Chakra UI Menu Style */}
+  </>
+);
+```
+
+![Color Highlighted Selected Option](./github/color-selected-option.png)
+
+![Check Highlighted Selected Option](./github/check-selected-option.png)
+
+### `selectedOptionColor` — Default: `blue`
+
+If you choose to stick with the default `selectedOptionStyle="color"`, you have one additional styling option. If you do not like the default of blue for the highlight color, you can pass the `selectedOptionColor` prop to change it. This prop will accept any named color from your color theme, and it will use the `500` value in light mode or the `300` value in dark mode.
+
+```js
+return (
+  <>
+    <Select selectedOptionColor="blue" /> {/* Default */}
+    <Select selectedOptionColor="purple" />
+  </>
+);
+```
+
+![Purple Selected Option Color (light mode)](./github/purple-selected-option-light.png)
+
+![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
+
+### `isFixed`
+
+In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag, and it changes the default `tagVariant` for that tag to be solid. This only applies when using `isMulti`.
 
 ```js
 return (
@@ -143,49 +228,6 @@ return (
   />
 );
 ```
-
-- In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). Until this version there was no styling applied to the selected options in the menu for both the single select, or the multi-select with `hideSelectedOptions` set to `false`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
-
-```js
-return (
-  <>
-    <Select selectedOptionStyle="color" /> {/* Default */}
-    <Select selectedOptionStyle="check" /> {/* Chakra UI Menu Style */}
-  </>
-);
-```
-
-![Color Highlighted Selected Option](./github/color-selected-option.png)
-
-![Check Highlighted Selected Option](./github/check-selected-option.png)
-
-- If you choose to stick with the default `selectedOptionStyle="color"`, you have one additional styling option. If you do not like the default of blue for the highlight color, you can pass the `selectedOptionColor` prop to change it. This prop will accept any named color from your color theme, and it will use the `500` value in light mode or the `300` value in dark mode.
-
-```js
-return (
-  <>
-    <Select selectedOptionColor="blue" /> {/* Default */}
-    <Select selectedOptionColor="purple" />
-  </>
-);
-```
-
-![Purple Selected Option Color (light mode)](./github/purple-selected-option-light.png)
-
-![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
-
-- The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra color strings which will emulate the respective props being passed to [Chakra's `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors).
-
-```js
-return (
-  <>
-    <Select focusBorderColor="green.500" />
-    <Select errorBorderColor="orange.500" />
-  </>
-);
-```
-
-![Orange errorBorderColor](./github/custom-error-border.png)
 
 If you have any other requests for Chakra-like features that could be added, or problems with the current features, [please submit an issue](https://github.com/csandman/chakra-react-select/issues/new/choose)!
 
