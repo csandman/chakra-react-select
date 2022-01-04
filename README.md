@@ -227,6 +227,30 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `singleValue` - `Box`
 - `valueContainer` - `Box`
 
+If you're using typescript, define your `chakraStyles` object before passing it into your component using the `ChakraStylesConfig` type exported from this package:
+
+```typescript
+import { Select, ChakraStylesConfig } from "chakra-react-select";
+
+const App: React.FC = () => {
+  const chakraStyles: ChakraStylesConfig = {
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      p: 0,
+      w: "40px",
+    }),
+    // ...
+  };
+
+  return <Select chakraStyles={chakraStyles} />;
+};
+
+export default App;
+```
+
+- Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-example-5yh6q?file=/app.tsx
+- Vanilla JS Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+
 ### `className`
 
 This package implements the same classNames on the sub components as the original package so you can use these to style sub-components with CSS. Here is an except from [the react-select docs](https://react-select.com/styles#using-classnames) describing how it works:
