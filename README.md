@@ -31,7 +31,9 @@ import {
 } from "chakra-react-select";
 ```
 
-In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept all of the props that the original takes, however customizing the `theme` or the `components` could break this implementation so change them at your own risk. There are also a few extra things you can do with this wrapper that pull from the chakra library.
+In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions.
+
+## Extra Props
 
 - You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
 
@@ -120,7 +122,7 @@ return <Select hasStickyGroupHeaders />;
 
 ![Sticky Group Headers](./github/sticky-group-headers.png)
 
-- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti` is passed.
+- In your options objects, you can add the key `isFixed: true` to emulate the example in the [react-select docs](https://react-select.com/home#fixed-options). This will prevent the options which have this flag from having the remove button on its corresponding tag. This only applies when using `isMulti`.
 
 ```js
 return (
@@ -171,7 +173,89 @@ return (
 
 ![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
 
+- The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra color strings which will emulate the respective props being passed to [Chakra's `<Input />` component](https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors).
+
+![Orange errorBorderColor](./github/custom-error-border.png)
+
 If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
+
+## Styling
+
+There are a few methods of customizing the styles for this package. The first thing to note is that this package does not use the `styles` or `theme` props that are utilized by the original package. The `theme` prop isn't used as most of the base styles are set up to align with your Chakra theme, and customizing your base theme (such as colors or components) should in turn change the styles in this package.
+
+This package does however offer an alternative to the `styles` prop, `chakraStyles`. It mostly emulates the behavior of the original `styles` prop with some slight tweaks, and because its not identical I decided it best to name it differently to avoid confusion.
+
+### `chakraStyles`
+
+In order to use the `chakraStyles` prop, first check the documentation for [the original `styles` prop from the react-select docs](https://react-select.com/styles#style-object). This package offers an identical API for the `chakraStyles` prop, however the `provided` and output style objects use [Chakra's `sx` prop](https://chakra-ui.com/docs/features/the-sx-prop) instead of the default emotion styles the original package offers. This allows you to both use the shorthand styling props you'd normally use to style Chakra components, as well as tokens from your theme such as named colors.
+
+The API for an individual style function looks like this:
+
+```js
+/**
+ * @param {SystemStyleObject} provided -- the component's default styles
+ * @param {Object} state -- the component's current state e.g. `isFocused` (this gives all of the same props that are passed into the component)
+ * @returns {Object}
+ */
+function option(provided, state) {
+  return { ...provided, color: state.isFocused ? "blue.500" : "red.400" };
+}
+```
+
+All of the style keys offered in the original package can be used here, except for `input` as that does not allow me to use the `chakraStyles` from the select props. The `input` styles are also much more dynamic and should be left alone for the most part.
+
+Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/layout/box) except for a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered by that component:
+
+- `clearIndicator` - `CloseButton`
+- `container` - `Box`
+- `control` - `Box`
+- `dropdownIndicator` - `Box`
+- `group` - `Box`
+- `groupHeading` - `Box`
+- `indicatorsContainer` - `Box`
+- `indicatorSeparator` - `Divider`
+- `loadingIndicator` - `Spinner`
+- `loadingMessage` - `Box`
+- `menu` - `Box`
+- `menuList` - `Box`
+- `multiValue` - `Tag`
+- `multiValueLabel` - `TagLabel`
+- `multiValueRemove` - `TagCloseButton`
+- `noOptionsMessage` - `Box`
+- `option` - `Box`
+- `placeholder` - `Box`
+- `singleValue` - `Box`
+- `valueContainer` - `Box`
+
+### `className`
+
+This package implements the same classNames on the sub components as the original package so you can use these to style sub-components with CSS. Here is an except from [the react-select docs](https://react-select.com/styles#using-classnames) describing how it works:
+
+> If you provide the `className` prop to react-select, the SelectContainer will be given a className based on the provided value.
+>
+> If you provide the `classNamePrefix` prop to react-select, all inner elements will be given a className
+> with the provided prefix.
+>
+> For example, given `className='react-select-container'` and `classNamePrefix="react-select"`,
+> the DOM structure is similar to this:
+>
+> ```html
+> <div class="react-select-container">
+>   <div class="react-select__control">
+>     <div class="react-select__value-container">...</div>
+>     <div class="react-select__indicators">...</div>
+>   </div>
+>   <div class="react-select__menu">
+>     <div class="react-select__menu-list">
+>       <div class="react-select__option">...</div>
+>     </div>
+>   </div>
+> </div>
+> ```
+>
+> While we encourage you to use the new Styles API, you still have the option of styling via CSS classes. This ensures compatibility with [styled components](https://www.styled-components.com/), [CSS modules](https://github.com/css-modules/css-modules) and other libraries.
+
+Here is an example of using classNames to style the components: https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-4r2pe?file=/example.js
 
 ## CodeSandbox Templates
 

@@ -1,7 +1,5 @@
-import { Props, ThemeSpacing } from "react-select";
-import { CSSWithMultiValues } from "@chakra-ui/react";
-
-export type { Theme } from "react-select";
+import { Props } from "react-select";
+import { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
 
 export type { RecursiveCSSObject } from "@chakra-ui/react";
 
@@ -11,6 +9,36 @@ export type TagVariant = "subtle" | "solid" | "outline" | undefined;
 
 export type SelectedOptionStyle = "color" | "check";
 
+type StylesFunction = (
+  provided: SystemStyleObject,
+  state: Record<string, unknown>
+) => SystemStyleObject;
+
+export type ChakraStyles = {
+  clearIndicator?: StylesFunction;
+  container?: StylesFunction;
+  control?: StylesFunction;
+  dropdownIndicator?: StylesFunction;
+  group?: StylesFunction;
+  groupHeading?: StylesFunction;
+  indicatorsContainer?: StylesFunction;
+  indicatorSeparator?: StylesFunction;
+  input?: StylesFunction;
+  loadingIndicator?: StylesFunction;
+  loadingMessage?: StylesFunction;
+  menu?: StylesFunction;
+  menuList?: StylesFunction;
+  menuPortal?: StylesFunction;
+  multiValue?: StylesFunction;
+  multiValueLabel?: StylesFunction;
+  multiValueRemove?: StylesFunction;
+  noOptionsMessage?: StylesFunction;
+  option?: StylesFunction;
+  placeholder?: StylesFunction;
+  singleValue?: StylesFunction;
+  valueContainer?: StylesFunction;
+};
+
 export interface ChakraSelectProps extends Props {
   size?: Size;
   colorScheme?: string;
@@ -19,13 +47,10 @@ export interface ChakraSelectProps extends Props {
   hasStickyGroupHeaders?: boolean;
   selectedOptionStyle?: SelectedOptionStyle;
   selectedOptionColor?: string;
+  focusBorderColor?: string;
+  errorBorderColor?: string;
+  chakraStyles?: ChakraStyles;
 }
-
-export type OptionalTheme = {
-  borderRadius?: number;
-  colors?: { [key: string]: string };
-  spacing?: ThemeSpacing;
-};
 
 export interface SxProps extends CSSWithMultiValues {
   _disabled: CSSWithMultiValues;
