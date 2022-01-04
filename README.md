@@ -258,7 +258,7 @@ const App: React.FC = () => {
 };
 ```
 
-- Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-example-5yh6q?file=/app.tsx
+- Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
 - Vanilla JS Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
 
 ### Theme Styles
