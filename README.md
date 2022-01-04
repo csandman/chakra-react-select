@@ -114,7 +114,7 @@ return (
 );
 ```
 
-- One thing I added which isn't specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+- One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
   - Example: https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js
 
 ```js
@@ -144,7 +144,7 @@ return (
 );
 ```
 
-- In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). Until this version I had forgotten to style the selected options in the menu for both the single select, or the multi-select with `hideSelectedOptions` set to `false`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
+- In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). Until this version there was no styling applied to the selected options in the menu for both the single select, or the multi-select with `hideSelectedOptions` set to `false`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/overlay/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
 
 ```js
 return (
@@ -187,13 +187,13 @@ return (
 
 ![Orange errorBorderColor](./github/custom-error-border.png)
 
-If you have any other questions or requests, leave it as an issue. I'm sure there are some features of `react-select` that I missed and I definitely want to make this wrapper as good as it can be!
+If you have any other requests for Chakra-like features that could be added, or problems with the current features, [please submit an issue](https://github.com/csandman/chakra-react-select/issues/new/choose)!
 
 ## Styling
 
-There are a few methods of customizing the styles for this package. The first thing to note is that this package does not use the `styles` or `theme` props that are utilized by the original package. The `theme` prop isn't used as most of the base styles are set up to align with your Chakra theme, and customizing your base theme (such as colors or components) should in turn change the styles in this package.
+There are a few ways to style the components that make up `chakra-react-select`. It's important to note that this package does not use the `theme` or `styles` props that are implemented in `react-select`. The `theme` prop isn't used as most of the components' base styles are pulling from your Chakra theme, and customizing your base theme (such as colors or component styles) should in turn change the styles in this package.
 
-This package does however offer an alternative to the `styles` prop, `chakraStyles`. It mostly emulates the behavior of the original `styles` prop with some slight tweaks, and because its not identical I decided it best to name it differently to avoid confusion.
+This package does however offer an alternative to the `styles` prop, `chakraStyles`. It mostly emulates the behavior of the original `styles` prop, however, because it’s not identical it is named differently to prevent confusion.
 
 ### `chakraStyles`
 
@@ -324,7 +324,7 @@ When submitting a bug report, please include a minimum reproduction of your issu
 
 ## Roadmap
 
-Since releasing this project, there have been a few things brought to my attention from users that I would like to update in the near future.
+Since releasing this project, there have been a few things brought up that will be addressed in the near future.
 
 #### [react-select v5](https://github.com/JedWatson/react-select/releases/tag/react-select%405.0.0)
 
