@@ -1,6 +1,6 @@
 # chakra-react-select
 
-[![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE)
+[![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
 [![npm - chakra-react-select](https://img.shields.io/npm/v/chakra-react-select "chakra-react-select npm")](https://www.npmjs.com/package/chakra-react-select)
 [![bundle size - chakra-react-select](https://badgen.net/bundlephobia/min/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
 [![bundle size - chakra-react-select](https://badgen.net/bundlephobia/minzip/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
