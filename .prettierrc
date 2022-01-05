@@ -8,11 +8,21 @@
   "jsxSingleQuote": false,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
   "arrowParens": "always",
   "requirePragma": false,
   "insertPragma": false,
   "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "css",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "importOrder": [
+    "^react$",
+    "^@chakra-ui/react$",
+    "^@chakra-ui/.+$",
+    "<THIRD_PARTY_MODULES>",
+    "^\\.?\\./.+$"
+  ],
+  "importOrderSortSpecifiers": true,
+  "importOrderSeparation": false,
+  "importOrderCaseInsensitive": false,
+  "importOrderParserPlugins": ["typescript", "jsx"]
 }

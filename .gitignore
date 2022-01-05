@@ -106,3 +106,5 @@ dist
 .DS_Store
 
 storybook-static/
+tmp/
+temp/
