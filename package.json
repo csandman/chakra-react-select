@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A chakra-ui wrapper for the popular select library react-select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
@@ -24,6 +24,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --root-mode upward --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --root-mode upward --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
+    "format": "prettier --write .",
     "format:package": "prettier-package-json --write",
     "lint": "concurrently npm:lint:*",
     "lint:src": "eslint src --ext .ts,.tsx",
@@ -52,6 +53,7 @@
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
+    "@trivago/prettier-plugin-sort-imports": "^3.1.1",
     "@types/react": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
@@ -93,10 +95,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx,js,css,md}": "prettier --write",
-    "package.json": [
-      "npm run format:package",
-      "git add"
-    ]
+    "*": "prettier --ignore-unknown --write",
+    "package.json": "prettier-package-json --write"
   }
 }

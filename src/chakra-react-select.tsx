@@ -1,509 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { cloneElement, ReactElement } from "react";
-import {
-  Flex,
-  Tag,
-  TagCloseButton,
-  TagLabel,
-  Divider,
-  CloseButton,
-  Center,
-  Box,
-  MenuIcon,
-  Spinner,
-  PropsOf,
-  StylesProvider,
-  useMultiStyleConfig,
-  useStyles,
-  useTheme,
-  useColorModeValue,
-  useFormControl,
-  createIcon,
-} from "@chakra-ui/react";
+import { ReactElement, cloneElement } from "react";
+import { useColorModeValue, useFormControl, useTheme } from "@chakra-ui/react";
+import chakraComponents from "./chakra-components";
 import {
   ChakraSelectProps,
-  Size,
-  Theme,
-  TagVariant,
   SelectedOptionStyle,
-  RecursiveCSSObject,
-  SxProps,
-  SizeProps,
-  OptionalTheme,
+  Size,
+  TagVariant,
 } from "./types";
-
-// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
-const ChevronDown = createIcon({
-  displayName: "ChevronDownIcon",
-  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
-});
-
-// Use the CheckIcon component from the chakra menu
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
-const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-);
-
-// Custom styles for components which do not have a chakra equivalent
-const chakraStyles: ChakraSelectProps["styles"] = {
-  // When disabled, react-select sets the pointer-state to none which prevents
-  // the `not-allowed` cursor style from chakra from getting applied to the
-  // Control
-  container: (provided) => ({
-    ...provided,
-    pointerEvents: "auto",
-  }),
-  input: (provided) => ({
-    ...provided,
-    color: "inherit",
-    lineHeight: 1,
-  }),
-  menu: (provided) => ({
-    ...provided,
-    boxShadow: "none",
-  }),
-  valueContainer: (provided, { selectProps: { size } }) => {
-    const px: SizeProps = {
-      sm: "0.75rem",
-      md: "1rem",
-      lg: "1rem",
-    };
-
-    return {
-      ...provided,
-      padding: `0.125rem ${px[size as Size]}`,
-    };
-  },
-  loadingMessage: (provided, { selectProps: { size } }) => {
-    const fontSizes: SizeProps = {
-      sm: "0.875rem",
-      md: "1rem",
-      lg: "1.125rem",
-    };
-
-    const paddings: SizeProps = {
-      sm: "6px 9px",
-      md: "8px 12px",
-      lg: "10px 15px",
-    };
-
-    return {
-      ...provided,
-      fontSize: fontSizes[size as Size],
-      padding: paddings[size as Size],
-    };
-  },
-  // Add the chakra style for when a TagCloseButton has focus
-  multiValueRemove: (
-    provided,
-    {
-      // @ts-ignore For some reason isFocused is not recognized as a prop here
-      // but it works
-      isFocused,
-      selectProps: { multiValueRemoveFocusStyle },
-    }
-  ) => (isFocused ? multiValueRemoveFocusStyle : {}),
-  singleValue: ({ color, ...provided }) => provided,
-  control: () => ({}),
-  menuList: () => ({}),
-  option: () => ({}),
-  multiValue: () => ({}),
-  multiValueLabel: () => ({}),
-  group: () => ({}),
-};
-
-const chakraComponents: ChakraSelectProps["components"] = {
-  // Control components
-  Control: ({
-    className,
-    cx,
-    children,
-    innerRef,
-    innerProps,
-    isDisabled,
-    isFocused,
-    menuIsOpen,
-    selectProps: { size, isInvalid },
-  }) => {
-    const inputStyles = useMultiStyleConfig("Input", { size });
-
-    const heights: SizeProps = {
-      sm: 8,
-      md: 10,
-      lg: 12,
-    };
-
-    return (
-      <StylesProvider value={inputStyles}>
-        <Flex
-          ref={innerRef}
-          className={cx(
-            {
-              control: true,
-              "control--is-disabled": isDisabled,
-              "control--is-focused": isFocused,
-              "control--menu-is-open": menuIsOpen,
-            },
-            className
-          )}
-          sx={{
-            ...inputStyles.field,
-            p: 0,
-            overflow: "hidden",
-            h: "auto",
-            minH: heights[size as Size],
-          }}
-          {...innerProps}
-          data-focus={isFocused ? true : undefined}
-          data-invalid={isInvalid ? true : undefined}
-          data-disabled={isDisabled ? true : undefined}
-        >
-          {children}
-        </Flex>
-      </StylesProvider>
-    );
-  },
-  MultiValueContainer: ({
-    children,
-    innerRef,
-    innerProps,
-    data,
-    selectProps,
-  }) => (
-    <Tag
-      ref={innerRef}
-      {...innerProps}
-      m="0.125rem"
-      // react-select Fixed Options example:
-      // https://react-select.com/home#fixed-options
-      variant={
-        data.variant ||
-        selectProps.tagVariant ||
-        (data.isFixed ? "solid" : "subtle")
-      }
-      colorScheme={data.colorScheme || selectProps.colorScheme}
-      size={selectProps.size}
-    >
-      {children}
-    </Tag>
-  ),
-  MultiValueLabel: ({ children, innerRef, innerProps }) => (
-    <TagLabel ref={innerRef} {...innerProps}>
-      {children}
-    </TagLabel>
-  ),
-  MultiValueRemove: ({ children, innerRef, innerProps, data: { isFixed } }) => {
-    if (isFixed) {
-      return null;
-    }
-
-    return (
-      <TagCloseButton ref={innerRef} {...innerProps} tabIndex={-1}>
-        {children}
-      </TagCloseButton>
-    );
-  },
-  IndicatorSeparator: ({ className, cx, innerProps }) => (
-    <Divider
-      {...innerProps}
-      className={cx({ "indicator-separator": true }, className)}
-      orientation="vertical"
-      opacity="1"
-    />
-  ),
-  ClearIndicator: ({ className, cx, innerProps, selectProps: { size } }) => (
-    <CloseButton
-      {...innerProps}
-      className={cx(
-        {
-          indicator: true,
-          "clear-indicator": true,
-        },
-        className
-      )}
-      size={size}
-      mx={2}
-      tabIndex={-1}
-    />
-  ),
-  DropdownIndicator: ({ className, cx, innerProps, selectProps: { size } }) => {
-    const { addon } = useStyles();
-
-    const iconSizes: SizeProps = {
-      sm: 4,
-      md: 5,
-      lg: 6,
-    };
-    const iconSize = iconSizes[size as Size];
-
-    return (
-      <Center
-        {...innerProps}
-        className={cx(
-          {
-            indicator: true,
-            "dropdown-indicator": true,
-          },
-          className
-        )}
-        sx={{
-          ...addon,
-          h: "100%",
-          borderRadius: 0,
-          borderWidth: 0,
-          cursor: "pointer",
-        }}
-      >
-        <ChevronDown h={iconSize} w={iconSize} />
-      </Center>
-    );
-  },
-  LoadingIndicator: ({ className, cx, innerProps, selectProps: { size } }) => {
-    const spinnerSizes: SizeProps = {
-      sm: "xs",
-      md: "sm",
-      lg: "md",
-    };
-
-    const spinnerSize = spinnerSizes[size as Size];
-
-    return (
-      <Spinner
-        className={cx(
-          {
-            indicator: true,
-            "loading-indicator": true,
-          },
-          className
-        )}
-        mr={3}
-        {...innerProps}
-        size={spinnerSize}
-      />
-    );
-  },
-  // Menu components
-  Menu: ({
-    className,
-    cx,
-    children,
-    innerProps,
-    innerRef,
-    // @ts-ignore `placement` is not recognized as a prop but it's essential
-    // for the menu placement (and it is passed)
-    placement,
-    selectProps: { size },
-  }) => {
-    const menuStyles = useMultiStyleConfig("Menu", {});
-
-    const chakraTheme = useTheme();
-    const borderRadii: SizeProps = {
-      sm: chakraTheme.radii.sm,
-      md: chakraTheme.radii.md,
-      lg: chakraTheme.radii.md,
-    };
-
-    return (
-      <Box
-        ref={innerRef}
-        className={cx({ menu: true }, className)}
-        sx={{
-          position: "absolute",
-          ...(placement === "bottom" && { top: "100%" }),
-          ...(placement === "top" && { bottom: "100%" }),
-          my: "8px",
-          w: "100%",
-          zIndex: 1,
-          overflow: "hidden",
-          rounded: borderRadii[size as Size],
-        }}
-        {...innerProps}
-      >
-        <StylesProvider value={menuStyles}>{children}</StylesProvider>
-      </Box>
-    );
-  },
-  MenuList: ({
-    className,
-    cx,
-    innerRef,
-    children,
-    maxHeight,
-    isMulti,
-    selectProps: { size },
-  }) => {
-    const { list } = useStyles();
-
-    const chakraTheme = useTheme();
-    const borderRadii: SizeProps = {
-      sm: chakraTheme.radii.sm,
-      md: chakraTheme.radii.md,
-      lg: chakraTheme.radii.md,
-    };
-
-    return (
-      <Box
-        className={cx(
-          {
-            "menu-list": true,
-            "menu-list--is-multi": isMulti,
-          },
-          className
-        )}
-        sx={{
-          ...list,
-          maxH: `${maxHeight}px`,
-          overflowY: "auto",
-          borderRadius: borderRadii[size as Size],
-        }}
-        ref={innerRef}
-      >
-        {children}
-      </Box>
-    );
-  },
-  GroupHeading: ({
-    cx,
-    className,
-    innerProps,
-    children,
-    selectProps: { size, hasStickyGroupHeaders },
-  }) => {
-    const {
-      groupTitle,
-      list: { bg },
-    } = useStyles();
-
-    const chakraTheme = useTheme();
-    const fontSizes: SizeProps = {
-      sm: chakraTheme.fontSizes.xs,
-      md: chakraTheme.fontSizes.sm,
-      lg: chakraTheme.fontSizes.md,
-    };
-    const paddings: SizeProps = {
-      sm: "0.4rem 0.8rem",
-      md: "0.5rem 1rem",
-      lg: "0.6rem 1.2rem",
-    };
-
-    return (
-      <Box
-        className={cx({ "group-heading": true }, className)}
-        sx={{
-          ...groupTitle,
-          fontSize: fontSizes[size as Size],
-          p: paddings[size as Size],
-          m: 0,
-          borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
-          position: hasStickyGroupHeaders ? "sticky" : "static",
-          top: -2,
-          bg,
-        }}
-        {...innerProps}
-      >
-        {children}
-      </Box>
-    );
-  },
-  Option: ({
-    className,
-    cx,
-    innerRef,
-    innerProps,
-    children,
-    isFocused,
-    isDisabled,
-    isSelected,
-    selectProps: {
-      size,
-      isMulti,
-      hideSelectedOptions,
-      selectedOptionStyle,
-      selectedOptionColor,
-    },
-  }) => {
-    const { item } = useStyles();
-
-    const paddings: SizeProps = {
-      sm: "0.3rem 0.6rem",
-      md: "0.4rem 0.8rem",
-      lg: "0.5rem 1rem",
-    };
-
-    // Use the same selected color as the border of the select component
-    // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts#L73
-    const selectedBg = useColorModeValue(
-      `${selectedOptionColor}.500`,
-      `${selectedOptionColor}.300`
-    );
-    const selectedColor = useColorModeValue("white", "black");
-
-    // Don't create exta space for the checkmark if using a multi select with
-    // options that dissapear when they're selected
-    const showCheckIcon: boolean =
-      selectedOptionStyle === "check" &&
-      (!isMulti || hideSelectedOptions === false);
-
-    const shouldHighlight: boolean =
-      selectedOptionStyle === "color" && isSelected;
-
-    return (
-      <Flex
-        role="button"
-        className={cx(
-          {
-            option: true,
-            "option--is-disabled": isDisabled,
-            "option--is-focused": isFocused,
-            "option--is-selected": isSelected,
-          },
-          className
-        )}
-        sx={{
-          ...item,
-          alignItems: "center",
-          w: "100%",
-          textAlign: "start",
-          fontSize: size,
-          p: paddings[size as Size],
-          bg: isFocused
-            ? (item as RecursiveCSSObject<SxProps>)._focus.bg
-            : "transparent",
-          ...(shouldHighlight && {
-            bg: selectedBg,
-            color: selectedColor,
-            _active: { bg: selectedBg },
-          }),
-          ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
-        }}
-        ref={innerRef}
-        {...innerProps}
-        disabled={isDisabled ? true : undefined}
-      >
-        {showCheckIcon && (
-          <MenuIcon
-            fontSize="0.8em"
-            marginEnd="0.75rem"
-            opacity={isSelected ? 1 : 0}
-          >
-            <CheckIcon />
-          </MenuIcon>
-        )}
-        {children}
-      </Flex>
-    );
-  },
-};
 
 const ChakraReactSelect = ({
   children,
-  styles = {},
+  styles,
   components = {},
   theme,
   size = "md",
@@ -511,10 +18,13 @@ const ChakraReactSelect = ({
   isDisabled,
   isInvalid,
   inputId,
-  tagVariant = undefined as TagVariant,
-  hasStickyGroupHeaders = false as boolean,
-  selectedOptionStyle = "color" as SelectedOptionStyle,
+  tagVariant,
+  hasStickyGroupHeaders = false,
+  selectedOptionStyle = "color",
   selectedOptionColor = "blue",
+  focusBorderColor,
+  errorBorderColor,
+  chakraStyles = {},
   ...props
 }: ChakraSelectProps): ReactElement => {
   const chakraTheme = useTheme();
@@ -523,14 +33,6 @@ const ChakraReactSelect = ({
   // on a surrounding form control to get the values of `isDisabled` and
   // `isInvalid`
   const inputProps = useFormControl({ isDisabled, isInvalid });
-
-  // The chakra theme styles for TagCloseButton when focused
-  const closeButtonFocus =
-    chakraTheme.components.Tag.baseStyle.closeButton._focus;
-  const multiValueRemoveFocusStyle = {
-    background: closeButtonFocus.bg,
-    boxShadow: chakraTheme.shadows[closeButtonFocus.boxShadow],
-  };
 
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
@@ -575,43 +77,21 @@ const ChakraReactSelect = ({
       ...chakraComponents,
       ...components,
     },
-    styles: {
-      ...chakraStyles,
-      ...styles,
-    },
-    theme: (baseTheme: Theme) => {
-      let propTheme: OptionalTheme = {};
-      if (typeof theme === "function") {
-        propTheme = theme(baseTheme);
-      }
-
-      return {
-        ...baseTheme,
-        ...propTheme,
-        colors: {
-          ...baseTheme.colors,
-          neutral50: placeholderColor, // placeholder text color
-          neutral40: placeholderColor, // noOptionsMessage color
-          ...propTheme.colors,
-        },
-        spacing: {
-          ...baseTheme.spacing,
-          ...propTheme.spacing,
-        },
-      };
-    },
     colorScheme,
     size: realSize,
     tagVariant: realTagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,
-    multiValueRemoveFocusStyle,
     // isDisabled and isInvalid can be set on the component
     // or on a surrounding form control
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputId || inputProps.id,
     hasStickyGroupHeaders,
+    placeholderColor,
+    chakraStyles,
+    focusBorderColor,
+    errorBorderColor,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
