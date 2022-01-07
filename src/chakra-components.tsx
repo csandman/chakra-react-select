@@ -954,16 +954,7 @@ const chakraComponents: ChakraSelectProps["components"] = {
       </Box>
     );
   },
-  Input: (props) => (
-    <chakra.input
-      as={selectComponents.Input}
-      __css={{
-        color: "inherit",
-        lineHeight: 1,
-      }}
-      {...props}
-    />
-  ),
+  Input: (props) => <chakra.input as={selectComponents.Input} {...props} />,
 };
 
 export default chakraComponents;
