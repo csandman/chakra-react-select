@@ -8,6 +8,15 @@ import {
   TagVariant,
 } from "./types";
 
+// Custom styles for components which do not have a chakra equivalent
+const customStyles: ChakraSelectProps["styles"] = {
+  input: (provided) => ({
+    ...provided,
+    color: "inherit",
+    lineHeight: 1,
+  }),
+};
+
 const ChakraReactSelect = ({
   children,
   styles,
@@ -89,6 +98,7 @@ const ChakraReactSelect = ({
     inputId: inputId || inputProps.id,
     hasStickyGroupHeaders,
     placeholderColor,
+    styles: customStyles,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
