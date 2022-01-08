@@ -35,8 +35,7 @@
   "types": "dist/types/index.d.ts",
   "typings": "dist/types/index.d.ts",
   "dependencies": {
-    "@types/react-select": "^4.0.18",
-    "react-select": "^4.3.1"
+    "react-select": "^5.2.1"
   },
   "peerDependencies": {
     "@chakra-ui/react": "^1.6.0",
