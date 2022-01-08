@@ -82,13 +82,6 @@ const useChakraSelectProps = <
     inputId: inputId || inputProps.id,
     hasStickyGroupHeaders,
     placeholderColor,
-    styles: {
-      input: (provided) => ({
-        ...provided,
-        color: "inherit",
-        lineHeight: 1,
-      }),
-    },
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
