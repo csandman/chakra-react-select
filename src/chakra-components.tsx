@@ -584,7 +584,9 @@ const ClearIndicator = <
     : initialStyles;
 
   return (
-    // @ts-ignore
+    // @ts-ignore the `innerProps` type is meant for a div element, not a
+    // button like this is.  I'm not sure how to cast the type for these
+    // props into a type that the `CloseButton` component will be happe with
     <CloseButton
       className={cx(
         {
