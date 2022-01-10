@@ -355,6 +355,63 @@ This package implements the same classNames on the sub components as the origina
 
 Here is an example of using classNames to style the components: https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-4r2pe?file=/example.js
 
+## TypeScript Support
+
+This package has always supported typescript, however until `3.0.0` none of the type inference was working on the props passed into this component. Now that they are, you may need to pass in some generics in order for your component to work properly.
+
+This package exports all of the named module members of the original `react-select` in case you need their built in types in any of your variable declarations. The root select `Props` type that is exported by `react-select` has been [extended using module augmentation](https://github.com/JedWatson/react-select/issues/4804#issuecomment-927223471) so if you import that type, it will include all of the extra props offered. This package also exports a few custom types that are specific to the custom props offered by this package:
+
+- `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed to customize the component styles. This is almost identical to the built in `StylesConfig` type, however it uses Chakra's `SystemStyleObject` type instead of react-select's emotion styles.
+- `OptionBase` — A type for your individual select options that includes the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
+
+Here is an example of how to pass in the proper generics to `chakra-react-select`:
+
+````ts
+import { GroupBase, OptionBase, Select } from "chakra-react-select";
+
+/**
+ * `OptionBase` is a custom type exported by this package meant to be extended
+ * to make your custom option types. It includes all of the keys that can be
+ * used by this package to customize the styles of your selected options
+ *
+ * ```
+ * type OptionBase = {
+ *   variant?: string;
+ *   colorScheme?: string;
+ *   isFixed?: boolean;
+ *   isDisabled?: boolean;
+ * };
+ * ```
+ */
+interface ColorOption extends OptionBase {
+  label: string;
+  value: string;
+}
+
+const colorOptions = [
+  {
+    label: "Red",
+    value: "red",
+    colorScheme: "red", // This is allowed because of the key in the `OptionBase` type
+  },
+  {
+    label: "Blue",
+    value: "blue",
+  }
+]
+
+function CustomMultiSelect() {
+  return {
+    <Select<ColorOption, true, GroupBase<ColorOption>>
+      isMulti
+      name="colors"
+      options={colorOptions}
+      placeholder="Select some colors..."
+    />
+  }
+}
+````
+
 ## CodeSandbox Templates
 
 When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
@@ -366,8 +423,14 @@ When submitting a bug report, please include a minimum reproduction of your issu
 
 ## Roadmap
 
-Since releasing this project, there have been a few things brought up that will be addressed in the near future.
+Since releasing this project, there have been a few things brought up that will be addressed in the near future. In version `2.0.0` the **Better Customization** feature was implemented, and in version `3.0.0` the version of `react-select` used by this package was updated to `v5`.
 
-#### [react-select v5](https://github.com/JedWatson/react-select/releases/tag/react-select%405.0.0)
+#### Better Support for component wrapping
 
-It was brought to my attention in [this issue](https://github.com/csandman/chakra-react-select/issues/5) that react-select had a version 5 release almost immediately after I released this package (great timing right 😏). This version is rebuilt in TypeScript so you no longer need to install `@types/react-select` to access the types. I made a first pass at upgrading to the new version, and the errors I faced along with [some](https://github.com/csandman/chakra-react-select/issues/8) [comments](https://github.com/chakra-ui/chakra-ui/issues/1293#issuecomment-928934615) I have been receiving from people have made me realize that I probably set up the types incorrectly when I first made this project. I still plan to make the switch soon, however I will need to take a deep dive into the inner workings of react-select's TypeScript support along with how TypeScript works itself, as i am very new to it. If anyone would like to help me make the upgrade/fix the way my types are implemented, I'd greatly appreciate it!
+Like the original `react-select`, this package exports an object called `chakraComponents`. These are all of the custom components that are being passed into `react-select` to replace the built in ones. When implementing this component, you have the option to wrap these components and alter their state [in the same way the original does](https://react-select.com/components#defining-components), however, these wrapped components do not accept any of the Chakra style props. And more importantly, in the cases where Chakra components other than the base `Box` are used, for example the `LoadingIndicator` which uses the Chakra [`Spinner`](https://chakra-ui.com/docs/feedback/spinner), you can not pass any of the custom props that are specific to that component. The fact that they do not accept the style props is not the most important, as these can all be passed using the `chakraStyles` prop, however this package will never feel quite as customizable as it could until you have to freedom to pass more of these props directly to the component.
+
+Because of this, at this point in time it is not recommended to wrap the custom components exported by this project, but instead replace them entirely. If you would like them to only slightly alter the custom components in this package, it is recommended to [copy the source for that component](https://github.com/csandman/chakra-react-select/blob/main/src/chakra-components.tsx), alter it as needed, and then pass it into the `components` prop on your root select. Eventually there will be better support for passing custom props while wrapping this packages internal components.
+
+#### Remove `@ts-ignore` comments
+
+There are only 2 places where `@ts-ignore` was used to ignore mismatched types. In the upgrade process to `3.0.0` there was no clear way to make those props line up, however they shouldn't cause any issues with implementation. However, ideally there would be no need for any `@ts-ignore` comments so these will be revisited at some point.
