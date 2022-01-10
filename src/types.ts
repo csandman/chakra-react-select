@@ -82,8 +82,6 @@ export type ChakraStylesConfig<
 };
 
 export type OptionBase = {
-  value: unknown;
-  label: string;
   variant?: string;
   colorScheme?: string;
   isFixed?: boolean;
