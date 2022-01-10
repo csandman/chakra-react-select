@@ -10,7 +10,10 @@ This component is a wrapper for the popular react component [react-select](https
 
 ![Chakra React Select Banner](./github/chakra-react-select.png)
 
-Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
+Check out the demos here:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx
 
 ## Contents
 
@@ -29,6 +32,7 @@ Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb
   - [`chakraStyles`](#chakrastyles)
   - [Theme Styles](#theme-styles)
   - [`className`](#classname)
+- [TypeScript Support](#typescript-support)
 - [CodeSandbox Templates](#codesandbox-templates)
 - [Roadmap](#roadmap)
 
@@ -170,6 +174,8 @@ One additional feature which isn’t specific to Chakra or react-select is stick
 return <Select hasStickyGroupHeaders />;
 ```
 
+**NOTE:** It has recently been discovered that when using this prop, navigating up through the available options with the arrow key will keep the focused option underneath the header, as it will not scroll enough to account for it being there. So if this is an issue for you, avoid this prop. A fix for this is being investigated.
+
 ![Sticky Group Headers](./github/sticky-group-headers.png)
 
 #### `selectedOptionStyle` — Options: `color`, `check` — Default: `color`
@@ -286,7 +292,7 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `singleValue` - `Box`
 - `valueContainer` - `Box`
 
-If you're using typescript, define your `chakraStyles` object before passing it into your component using the `ChakraStylesConfig` type exported from this package:
+If you're using TypeScript, the `chakraStyles` prop is defined by the exported `ChakraStylesConfig` interface.
 
 ```ts
 import { ChakraStylesConfig, Select } from "chakra-react-select";
