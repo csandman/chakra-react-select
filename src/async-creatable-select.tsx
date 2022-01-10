@@ -1,15 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { forwardRef } from "react";
-import AsyncCreatableReactSelect from "react-select/async-creatable";
-import ChakraReactSelect from "./chakra-react-select";
-import { ChakraSelectProps } from "./types";
+import React, {
+  MutableRefObject,
+  ReactElement,
+  RefAttributes,
+  forwardRef,
+} from "react";
+import { GroupBase, SelectInstance } from "react-select";
+import AsyncCreatableReactSelect, {
+  AsyncCreatableProps,
+} from "react-select/async-creatable";
+import useChakraSelectProps from "./use-chakra-select-props";
 
-const AsyncCreatableSelect = forwardRef<any, ChakraSelectProps>(
-  (props, ref) => (
-    <ChakraReactSelect {...props}>
-      <AsyncCreatableReactSelect ref={ref} />
-    </ChakraReactSelect>
-  )
-);
+type AsyncCreatableSelectType = <
+  Option = unknown,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(
+  props: AsyncCreatableProps<Option, IsMulti, Group> &
+    RefAttributes<SelectInstance<Option, IsMulti, Group>>
+) => ReactElement;
+
+const AsyncCreatableSelect = forwardRef(
+  <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
+    props: AsyncCreatableProps<Option, IsMulti, Group>,
+    ref:
+      | ((instance: SelectInstance<Option, IsMulti, Group> | null) => void)
+      | MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
+      | null
+  ) => {
+    const chakraSelectProps = useChakraSelectProps(props);
+
+    return <AsyncCreatableReactSelect ref={ref} {...chakraSelectProps} />;
+  }
+) as AsyncCreatableSelectType;
 
 export default AsyncCreatableSelect;

@@ -1,24 +1,13 @@
-import { ReactElement, cloneElement } from "react";
-import { useColorModeValue, useFormControl, useTheme } from "@chakra-ui/react";
+import { useColorModeValue, useFormControl } from "@chakra-ui/react";
+import { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import {
-  ChakraSelectProps,
-  SelectedOptionStyle,
-  Size,
-  TagVariant,
-} from "./types";
+import { SelectedOptionStyle, Size, TagVariant } from "./types";
 
-// Custom styles for components which do not have a chakra equivalent
-const customStyles: ChakraSelectProps["styles"] = {
-  input: (provided) => ({
-    ...provided,
-    color: "inherit",
-    lineHeight: 1,
-  }),
-};
-
-const ChakraReactSelect = ({
-  children,
+const useChakraSelectProps = <
+  Option,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>({
   styles,
   components = {},
   theme,
@@ -35,9 +24,7 @@ const ChakraReactSelect = ({
   errorBorderColor,
   chakraStyles = {},
   ...props
-}: ChakraSelectProps): ReactElement => {
-  const chakraTheme = useTheme();
-
+}: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
   // `isInvalid`
@@ -45,10 +32,7 @@ const ChakraReactSelect = ({
 
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
-  const placeholderColor = useColorModeValue(
-    chakraTheme.colors.gray[400],
-    chakraTheme.colors.whiteAlpha[400]
-  );
+  const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
   let realSize: Size = size;
@@ -81,7 +65,7 @@ const ChakraReactSelect = ({
     realSelectedOptionColor = "blue";
   }
 
-  const select = cloneElement(children, {
+  const select: Props<Option, IsMulti, Group> = {
     components: {
       ...chakraComponents,
       ...components,
@@ -98,7 +82,6 @@ const ChakraReactSelect = ({
     inputId: inputId || inputProps.id,
     hasStickyGroupHeaders,
     placeholderColor,
-    styles: customStyles,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
@@ -107,9 +90,9 @@ const ChakraReactSelect = ({
     // override the `isInvalid` prop
     "aria-invalid":
       props["aria-invalid"] ?? inputProps["aria-invalid"] ? true : undefined,
-  });
+  };
 
   return select;
 };
 
-export default ChakraReactSelect;
+export default useChakraSelectProps;

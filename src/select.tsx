@@ -1,13 +1,33 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { forwardRef } from "react";
-import ReactSelect from "react-select";
-import ChakraReactSelect from "./chakra-react-select";
-import { ChakraSelectProps } from "./types";
+import React, {
+  MutableRefObject,
+  ReactElement,
+  RefAttributes,
+  forwardRef,
+} from "react";
+import ReactSelect, { GroupBase, Props, SelectInstance } from "react-select";
+import useChakraSelectProps from "./use-chakra-select-props";
 
-const Select = forwardRef<any, ChakraSelectProps>((props, ref) => (
-  <ChakraReactSelect {...props}>
-    <ReactSelect ref={ref} />
-  </ChakraReactSelect>
-));
+type SelectType = <
+  Option = unknown,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(
+  props: Props<Option, IsMulti, Group> &
+    RefAttributes<SelectInstance<Option, IsMulti, Group>>
+) => ReactElement;
+
+const Select = forwardRef(
+  <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
+    props: Props<Option, IsMulti, Group>,
+    ref:
+      | ((instance: SelectInstance<Option, IsMulti, Group> | null) => void)
+      | MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
+      | null
+  ) => {
+    const chakraSelectProps = useChakraSelectProps(props);
+
+    return <ReactSelect ref={ref} {...chakraSelectProps} />;
+  }
+) as SelectType;
 
 export default Select;
