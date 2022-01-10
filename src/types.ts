@@ -111,16 +111,6 @@ declare module "react-select/dist/declarations/src/Select" {
 }
 
 declare module "react-select/dist/declarations/src/components/MultiValue" {
-  export interface MultiValueGenericProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>
-  > {
-    sx: SystemStyleObject;
-  }
-}
-
-declare module "react-select/dist/declarations/src/components/MultiValue" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
@@ -128,9 +118,15 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
   > {
     sx: SystemStyleObject;
   }
-}
 
-declare module "react-select/dist/declarations/src/components/MultiValue" {
+  export interface MultiValueGenericProps<
+    Option,
+    IsMulti extends boolean,
+    Group extends GroupBase<Option>
+  > {
+    sx: SystemStyleObject;
+  }
+
   export interface MultiValueRemoveProps<
     Option,
     IsMulti extends boolean,
