@@ -27,6 +27,7 @@
     "format": "prettier --write .",
     "format:package": "prettier-package-json --write",
     "lint": "concurrently npm:lint:*",
+    "lint-fix": "eslint --fix src",
     "lint:src": "eslint src --ext .ts,.tsx",
     "lint:types": "tsc --noEmit",
     "prepare": "husky install",
