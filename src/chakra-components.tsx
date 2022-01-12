@@ -471,8 +471,12 @@ const MultiValueRemove = <
   }
 
   return (
+    // @ts-ignore the `innerProps` type is not compatible with the props
+    // accepted by the `TagCloseButton`. The most likely solution in the long
+    // term is using a `chakra.button` instead of a TagCloseButton and styling
+    // it using the multi style config of a tag close button.
     <TagCloseButton
-      className={innerProps.className}
+      {...innerProps}
       sx={sx}
       tabIndex={-1}
       data-focus={isFocused ? true : undefined}
