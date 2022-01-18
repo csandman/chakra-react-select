@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
-import {
+import type { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
+import type {
   ClearIndicatorProps,
   ContainerProps,
   ControlProps,
@@ -211,32 +210,5 @@ declare module "react-select/dist/declarations/src/Select" {
      * @link https://react-select.com/styles#style-object
      */
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
-  }
-}
-
-declare module "react-select/dist/declarations/src/components/MultiValue" {
-  export interface MultiValueProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>
-  > {
-    sx: SystemStyleObject;
-  }
-
-  export interface MultiValueGenericProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>
-  > {
-    sx: SystemStyleObject;
-  }
-
-  export interface MultiValueRemoveProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>
-  > {
-    isFocused: boolean;
-    sx: SystemStyleObject;
   }
 }

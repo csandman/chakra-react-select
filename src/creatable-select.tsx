@@ -1,11 +1,8 @@
-import React, {
-  MutableRefObject,
-  ReactElement,
-  RefAttributes,
-  forwardRef,
-} from "react";
-import { GroupBase, SelectInstance } from "react-select";
-import CreatableReactSelect, { CreatableProps } from "react-select/creatable";
+import React, { forwardRef } from "react";
+import type { MutableRefObject, ReactElement, RefAttributes } from "react";
+import type { GroupBase, SelectInstance } from "react-select";
+import CreatableReactSelect from "react-select/creatable";
+import type { CreatableProps } from "react-select/creatable";
 import useChakraSelectProps from "./use-chakra-select-props";
 
 type CreatableSelectType = <

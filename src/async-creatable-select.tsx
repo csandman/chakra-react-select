@@ -1,13 +1,8 @@
-import React, {
-  MutableRefObject,
-  ReactElement,
-  RefAttributes,
-  forwardRef,
-} from "react";
-import { GroupBase, SelectInstance } from "react-select";
-import AsyncCreatableReactSelect, {
-  AsyncCreatableProps,
-} from "react-select/async-creatable";
+import React, { forwardRef } from "react";
+import type { MutableRefObject, ReactElement, RefAttributes } from "react";
+import type { GroupBase, SelectInstance } from "react-select";
+import AsyncCreatableReactSelect from "react-select/async-creatable";
+import type { AsyncCreatableProps } from "react-select/async-creatable";
 import useChakraSelectProps from "./use-chakra-select-props";
 
 type AsyncCreatableSelectType = <

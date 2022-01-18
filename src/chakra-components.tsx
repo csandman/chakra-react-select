@@ -1,14 +1,13 @@
-import React, { ReactElement } from "react";
+import React from "react";
+import type { ReactElement } from "react";
 import {
   Box,
   CloseButton,
   Divider,
   MenuIcon,
   PropsOf,
-  RecursiveCSSObject,
   Spinner,
   StylesProvider,
-  SystemStyleObject,
   Tag,
   TagCloseButton,
   TagLabel,
@@ -19,7 +18,8 @@ import {
   useStyles,
   useTheme,
 } from "@chakra-ui/react";
-import {
+import type { RecursiveCSSObject, SystemStyleObject } from "@chakra-ui/react";
+import type {
   ClearIndicatorProps,
   ContainerProps,
   ControlProps,
@@ -42,7 +42,7 @@ import {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
-import { Size, SizeProps, SxProps } from "./types";
+import type { Size, SizeProps, SxProps } from "./types";
 import { cleanCommonProps } from "./utils";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
