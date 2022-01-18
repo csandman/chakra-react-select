@@ -310,8 +310,12 @@ const App: React.FC = () => {
 };
 ```
 
-- Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
-- Vanilla JS Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+- Dropdown menu attached to control example:
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+- Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles example:
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-qwq3o?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-iydfe?file=/example.js
 
 ### Theme Styles
 
