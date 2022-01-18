@@ -1,4 +1,4 @@
-import { CommonPropsAndClassName, GroupBase } from "react-select";
+import type { CommonPropsAndClassName, GroupBase } from "react-select";
 
 export const cleanCommonProps = <
   Option,

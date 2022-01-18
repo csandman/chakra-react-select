@@ -1,7 +1,7 @@
 import { useColorModeValue, useFormControl } from "@chakra-ui/react";
-import { GroupBase, Props } from "react-select";
+import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import { SelectedOptionStyle, Size, TagVariant } from "./types";
+import type { SelectedOptionStyle, Size, TagVariant } from "./types";
 
 const useChakraSelectProps = <
   Option,
