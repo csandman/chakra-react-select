@@ -974,6 +974,7 @@ const Option = <
       _active: { bg: selectedBg },
     }),
     ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
+    ...(isDisabled && { _active: {} }),
   };
 
   const sx: SystemStyleObject = chakraStyles?.option
