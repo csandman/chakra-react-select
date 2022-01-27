@@ -2,23 +2,25 @@ import React from "react";
 import type { ReactElement } from "react";
 import {
   Box,
-  CloseButton,
   Divider,
+  Icon,
   MenuIcon,
   PropsOf,
   Spinner,
   StylesProvider,
-  Tag,
-  TagCloseButton,
-  TagLabel,
   chakra,
   createIcon,
   useColorModeValue,
   useMultiStyleConfig,
+  useStyleConfig,
   useStyles,
   useTheme,
 } from "@chakra-ui/react";
-import type { RecursiveCSSObject, SystemStyleObject } from "@chakra-ui/react";
+import type {
+  IconProps,
+  RecursiveCSSObject,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -42,26 +44,8 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
-import type { Size, SizeProps, SxProps } from "./types";
+import type { OptionBase, Size, SizeProps, SxProps } from "./types";
 import { cleanCommonProps } from "./utils";
-
-// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
-const ChevronDown = createIcon({
-  displayName: "ChevronDownIcon",
-  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
-});
-
-// Use the CheckIcon component from the chakra menu
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
-const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-);
 
 const SelectContainer = <
   Option,
@@ -300,6 +284,7 @@ const Placeholder = <
     position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",
+    userSelect: "none",
   };
 
   const sx: SystemStyleObject = chakraStyles?.placeholder
@@ -324,7 +309,7 @@ const Placeholder = <
 
 // Multi Value
 const MultiValue = <
-  Option,
+  Option extends OptionBase,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
@@ -345,20 +330,39 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles } = selectProps;
+  const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
 
-  const containerInitialStyles: SystemStyleObject = { m: "0.125rem" };
+  const { container, closeButton, label } = useMultiStyleConfig("Tag", {
+    size,
+    colorScheme: data.colorScheme || colorScheme,
+    variant: data.variant || tagVariant || (data.isFixed ? "solid" : "subtle"),
+  });
+
+  const containerInitialStyles: SystemStyleObject = {
+    display: "inline-flex",
+    verticalAlign: "top",
+    alignItems: "center",
+    maxWidth: "100%",
+    ...container,
+    m: "0.125rem",
+  };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialStyles, props)
     : containerInitialStyles;
 
   const labelSx: SystemStyleObject = chakraStyles?.multiValueLabel
-    ? chakraStyles.multiValueLabel({}, props)
-    : {};
+    ? chakraStyles.multiValueLabel(label, props)
+    : label;
 
+  const removeInitialStyles: SystemStyleObject = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    ...closeButton,
+  };
   const removeSx: SystemStyleObject = chakraStyles?.multiValueRemove
-    ? chakraStyles.multiValueRemove({}, props)
-    : {};
+    ? chakraStyles.multiValueRemove(removeInitialStyles, props)
+    : removeInitialStyles;
 
   return (
     <Container
@@ -418,24 +422,12 @@ const MultiValueContainer = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ): ReactElement => {
-  const { children, innerProps, data, selectProps, sx } = props;
+  const { children, innerProps, sx } = props;
 
   return (
-    <Tag
-      {...innerProps}
-      // react-select Fixed Options example:
-      // https://react-select.com/home#fixed-options
-      variant={
-        data.variant ||
-        selectProps.tagVariant ||
-        (data.isFixed ? "solid" : "subtle")
-      }
-      colorScheme={data.colorScheme || selectProps.colorScheme}
-      size={selectProps.size}
-      sx={sx}
-    >
+    <chakra.span {...innerProps} sx={sx}>
       {children}
-    </Tag>
+    </chakra.span>
   );
 };
 
@@ -449,14 +441,24 @@ const MultiValueLabel = <
   const { children, innerProps, sx } = props;
 
   return (
-    <TagLabel {...innerProps} sx={sx}>
+    <chakra.span {...innerProps} sx={sx}>
       {children}
-    </TagLabel>
+    </chakra.span>
   );
 };
 
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/tag/src/tag.tsx#L75
+const TagCloseIcon: React.FC<IconProps> = (props) => (
+  <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
+    <path
+      fill="currentColor"
+      d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
+    />
+  </Icon>
+);
+
 const MultiValueRemove = <
-  Option,
+  Option extends OptionBase,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
@@ -464,25 +466,19 @@ const MultiValueRemove = <
 ): ReactElement | null => {
   const { children, innerProps, isFocused, data, sx } = props;
 
-  // @ts-ignore `isFixed` is not found on the default Option object
-  // not sure how to extend it internally
   if (data.isFixed) {
     return null;
   }
 
   return (
-    // @ts-ignore the `innerProps` type is not compatible with the props
-    // accepted by the `TagCloseButton`. The most likely solution in the long
-    // term is using a `chakra.button` instead of a TagCloseButton and styling
-    // it using the multi style config of a tag close button.
-    <TagCloseButton
+    <Box
       {...innerProps}
+      role="button"
       sx={sx}
-      tabIndex={-1}
       data-focus={isFocused ? true : undefined}
     >
-      {children}
-    </TagCloseButton>
+      {children || <TagCloseIcon />}
+    </Box>
   );
 };
 
@@ -565,6 +561,15 @@ const IndicatorSeparator = <
   );
 };
 
+const CloseIcon: React.FC<IconProps> = (props) => (
+  <Icon focusable="false" aria-hidden {...props}>
+    <path
+      fill="currentColor"
+      d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+    />
+  </Icon>
+);
+
 const ClearIndicator = <
   Option,
   IsMulti extends boolean,
@@ -573,6 +578,7 @@ const ClearIndicator = <
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ): ReactElement => {
   const {
+    children,
     className,
     cx,
     innerProps,
@@ -580,17 +586,27 @@ const ClearIndicator = <
     selectProps: { size, chakraStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = { mx: 1 };
+  const closeButtonStyles = useStyleConfig("CloseButton", {
+    size: size as undefined,
+  });
+
+  const initialStyles: SystemStyleObject = {
+    ...closeButtonStyles,
+    mx: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    cursor: "pointer",
+  };
 
   const sx: SystemStyleObject = chakraStyles?.clearIndicator
     ? chakraStyles.clearIndicator(initialStyles, props)
     : initialStyles;
 
   return (
-    // @ts-ignore the `innerProps` type is meant for a div element, not a
-    // button like this is.  I'm not sure how to cast the type for these
-    // props into a type that the `CloseButton` component will be happe with
-    <CloseButton
+    <Box
+      role="button"
       className={cx(
         {
           indicator: true,
@@ -598,15 +614,26 @@ const ClearIndicator = <
         },
         className
       )}
-      size={size}
       sx={sx}
-      tabIndex={-1}
       data-focused={isFocused ? true : undefined}
       aria-label="Clear selected options"
       {...innerProps}
-    />
+    >
+      {children || <CloseIcon width="1em" height="1em" />}
+    </Box>
   );
 };
+
+// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
+const ChevronDownIcon = createIcon({
+  displayName: "ChevronDownIcon",
+  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
+});
+
+const DownChevron = (props: IconProps): ReactElement => (
+  <ChevronDownIcon {...props} />
+);
 
 const DropdownIndicator = <
   Option,
@@ -616,6 +643,7 @@ const DropdownIndicator = <
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ): ReactElement => {
   const {
+    children,
     className,
     cx,
     innerProps,
@@ -658,7 +686,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      <ChevronDown h={iconSize} w={iconSize} />
+      {children || <DownChevron h={iconSize} w={iconSize} />}
     </Box>
   );
 };
@@ -718,17 +746,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     innerProps,
     innerRef,
     placement,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu", {});
-
-  const chakraTheme = useTheme();
-  const borderRadii: SizeProps = {
-    sm: chakraTheme.radii.sm,
-    md: chakraTheme.radii.md,
-    lg: chakraTheme.radii.md,
-  };
 
   const initialStyles: SystemStyleObject = {
     position: "absolute",
@@ -738,7 +759,6 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     w: "100%",
     zIndex: 1,
     overflow: "hidden",
-    rounded: borderRadii[size as Size],
   };
 
   const sx: SystemStyleObject = chakraStyles?.menu
@@ -776,12 +796,7 @@ const MenuList = <
 
   const { list } = useStyles();
 
-  const chakraTheme = useTheme();
-  const borderRadii: SizeProps = {
-    sm: chakraTheme.radii.sm,
-    md: chakraTheme.radii.md,
-    lg: chakraTheme.radii.md,
-  };
+  const borderRadii: SizeProps = useTheme().radii;
 
   const initialStyles: SystemStyleObject = {
     ...list,
@@ -905,6 +920,17 @@ const GroupHeading = <
   );
 };
 
+// Use the CheckIcon component from the chakra menu
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
+const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
+  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
+    <polygon
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+    />
+  </svg>
+);
+
 const Option = <
   Option,
   IsMulti extends boolean,
@@ -973,6 +999,7 @@ const Option = <
       _active: { bg: selectedBg },
     }),
     ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
+    ...(isDisabled && { _active: {} }),
   };
 
   const sx: SystemStyleObject = chakraStyles?.option

@@ -269,7 +269,7 @@ All of the style keys offered in the original package can be used here, except f
 
 Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/layout/box) with a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered:
 
-- `clearIndicator` - `CloseButton`
+- `clearIndicator` - `Box` (uses theme styles for Chakra's `CloseButton`)
 - `container` - `Box`
 - `control` - `Box` (uses theme styles for Chakra's `Input`)
 - `dropdownIndicator` - `Box` (uses theme styles for Chrakra's `InputRightAddon`)
@@ -283,9 +283,9 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `loadingMessage` - `Box`
 - `menu` - `Box`
 - `menuList` - `Box` (uses theme styles for Chakra's `Menu`)
-- `multiValue` - `Tag`
-- `multiValueLabel` - `TagLabel`
-- `multiValueRemove` - `TagCloseButton`
+- `multiValue` - `chakra.span` (uses theme styles for Chakra's `Tag`)
+- `multiValueLabel` - `chakra.span` (uses theme styles for Chakra's `TagLabel`)
+- `multiValueRemove` - `Box` (uses theme styles for Chakra's `TagCloseButton`)
 - `noOptionsMessage` - `Box`
 - `option` - `Box` (uses theme styles for Chakra's `MenuItem`)
 - `placeholder` - `Box`

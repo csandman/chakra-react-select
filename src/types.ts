@@ -34,7 +34,7 @@ export type SizeProps = {
 
 export type Size = "sm" | "md" | "lg";
 
-export type TagVariant = "subtle" | "solid" | "outline" | undefined;
+export type TagVariant = "subtle" | "solid" | "outline";
 
 export type SelectedOptionStyle = "color" | "check";
 
