@@ -23,12 +23,20 @@ const useChakraSelectProps = <
   focusBorderColor,
   errorBorderColor,
   chakraStyles = {},
+  onFocus,
+  onBlur,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
   // `isInvalid`
-  const inputProps = useFormControl({ isDisabled, isInvalid });
+  const inputProps = useFormControl({
+    id: inputId,
+    isDisabled,
+    isInvalid,
+    onFocus,
+    onBlur,
+  });
 
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
@@ -66,25 +74,28 @@ const useChakraSelectProps = <
   }
 
   const select: Props<Option, IsMulti, Group> = {
+    // Allow overriding of custom components
     components: {
       ...chakraComponents,
       ...components,
     },
+    // Custom select props
     colorScheme,
     size: realSize,
     tagVariant: realTagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,
-    // isDisabled and isInvalid can be set on the component
-    // or on a surrounding form control
-    isDisabled: inputProps.disabled,
-    isInvalid: !!inputProps["aria-invalid"],
-    inputId: inputId || inputProps.id,
     hasStickyGroupHeaders,
     placeholderColor,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
+    // Extract custom props from form control
+    onFocus: inputProps.onFocus,
+    onBlur: inputProps.onBlur,
+    isDisabled: inputProps.disabled,
+    isInvalid: !!inputProps["aria-invalid"],
+    inputId: inputProps.id,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
