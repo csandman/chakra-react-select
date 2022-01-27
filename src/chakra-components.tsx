@@ -47,24 +47,6 @@ import type {
 import type { OptionBase, Size, SizeProps, SxProps } from "./types";
 import { cleanCommonProps } from "./utils";
 
-// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
-const ChevronDown = createIcon({
-  displayName: "ChevronDownIcon",
-  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
-});
-
-// Use the CheckIcon component from the chakra menu
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
-const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
-);
-
 const SelectContainer = <
   Option,
   IsMulti extends boolean,
@@ -642,6 +624,17 @@ const ClearIndicator = <
   );
 };
 
+// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
+const ChevronDownIcon = createIcon({
+  displayName: "ChevronDownIcon",
+  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
+});
+
+const DownChevron = (props: IconProps): ReactElement => (
+  <ChevronDownIcon {...props} />
+);
+
 const DropdownIndicator = <
   Option,
   IsMulti extends boolean,
@@ -650,6 +643,7 @@ const DropdownIndicator = <
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ): ReactElement => {
   const {
+    children,
     className,
     cx,
     innerProps,
@@ -692,7 +686,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      <ChevronDown h={iconSize} w={iconSize} />
+      {children || <DownChevron h={iconSize} w={iconSize} />}
     </Box>
   );
 };
@@ -752,17 +746,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     innerProps,
     innerRef,
     placement,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu", {});
-
-  const chakraTheme = useTheme();
-  const borderRadii: SizeProps = {
-    sm: chakraTheme.radii.sm,
-    md: chakraTheme.radii.md,
-    lg: chakraTheme.radii.md,
-  };
 
   const initialStyles: SystemStyleObject = {
     position: "absolute",
@@ -772,7 +759,6 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     w: "100%",
     zIndex: 1,
     overflow: "hidden",
-    rounded: borderRadii[size as Size],
   };
 
   const sx: SystemStyleObject = chakraStyles?.menu
@@ -810,12 +796,7 @@ const MenuList = <
 
   const { list } = useStyles();
 
-  const chakraTheme = useTheme();
-  const borderRadii: SizeProps = {
-    sm: chakraTheme.radii.sm,
-    md: chakraTheme.radii.md,
-    lg: chakraTheme.radii.md,
-  };
+  const borderRadii: SizeProps = useTheme().radii;
 
   const initialStyles: SystemStyleObject = {
     ...list,
@@ -938,6 +919,17 @@ const GroupHeading = <
     </Box>
   );
 };
+
+// Use the CheckIcon component from the chakra menu
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
+const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
+  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
+    <polygon
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+    />
+  </svg>
+);
 
 const Option = <
   Option,
