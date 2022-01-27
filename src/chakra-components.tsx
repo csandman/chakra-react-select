@@ -4,13 +4,11 @@ import {
   Box,
   CloseButton,
   Divider,
+  Icon,
   MenuIcon,
   PropsOf,
   Spinner,
   StylesProvider,
-  Tag,
-  TagCloseButton,
-  TagLabel,
   chakra,
   createIcon,
   useColorModeValue,
@@ -18,7 +16,11 @@ import {
   useStyles,
   useTheme,
 } from "@chakra-ui/react";
-import type { RecursiveCSSObject, SystemStyleObject } from "@chakra-ui/react";
+import type {
+  IconProps,
+  RecursiveCSSObject,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -42,7 +44,7 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
-import type { Size, SizeProps, SxProps } from "./types";
+import type { OptionBase, Size, SizeProps, SxProps } from "./types";
 import { cleanCommonProps } from "./utils";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
@@ -325,7 +327,7 @@ const Placeholder = <
 
 // Multi Value
 const MultiValue = <
-  Option,
+  Option extends OptionBase,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
@@ -346,20 +348,39 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles } = selectProps;
+  const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
 
-  const containerInitialStyles: SystemStyleObject = { m: "0.125rem" };
+  const { container, closeButton, label } = useMultiStyleConfig("Tag", {
+    size,
+    colorScheme: data.colorScheme || colorScheme,
+    variant: data.variant || tagVariant || (data.isFixed ? "solid" : "subtle"),
+  });
+
+  const containerInitialStyles: SystemStyleObject = {
+    display: "inline-flex",
+    verticalAlign: "top",
+    alignItems: "center",
+    maxWidth: "100%",
+    ...container,
+    m: "0.125rem",
+  };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialStyles, props)
     : containerInitialStyles;
 
   const labelSx: SystemStyleObject = chakraStyles?.multiValueLabel
-    ? chakraStyles.multiValueLabel({}, props)
-    : {};
+    ? chakraStyles.multiValueLabel(label, props)
+    : label;
 
+  const removeInitialStyles: SystemStyleObject = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    ...closeButton,
+  };
   const removeSx: SystemStyleObject = chakraStyles?.multiValueRemove
-    ? chakraStyles.multiValueRemove({}, props)
-    : {};
+    ? chakraStyles.multiValueRemove(removeInitialStyles, props)
+    : removeInitialStyles;
 
   return (
     <Container
@@ -419,24 +440,12 @@ const MultiValueContainer = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ): ReactElement => {
-  const { children, innerProps, data, selectProps, sx } = props;
+  const { children, innerProps, sx } = props;
 
   return (
-    <Tag
-      {...innerProps}
-      // react-select Fixed Options example:
-      // https://react-select.com/home#fixed-options
-      variant={
-        data.variant ||
-        selectProps.tagVariant ||
-        (data.isFixed ? "solid" : "subtle")
-      }
-      colorScheme={data.colorScheme || selectProps.colorScheme}
-      size={selectProps.size}
-      sx={sx}
-    >
+    <chakra.span {...innerProps} sx={sx}>
       {children}
-    </Tag>
+    </chakra.span>
   );
 };
 
@@ -450,14 +459,24 @@ const MultiValueLabel = <
   const { children, innerProps, sx } = props;
 
   return (
-    <TagLabel {...innerProps} sx={sx}>
+    <chakra.span {...innerProps} sx={sx}>
       {children}
-    </TagLabel>
+    </chakra.span>
   );
 };
 
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/tag/src/tag.tsx#L75
+const TagCloseIcon: React.FC<IconProps> = (props) => (
+  <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
+    <path
+      fill="currentColor"
+      d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
+    />
+  </Icon>
+);
+
 const MultiValueRemove = <
-  Option,
+  Option extends OptionBase,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
@@ -465,25 +484,19 @@ const MultiValueRemove = <
 ): ReactElement | null => {
   const { children, innerProps, isFocused, data, sx } = props;
 
-  // @ts-ignore `isFixed` is not found on the default Option object
-  // not sure how to extend it internally
   if (data.isFixed) {
     return null;
   }
 
   return (
-    // @ts-ignore the `innerProps` type is not compatible with the props
-    // accepted by the `TagCloseButton`. The most likely solution in the long
-    // term is using a `chakra.button` instead of a TagCloseButton and styling
-    // it using the multi style config of a tag close button.
-    <TagCloseButton
+    <Box
       {...innerProps}
+      role="button"
       sx={sx}
-      tabIndex={-1}
       data-focus={isFocused ? true : undefined}
     >
-      {children}
-    </TagCloseButton>
+      {children || <TagCloseIcon />}
+    </Box>
   );
 };
 

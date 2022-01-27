@@ -283,9 +283,9 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `loadingMessage` - `Box`
 - `menu` - `Box`
 - `menuList` - `Box` (uses theme styles for Chakra's `Menu`)
-- `multiValue` - `Tag`
-- `multiValueLabel` - `TagLabel`
-- `multiValueRemove` - `TagCloseButton`
+- `multiValue` - `chakra.span` (uses theme styles for Chakra's `Tag`)
+- `multiValueLabel` - `chakra.span` (uses theme styles for Chakra's `TagLabel`)
+- `multiValueRemove` - `Box` (uses theme styles for Chakra's `TagCloseButton`)
 - `noOptionsMessage` - `Box`
 - `option` - `Box` (uses theme styles for Chakra's `MenuItem`)
 - `placeholder` - `Box`
