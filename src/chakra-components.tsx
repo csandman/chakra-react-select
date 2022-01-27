@@ -300,6 +300,7 @@ const Placeholder = <
     position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",
+    userSelect: "none",
   };
 
   const sx: SystemStyleObject = chakraStyles?.placeholder
