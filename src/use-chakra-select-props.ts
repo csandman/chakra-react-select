@@ -51,7 +51,7 @@ const useChakraSelectProps = <
 
   // Ensure that the tag variant used is one of the options, either `subtle`,
   // `solid`, or `outline` (or undefined)
-  let realTagVariant: TagVariant = tagVariant;
+  let realTagVariant: TagVariant | undefined = tagVariant;
   const tagVariantOptions: TagVariant[] = ["subtle", "solid", "outline"];
   if (tagVariant !== undefined) {
     if (!tagVariantOptions.includes(tagVariant)) {
