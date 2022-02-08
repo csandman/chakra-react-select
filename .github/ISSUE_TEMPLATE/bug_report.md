@@ -4,7 +4,7 @@ about:
   Create a report to help us improve the project.  You only need to include the
   fields relevant to your issue, if I need more info I'll ask!
 title: "[BUG] "
-labels: bug
+labels: Bug
 assignees: csandman
 ---
 

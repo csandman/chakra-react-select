@@ -2,7 +2,7 @@
 name: Question
 about: Just have a question?  Ask it here!
 title: "[QUESTION] "
-labels: question
+labels: Question
 assignees: csandman
 ---
 
