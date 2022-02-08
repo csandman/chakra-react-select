@@ -1,4 +1,8 @@
-import type { CSSWithMultiValues, SystemStyleObject } from "@chakra-ui/react";
+import type {
+  CSSWithMultiValues,
+  RecursiveCSSObject,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -22,9 +26,11 @@ import type {
 } from "react-select";
 
 export interface SxProps extends CSSWithMultiValues {
-  _disabled: CSSWithMultiValues;
-  _focus: CSSWithMultiValues;
+  _disabled?: CSSWithMultiValues;
+  _focus?: CSSWithMultiValues;
 }
+
+export type ThemeObject = RecursiveCSSObject<SxProps>;
 
 export type SizeProps = {
   sm: string | number;
@@ -80,12 +86,12 @@ export type ChakraStylesConfig<
   valueContainer?: StylesFunction<ValueContainerProps<Option, IsMulti, Group>>;
 };
 
-export type OptionBase = {
+export interface OptionBase {
   variant?: string;
   colorScheme?: string;
   isFixed?: boolean;
   isDisabled?: boolean;
-};
+}
 
 declare module "react-select/dist/declarations/src/Select" {
   export interface Props<
