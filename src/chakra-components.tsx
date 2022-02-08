@@ -16,11 +16,7 @@ import {
   useStyles,
   useTheme,
 } from "@chakra-ui/react";
-import type {
-  IconProps,
-  RecursiveCSSObject,
-  SystemStyleObject,
-} from "@chakra-ui/react";
+import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -44,7 +40,7 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
-import type { OptionBase, Size, SizeProps, SxProps } from "./types";
+import type { OptionBase, Size, SizeProps, ThemeObject } from "./types";
 import { cleanCommonProps } from "./utils";
 
 const SelectContainer = <
@@ -957,7 +953,7 @@ const Option = <
     },
   } = props;
 
-  const { item } = useStyles();
+  const itemStyles = useStyles().item as ThemeObject;
 
   const paddings: SizeProps = {
     sm: "0.3rem 0.6rem",
@@ -983,22 +979,20 @@ const Option = <
     selectedOptionStyle === "color" && isSelected;
 
   const initialStyles: SystemStyleObject = {
-    ...item,
+    ...itemStyles,
     d: "flex",
     alignItems: "center",
     w: "100%",
     textAlign: "start",
     fontSize: size,
     p: paddings[size as Size],
-    bg: isFocused
-      ? (item as RecursiveCSSObject<SxProps>)._focus.bg
-      : "transparent",
+    bg: isFocused ? itemStyles._focus?.bg : "transparent",
     ...(shouldHighlight && {
       bg: selectedBg,
       color: selectedColor,
       _active: { bg: selectedBg },
     }),
-    ...(isDisabled && (item as RecursiveCSSObject<SxProps>)._disabled),
+    ...(isDisabled && itemStyles._disabled),
     ...(isDisabled && { _active: {} }),
   };
 

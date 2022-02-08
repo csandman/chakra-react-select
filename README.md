@@ -33,6 +33,7 @@ Check out the demos here:
   - [Theme Styles](#theme-styles)
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
+- [Customizing Components](#customizing-components)
 - [CodeSandbox Templates](#codesandbox-templates)
 - [Roadmap](#roadmap)
 
@@ -277,7 +278,7 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `groupHeading` - `Box` (uses theme styles for Chakra's `Menu` group title)
 - `indicatorsContainer` - `Box`
 - `indicatorSeparator` - `Divider`
-- `input` - `chakra.input`
+- `input` - `chakra.input` (wrapped in a `Box`)
 - `inputContainer` - `Box`
 - `loadingIndicator` - `Spinner`
 - `loadingMessage` - `Box`
@@ -426,6 +427,63 @@ function CustomMultiSelect() {
 }
 ````
 
+## Customizing Components
+
+Like the original `react-select`, this package exports all of the custom components that make up the overall select. However, instead of being exported as `components` they are exported as `chakraComponents` in order to leave the original `components` export from react-select alone (you can export that as well if you'd like). When implementing this component, you have the option to wrap these components and alter their state and the children they return [in the same way the original does](https://react-select.com/components#defining-components).
+
+Here's an example of how you might use this to create a select with a custom `Option`:
+
+```ts
+import { Icon } from "@chakra-ui/react";
+import { Select, chakraComponents } from "chakra-react-select";
+import {
+  GiCherry,
+  GiChocolateBar,
+  GiCoffeeBeans,
+  GiStrawberry,
+} from "react-icons/gi";
+
+const flavorOptions = [
+  {
+    value: "coffee",
+    label: "Coffee",
+    icon: <Icon as={GiCoffeeBeans} color="orange.700" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "chocolate",
+    label: "Chocolate",
+    icon: <Icon as={GiChocolateBar} color="yellow.800" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "strawberry",
+    label: "Strawberry",
+    icon: <Icon as={GiStrawberry} color="red.500" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "cherry",
+    label: "Cherry",
+    icon: <Icon as={GiCherry} color="red.600" mr={2} h={5} w={5} />,
+  },
+];
+
+const Example = () => (
+  <Select
+    name="flavors"
+    options={flavorOptions}
+    placeholder="Select some flavors..."
+    components={{
+      Option: ({ children, ...props }) => (
+        <chakraComponents.Option {...props}>
+          {props.data.icon} {children}
+        </chakraComponents.Option>
+      ),
+    }}
+  />
+);
+```
+
+CodeSandbox Example: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+
 ## CodeSandbox Templates
 
 When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
@@ -441,10 +499,6 @@ Since releasing this project, there have been a few things brought up that will 
 
 #### Better Support for component wrapping
 
-Like the original `react-select`, this package exports an object called `chakraComponents`. These are all of the custom components that are being passed into `react-select` to replace the built in ones. When implementing this component, you have the option to wrap these components and alter their state [in the same way the original does](https://react-select.com/components#defining-components), however, these wrapped components do not accept any of the Chakra style props. And more importantly, in the cases where Chakra components other than the base `Box` are used, for example the `LoadingIndicator` which uses the Chakra [`Spinner`](https://chakra-ui.com/docs/feedback/spinner), you can not pass any of the custom props that are specific to that component. The fact that they do not accept the style props is not the most important, as these can all be passed using the `chakraStyles` prop, however this package will never feel quite as customizable as it could until you have to freedom to pass more of these props directly to the component.
+When implementing this component, you have the option to wrap the custom components exported in `chakraComponents`, however, these wrapped components do not accept any of the Chakra style props. And more importantly, in the cases where Chakra components other than the base `Box` are used, for example the `LoadingIndicator` which uses the Chakra [`Spinner`](https://chakra-ui.com/docs/feedback/spinner), you can not pass any of the custom props that are specific to that component. The fact that they do not accept the style props is not the most important, as these can all be passed using the `chakraStyles` prop, however this package will never feel quite as customizable as it could until you have to freedom to pass more of these props directly to the component.
 
-Because of this, at this point in time it is not recommended to wrap the custom components exported by this project, but instead replace them entirely. If you would like them to only slightly alter the custom components in this package, it is recommended to [copy the source for that component](https://github.com/csandman/chakra-react-select/blob/main/src/chakra-components.tsx), alter it as needed, and then pass it into the `components` prop on your root select. Eventually there will be better support for passing custom props while wrapping this packages internal components.
-
-#### Remove `@ts-ignore` comments
-
-There are only 2 places where `@ts-ignore` was used to ignore mismatched types. In the upgrade process to `3.0.0` there was no clear way to make those props line up, however they shouldn't cause any issues with implementation. However, ideally there would be no need for any `@ts-ignore` comments so these will be revisited at some point.
+Because of this, at this point in time it is not recommended to wrap the custom components exported by this project (unless you're altering their children), but instead replace them entirely. If you would like them to do more in-depth alteration to the the custom components in this package, it is recommended to [copy the source for that component](https://github.com/csandman/chakra-react-select/blob/main/src/chakra-components.tsx), alter it as needed, and then pass it into the `components` prop on your root select. Eventually there will be better support for passing custom props while wrapping this package's internal components.
