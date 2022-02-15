@@ -466,18 +466,22 @@ const flavorOptions = [
   },
 ];
 
+// Make sure this is defined outside of the component which returns your select
+// or you'll run into rendering issues
+const customComponents = {
+  Option: ({ children, ...props }) => (
+    <chakraComponents.Option {...props}>
+      {props.data.icon} {children}
+    </chakraComponents.Option>
+  ),
+};
+
 const Example = () => (
   <Select
     name="flavors"
     options={flavorOptions}
     placeholder="Select some flavors..."
-    components={{
-      Option: ({ children, ...props }) => (
-        <chakraComponents.Option {...props}>
-          {props.data.icon} {children}
-        </chakraComponents.Option>
-      ),
-    }}
+    components={customComponents}
   />
 );
 ```
