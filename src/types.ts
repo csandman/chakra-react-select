@@ -2,7 +2,7 @@ import type {
   CSSWithMultiValues,
   RecursiveCSSObject,
   SystemStyleObject,
-} from "@chakra-ui/react";
+} from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ContainerProps,
