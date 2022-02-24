@@ -30,6 +30,8 @@ Check out the demos here:
   - [`isFixed`](#isfixed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
+    - [Caveats](#caveats)
+    - [Examples](#examples)
   - [Theme Styles](#theme-styles)
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
@@ -248,8 +250,6 @@ This package does however offer an alternative to the `styles` prop, `chakraStyl
 
 In order to use the `chakraStyles` prop, first check the documentation for [the original `styles` prop from the react-select docs](https://react-select.com/styles#style-object). This package offers an identical API for the `chakraStyles` prop, however the `provided` and output style objects use [Chakra's `sx` prop](https://chakra-ui.com/docs/features/the-sx-prop) instead of the default emotion styles the original package offers. This allows you to both use the shorthand styling props you'd normally use to style Chakra components, as well as tokens from your theme such as named colors.
 
-The one difference between the keys in this style object and the original, is that in the original the `input` styles apply to a container surrounding the html `<input />` element, and there was no key for styling the input itself. With this styles object, the `input` key now styles the actual `<input />` element and there is a new key, `inputContainer`, that styles the surrounding `Box`. Both functions use the `state` argument for the original `input` key.
-
 The API for an individual style function looks like this:
 
 ```js
@@ -307,9 +307,58 @@ const App: React.FC = () => {
       w: "40px",
     }),
   };
+
   return <Select chakraStyles={chakraStyles} />;
 };
 ```
+
+#### Caveats
+
+The one change between the keys in the `chakraStyles` prop and the original `styles` prop, is that in the original the `input` styles apply to a container surrounding the html `<input />` element, and there is no key for styling the input itself. With the `chakraStyles` object, the `input` key now styles the actual `<chakra.input />` element and there is a new key, `inputContainer`, that styles the surrounding `Box`. Both functions use the `state` argument for the original `input` key.
+
+Additionally, there is one key that is available in the `styles` prop that does not exist in the `chakraStyles` object; `menuPortal`. This key applies to the `MenuPortal` element which is only used when the [`menuPortalTarget`](https://react-select.com/advanced#portaling) prop is passed in. This component is replaceable, however it is very tightly integrated with the menu placement logic (and a context provider) so it appears to be impossible to fully replace it with a chakra component. And in turn, it can't pull a key from the `chakraStyles` prop. Therefor, if you are passing the `menuPortalTarget` prop and would like to change the styles of the `MenuPortal` component, you have two options:
+
+1. Pass the original `styles` prop with the `menuPortal` key. This is the only key in the `styles` object that will be applied to your components.
+
+```jsx
+return (
+  <Select
+    menuPortalTarget={document.body}
+    styles={{
+      menuPortal: (provided) => ({ ...provided, zIndex: 100 })
+    }}
+    chakraStyles={{
+      // All other component styles
+    }}
+  />
+)
+```
+
+2. Pass the `classNamePrefix` prop [as described below]() and style the `MenuPortal` with CSS using the className `prefix__menu-portal`.
+
+```jsx
+// example.js
+import "styles.css"
+
+return (
+  <Select
+    menuPortalTarget={document.body}
+    classNamePrefix="chakra-react-select"
+  />
+)
+```
+
+```css
+/* styles.css */
+
+.chakra-react-select__menu-portal {
+  z-index: 100;
+}
+```
+
+If anyone has any suggestions for how to fully replace the `MenuPortal` component, please leave a comment on [this issue](https://github.com/csandman/chakra-react-select/issues/55) or submit a pull request.
+
+#### Examples
 
 - Dropdown menu attached to control example:
   - TypeScript: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx

@@ -8,7 +8,6 @@ const useChakraSelectProps = <
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
 >({
-  styles,
   components = {},
   theme,
   size = "md",
