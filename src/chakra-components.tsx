@@ -1,22 +1,21 @@
-import React from "react";
 import type { ReactElement } from "react";
+import React from "react";
+import { Icon as ChakraIcon, IconProps } from "@chakra-ui/icon";
+import { Box, BoxProps, Divider } from "@chakra-ui/layout";
+import { MenuIcon } from "@chakra-ui/menu";
+import { Spinner } from "@chakra-ui/spinner";
 import {
-  Box,
-  Divider,
-  Icon,
-  MenuIcon,
   PropsOf,
-  Spinner,
   StylesProvider,
+  SystemStyleObject,
   chakra,
-  createIcon,
+  forwardRef,
   useColorModeValue,
   useMultiStyleConfig,
   useStyleConfig,
   useStyles,
   useTheme,
-} from "@chakra-ui/react";
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
+} from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -40,6 +39,7 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
+import { CaretDownIcon, CaretUpIcon, CloseIcon } from "./icons";
 import type { OptionBase, Size, SizeProps, ThemeObject } from "./types";
 import { cleanCommonProps } from "./utils";
 
@@ -107,9 +107,9 @@ const ValueContainer = <
   } = props;
 
   const px: SizeProps = {
-    sm: "0.75rem",
-    md: "1rem",
-    lg: "1rem",
+    sm: 0.5,
+    md: 1,
+    lg: 1,
   };
 
   const initialStyles: SystemStyleObject = {
@@ -237,7 +237,6 @@ const Control = <
   return (
     <StylesProvider value={inputStyles}>
       <Box
-        ref={innerRef}
         className={cx(
           {
             control: true,
@@ -247,11 +246,12 @@ const Control = <
           },
           className
         )}
+        ref={innerRef}
         sx={sx}
         {...innerProps}
+        data-disabled={isDisabled ? true : undefined}
         data-focus={isFocused ? true : undefined}
         data-invalid={isInvalid ? true : undefined}
-        data-disabled={isDisabled ? true : undefined}
       >
         {children}
       </Box>
@@ -373,8 +373,8 @@ const MultiValue = <
         ),
         ...innerProps,
       }}
-      sx={containerSx}
       selectProps={selectProps}
+      sx={containerSx}
     >
       <Label
         data={data}
@@ -386,8 +386,8 @@ const MultiValue = <
             className
           ),
         }}
-        sx={labelSx}
         selectProps={selectProps}
+        sx={labelSx}
       >
         {children}
       </Label>
@@ -403,9 +403,9 @@ const MultiValue = <
           "aria-label": `Remove ${children || "option"}`,
           ...removeProps,
         }}
-        sx={removeSx}
-        selectProps={selectProps}
         isFocused={isFocused}
+        selectProps={selectProps}
+        sx={removeSx}
       />
     </Container>
   );
@@ -445,12 +445,12 @@ const MultiValueLabel = <
 
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/tag/src/tag.tsx#L75
 const TagCloseIcon: React.FC<IconProps> = (props) => (
-  <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
+  <ChakraIcon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
     <path
-      fill="currentColor"
       d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
+      fill="currentColor"
     />
-  </Icon>
+  </ChakraIcon>
 );
 
 const MultiValueRemove = <
@@ -469,9 +469,9 @@ const MultiValueRemove = <
   return (
     <Box
       {...innerProps}
+      data-focus={isFocused ? true : undefined}
       role="button"
       sx={sx}
-      data-focus={isFocused ? true : undefined}
     >
       {children || <TagCloseIcon />}
     </Box>
@@ -498,7 +498,7 @@ const SingleValue = <
   const initialStyles: SystemStyleObject = {
     label: "singleValue",
     mx: "0.125rem",
-    maxWidth: `calc(100% - 0.5rem)`,
+    maxWidth: "calc(100% - 0.5rem)",
     overflow: "hidden",
     position: "absolute",
     textOverflow: "ellipsis",
@@ -542,7 +542,10 @@ const IndicatorSeparator = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = { opacity: 1 };
+  const initialStyles: SystemStyleObject = {
+    opacity: 1,
+    display: "none",
+  };
 
   const sx: SystemStyleObject = chakraStyles?.indicatorSeparator
     ? chakraStyles.indicatorSeparator(initialStyles, props)
@@ -551,20 +554,11 @@ const IndicatorSeparator = <
   return (
     <Divider
       className={cx({ "indicator-separator": true }, className)}
-      sx={sx}
       orientation="vertical"
+      sx={sx}
     />
   );
 };
-
-const CloseIcon: React.FC<IconProps> = (props) => (
-  <Icon focusable="false" aria-hidden {...props}>
-    <path
-      fill="currentColor"
-      d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
-    />
-  </Icon>
-);
 
 const ClearIndicator = <
   Option,
@@ -602,7 +596,7 @@ const ClearIndicator = <
 
   return (
     <Box
-      role="button"
+      aria-label="Clear selected options"
       className={cx(
         {
           indicator: true,
@@ -610,26 +604,15 @@ const ClearIndicator = <
         },
         className
       )}
-      sx={sx}
       data-focused={isFocused ? true : undefined}
-      aria-label="Clear selected options"
+      role="button"
+      sx={sx}
       {...innerProps}
     >
-      {children || <CloseIcon width="1em" height="1em" />}
+      {children || <CloseIcon height="1em" width="1em" />}
     </Box>
   );
 };
-
-// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
-const ChevronDownIcon = createIcon({
-  displayName: "ChevronDownIcon",
-  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
-});
-
-const DownChevron = (props: IconProps): ReactElement => (
-  <ChevronDownIcon {...props} />
-);
 
 const DropdownIndicator = <
   Option,
@@ -643,7 +626,7 @@ const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { menuIsOpen, size, chakraStyles },
   } = props;
 
   const { addon } = useStyles();
@@ -654,6 +637,7 @@ const DropdownIndicator = <
     lg: 6,
   };
   const iconSize = iconSizes[size as Size];
+  const Icon = menuIsOpen ? CaretUpIcon : CaretDownIcon;
 
   const initialStyles: SystemStyleObject = {
     ...addon,
@@ -664,12 +648,14 @@ const DropdownIndicator = <
     borderRadius: 0,
     borderWidth: 0,
     cursor: "pointer",
+    bg: "transparent",
+    px: 2,
+    color: "fluidBlue",
   };
 
   const sx: SystemStyleObject = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialStyles, props)
     : initialStyles;
-
   return (
     <Box
       {...innerProps}
@@ -682,7 +668,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      {children || <DownChevron h={iconSize} w={iconSize} />}
+      {children || <Icon h={iconSize} w={iconSize} />}
     </Box>
   );
 };
@@ -709,7 +695,7 @@ const LoadingIndicator = <
 
   const spinnerSize = spinnerSizes[size as Size];
 
-  const initialStyles: SystemStyleObject = { mr: 3 };
+  const initialStyles: SystemStyleObject = { mr: 3, color: "fluidBlue" };
 
   const sx: SystemStyleObject = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialStyles, props)
@@ -763,8 +749,8 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
 
   return (
     <Box
-      ref={innerRef}
       className={cx({ menu: true }, className)}
+      ref={innerRef}
       sx={sx}
       {...innerProps}
     >
@@ -814,8 +800,8 @@ const MenuList = <
         },
         className
       )}
-      sx={sx}
       ref={innerRef}
+      sx={sx}
     >
       {children}
     </Box>
@@ -851,10 +837,10 @@ const Group = <
     <Box className={cx({ group: true }, className)} sx={sx}>
       <Heading
         {...headingProps}
-        selectProps={selectProps}
         cx={cx}
-        theme={theme}
         getStyles={getStyles}
+        selectProps={selectProps}
+        theme={theme}
       >
         {label}
       </Heading>
@@ -919,13 +905,18 @@ const GroupHeading = <
 // Use the CheckIcon component from the chakra menu
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
 const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
+  <svg height="1em" viewBox="0 0 14 14" width="1em" {...props}>
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     />
   </svg>
 );
+
+type OptionDivProps = BoxProps & { isDisabled?: boolean };
+const OptionDiv = forwardRef<OptionDivProps, "div">((props, ref) => (
+  <Box ref={ref} {...props} />
+));
 
 const Option = <
   Option,
@@ -969,7 +960,7 @@ const Option = <
   );
   const selectedColor = useColorModeValue("white", "black");
 
-  // Don't create exta space for the checkmark if using a multi select with
+  // Don't create extra space for the checkmark if using a multi select with
   // options that dissapear when they're selected
   const showCheckIcon: boolean =
     selectedOptionStyle === "check" &&
@@ -994,6 +985,9 @@ const Option = <
     }),
     ...(isDisabled && itemStyles._disabled),
     ...(isDisabled && { _active: {} }),
+    "> .chakra-icon ": {
+      color: isSelected ? "inherit" : "fluidBlue",
+    },
   };
 
   const sx: SystemStyleObject = chakraStyles?.option
@@ -1001,8 +995,7 @@ const Option = <
     : initialStyles;
 
   return (
-    <Box
-      role="button"
+    <OptionDiv
       className={cx(
         {
           option: true,
@@ -1012,13 +1005,15 @@ const Option = <
         },
         className
       )}
-      sx={sx}
       ref={innerRef}
+      role="button"
+      sx={sx}
       {...innerProps}
-      disabled={isDisabled ? true : undefined}
+      isDisabled={!!isDisabled || undefined}
     >
       {showCheckIcon && (
         <MenuIcon
+          color="inherit"
           fontSize="0.8em"
           marginEnd="0.75rem"
           opacity={isSelected ? 1 : 0}
@@ -1027,7 +1022,7 @@ const Option = <
         </MenuIcon>
       )}
       {children}
-    </Box>
+    </OptionDiv>
   );
 };
 
@@ -1208,9 +1203,9 @@ const Input = <
     >
       <chakra.input
         className={cx({ input: true }, inputClassName)}
+        disabled={isDisabled}
         ref={innerRef}
         sx={inputStyles}
-        disabled={isDisabled}
         {...innerProps}
       />
     </Box>
