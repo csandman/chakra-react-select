@@ -39,12 +39,12 @@
     "react-select": "^5.2.2"
   },
   "peerDependencies": {
-    "@chakra-ui/form-control": "1.5.8",
-    "@chakra-ui/icon": "2.0.5",
-    "@chakra-ui/layout": "1.7.6",
-    "@chakra-ui/menu": "1.8.8",
-    "@chakra-ui/spinner": "1.2.6",
-    "@chakra-ui/system": "1.11.1",
+    "@chakra-ui/form-control": "^1.5.8",
+    "@chakra-ui/icon": "^2.0.5",
+    "@chakra-ui/layout": "^1.7.6",
+    "@chakra-ui/menu": "^1.8.8",
+    "@chakra-ui/spinner": "^1.2.6",
+    "@chakra-ui/system": "^1.11.1",
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6"
   },
