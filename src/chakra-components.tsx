@@ -1,13 +1,13 @@
 import React from "react";
 import type { ReactElement } from "react";
-import { Icon, IconProps, createIcon } from "@chakra-ui/icon";
+import type { IconProps } from "@chakra-ui/icon";
+import { Icon, createIcon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import { Spinner } from "@chakra-ui/spinner";
+import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
 import {
-  PropsOf,
   StylesProvider,
-  SystemStyleObject,
   chakra,
   useColorModeValue,
   useMultiStyleConfig,
