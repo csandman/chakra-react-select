@@ -625,17 +625,8 @@ const ChevronDownIcon = createIcon({
   d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
 });
 
-export const ChevronUpIcon = createIcon({
-  d: "M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z",
-  displayName: "ChevronUpIcon",
-});
-
 const DownChevron = (props: IconProps): ReactElement => (
   <ChevronDownIcon {...props} />
-);
-
-const UpChevron = (props: IconProps): ReactElement => (
-  <ChevronUpIcon {...props} />
 );
 
 const DropdownIndicator = <
@@ -650,7 +641,7 @@ const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { menuIsOpen, size, chakraStyles },
+    selectProps: { size, chakraStyles },
   } = props;
 
   const { addon } = useStyles();
@@ -661,7 +652,6 @@ const DropdownIndicator = <
     lg: 6,
   };
   const iconSize = iconSizes[size as Size];
-  const ChevronIcon = menuIsOpen ? UpChevron : DownChevron;
 
   const initialStyles: SystemStyleObject = {
     ...addon,
@@ -690,7 +680,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      {children || <ChevronIcon h={iconSize} w={iconSize} />}
+      {children || <DownChevron h={iconSize} w={iconSize} />}
     </Box>
   );
 };
