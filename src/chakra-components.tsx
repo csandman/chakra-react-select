@@ -1,7 +1,7 @@
 import React from "react";
 import type { ReactElement } from "react";
 import { Icon, IconProps, createIcon } from "@chakra-ui/icon";
-import { Box, BoxProps, Divider } from "@chakra-ui/layout";
+import { Box, Divider } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import { Spinner } from "@chakra-ui/spinner";
 import {
@@ -9,7 +9,6 @@ import {
   StylesProvider,
   SystemStyleObject,
   chakra,
-  forwardRef,
   useColorModeValue,
   useMultiStyleConfig,
   useStyleConfig,
@@ -936,11 +935,6 @@ const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
   </svg>
 );
 
-type OptionDivProps = BoxProps & { isDisabled?: boolean };
-const OptionDiv = forwardRef<OptionDivProps, "div">((props, ref) => (
-  <Box ref={ref} {...props} />
-));
-
 const Option = <
   Option,
   IsMulti extends boolean,
@@ -1015,7 +1009,7 @@ const Option = <
     : initialStyles;
 
   return (
-    <OptionDiv
+    <Box
       role="button"
       className={cx(
         {
@@ -1029,7 +1023,8 @@ const Option = <
       sx={sx}
       ref={innerRef}
       {...innerProps}
-      isDisabled={!!isDisabled || undefined}
+      data-disabled={isDisabled ? true : undefined}
+      aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
         <MenuIcon
@@ -1041,7 +1036,7 @@ const Option = <
         </MenuIcon>
       )}
       {children}
-    </OptionDiv>
+    </Box>
   );
 };
 
