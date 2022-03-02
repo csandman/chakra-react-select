@@ -1,15 +1,14 @@
 import React from "react";
 import type { ReactElement } from "react";
-import { Icon, IconProps, createIcon } from "@chakra-ui/icon";
-import { Box, BoxProps, Divider } from "@chakra-ui/layout";
+import type { IconProps } from "@chakra-ui/icon";
+import { Icon, createIcon } from "@chakra-ui/icon";
+import { Box, Divider } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import { Spinner } from "@chakra-ui/spinner";
+import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
 import {
-  PropsOf,
   StylesProvider,
-  SystemStyleObject,
   chakra,
-  forwardRef,
   useColorModeValue,
   useMultiStyleConfig,
   useStyleConfig,
@@ -626,17 +625,8 @@ const ChevronDownIcon = createIcon({
   d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
 });
 
-export const ChevronUpIcon = createIcon({
-  d: "M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z",
-  displayName: "ChevronUpIcon",
-});
-
 const DownChevron = (props: IconProps): ReactElement => (
   <ChevronDownIcon {...props} />
-);
-
-const UpChevron = (props: IconProps): ReactElement => (
-  <ChevronUpIcon {...props} />
 );
 
 const DropdownIndicator = <
@@ -651,7 +641,7 @@ const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { menuIsOpen, size, chakraStyles },
+    selectProps: { size, chakraStyles },
   } = props;
 
   const { addon } = useStyles();
@@ -662,7 +652,6 @@ const DropdownIndicator = <
     lg: 6,
   };
   const iconSize = iconSizes[size as Size];
-  const ChevronIcon = menuIsOpen ? UpChevron : DownChevron;
 
   const initialStyles: SystemStyleObject = {
     ...addon,
@@ -691,7 +680,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      {children || <ChevronIcon h={iconSize} w={iconSize} />}
+      {children || <DownChevron h={iconSize} w={iconSize} />}
     </Box>
   );
 };
@@ -936,11 +925,6 @@ const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
   </svg>
 );
 
-type OptionDivProps = BoxProps & { isDisabled?: boolean };
-const OptionDiv = forwardRef<OptionDivProps, "div">((props, ref) => (
-  <Box ref={ref} {...props} />
-));
-
 const Option = <
   Option,
   IsMulti extends boolean,
@@ -1015,7 +999,7 @@ const Option = <
     : initialStyles;
 
   return (
-    <OptionDiv
+    <Box
       role="button"
       className={cx(
         {
@@ -1029,7 +1013,8 @@ const Option = <
       sx={sx}
       ref={innerRef}
       {...innerProps}
-      isDisabled={!!isDisabled || undefined}
+      data-disabled={isDisabled ? true : undefined}
+      aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
         <MenuIcon
@@ -1041,7 +1026,7 @@ const Option = <
         </MenuIcon>
       )}
       {children}
-    </OptionDiv>
+    </Box>
   );
 };
 
