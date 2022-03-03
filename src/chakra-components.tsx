@@ -1,22 +1,20 @@
 import React from "react";
 import type { ReactElement } from "react";
+import type { IconProps } from "@chakra-ui/icon";
+import { Icon, createIcon } from "@chakra-ui/icon";
+import { Box, Divider } from "@chakra-ui/layout";
+import { MenuIcon } from "@chakra-ui/menu";
+import { Spinner } from "@chakra-ui/spinner";
+import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
 import {
-  Box,
-  Divider,
-  Icon,
-  MenuIcon,
-  PropsOf,
-  Spinner,
   StylesProvider,
   chakra,
-  createIcon,
   useColorModeValue,
   useMultiStyleConfig,
   useStyleConfig,
   useStyles,
   useTheme,
-} from "@chakra-ui/react";
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
+} from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -1015,7 +1013,8 @@ const Option = <
       sx={sx}
       ref={innerRef}
       {...innerProps}
-      disabled={isDisabled ? true : undefined}
+      data-disabled={isDisabled ? true : undefined}
+      aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
         <MenuIcon

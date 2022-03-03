@@ -1,4 +1,5 @@
-import { useColorModeValue, useFormControl } from "@chakra-ui/react";
+import { useFormControl } from "@chakra-ui/form-control";
+import { useColorModeValue } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle, Size, TagVariant } from "./types";
