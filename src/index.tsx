@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { SystemStyleObject } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase } from "react-select";
 
 declare module "react-select/dist/declarations/src/components/MultiValue" {
