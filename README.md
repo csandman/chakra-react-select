@@ -542,7 +542,7 @@ CodeSandbox Examples:
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
-For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI `Spinner`. Here is an example demonstrating which extra props are offered:
+For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI [`Spinner`](https://chakra-ui.com/docs/components/feedback/spinner). Here is an example demonstrating which extra props are offered:
 
 ```jsx
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
@@ -589,7 +589,7 @@ const App = () => (
 
 CodeSandbox examples:
 
-- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js:315-423
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js
 - TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
 
 ## CodeSandbox Templates
