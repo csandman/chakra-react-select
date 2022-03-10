@@ -8,6 +8,13 @@ import type {
   TagVariant,
 } from "./types";
 
+/**
+ * Module augmentation is used to add extra props to the existing interfaces
+ * from `react-select` as per the docs
+ *
+ * @see {@link https://react-select.com/typescript#custom-select-props}
+ */
+
 declare module "react-select/dist/declarations/src/Select" {
   export interface Props<
     Option,
@@ -98,7 +105,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * The color value to style the border of the `Control` with when the
      * select is focused
      *
-     * @defaultValue `blue.500`
+     * @defaultValue Light mode: `blue.500` | Dark mode: `blue.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
      * @see {@link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors}
      */
@@ -108,7 +115,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * The color value to style the border of the `Control` with when
      * `isInvalid` is passed to the select
      *
-     * @defaultValue `red.500`
+     * @defaultValue Light mode: `red.500` | Dark mode: `red.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
      * @see {@link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors}
      */
@@ -118,7 +125,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * The color used to style the text in the `Placeholder`, `LoadingMessage`,
      * and `NoOptionsMessage`.
      *
-     * @defaultValue `gray.400` in light mode | `whiteAlpha.400` in dark mode
+     * @defaultValue Light mode: `gray.400` | Dark mode: `whiteAlpha.400`
      * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13}
      */
     placeholderColor?: string;
@@ -171,6 +178,8 @@ declare module "react-select/dist/declarations/src/components/indicators" {
      * The color of the filled in area of the spinner
      *
      * Defaults to your Chakra theme's text color
+     *
+     * @defaultValue Light mode: `gray.700` | Dark mode: `whiteAlpha.900`
      */
     color?: string;
 
