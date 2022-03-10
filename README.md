@@ -36,6 +36,7 @@ Check out the demos here:
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
+  - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
 - [CodeSandbox Templates](#codesandbox-templates)
 - [Roadmap](#roadmap)
 
@@ -535,7 +536,62 @@ const Example = () => (
 );
 ```
 
-CodeSandbox Example: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+CodeSandbox Examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-odi90k?file=/app.tsx
+
+### Custom `LoadingIndicator` (Chakra `Spinner`)
+
+For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI spinner. Here is an example demonstrating which extra props are allowed:
+
+```jsx
+import { AsyncSelect, chakraComponents } from "chakra-react-select";
+
+// These are the defaults for each of the custom props
+const asyncComponents = {
+  LoadingIndicator: (props) => (
+    <chakraComponents.LoadingIndicator
+      // The color of the main line which makes up the spinner
+      // This could be accomplished using `chakraStyles` but it is also available as a custom prop
+      color="currentColor" // <-- This default's to your theme's text color (gray.700 in light mode | whiteAlpha.900 in dark mode)
+      // The color of the remaining space that makes up the spinner
+      emptyColor="transparent"
+      // The `size` prop on the Chakra spinner
+      // Defaults to one size smaller than the Select's size
+      spinnerSize="md"
+      // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
+      speed="0.45s"
+      // A CSS size string representing the thickness of the spinner's line
+      thickness="2px"
+      // Don't forget to forward the props!
+      {...props}
+    />
+  ),
+};
+
+const App = () => (
+  <AsyncSelect
+    isMulti
+    name="colors"
+    placeholder="Select some colors..."
+    components={asyncComponents}
+    loadOptions={(inputValue, callback) => {
+      setTimeout(() => {
+        const values = colourOptions.filter((i) =>
+          i.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        callback(values);
+      }, 20000);
+    }}
+  />
+);
+```
+
+CodeSandbox examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js:315-423
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
 
 ## CodeSandbox Templates
 

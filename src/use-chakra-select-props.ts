@@ -59,8 +59,7 @@ const useChakraSelectProps = <
     }
   }
 
-  // Ensure that the tag variant used is one of the options, either `subtle`,
-  // `solid`, or `outline` (or undefined)
+  // Ensure that the selected option style is either `color` or `check`
   let realSelectedOptionStyle: SelectedOptionStyle = selectedOptionStyle;
   const selectedOptionStyleOptions: SelectedOptionStyle[] = ["color", "check"];
   if (!selectedOptionStyleOptions.includes(selectedOptionStyle)) {
