@@ -543,7 +543,7 @@ CodeSandbox Examples:
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
-For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI spinner. Here is an example demonstrating which extra props are allowed:
+For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI `Spinner`. Here is an example demonstrating which extra props are offered:
 
 ```jsx
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
@@ -554,7 +554,7 @@ const asyncComponents = {
     <chakraComponents.LoadingIndicator
       // The color of the main line which makes up the spinner
       // This could be accomplished using `chakraStyles` but it is also available as a custom prop
-      color="currentColor" // <-- This default's to your theme's text color (gray.700 in light mode | whiteAlpha.900 in dark mode)
+      color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
       // The color of the remaining space that makes up the spinner
       emptyColor="transparent"
       // The `size` prop on the Chakra spinner
@@ -582,7 +582,7 @@ const App = () => (
           i.label.toLowerCase().includes(inputValue.toLowerCase())
         );
         callback(values);
-      }, 20000);
+      }, 3000);
     }}
   />
 );
