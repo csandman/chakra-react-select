@@ -697,9 +697,14 @@ const LoadingIndicator = <
     cx,
     innerProps,
     selectProps: { size, chakraStyles },
+    color,
+    emptyColor,
+    speed,
+    thickness,
+    spinnerSize: propsSpinnerSize,
   } = props;
 
-  const spinnerSizes: SizeProps = {
+  const spinnerSizes: SizeProps<string> = {
     sm: "xs",
     md: "sm",
     lg: "md",
@@ -724,7 +729,11 @@ const LoadingIndicator = <
       )}
       sx={sx}
       {...innerProps}
-      size={spinnerSize as Size}
+      size={propsSpinnerSize || spinnerSize}
+      color={color}
+      emptyColor={emptyColor}
+      speed={speed}
+      thickness={thickness}
     />
   );
 };

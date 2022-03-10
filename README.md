@@ -36,8 +36,8 @@ Check out the demos here:
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
+  - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
 - [CodeSandbox Templates](#codesandbox-templates)
-- [Roadmap](#roadmap)
 
 ## Usage
 
@@ -535,7 +535,62 @@ const Example = () => (
 );
 ```
 
-CodeSandbox Example: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+CodeSandbox Examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-odi90k?file=/app.tsx
+
+### Custom `LoadingIndicator` (Chakra `Spinner`)
+
+For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI `Spinner`. Here is an example demonstrating which extra props are offered:
+
+```jsx
+import { AsyncSelect, chakraComponents } from "chakra-react-select";
+
+// These are the defaults for each of the custom props
+const asyncComponents = {
+  LoadingIndicator: (props) => (
+    <chakraComponents.LoadingIndicator
+      // The color of the main line which makes up the spinner
+      // This could be accomplished using `chakraStyles` but it is also available as a custom prop
+      color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
+      // The color of the remaining space that makes up the spinner
+      emptyColor="transparent"
+      // The `size` prop on the Chakra spinner
+      // Defaults to one size smaller than the Select's size
+      spinnerSize="md"
+      // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
+      speed="0.45s"
+      // A CSS size string representing the thickness of the spinner's line
+      thickness="2px"
+      // Don't forget to forward the props!
+      {...props}
+    />
+  ),
+};
+
+const App = () => (
+  <AsyncSelect
+    isMulti
+    name="colors"
+    placeholder="Select some colors..."
+    components={asyncComponents}
+    loadOptions={(inputValue, callback) => {
+      setTimeout(() => {
+        const values = colourOptions.filter((i) =>
+          i.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        callback(values);
+      }, 3000);
+    }}
+  />
+);
+```
+
+CodeSandbox examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js:315-423
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
 
 ## CodeSandbox Templates
 
@@ -545,13 +600,3 @@ When submitting a bug report, please include a minimum reproduction of your issu
 - React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
 - Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
 - Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
-
-## Roadmap
-
-Since releasing this project, there have been a few things brought up that will be addressed in the near future. In version `2.0.0` the **Better Customization** feature was implemented, and in version `3.0.0` the version of `react-select` used by this package was updated to `v5`.
-
-#### Better Support for component wrapping
-
-When implementing this component, you have the option to wrap the custom components exported in `chakraComponents`, however, these wrapped components do not accept any of the Chakra style props. And more importantly, in the cases where Chakra components other than the base `Box` are used, for example the `LoadingIndicator` which uses the Chakra [`Spinner`](https://chakra-ui.com/docs/feedback/spinner), you can not pass any of the custom props that are specific to that component. The fact that they do not accept the style props is not the most important, as these can all be passed using the `chakraStyles` prop, however this package will never feel quite as customizable as it could until you have to freedom to pass more of these props directly to the component.
-
-Because of this, at this point in time it is not recommended to wrap the custom components exported by this project (unless you're altering their children), but instead replace them entirely. If you would like them to do more in-depth alteration to the the custom components in this package, it is recommended to [copy the source for that component](https://github.com/csandman/chakra-react-select/blob/main/src/chakra-components.tsx), alter it as needed, and then pass it into the `components` prop on your root select. Eventually there will be better support for passing custom props while wrapping this package's internal components.
