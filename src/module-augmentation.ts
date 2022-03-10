@@ -21,8 +21,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: `sm` | `md` | `lg`
      *
      * @defaultValue `md`
-     * @link https://github.com/csandman/chakra-react-select#size--options-sm-md-lg--default-md
-     * @link https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input
+     * @see {@link https://github.com/csandman/chakra-react-select#size--options-sm-md-lg--default-md}
+     * @see {@link https://chakra-ui.com/docs/form/input#changing-the-size-of-the-input}
      */
     size?: Size;
 
@@ -33,8 +33,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * If the `aria-invalid` prop is not passed, this prop will also set that
      *
      * @defaultValue `false`
-     * @link https://github.com/csandman/chakra-react-select#isinvalid--default-false
-     * @link https://chakra-ui.com/docs/form/input#props
+     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false}
+     * @see {@link https://chakra-ui.com/docs/form/input#props}
      */
     isInvalid?: boolean;
 
@@ -45,8 +45,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * The styling matches the chakra `Tag` component
      *
      * @defaultValue `"gray"`
-     * @link https://github.com/csandman/chakra-react-select#colorscheme
-     * @link https://chakra-ui.com/docs/data-display/tag#props
+     * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
+     * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
      */
     colorScheme?: string;
 
@@ -57,8 +57,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: "subtle" | "solid" | "outline"
      *
      * @defaultValue `subtle`
-     * @link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle-solid-outline--default-subtle
-     * @link https://chakra-ui.com/docs/data-display/tag#props
+     * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle-solid-outline--default-subtle}
+     * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
      */
     tagVariant?: TagVariant;
 
@@ -68,7 +68,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * corresponding group is in view
      *
      * @defaultValue `false`
-     * @link https://github.com/csandman/chakra-react-select#hasstickygroupheaders--default-false
+     * @see {@link https://github.com/csandman/chakra-react-select#hasstickygroupheaders--default-false}
      */
     hasStickyGroupHeaders?: boolean;
 
@@ -79,8 +79,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: `color` | `check`
      *
      * @defaultValue `color`
-     * @link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color-check--default-color
-     * @link https://chakra-ui.com/docs/overlay/menu#menu-option-groups
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color-check--default-color}
+     * @see {@link https://chakra-ui.com/docs/overlay/menu#menu-option-groups}
      */
     selectedOptionStyle?: SelectedOptionStyle;
 
@@ -90,7 +90,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * and the `300` value in dark mode.
      *
      * @defaultValue `blue`
-     * @link https://github.com/csandman/chakra-react-select#selectedoptioncolor--default-blue
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolor--default-blue}
      */
     selectedOptionColor?: string;
 
@@ -99,8 +99,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * select is focused
      *
      * @defaultValue `blue.500`
-     * @link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500
-     * @link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors
+     * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
+     * @see {@link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors}
      */
     focusBorderColor?: string;
 
@@ -109,8 +109,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * `isInvalid` is passed to the select
      *
      * @defaultValue `red.500`
-     * @link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500
-     * @link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors
+     * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
+     * @see {@link https://chakra-ui.com/docs/form/input#changing-the-focus-and-error-border-colors}
      */
     errorBorderColor?: string;
 
@@ -119,7 +119,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * and `NoOptionsMessage`.
      *
      * @defaultValue `gray.400` in light mode | `whiteAlpha.400` in dark mode
-     * @link https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
+     * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13}
      */
     placeholderColor?: string;
 
@@ -127,8 +127,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * Style transformation methods for each of the rendered components using,
      * Chakra's `SystemStyleObject` and the props passed into each component
      *
-     * @link https://github.com/csandman/chakra-react-select#chakrastyles
-     * @link https://react-select.com/styles#style-object
+     * @see {@link https://github.com/csandman/chakra-react-select#chakrastyles}
+     * @see {@link https://react-select.com/styles#style-object}
      */
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
   }
@@ -170,7 +170,7 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     /**
      * The color of the filled in area of the spinner
      *
-     * @defaultValue `gray.700`
+     * Defaults to your Chakra theme's text color
      */
     color?: string;
 
@@ -194,14 +194,13 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     /**
      * The speed of the spinner represented by the time it takes to make one full rotation.
      *
-     * This speed is represented by a CSS `<time>` variable which uses either seconds or milliseconds
+     * This speed is represented by a [CSS `<time>`](https://developer.mozilla.org/en-US/docs/Web/CSS/time) variable which uses either seconds or milliseconds
      *
      * @defaultValue `0.45s`
      * @example
      * ```jsx
      * <Spinner speed="0.2s"/>
      * ```
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/time}
      * @see {@link https://chakra-ui.com/docs/components/feedback/spinner#props}
      */
     speed?: string;
