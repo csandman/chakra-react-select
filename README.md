@@ -38,7 +38,6 @@ Check out the demos here:
 - [Customizing Components](#customizing-components)
   - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
 - [CodeSandbox Templates](#codesandbox-templates)
-- [Roadmap](#roadmap)
 
 ## Usage
 
@@ -601,13 +600,3 @@ When submitting a bug report, please include a minimum reproduction of your issu
 - React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
 - Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
 - Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
-
-## Roadmap
-
-Since releasing this project, there have been a few things brought up that will be addressed in the near future. In version `2.0.0` the **Better Customization** feature was implemented, and in version `3.0.0` the version of `react-select` used by this package was updated to `v5`.
-
-#### Better Support for component wrapping
-
-When implementing this component, you have the option to wrap the custom components exported in `chakraComponents`, however, these wrapped components do not accept any of the Chakra style props. And more importantly, in the cases where Chakra components other than the base `Box` are used, for example the `LoadingIndicator` which uses the Chakra [`Spinner`](https://chakra-ui.com/docs/feedback/spinner), you can not pass any of the custom props that are specific to that component. The fact that they do not accept the style props is not the most important, as these can all be passed using the `chakraStyles` prop, however this package will never feel quite as customizable as it could until you have to freedom to pass more of these props directly to the component.
-
-Because of this, at this point in time it is not recommended to wrap the custom components exported by this project (unless you're altering their children), but instead replace them entirely. If you would like them to do more in-depth alteration to the the custom components in this package, it is recommended to [copy the source for that component](https://github.com/csandman/chakra-react-select/blob/main/src/chakra-components.tsx), alter it as needed, and then pass it into the `components` prop on your root select. Eventually there will be better support for passing custom props while wrapping this package's internal components.
