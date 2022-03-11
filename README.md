@@ -485,7 +485,26 @@ function CustomMultiSelect() {
 
 Like the original `react-select`, this package exports all of the custom components that make up the overall select. However, instead of being exported as `components` they are exported as `chakraComponents` in order to leave the original `components` export from react-select alone (you can export that as well if you'd like). When implementing this component, you have the option to wrap these components and alter their state and the children they return [in the same way the original does](https://react-select.com/components#defining-components).
 
-Here's an example of how you might use this to create a select with a custom `Option`:
+It's important to note however, that there are 3 components offered in the original `react-select` that are missing from `chakraComponents`. These are the `CrossIcon`, `DownChevron`, and `MenuPortal`. The `MenuPortal` could not be replaced at all [as mentioned earlier](#caveats), so if you'd like to customize it, use the original from the `components` import. The icons posed issues with prop compatibility when passing them into the core `Select` so the easiest way to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator` and pass custom icons in as children:
+
+CodeSandbox: https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js
+
+```js
+const components = {
+  ClearIndicator: (props) => (
+    <chakraComponents.ClearIndicator {...props}>
+      <Icon as={IoMdCloseCircleOutline} w={4} h={4} />
+    </chakraComponents.ClearIndicator>
+  ),
+  DropdownIndicator: (props) => (
+    <chakraComponents.DropdownIndicator {...props}>
+      <Icon as={AiFillCaretDown} />
+    </chakraComponents.DropdownIndicator>
+  ),
+};
+```
+
+Here's a complete example of how you might use custom components to create a select with a custom `Option`:
 
 ```ts
 import { Icon } from "@chakra-ui/react";
