@@ -5,7 +5,7 @@ import AsyncCreatableReactSelect from "react-select/async-creatable";
 import type { AsyncCreatableProps } from "react-select/async-creatable";
 import useChakraSelectProps from "./use-chakra-select-props";
 
-type AsyncCreatableSelectType = <
+export type AsyncCreatableSelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
@@ -26,6 +26,6 @@ const AsyncCreatableSelect = forwardRef(
 
     return <AsyncCreatableReactSelect ref={ref} {...chakraSelectProps} />;
   }
-) as AsyncCreatableSelectType;
+) as AsyncCreatableSelectComponent;
 
 export default AsyncCreatableSelect;

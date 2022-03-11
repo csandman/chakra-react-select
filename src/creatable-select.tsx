@@ -5,7 +5,7 @@ import CreatableReactSelect from "react-select/creatable";
 import type { CreatableProps } from "react-select/creatable";
 import useChakraSelectProps from "./use-chakra-select-props";
 
-type CreatableSelectType = <
+export type CreatableSelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
@@ -26,6 +26,6 @@ const CreatableSelect = forwardRef(
 
     return <CreatableReactSelect ref={ref} {...chakraSelectProps} />;
   }
-) as CreatableSelectType;
+) as CreatableSelectComponent;
 
 export default CreatableSelect;

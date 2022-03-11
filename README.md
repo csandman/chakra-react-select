@@ -427,6 +427,11 @@ This package exports all of the named module members of the original `react-sele
 
 - `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed to customize the component styles. This is almost identical to the built in `StylesConfig` type, however it uses Chakra's `SystemStyleObject` type instead of react-select's emotion styles.
 - `OptionBase` — A type for your individual select options that includes the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
+- Each of the four Select components has a type exported with it:
+  - `SelectComponent`
+  - `AsyncSelectComponent`
+  - `CreatableSelectComponent`
+  - `AsyncCreatableSelectComponent`
 
 Here is an example of how to pass in the proper generics to `chakra-react-select`:
 
