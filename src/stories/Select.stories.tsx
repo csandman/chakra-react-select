@@ -17,7 +17,7 @@ const defaultColorOptions = [
 
 export default {
   component: ChakraReactSelect,
-  title: "Select",
+  title: "Playground",
   argTypes: {
     size: {
       options: ["sm", "md", "lg"],

@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
+    "plugin:storybook/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -50,5 +51,13 @@
         "disallowTypeAnnotations": true
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
 }
