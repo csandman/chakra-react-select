@@ -1,7 +1,7 @@
 import React from "react";
 import type { ReactElement } from "react";
 import type { IconProps } from "@chakra-ui/icon";
-import { Icon, createIcon } from "@chakra-ui/icon";
+import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import { Spinner } from "@chakra-ui/spinner";
@@ -441,7 +441,11 @@ const MultiValueLabel = <
   );
 };
 
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/tag/src/tag.tsx#L75
+/**
+ * Borrowed from Chakra UI Tag source
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/tag/src/tag.tsx#L75}
+ */
 const TagCloseIcon: React.FC<IconProps> = (props) => (
   <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
     <path
@@ -555,7 +559,12 @@ const IndicatorSeparator = <
   );
 };
 
-const CloseIcon: React.FC<IconProps> = (props) => (
+/**
+ * Borrowed from Chakra UI source
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/close-button/src/close-button.tsx#L14}
+ */
+const CrossIcon: React.FC<IconProps> = (props) => (
   <Icon focusable="false" aria-hidden {...props}>
     <path
       fill="currentColor"
@@ -581,7 +590,7 @@ const ClearIndicator = <
   } = props;
 
   const closeButtonStyles = useStyleConfig("CloseButton", {
-    size: size as undefined,
+    size,
   });
 
   const initialStyles: SystemStyleObject = {
@@ -593,10 +602,17 @@ const ClearIndicator = <
     flexShrink: 0,
     cursor: "pointer",
   };
-
   const sx: SystemStyleObject = chakraStyles?.clearIndicator
     ? chakraStyles.clearIndicator(initialStyles, props)
     : initialStyles;
+
+  const initialIconStyles: SystemStyleObject = {
+    width: "1em",
+    height: "1em",
+  };
+  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
+    ? chakraStyles.crossIcon(initialIconStyles, props)
+    : initialIconStyles;
 
   return (
     <Box
@@ -613,20 +629,23 @@ const ClearIndicator = <
       aria-label="Clear selected options"
       {...innerProps}
     >
-      {children || <CloseIcon width="1em" height="1em" />}
+      {children || <CrossIcon sx={iconSx} />}
     </Box>
   );
 };
 
-// Taken from the @chakra-ui/icons package to prevent needing it as a dependency
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
-const ChevronDownIcon = createIcon({
-  displayName: "ChevronDownIcon",
-  d: "M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z",
-});
-
+/**
+ * Borrowed from the `@chakra-ui/icons` package to prevent needing it as a dependency
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx}
+ */
 const DownChevron = (props: IconProps): ReactElement => (
-  <ChevronDownIcon {...props} />
+  <Icon {...props}>
+    <path
+      fill="currentColor"
+      d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+    />
+  </Icon>
 );
 
 const DropdownIndicator = <
@@ -647,26 +666,34 @@ const DropdownIndicator = <
   const { addon } = useStyles();
 
   const iconSizes: SizeProps = {
-    sm: 4,
-    md: 5,
-    lg: 6,
+    sm: "16px",
+    md: "20px",
+    lg: "24px",
   };
   const iconSize = iconSizes[size as Size];
 
   const initialStyles: SystemStyleObject = {
     ...addon,
-    d: "flex",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    h: "100%",
+    height: "100%",
     borderRadius: 0,
     borderWidth: 0,
     cursor: "pointer",
+    fontSize: iconSize,
   };
-
   const sx: SystemStyleObject = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialStyles, props)
     : initialStyles;
+
+  const initialIconStyles = {
+    height: "1em",
+    width: "1em",
+  };
+  const iconSx: SystemStyleObject = chakraStyles?.downChevron
+    ? chakraStyles.downChevron(initialIconStyles, props)
+    : initialIconStyles;
 
   return (
     <Box
@@ -680,7 +707,7 @@ const DropdownIndicator = <
       )}
       sx={sx}
     >
-      {children || <DownChevron h={iconSize} w={iconSize} />}
+      {children || <DownChevron sx={iconSx} />}
     </Box>
   );
 };
@@ -910,6 +937,7 @@ const GroupHeading = <
     position: hasStickyGroupHeaders ? "sticky" : "static",
     top: -2,
     bg,
+    zIndex: 1,
   };
 
   const sx: SystemStyleObject = chakraStyles?.groupHeading
@@ -923,8 +951,11 @@ const GroupHeading = <
   );
 };
 
-// Use the CheckIcon component from the chakra menu
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/menu/src/menu.tsx#L301
+/**
+ * The `CheckIcon` component from the Chakra UI Menu
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/menu/src/menu.tsx#L314}
+ */
 const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
   <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
     <polygon
@@ -968,8 +999,11 @@ const Option = <
     lg: "0.5rem 1rem",
   };
 
-  // Use the same selected color as the border of the select component
-  // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts#L73
+  /**
+   * Use the same selected color as the border of the select component
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
+   */
   const selectedBg = useColorModeValue(
     `${selectedOptionColor}.500`,
     `${selectedOptionColor}.300`
@@ -1231,18 +1265,19 @@ const chakraComponents = {
   DropdownIndicator,
   Group,
   GroupHeading,
-  IndicatorSeparator,
   IndicatorsContainer,
+  IndicatorSeparator,
   Input,
   LoadingIndicator,
-  LoadingMessage,
   Menu,
   MenuList,
+  // TODO: Figure out how to add the `MenuPortal`
+  LoadingMessage,
+  NoOptionsMessage,
   MultiValue,
   MultiValueContainer,
   MultiValueLabel,
   MultiValueRemove,
-  NoOptionsMessage,
   Option,
   Placeholder,
   SelectContainer,

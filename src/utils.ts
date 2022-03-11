@@ -1,5 +1,10 @@
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
 
+/**
+ * Borrowed from the original `react-select` package
+ *
+ * @see {@link https://github.com/JedWatson/react-select/blob/2d3d6afe18421ea5b6c3f8f0db479ad323c35639/packages/react-select/src/utils.ts#L74}
+ */
 export const cleanCommonProps = <
   Option,
   IsMulti extends boolean,

@@ -38,8 +38,11 @@ const useChakraSelectProps = <
     onBlur,
   });
 
-  // The chakra UI global placeholder color
-  // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
+  /**
+   * The chakra UI global placeholder color
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
+   */
   const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
