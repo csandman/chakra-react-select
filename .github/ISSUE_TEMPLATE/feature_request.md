@@ -4,7 +4,7 @@ about:
   Suggest an idea for this project.  This template is just a guideline, only
   fill out the fields you need
 title: "[FEATURE] "
-labels: feature request
+labels: Feature Request
 assignees: csandman
 ---
 

@@ -10,7 +10,10 @@ This component is a wrapper for the popular react component [react-select](https
 
 ![Chakra React Select Banner](./github/chakra-react-select.png)
 
-Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
+Check out the demos here:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx
 
 ## Contents
 
@@ -27,10 +30,14 @@ Check out the demo here: https://codesandbox.io/s/chakra-react-select-demo-65ohb
   - [`isFixed`](#isfixed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
+    - [Caveats](#caveats)
+    - [Examples](#examples)
   - [Theme Styles](#theme-styles)
   - [`className`](#classname)
+- [TypeScript Support](#typescript-support)
+- [Customizing Components](#customizing-components)
+  - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
 - [CodeSandbox Templates](#codesandbox-templates)
-- [Roadmap](#roadmap)
 
 ## Usage
 
@@ -170,6 +177,8 @@ One additional feature which isn’t specific to Chakra or react-select is stick
 return <Select hasStickyGroupHeaders />;
 ```
 
+**NOTE:** It has recently been discovered that when using this prop, navigating up through the available options with the arrow key will keep the focused option underneath the header, as it will not scroll enough to account for it being there. So if this is an issue for you, avoid this prop. A fix for this is being investigated.
+
 ![Sticky Group Headers](./github/sticky-group-headers.png)
 
 #### `selectedOptionStyle` — Options: `color`, `check` — Default: `color`
@@ -261,7 +270,7 @@ All of the style keys offered in the original package can be used here, except f
 
 Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/layout/box) with a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered:
 
-- `clearIndicator` - `CloseButton`
+- `clearIndicator` - `Box` (uses theme styles for Chakra's `CloseButton`)
 - `container` - `Box`
 - `control` - `Box` (uses theme styles for Chakra's `Input`)
 - `dropdownIndicator` - `Box` (uses theme styles for Chrakra's `InputRightAddon`)
@@ -269,20 +278,22 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `groupHeading` - `Box` (uses theme styles for Chakra's `Menu` group title)
 - `indicatorsContainer` - `Box`
 - `indicatorSeparator` - `Divider`
+- `input` - `chakra.input` (wrapped in a `Box`)
+- `inputContainer` - `Box`
 - `loadingIndicator` - `Spinner`
 - `loadingMessage` - `Box`
 - `menu` - `Box`
 - `menuList` - `Box` (uses theme styles for Chakra's `Menu`)
-- `multiValue` - `Tag`
-- `multiValueLabel` - `TagLabel`
-- `multiValueRemove` - `TagCloseButton`
+- `multiValue` - `chakra.span` (uses theme styles for Chakra's `Tag`)
+- `multiValueLabel` - `chakra.span` (uses theme styles for Chakra's `TagLabel`)
+- `multiValueRemove` - `Box` (uses theme styles for Chakra's `TagCloseButton`)
 - `noOptionsMessage` - `Box`
 - `option` - `Box` (uses theme styles for Chakra's `MenuItem`)
 - `placeholder` - `Box`
 - `singleValue` - `Box`
 - `valueContainer` - `Box`
 
-If you're using typescript, define your `chakraStyles` object before passing it into your component using the `ChakraStylesConfig` type exported from this package:
+If you're using TypeScript, the `chakraStyles` prop is defined by the exported `ChakraStylesConfig` interface.
 
 ```ts
 import { ChakraStylesConfig, Select } from "chakra-react-select";
@@ -296,12 +307,65 @@ const App: React.FC = () => {
       w: "40px",
     }),
   };
+
   return <Select chakraStyles={chakraStyles} />;
 };
 ```
 
-- Typescript Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
-- Vanilla JS Example: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+#### Caveats
+
+The one change between the keys in the `chakraStyles` prop and the original `styles` prop, is that in the original the `input` styles apply to a container surrounding the html `<input />` element, and there is no key for styling the input itself. With the `chakraStyles` object, the `input` key now styles the actual `<chakra.input />` element and there is a new key, `inputContainer`, that styles the surrounding `Box`. Both functions use the `state` argument for the original `input` key.
+
+Additionally, there is one key that is available in the `styles` prop that does not exist in the `chakraStyles` object; `menuPortal`. This key applies to the `MenuPortal` element which is only used when the [`menuPortalTarget`](https://react-select.com/advanced#portaling) prop is passed in. This component is replaceable, however it is very tightly integrated with the menu placement logic (and a context provider) so it appears to be impossible to fully replace it with a chakra component. And in turn, it can't pull a key from the `chakraStyles` prop. Therefor, if you are passing the `menuPortalTarget` prop and would like to change the styles of the `MenuPortal` component, you have two options:
+
+1. Pass the original `styles` prop with the `menuPortal` key. This is the only key in the `styles` object that will be applied to your components.
+
+```jsx
+return (
+  <Select
+    menuPortalTarget={document.body}
+    styles={{
+      menuPortal: (provided) => ({ ...provided, zIndex: 100 })
+    }}
+    chakraStyles={{
+      // All other component styles
+    }}
+  />
+)
+```
+
+2. Pass the `classNamePrefix` prop [as described below]() and style the `MenuPortal` with CSS using the className `prefix__menu-portal`.
+
+```jsx
+// example.js
+import "styles.css"
+
+return (
+  <Select
+    menuPortalTarget={document.body}
+    classNamePrefix="chakra-react-select"
+  />
+)
+```
+
+```css
+/* styles.css */
+
+.chakra-react-select__menu-portal {
+  z-index: 100;
+}
+```
+
+If anyone has any suggestions for how to fully replace the `MenuPortal` component, please leave a comment on [this issue](https://github.com/csandman/chakra-react-select/issues/55) or submit a pull request.
+
+#### Examples
+
+- Dropdown menu attached to control example:
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+- Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles example:
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-qwq3o?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-iydfe?file=/example.js
 
 ### Theme Styles
 
@@ -355,6 +419,179 @@ This package implements the same classNames on the sub components as the origina
 
 Here is an example of using classNames to style the components: https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-4r2pe?file=/example.js
 
+## TypeScript Support
+
+This package has always supported typescript, however until `3.0.0` none of the type inference was working on the props passed into this component. Now that they are, you may need to pass in some generics in order for your component to work properly.
+
+This package exports all of the named module members of the original `react-select` in case you need their built in types in any of your variable declarations. The root select `Props` type that is exported by `react-select` has been [extended using module augmentation](https://github.com/JedWatson/react-select/issues/4804#issuecomment-927223471) so if you import that type, it will include all of the extra props offered. This package also exports a few custom types that are specific to the custom props offered by this package:
+
+- `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed to customize the component styles. This is almost identical to the built in `StylesConfig` type, however it uses Chakra's `SystemStyleObject` type instead of react-select's emotion styles.
+- `OptionBase` — A type for your individual select options that includes the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
+
+Here is an example of how to pass in the proper generics to `chakra-react-select`:
+
+````ts
+import { GroupBase, OptionBase, Select } from "chakra-react-select";
+
+/**
+ * `OptionBase` is a custom type exported by this package meant to be extended
+ * to make your custom option types. It includes all of the keys that can be
+ * used by this package to customize the styles of your selected options
+ *
+ * ```
+ * type OptionBase = {
+ *   variant?: string;
+ *   colorScheme?: string;
+ *   isFixed?: boolean;
+ *   isDisabled?: boolean;
+ * };
+ * ```
+ */
+interface ColorOption extends OptionBase {
+  label: string;
+  value: string;
+}
+
+const colorOptions = [
+  {
+    label: "Red",
+    value: "red",
+    colorScheme: "red", // This is allowed because of the key in the `OptionBase` type
+  },
+  {
+    label: "Blue",
+    value: "blue",
+  }
+]
+
+function CustomMultiSelect() {
+  return {
+    <Select<ColorOption, true, GroupBase<ColorOption>>
+      isMulti
+      name="colors"
+      options={colorOptions}
+      placeholder="Select some colors..."
+    />
+  }
+}
+````
+
+## Customizing Components
+
+Like the original `react-select`, this package exports all of the custom components that make up the overall select. However, instead of being exported as `components` they are exported as `chakraComponents` in order to leave the original `components` export from react-select alone (you can export that as well if you'd like). When implementing this component, you have the option to wrap these components and alter their state and the children they return [in the same way the original does](https://react-select.com/components#defining-components).
+
+Here's an example of how you might use this to create a select with a custom `Option`:
+
+```ts
+import { Icon } from "@chakra-ui/react";
+import { Select, chakraComponents } from "chakra-react-select";
+import {
+  GiCherry,
+  GiChocolateBar,
+  GiCoffeeBeans,
+  GiStrawberry,
+} from "react-icons/gi";
+
+const flavorOptions = [
+  {
+    value: "coffee",
+    label: "Coffee",
+    icon: <Icon as={GiCoffeeBeans} color="orange.700" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "chocolate",
+    label: "Chocolate",
+    icon: <Icon as={GiChocolateBar} color="yellow.800" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "strawberry",
+    label: "Strawberry",
+    icon: <Icon as={GiStrawberry} color="red.500" mr={2} h={5} w={5} />,
+  },
+  {
+    value: "cherry",
+    label: "Cherry",
+    icon: <Icon as={GiCherry} color="red.600" mr={2} h={5} w={5} />,
+  },
+];
+
+// Make sure this is defined outside of the component which returns your select
+// or you'll run into rendering issues
+const customComponents = {
+  Option: ({ children, ...props }) => (
+    <chakraComponents.Option {...props}>
+      {props.data.icon} {children}
+    </chakraComponents.Option>
+  ),
+};
+
+const Example = () => (
+  <Select
+    name="flavors"
+    options={flavorOptions}
+    placeholder="Select some flavors..."
+    components={customComponents}
+  />
+);
+```
+
+CodeSandbox Examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-odi90k?file=/app.tsx
+
+### Custom `LoadingIndicator` (Chakra `Spinner`)
+
+For most sub components, the styling can be easily accomplished using the [`chakraStyles`](#chakrastyles) prop. However, in the case of the `LoadingIndicator` there are a few props which do not directly correlate very well with styling props. To solve that problem, the `chakraComponents.LoadingIndicator` component can be passed a few extra props which are normally available on the Chakra UI [`Spinner`](https://chakra-ui.com/docs/components/feedback/spinner). Here is an example demonstrating which extra props are offered:
+
+```jsx
+import { AsyncSelect, chakraComponents } from "chakra-react-select";
+
+// These are the defaults for each of the custom props
+const asyncComponents = {
+  LoadingIndicator: (props) => (
+    <chakraComponents.LoadingIndicator
+      // The color of the main line which makes up the spinner
+      // This could be accomplished using `chakraStyles` but it is also available as a custom prop
+      color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
+      // The color of the remaining space that makes up the spinner
+      emptyColor="transparent"
+      // The `size` prop on the Chakra spinner
+      // Defaults to one size smaller than the Select's size
+      spinnerSize="md"
+      // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
+      speed="0.45s"
+      // A CSS size string representing the thickness of the spinner's line
+      thickness="2px"
+      // Don't forget to forward the props!
+      {...props}
+    />
+  ),
+};
+
+const App = () => (
+  <AsyncSelect
+    isMulti
+    name="colors"
+    placeholder="Select some colors..."
+    components={asyncComponents}
+    loadOptions={(inputValue, callback) => {
+      setTimeout(() => {
+        const values = colourOptions.filter((i) =>
+          i.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+        callback(values);
+      }, 3000);
+    }}
+  />
+);
+```
+
+CodeSandbox examples:
+
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
+
 ## CodeSandbox Templates
 
 When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
@@ -363,11 +600,3 @@ When submitting a bug report, please include a minimum reproduction of your issu
 - React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
 - Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
 - Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
-
-## Roadmap
-
-Since releasing this project, there have been a few things brought up that will be addressed in the near future.
-
-#### [react-select v5](https://github.com/JedWatson/react-select/releases/tag/react-select%405.0.0)
-
-It was brought to my attention in [this issue](https://github.com/csandman/chakra-react-select/issues/5) that react-select had a version 5 release almost immediately after I released this package (great timing right 😏). This version is rebuilt in TypeScript so you no longer need to install `@types/react-select` to access the types. I made a first pass at upgrading to the new version, and the errors I faced along with [some](https://github.com/csandman/chakra-react-select/issues/8) [comments](https://github.com/chakra-ui/chakra-ui/issues/1293#issuecomment-928934615) I have been receiving from people have made me realize that I probably set up the types incorrectly when I first made this project. I still plan to make the switch soon, however I will need to take a deep dive into the inner workings of react-select's TypeScript support along with how TypeScript works itself, as i am very new to it. If anyone would like to help me make the upgrade/fix the way my types are implemented, I'd greatly appreciate it!

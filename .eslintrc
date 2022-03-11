@@ -33,6 +33,22 @@
       {
         "extensions": [".js", ".tsx"]
       }
+    ],
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        "prefer": "type-imports",
+        "disallowTypeAnnotations": true
+      }
     ]
   }
 }
