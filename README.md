@@ -274,6 +274,8 @@ Most of the components rendered by this package use the basic [Chakra `<Box />` 
 - `container` - `Box`
 - `control` - `Box` (uses theme styles for Chakra's `Input`)
 - `dropdownIndicator` - `Box` (uses theme styles for Chrakra's `InputRightAddon`)
+- `downChevron` - `Icon`
+- `crossIcon` - `Icon`
 - `group` - `Box`
 - `groupHeading` - `Box` (uses theme styles for Chakra's `Menu` group title)
 - `indicatorsContainer` - `Box`
@@ -314,7 +316,22 @@ const App: React.FC = () => {
 
 #### Caveats
 
-The one change between the keys in the `chakraStyles` prop and the original `styles` prop, is that in the original the `input` styles apply to a container surrounding the html `<input />` element, and there is no key for styling the input itself. With the `chakraStyles` object, the `input` key now styles the actual `<chakra.input />` element and there is a new key, `inputContainer`, that styles the surrounding `Box`. Both functions use the `state` argument for the original `input` key.
+One change between the keys in the `chakraStyles` prop and the original `styles` prop, is that in the original the `input` styles apply to a container surrounding the html `<input />` element, and there is no key for styling the input itself. With the `chakraStyles` object, the `input` key now styles the actual `<chakra.input />` element and there is a new key, `inputContainer`, that styles the surrounding `Box`. Both functions use the `state` argument for the original `input` key.
+
+There are also two extra style keys for the icons contained within the indicators that are not offered in the original package. These are `downChevron` which is contained inside the `DropdownIndicator`, and the `crossIcon` which is contained inside the `ClearIndicator`. Both styles receive the same `state` values as their containing indicators. These style keys were added as a convenience, however you could also apply the same styles using the parent `chakraStyles` by doing something like this:
+
+```js
+// Demo: https://codesandbox.io/s/chakra-react-select-dropdown-indicator-flip-lhc4ep?file=/example.js
+
+const chakraStyles = {
+  dropdownIndicator: (prev, { selectProps }) => ({
+    ...prev,
+    "> svg": {
+      transform: `rotate(${selectProps.menuIsOpen ? -180 : 0}deg)`,
+    },
+  }),
+};
+```
 
 Additionally, there is one key that is available in the `styles` prop that does not exist in the `chakraStyles` object; `menuPortal`. This key applies to the `MenuPortal` element which is only used when the [`menuPortalTarget`](https://react-select.com/advanced#portaling) prop is passed in. This component is replaceable, however it is very tightly integrated with the menu placement logic (and a context provider) so it appears to be impossible to fully replace it with a chakra component. And in turn, it can't pull a key from the `chakraStyles` prop. Therefor, if you are passing the `menuPortalTarget` prop and would like to change the styles of the `MenuPortal` component, you have two options:
 
@@ -485,7 +502,26 @@ function CustomMultiSelect() {
 
 Like the original `react-select`, this package exports all of the custom components that make up the overall select. However, instead of being exported as `components` they are exported as `chakraComponents` in order to leave the original `components` export from react-select alone (you can export that as well if you'd like). When implementing this component, you have the option to wrap these components and alter their state and the children they return [in the same way the original does](https://react-select.com/components#defining-components).
 
-Here's an example of how you might use this to create a select with a custom `Option`:
+It's important to note however, that there are 3 components offered in the original `react-select` that are missing from `chakraComponents`. These are the `CrossIcon`, `DownChevron`, and `MenuPortal`. The `MenuPortal` could not be replaced at all [as mentioned earlier](#caveats), so if you'd like to customize it, use the original from the `components` import. The icons posed issues with prop compatibility when passing them into the core `Select` so the easiest way to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator` and pass custom icons in as children:
+
+CodeSandbox: https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js
+
+```js
+const components = {
+  ClearIndicator: (props) => (
+    <chakraComponents.ClearIndicator {...props}>
+      <Icon as={IoMdCloseCircleOutline} w={4} h={4} />
+    </chakraComponents.ClearIndicator>
+  ),
+  DropdownIndicator: (props) => (
+    <chakraComponents.DropdownIndicator {...props}>
+      <Icon as={AiFillCaretDown} />
+    </chakraComponents.DropdownIndicator>
+  ),
+};
+```
+
+Here's a complete example of how you might use custom components to create a select with a custom `Option`:
 
 ```ts
 import { Icon } from "@chakra-ui/react";

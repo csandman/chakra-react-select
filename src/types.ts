@@ -60,6 +60,8 @@ export interface ChakraStylesConfig<
   dropdownIndicator?: StylesFunction<
     DropdownIndicatorProps<Option, IsMulti, Group>
   >;
+  downChevron?: StylesFunction<DropdownIndicatorProps<Option, IsMulti, Group>>;
+  crossIcon?: StylesFunction<ClearIndicatorProps<Option, IsMulti, Group>>;
   group?: StylesFunction<GroupProps<Option, IsMulti, Group>>;
   groupHeading?: StylesFunction<GroupHeadingProps<Option, IsMulti, Group>>;
   indicatorsContainer?: StylesFunction<
