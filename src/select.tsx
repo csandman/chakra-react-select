@@ -4,7 +4,7 @@ import ReactSelect from "react-select";
 import type { GroupBase, Props, SelectInstance } from "react-select";
 import useChakraSelectProps from "./use-chakra-select-props";
 
-type SelectType = <
+export type SelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
@@ -25,6 +25,6 @@ const Select = forwardRef(
 
     return <ReactSelect ref={ref} {...chakraSelectProps} />;
   }
-) as SelectType;
+) as SelectComponent;
 
 export default Select;

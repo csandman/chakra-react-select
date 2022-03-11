@@ -5,7 +5,7 @@ import AsyncReactSelect from "react-select/async";
 import type { AsyncProps } from "react-select/async";
 import useChakraSelectProps from "./use-chakra-select-props";
 
-type AsyncSelectType = <
+export type AsyncSelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
   Group extends GroupBase<Option> = GroupBase<Option>
@@ -26,6 +26,6 @@ const AsyncSelect = forwardRef(
 
     return <AsyncReactSelect ref={ref} {...chakraSelectProps} />;
   }
-) as AsyncSelectType;
+) as AsyncSelectComponent;
 
 export default AsyncSelect;
