@@ -15,6 +15,8 @@ Check out the demos here:
 - Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
 - TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx
 
+**NOTE:** Before leaving an issue on this project, remember that this is just a _wrapper_ for `react-select`, not a standalone package. A large percent of the questions people have end up being about how `react-select` itself works, so please read through their documentation to familiarize yourself with it! https://react-select.com/home
+
 ## Contents
 
 - [Usage](#usage)
