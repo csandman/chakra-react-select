@@ -27,6 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: npm --version
     - name: Install Dependencies
       run: npm install
     - name: Lint code and types
