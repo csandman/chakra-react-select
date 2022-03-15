@@ -1,10 +1,14 @@
 # chakra-react-select
 
-[![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
+[![Build Status](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml/badge.svg?branch=main "Build Status")](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml?query=branch%3Amain)
+[![Lint Status](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml/badge.svg?branch=main "Lint Status")](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml?query=branch%3Amain)
 [![npm - chakra-react-select](https://img.shields.io/npm/v/chakra-react-select "chakra-react-select npm")](https://www.npmjs.com/package/chakra-react-select)
-[![bundle size - chakra-react-select](https://badgen.net/bundlephobia/min/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
-[![bundle size - chakra-react-select](https://badgen.net/bundlephobia/minzip/chakra-react-select "chakra-react-select bundlephobia")](https://bundlephobia.com/result?p=chakra-react-select)
-[![Total Downloads - chakra-react-select](https://badgen.net/npm/dt/chakra-react-select?color=blue "chakra-react-select npm downloads")](https://www.npmjs.com/package/chakra-react-select)
+[![Minified Bundle Size](https://badgen.net/bundlephobia/min/chakra-react-select "Minified Bundle Size")](https://bundlephobia.com/result?p=chakra-react-select)
+[![Minzipped Bundle Size](https://badgen.net/bundlephobia/minzip/chakra-react-select "Minzipped Bundle Size")](https://bundlephobia.com/result?p=chakra-react-select)
+[![Total NPM Downloads](https://badgen.net/npm/dt/chakra-react-select?color=blue "Total NPM Downloads")](https://www.npmjs.com/package/chakra-react-select)
+[![Known Vulnerabilities](https://snyk.io/test/github/csandman/chakra-react-select/badge.svg "Known Vulnerabilities")](https://snyk.io/test/github/csandman/chakra-react-select)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg "Code Style: Prettier")](https://github.com/prettier/prettier)
+[![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
 
 This component is a wrapper for the popular react component [react-select](https://react-select.com/home) made using the UI library [Chakra UI](https://chakra-ui.com/).
 
@@ -14,6 +18,8 @@ Check out the demos here:
 
 - Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
 - TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx
+
+**NOTE:** Before leaving an issue on this project, remember that this is just a _wrapper_ for `react-select`, not a standalone package. A large percent of the questions people have end up being about how `react-select` itself works, so please read through their documentation to familiarize yourself with it! https://react-select.com/home
 
 ## Contents
 
