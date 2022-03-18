@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended",
     "airbnb",
     "airbnb-typescript",
+    "airbnb/hooks",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -21,20 +22,21 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./tsconfig.json"
+    "project": "tsconfig.eslint.json"
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "curly": ["error", "all"],
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-underscore-dangle": "off",
     "react/jsx-filename-extension": [
       "error",
       {
         "extensions": [".js", ".tsx"]
       }
     ],
-    "import/prefer-default-export": "off",
     "react/function-component-definition": [
       "error",
       {
