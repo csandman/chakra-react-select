@@ -7,7 +7,7 @@
 [![Minzipped Bundle Size](https://badgen.net/bundlephobia/minzip/chakra-react-select "Minzipped Bundle Size")](https://bundlephobia.com/result?p=chakra-react-select)
 [![Total NPM Downloads](https://badgen.net/npm/dt/chakra-react-select?color=blue "Total NPM Downloads")](https://www.npmjs.com/package/chakra-react-select)
 [![Known Vulnerabilities](https://snyk.io/test/github/csandman/chakra-react-select/badge.svg "Known Vulnerabilities")](https://snyk.io/test/github/csandman/chakra-react-select)
-[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg "Code Style: Prettier")](https://github.com/prettier/prettier)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-c596c7.svg "Code Style: Prettier")](https://github.com/prettier/prettier)
 [![MIT License](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
 
 This component is a wrapper for the popular react component [react-select](https://react-select.com/home) made using the UI library [Chakra UI](https://chakra-ui.com/).
