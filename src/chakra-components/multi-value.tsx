@@ -49,7 +49,7 @@ const MultiValue = <
     alignItems: "center",
     maxWidth: "100%",
     ...container,
-    m: "0.125rem",
+    margin: "0.125rem",
   };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialStyles, props)

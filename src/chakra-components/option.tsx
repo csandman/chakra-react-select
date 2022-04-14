@@ -77,12 +77,12 @@ const Option = <
 
   const initialStyles: SystemStyleObject = {
     ...itemStyles,
-    d: "flex",
+    display: "flex",
     alignItems: "center",
-    w: "100%",
+    width: "100%",
     textAlign: "start",
     fontSize: size,
-    p: paddings[size as Size],
+    padding: paddings[size as Size],
     bg: isFocused ? itemStyles._focus?.bg : "transparent",
     ...(shouldHighlight && {
       bg: selectedBg,

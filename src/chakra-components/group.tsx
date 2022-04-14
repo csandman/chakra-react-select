@@ -81,8 +81,8 @@ const GroupHeading = <
   const initialStyles: SystemStyleObject = {
     ...groupTitle,
     fontSize: fontSizes[size as Size],
-    p: paddings[size as Size],
-    m: 0,
+    padding: paddings[size as Size],
+    margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
     top: -2,

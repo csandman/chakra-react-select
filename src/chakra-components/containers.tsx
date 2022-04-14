@@ -80,10 +80,10 @@ export const ValueContainer = <
   };
 
   const initialStyles: SystemStyleObject = {
-    d: "flex",
+    display: "flex",
     alignItems: "center",
     flex: 1,
-    p: `0.125rem ${px[size as Size]}`,
+    paddig: `0.125rem ${px[size as Size]}`,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",
@@ -126,7 +126,7 @@ export const IndicatorsContainer = <
   } = props;
 
   const initialStyles: SystemStyleObject = {
-    d: "flex",
+    display: "flex",
     alignItems: "center",
     alignSelf: "stretch",
     flexShrink: 0,

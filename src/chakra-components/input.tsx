@@ -27,7 +27,7 @@ const Input = <
     font: "inherit",
     minW: "2px",
     border: 0,
-    m: 0,
+    margin: 0,
     outline: 0,
   };
 
@@ -41,7 +41,7 @@ const Input = <
       content: 'attr(data-value) " "',
       visibility: "hidden",
       whiteSpace: "pre",
-      p: 0,
+      padding: 0,
       ...spacingStyle,
     },
   };
@@ -55,7 +55,7 @@ const Input = <
     color: "inherit",
     bg: 0,
     opacity: isHidden ? 0 : 1,
-    w: "100%",
+    width: "100%",
     py: "0.125rem",
     ...spacingStyle,
   };
