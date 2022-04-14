@@ -45,11 +45,11 @@ const Control = <
 
   const initialStyles: SystemStyleObject = {
     ...inputStyles.field,
-    d: "flex",
-    p: 0,
+    display: "flex",
+    padding: 0,
     overflow: "hidden",
-    h: "auto",
-    minH: heights[size as Size],
+    height: "auto",
+    minHeight: heights[size as Size],
   };
 
   const sx: SystemStyleObject = chakraStyles?.control

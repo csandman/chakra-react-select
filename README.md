@@ -47,7 +47,7 @@ Check out the demos here:
 
 ## Usage
 
-In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then install this package:
+In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
 ```sh
 npm i chakra-react-select

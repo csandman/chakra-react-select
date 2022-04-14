@@ -35,8 +35,8 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     position: "absolute",
     ...(placement === "bottom" && { top: "100%" }),
     ...(placement === "top" && { bottom: "100%" }),
-    my: "8px",
-    w: "100%",
+    marginY: "8px",
+    width: "100%",
     zIndex: 1,
     overflow: "hidden",
   };
@@ -80,7 +80,7 @@ const MenuList = <
 
   const initialStyles: SystemStyleObject = {
     ...list,
-    maxH: `${maxHeight}px`,
+    maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     borderRadius: borderRadii[size as Size],
   };
@@ -136,7 +136,7 @@ const LoadingMessage = <
   const initialStyles: SystemStyleObject = {
     color: placeholderColor,
     textAlign: "center",
-    p: paddings[size as Size],
+    padding: paddings[size as Size],
     fontSize: fontSizes[size as Size],
   };
 
@@ -191,7 +191,7 @@ const NoOptionsMessage = <
   const initialStyles: SystemStyleObject = {
     color: placeholderColor,
     textAlign: "center",
-    p: paddings[size as Size],
+    padding: paddings[size as Size],
     fontSize: fontSizes[size as Size],
   };
 

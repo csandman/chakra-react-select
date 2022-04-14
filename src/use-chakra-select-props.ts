@@ -15,6 +15,8 @@ const useChakraSelectProps = <
   colorScheme = "gray",
   isDisabled,
   isInvalid,
+  isReadOnly,
+  isRequired,
   inputId,
   tagVariant,
   hasStickyGroupHeaders = false,
@@ -36,6 +38,8 @@ const useChakraSelectProps = <
     id: inputId,
     isDisabled,
     isInvalid,
+    isRequired,
+    isReadOnly,
     onFocus,
     onBlur,
   });

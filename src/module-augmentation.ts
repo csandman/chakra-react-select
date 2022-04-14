@@ -46,6 +46,24 @@ declare module "react-select/dist/declarations/src/Select" {
     isInvalid?: boolean;
 
     /**
+     * If `true`, the form control will be `readonly`
+     *
+     * @see {@link https://chakra-ui.com/docs/components/form/input#props}
+     * @see {@link https://chakra-ui.com/docs/components/form/form-control#props}
+     */
+    isReadOnly?: boolean;
+
+    /**
+     * If true, the form control will be required. This has 2 side effects:
+     * - The `FormLabel` will show a required indicator
+     * - The form element (e.g, Input) will have `aria-required` set to true
+     *
+     * @see {@link https://chakra-ui.com/docs/components/form/input#props}
+     * @see {@link https://chakra-ui.com/docs/components/form/form-control#props}
+     */
+    isRequired?: boolean;
+
+    /**
      * A color name that matches a key from your chakra theme and will
      * determine the color scheme of your `MultiValue` component
      *

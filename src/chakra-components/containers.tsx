@@ -24,6 +24,7 @@ export const SelectContainer = <
     innerProps,
     isDisabled,
     isRtl,
+    hasValue,
     selectProps: { chakraStyles },
   } = props;
 
@@ -46,6 +47,7 @@ export const SelectContainer = <
         {
           "--is-disabled": isDisabled,
           "--is-rtl": isRtl,
+          "--has-value": hasValue,
         },
         className
       )}
@@ -80,10 +82,10 @@ export const ValueContainer = <
   };
 
   const initialStyles: SystemStyleObject = {
-    d: "flex",
+    display: "flex",
     alignItems: "center",
     flex: 1,
-    p: `0.125rem ${px[size as Size]}`,
+    padding: `0.125rem ${px[size as Size]}`,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",
@@ -126,7 +128,7 @@ export const IndicatorsContainer = <
   } = props;
 
   const initialStyles: SystemStyleObject = {
-    d: "flex",
+    display: "flex",
     alignItems: "center",
     alignSelf: "stretch",
     flexShrink: 0,

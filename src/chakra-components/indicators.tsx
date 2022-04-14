@@ -157,7 +157,7 @@ export const ClearIndicator = <
 
   const initialStyles: SystemStyleObject = {
     ...closeButtonStyles,
-    mx: 1,
+    marginX: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -223,7 +223,7 @@ export const LoadingIndicator = <
 
   const spinnerSize = spinnerSizes[size as Size];
 
-  const initialStyles: SystemStyleObject = { mr: 3 };
+  const initialStyles: SystemStyleObject = { marginRight: 3 };
 
   const sx: SystemStyleObject = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialStyles, props)
