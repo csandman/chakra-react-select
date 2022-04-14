@@ -14,9 +14,9 @@ import type {
 import type { OptionBase } from "../types";
 
 const MultiValue = <
-  Option extends OptionBase,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueProps<Option, IsMulti, Group>
 ): ReactElement => {
@@ -37,10 +37,14 @@ const MultiValue = <
 
   const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
 
+  const extraData = data as unknown as OptionBase;
   const { container, closeButton, label } = useMultiStyleConfig("Tag", {
     size,
-    colorScheme: data.colorScheme || colorScheme,
-    variant: data.variant || tagVariant || (data.isFixed ? "solid" : "subtle"),
+    colorScheme: extraData.colorScheme || colorScheme,
+    variant:
+      extraData.variant ||
+      tagVariant ||
+      (extraData.isFixed ? "solid" : "subtle"),
   });
 
   const containerInitialStyles: SystemStyleObject = {
@@ -121,9 +125,9 @@ const MultiValue = <
 };
 
 const MultiValueContainer = <
-  Option,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ): ReactElement => {
@@ -137,9 +141,9 @@ const MultiValueContainer = <
 };
 
 const MultiValueLabel = <
-  Option,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ): ReactElement => {
@@ -167,15 +171,16 @@ const TagCloseIcon: React.FC<IconProps> = (props) => (
 );
 
 const MultiValueRemove = <
-  Option extends OptionBase,
-  IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ): ReactElement | null => {
   const { children, innerProps, isFocused, data, sx } = props;
 
-  if (data.isFixed) {
+  const extraData = data as unknown as OptionBase;
+  if (extraData.isFixed) {
     return null;
   }
 
