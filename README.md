@@ -43,6 +43,9 @@ Check out the demos here:
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
   - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
+- [Usage with React Form Libraries](#usage-with-react-form-libraries)
+  - [`react-hook-form`](#react-hook-form)
+  - [`formik`](#formik)
 - [CodeSandbox Templates](#codesandbox-templates)
 
 ## Usage
@@ -638,6 +641,45 @@ CodeSandbox examples:
 
 - Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js
 - TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
+
+## Usage with React Form Libraries
+
+_This section is a work in progress, check back soon for more examples_
+
+This package can be used with form controllers such as Formik or React Hook Form in the same way you would with the original React Select. Here are a few examples to help you get started. If you'd like to see examples using other form providers, you can [submit it as an issue](https://github.com/csandman/chakra-react-select/issues/new?assignees=csandman&labels=Question&template=question.md&title=%5BQUESTION%5D+).
+
+### [`react-hook-form`](https://react-hook-form.com/)
+
+See this issue for some discussion about using this package with `react-hook-form`: https://github.com/csandman/chakra-react-select/issues/7
+
+By default, `react-hook-form` uses [uncontrolled components](https://reactjs.org/docs/uncontrolled-components.html) to reduced input renders however this only works for native HTML inputs. Because chakra-react-select is not a native HTML input, you'll need to use react-hook-form's [`Controller`](https://react-hook-form.com/api/usecontroller/controller) component or [`useController`](https://react-hook-form.com/api/usecontroller) hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here are some examples using each:
+
+- `Controller` multi select with built-in validation
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-v7llc?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-typescript-v8ps5?file=/app.tsx
+- `useController` multi select with built-in validation
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-n8wuf?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-typescript-qcm23?file=/app.tsx
+- `useController` single select
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-11x4zk?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-vylckh?file=/app.tsx
+- Multi select with `yup` validation
+  - Vanilla JS: _coming soon_
+  - TypeScript: _coming soon_
+
+### [`formik`](https://formik.org/)
+
+See this issue for some discussion about using this package with `formik`: https://github.com/csandman/chakra-react-select/issues/23
+
+- Single select with built in validation
+  - Vanilla JS: _coming soon_
+  - TypeScript: _coming soon_
+- Multi select with built in validation
+  - Vanilla JS: _coming soon_
+  - TypeScript: _coming soon_
+- Multi select with `yup` validation
+  - Vanilla JS: _coming soon_
+  - TypeScript: _coming soon_
 
 ## CodeSandbox Templates
 
