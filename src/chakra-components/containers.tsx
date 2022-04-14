@@ -24,6 +24,7 @@ export const SelectContainer = <
     innerProps,
     isDisabled,
     isRtl,
+    hasValue,
     selectProps: { chakraStyles },
   } = props;
 
@@ -46,6 +47,7 @@ export const SelectContainer = <
         {
           "--is-disabled": isDisabled,
           "--is-rtl": isRtl,
+          "--has-value": hasValue,
         },
         className
       )}
