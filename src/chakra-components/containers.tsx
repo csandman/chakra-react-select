@@ -85,7 +85,7 @@ export const ValueContainer = <
     display: "flex",
     alignItems: "center",
     flex: 1,
-    paddig: `0.125rem ${px[size as Size]}`,
+    padding: `0.125rem ${px[size as Size]}`,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",
