@@ -7,6 +7,8 @@ export { default as AsyncCreatableSelect } from "./async-creatable-select";
 
 export { default as chakraComponents } from "./chakra-components";
 
+export { default as useChakraSelectProps } from "./use-chakra-select-props";
+
 export type { SelectComponent } from "./select";
 export type { CreatableSelectComponent } from "./creatable-select";
 export type { AsyncSelectComponent } from "./async-select";
