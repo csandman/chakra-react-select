@@ -660,7 +660,7 @@ const CustomSelect = (customSelectProps) => {
 };
 ```
 
-One example of how you might use this is to customize the component `react-google-places-autocomplete`, which is an autocomplete dropdown for Google Places that uses the `AsyncSelect` from `react-select` as it's core. Therefor, it accepts all of the same select props as the core react-select does which means you can use the `useChakraSelectProps` to style it:
+One example of how you might use this is to customize the component `react-google-places-autocomplete`, which is an autocomplete dropdown for Google Places that uses the `AsyncSelect` from `react-select` as it's core. Therefore, it accepts all of the same select props as the core react-select does which means you can use the `useChakraSelectProps` hook to style it:
 
 ```jsx
 import { useState } from "react";
