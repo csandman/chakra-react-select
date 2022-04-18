@@ -43,6 +43,7 @@ Check out the demos here:
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
   - [Custom `LoadingIndicator` (Chakra `Spinner`)](#custom-loadingindicator-chakra-spinner)
+- [`useChakraSelectProps`](#usechakraselectprops)
 - [Usage with React Form Libraries](#usage-with-react-form-libraries)
   - [`react-hook-form`](#react-hook-form)
   - [`formik`](#formik)
@@ -641,6 +642,51 @@ CodeSandbox examples:
 
 - Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js
 - TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
+
+## `useChakraSelectProps`
+
+Being a wrapper for `react-select`, all of the customizations done to react-select are passed in as props. There is a hook, [`useChakraSelectProps`](https://github.com/csandman/chakra-react-select/blob/main/src/use-chakra-select-props.ts) that handles merging any extra customizations from the end user with the customizations done by this package. In some cases you may simply want to use this hook to get the custom props and pass them into a `react-select` instance yourself.
+
+To do so, simply import the hook from this package, and call it by passing in any extra custom props you'd like into it and spread it onto a base `react-select` component:
+
+```jsx
+import { useChakraSelectProps } from "chakra-react-select";
+import Select from "react-select";
+
+const CustomSelect = (customSelectProps) => {
+  const selectProps = useChakraSelectProps(customSelectProps);
+
+  return <Select {...selectProps} />;
+};
+```
+
+One example of how you might use this is to customize the component `react-google-places-autocomplete`, which is an autocomplete dropdown for Google Places that uses the `AsyncSelect` from `react-select` as it's core. Therefore, it accepts all of the same select props as the core react-select does which means you can use the `useChakraSelectProps` hook to style it:
+
+```jsx
+import { useState } from "react";
+import { useChakraSelectProps } from "chakra-react-select";
+import ReactGooglePlacesAutocomplete from "react-google-places-autocomplete";
+
+const GooglePlacesAutocomplete = () => {
+  const [place, setPlace] = useState(null);
+
+  const selectProps = useChakraSelectProps({
+    value: place,
+    onChange: setPlace,
+  });
+
+  return (
+    <ReactGooglePlacesAutocomplete
+      apiKey="YOUR API KEY HERE"
+      selectProps={selectProps}
+    />
+  );
+};
+
+export default GooglePlacesAutocomplete;
+```
+
+**NOTE:** An API key would be needed to create a CodeSandbox example for this so you will have to implement it in your own project if you'd like to test it out.
 
 ## Usage with React Form Libraries
 
