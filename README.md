@@ -686,6 +686,8 @@ const GooglePlacesAutocomplete = () => {
 export default GooglePlacesAutocomplete;
 ```
 
+**NOTE:** An API key would be needed to create a CodeSandbox example for this so you will have to implement it in your own project if you'd like to test it out.
+
 ## Usage with React Form Libraries
 
 _This section is a work in progress, check back soon for more examples_
