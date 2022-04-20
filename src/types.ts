@@ -51,7 +51,7 @@ export type StylesFunction<ComponentProps> = (
 
 export interface ChakraStylesConfig<
   Option = unknown,
-  IsMulti extends boolean = false,
+  IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>
 > {
   clearIndicator?: StylesFunction<ClearIndicatorProps<Option, IsMulti, Group>>;
