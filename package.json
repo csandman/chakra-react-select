@@ -31,6 +31,7 @@
     "lint:src": "eslint .",
     "lint:types": "tsc --noEmit",
     "prepare": "husky install",
+    "prepublishOnly": "npm run build",
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
   },
   "types": "dist/types/index.d.ts",
