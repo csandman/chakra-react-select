@@ -248,7 +248,7 @@ return (
 );
 ```
 
-If you have any other requests for Chakra-like features that could be added, or problems with the current features, [please submit an issue](https://github.com/csandman/chakra-react-select/issues/new/choose)!
+If you have any other requests for Chakra-like features that could be added, or problems with the current features, [please start a discussion](https://github.com/csandman/chakra-react-select/discussions/categories/ideas)!
 
 ## Styling
 
@@ -692,7 +692,7 @@ export default GooglePlacesAutocomplete;
 
 _This section is a work in progress, check back soon for more examples_
 
-This package can be used with form controllers such as Formik or React Hook Form in the same way you would with the original React Select. Here are a few examples to help you get started. If you'd like to see examples using other form providers, you can [submit it as an issue](https://github.com/csandman/chakra-react-select/issues/new?assignees=csandman&labels=Question&template=question.md&title=%5BQUESTION%5D+).
+This package can be used with form controllers such as Formik or React Hook Form in the same way you would with the original React Select, and the quickest way to figure out how to do so would be to Google something along the lines of "react-select with formik/react-hook-form/etc" and replace `react-select` in those examples with `chakra-react-select`. However, here are a few examples to help you get started. If you'd like to see examples using other form providers, you can [submit it as a Q&A discussion](https://github.com/csandman/chakra-react-select/discussions/categories/q-a).
 
 ### [`react-hook-form`](https://react-hook-form.com/)
 
