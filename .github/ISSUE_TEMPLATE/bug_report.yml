@@ -68,6 +68,8 @@ body:
         - label: "macOS"
         - label: "Windows"
         - label: "Linux"
+        - label: "iOS/iPadOS"
+        - label: "Android"
   - type: "textarea"
     id: "additional-information"
     attributes:
