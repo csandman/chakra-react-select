@@ -1,0 +1,73 @@
+name: "Bug Report"
+description: "File a bug report"
+body:
+  - type: "markdown"
+    attributes:
+      value: |
+        Thanks for creating an issue!
+
+        Please search [open/closed issues](https://github.com/csandman/chakra-react-select/issues?q=is%3Aissue) and [discussions](https://github.com/csandman/chakra-react-select/discussions/categories/q-a) before submitting. Someone might have asked the same thing before!
+
+        Also remember that this package is a wrapper for `react-select`, so check out their [documentation](https://react-select.com/home) and their current [issues](https://github.com/JedWatson/react-select/issues?q=is%3Aissue+)/[discussions](https://github.com/JedWatson/react-select/discussions) for anything not mentioned in the `chakra-react-select` docs.
+  - type: "textarea"
+    id: "description"
+    attributes:
+      label: "Description"
+      description: "A general description of the issue."
+      placeholder: |
+        When I ____, I expected ____ to happen but ____ happened instead.
+    validations:
+      required: true
+  - type: "input"
+    id: "reproduction"
+    attributes:
+      label: "Link to Reproduction"
+      description: |
+        A link to a CodeSandbox reproduction which demonstrates the bug. You can use one of these templates to get started:
+
+        - React Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
+        - React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
+        - Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
+        - Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
+      placeholder: "https://codesandbox.io/"
+  - type: "textarea"
+    id: "steps"
+    attributes:
+      label: "Steps to reproduce"
+      description: |
+        Explain how to cause the issue in the provided reproduction.
+      value: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+  - type: "input"
+    id: "chakra-react-select-version"
+    attributes:
+      label: "chakra-react-select Version"
+      description: "The version of chakra-react-select you are on"
+      placeholder: "3.3.1"
+    validations:
+      required: true
+  - type: "input"
+    id: "browser"
+    attributes:
+      label: "Browser"
+      description: "The browser(s) this issue occurred with."
+      placeholder: "Google Chrome 93"
+  - type: "checkboxes"
+    id: "operating-system"
+    attributes:
+      label: "Operating System"
+      description: "The operating system(s) this issue occurred with."
+      options:
+        - label: "macOS"
+        - label: "Windows"
+        - label: "Linux"
+  - type: "textarea"
+    id: "additional-information"
+    attributes:
+      label: "Additional Information"
+      description: |
+        Use this section to provide any additional information you might have
+        like screenshots, notes, or links to ideas.
