@@ -51,13 +51,25 @@ Check out the demos here:
 
 ## Usage
 
-In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
+In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). If you don't have Chakra UI installed already, you can install it like this:
+
+```sh
+npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+# ...or...
+yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+```
+
+**NOTE:** As of [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3), your project will need to have a minimum of `@emotion/react@11.8.1` installed in order to avoid having multiple copies of `@emotion/react` installed. For more info, see [PR #115](https://github.com/csandman/chakra-react-select/pull/115).
+
+After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
 ```sh
 npm i chakra-react-select
+# ...or...
+yarn add chakra-react-select
 ```
 
-Then you can import the base select package, the async select, the creatable select or the async creatable select:
+Once installed, you can import the base select package, the async select, the creatable select or the async creatable select like so:
 
 ```js
 import {
@@ -66,9 +78,18 @@ import {
   CreatableSelect,
   Select,
 } from "chakra-react-select";
+// ...or...
+const {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} = require("chakra-react-select");
 ```
 
-In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions.
+All of the types and other exports from the original `react-select` package are also exported from this package, so you can import any of them if you need them.
+
+In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions listed below.
 
 ## Extra Props
 

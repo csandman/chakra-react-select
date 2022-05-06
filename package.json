@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "3.3.2",
+  "version": "3.3.3-beta.1",
   "description": "A Chakra UI wrapper for the popular library React Select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
@@ -46,6 +46,7 @@
     "@chakra-ui/menu": "^1.0.0",
     "@chakra-ui/spinner": "^1.0.0",
     "@chakra-ui/system": "^1.2.0",
+    "@emotion/react": "^11.8.1",
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6"
   },
