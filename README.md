@@ -51,13 +51,33 @@ Check out the demos here:
 
 ## Usage
 
-In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). Then [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
+In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). If you don't have Chakra UI installed already, you can install it like this:
+
+```sh
+npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+# ...or...
+yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+```
+
+**NOTE:** This installation command is slightly different from the one in the docs, because it sets a minimum version for `@emotion/react` of `v11.8.1`. This is set up this way because `react-select` has `@emotion/select` as a dependency, and having multiple versions of it in your app at once can cause errors (see #73). Mirroring the dependency version required by `react-select` will allow the dependency to be de-duped during installation, preventing these errors.
+
+After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
 ```sh
 npm i chakra-react-select
+# ...or...
+yarn add chakra-react-select
 ```
 
-Then you can import the base select package, the async select, the creatable select or the async creatable select:
+If you already have Chakra UI setup and are running into errors installing chakra like `Could not resolve dependency: peer @emotion/react@"^11.8.1"`, you should update your version of `@emotion/react` to a version that is compatible with `react-select@5.3.1`. To do so, run one of these commands:
+
+```sh
+npm i @emotion/react@^11.8.1 # yarn add @emotion/react@^11.8.1
+# ...or...
+npm i @emotion/react@latest # yarn add @emotion/react@latest
+```
+
+Once installed, you can import the base select package, the async select, the creatable select or the async creatable select like so:
 
 ```js
 import {
@@ -66,9 +86,18 @@ import {
   CreatableSelect,
   Select,
 } from "chakra-react-select";
+// ...or...
+const {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} = require("chakra-react-select");
 ```
 
-In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions.
+All of the types and other exports from the original `react-select` package are also exported from this package, so you can import any of them if you need them.
+
+In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions listed below.
 
 ## Extra Props
 
