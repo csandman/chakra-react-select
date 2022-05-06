@@ -59,7 +59,7 @@ npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@
 yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
-**NOTE:** As of [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3), your project will need to have a minimum of `@emotion/react@11.8.1` installed in order to avoid having multiple copies of `@emotion/react` installed. For more info, see #115.
+**NOTE:** As of [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3), your project will need to have a minimum of `@emotion/react@11.8.1` installed in order to avoid having multiple copies of `@emotion/react` installed. For more info, see [PR #115](https://github.com/csandman/chakra-react-select/pull/115).
 
 After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
