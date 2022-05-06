@@ -59,7 +59,7 @@ npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@
 yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
-**NOTE:** This installation command is slightly different from the one in the docs, because it sets a minimum version for `@emotion/react` of `v11.8.1`. This is set up this way because `react-select` has `@emotion/select` as a dependency, and having multiple versions of it in your app at once can cause errors (see #73). Mirroring the dependency version required by `react-select` will allow the dependency to be de-duped during installation, preventing these errors.
+**NOTE:** This installation command is slightly different from the one in the docs, because it sets a minimum version for `@emotion/react` of `v11.8.1`. This is set up this way because `react-select` has `@emotion/select` as a dependency, and having multiple versions of it in your app at once can cause errors (see #73). Mirroring the dependency version required by `react-select` in [`v5.3.1`](https://github.com/JedWatson/react-select/releases/tag/react-select%405.3.1) will allow the dependency to be de-duped during installation, preventing these errors.
 
 After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
@@ -69,7 +69,7 @@ npm i chakra-react-select
 yarn add chakra-react-select
 ```
 
-If you already have Chakra UI setup and are running into errors installing chakra like `Could not resolve dependency: peer @emotion/react@"^11.8.1"`, you should update your version of `@emotion/react` to a version that is compatible with `react-select@5.3.1`. To do so, run one of these commands:
+If you already have Chakra UI setup and are running into errors installing chakra like `Could not resolve dependency: peer @emotion/react@"^11.8.1"`, you should update your version of `@emotion/react` to a version that is compatible with [`react-select@5.3.1`](https://github.com/JedWatson/react-select/releases/tag/react-select%405.3.1). To do so, run one of these commands:
 
 ```sh
 npm i @emotion/react@^11.8.1 # yarn add @emotion/react@^11.8.1
