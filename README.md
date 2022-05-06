@@ -59,7 +59,7 @@ npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@
 yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
-**NOTE:** This installation command is slightly different from the one in the docs, because it sets a minimum version for `@emotion/react` of `v11.8.1`. This is set up this way because `react-select` has `@emotion/select` as a dependency, and having multiple versions of it in your app at once can cause errors (see #73). Mirroring the dependency version required by `react-select` in [`v5.3.1`](https://github.com/JedWatson/react-select/releases/tag/react-select%405.3.1) will allow the dependency to be de-duped during installation, preventing these errors.
+**NOTE:** As of [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3), your project will need to have a minimum of `@emotion/react@11.8.1` installed in order to avoid having multiple copies of `@emotion/react` installed. For more info, see #115.
 
 After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
@@ -67,14 +67,6 @@ After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/
 npm i chakra-react-select
 # ...or...
 yarn add chakra-react-select
-```
-
-If you already have Chakra UI setup and are running into errors installing chakra like `Could not resolve dependency: peer @emotion/react@"^11.8.1"`, you should update your version of `@emotion/react` to a version that is compatible with [`react-select@5.3.1`](https://github.com/JedWatson/react-select/releases/tag/react-select%405.3.1). To do so, run one of these commands:
-
-```sh
-npm i @emotion/react@^11.8.1 # yarn add @emotion/react@^11.8.1
-# ...or...
-npm i @emotion/react@latest # yarn add @emotion/react@latest
 ```
 
 Once installed, you can import the base select package, the async select, the creatable select or the async creatable select like so:
