@@ -8,28 +8,17 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
+    "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noImplicitAny": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
     "jsx": "react",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
+    "incremental": true,
     "declarationMap": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowJs": true
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
-  "exclude": ["node_modules"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS",
-      "resolveJsonModule": true,
-      "noImplicitAny": false
-    }
-  }
+  "exclude": ["node_modules"]
 }
