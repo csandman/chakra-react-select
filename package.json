@@ -24,7 +24,8 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --extensions .ts,.tsx -d dist/cjs --source-maps",
     "build:esm": "cross-env BABEL_ENV=esm babel src --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types",
-    "format": "prettier --write .",
+    "format": "concurrently npm:format:*",
+    "format:code": "prettier --write .",
     "format:package": "prettier-package-json --write",
     "lint": "concurrently npm:lint:*",
     "lint-fix": "eslint --fix src",
@@ -34,10 +35,10 @@
     "prepublishOnly": "npm run build",
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
   },
+  "sideEffects": false,
   "types": "dist/types/index.d.ts",
-  "typings": "dist/types/index.d.ts",
   "dependencies": {
-    "react-select": "^5.3.1"
+    "react-select": "^5.3.2"
   },
   "peerDependencies": {
     "@chakra-ui/form-control": "^1.0.0",
@@ -57,6 +58,7 @@
     "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@chakra-ui/babel-plugin": "^1.0.2",
     "@chakra-ui/form-control": "^1.6.0",
     "@chakra-ui/icon": "^2.0.5",
     "@chakra-ui/layout": "^1.8.0",
@@ -66,12 +68,12 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
-    "@types/react": "^18.0.8",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
+    "@types/react": "^17.0.45",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
-    "eslint": "^8.14.0",
+    "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -79,24 +81,29 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "lint-staged": "^12.4.1",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "prettier-package-json": "^2.6.3",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.6.4"
   },
   "keywords": [
+    "accessibility",
     "chakra",
     "chakra-ui",
     "combobox",
+    "dropdown",
     "input",
-    "multi select",
+    "listbox",
+    "menu",
+    "multi-select",
     "react",
-    "react-select"
+    "react-select",
+    "select"
   ],
   "publishConfig": {
     "access": "public"
