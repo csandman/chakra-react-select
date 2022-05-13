@@ -38,15 +38,15 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "react-select": "^5.3.2"
-  },
-  "peerDependencies": {
     "@chakra-ui/form-control": "^1.0.0",
     "@chakra-ui/icon": "^2.0.0",
     "@chakra-ui/layout": "^1.0.0",
     "@chakra-ui/menu": "^1.0.0",
     "@chakra-ui/spinner": "^1.0.0",
     "@chakra-ui/system": "^1.2.0",
+    "react-select": "^5.3.2"
+  },
+  "peerDependencies": {
     "@emotion/react": "^11.8.1",
     "react": ">=16.8.6",
     "react-dom": ">=16.8.6"
@@ -59,12 +59,6 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@chakra-ui/babel-plugin": "^1.0.2",
-    "@chakra-ui/form-control": "^1.6.0",
-    "@chakra-ui/icon": "^2.0.5",
-    "@chakra-ui/layout": "^1.8.0",
-    "@chakra-ui/menu": "^1.8.11",
-    "@chakra-ui/spinner": "^1.2.6",
-    "@chakra-ui/system": "^1.12.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
