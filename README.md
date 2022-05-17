@@ -1,4 +1,6 @@
-# chakra-react-select
+# chakra-react-select v3
+
+> This version of `chakra-react-select` is for compatibility with React v17 and Chakra UI v1. It will be maintained until the majority of users have migrated to the newest version of Chakra. If you're using [Chakra UI v2](https://chakra-ui.com/guides/migration) check [the docs for chakra-react-select v4 here](https://github.com/csandman/chakra-react-select).
 
 [![Build Status](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml/badge.svg?branch=main "Build Status")](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml?query=branch%3Amain)
 [![Lint Status](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml/badge.svg?branch=main "Lint Status")](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml?query=branch%3Amain)
@@ -16,8 +18,8 @@ This component is a wrapper for the popular react component [react-select](https
 
 Check out the demos here:
 
-- Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js
-- TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-demo-v3-fq7o7q?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-ts-demo-v3-30vgwj?file=/app.tsx
 
 **NOTE:** Before leaving an issue on this project, remember that this is just a _wrapper_ for `react-select`, not a standalone package. A large percent of the questions people have end up being about how `react-select` itself works, so please read through their documentation to familiarize yourself with it! https://react-select.com/home
 
@@ -51,22 +53,22 @@ Check out the demos here:
 
 ## Usage
 
-In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). If you don't have Chakra UI installed already, you can install it like this:
+In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their v1 docs](https://v1.chakra-ui.com/guides/first-steps). If you don't have Chakra UI installed already, you can install it like this:
 
 ```sh
-npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+npm i @chakra-ui/react@^1 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 # ...or...
-yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+yarn add @chakra-ui/react@^1 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
 **NOTE:** As of [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3), your project will need to have a minimum of `@emotion/react@11.8.1` installed in order to avoid having multiple copies of `@emotion/react` installed. For more info, see [PR #115](https://github.com/csandman/chakra-react-select/pull/115).
 
-After Chakra UI is setup, [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
+After Chakra UI is setup, [install v3 of this package from NPM](https://www.npmjs.com/package/chakra-react-select) using either the `@3` version tag or the `@chakra1` npm tag:
 
 ```sh
-npm i chakra-react-select
+npm i chakra-react-select@chakra1
 # ...or...
-yarn add chakra-react-select
+yarn add chakra-react-select@chakra1
 ```
 
 Once installed, you can import the base select package, the async select, the creatable select or the async creatable select like so:
@@ -202,7 +204,7 @@ return (
 
 One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
 
-- Example: https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js
+- Example: https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-v3-tmwnp4?file=/example.js
 
 ```js
 return <Select hasStickyGroupHeaders />;
@@ -352,7 +354,7 @@ One change between the keys in the `chakraStyles` prop and the original `styles`
 There are also two extra style keys for the icons contained within the indicators that are not offered in the original package. These are `downChevron` which is contained inside the `DropdownIndicator`, and the `crossIcon` which is contained inside the `ClearIndicator`. Both styles receive the same `state` values as their containing indicators. These style keys were added as a convenience, however you could also apply the same styles using the parent `chakraStyles` by doing something like this:
 
 ```js
-// Demo: https://codesandbox.io/s/chakra-react-select-dropdown-indicator-flip-lhc4ep?file=/example.js
+// Demo: https://codesandbox.io/s/chakra-react-select-dropdown-indicator-flip-v3-xqhyet?file=/example.js
 
 const chakraStyles = {
   dropdownIndicator: (prev, { selectProps }) => ({
@@ -409,11 +411,11 @@ If anyone has any suggestions for how to fully replace the `MenuPortal` componen
 #### Examples
 
 - Dropdown menu attached to control example:
-  - TypeScript: https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx
-  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-chakrastyles-v3-3wus8g?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-v3-tewves?file=/example.js
 - Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles example:
-  - TypeScript: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-qwq3o?file=/app.tsx
-  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-iydfe?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-v3-7273qk?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-v3-edv95f?file=/example.js
 
 ### Theme Styles
 
@@ -465,7 +467,7 @@ This package implements the same classNames on the sub components as the origina
 >
 > While we encourage you to use the new Styles API, you still have the option of styling via CSS classes. This ensures compatibility with [styled components](https://www.styled-components.com/), [CSS modules](https://github.com/css-modules/css-modules) and other libraries.
 
-Here is an example of using classNames to style the components: https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-4r2pe?file=/example.js
+Here is an example of using classNames to style the components: https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-v3-50pqn2?file=/example.js
 
 ## TypeScript Support
 
@@ -535,7 +537,7 @@ Like the original `react-select`, this package exports all of the custom compone
 
 It's important to note however, that there are 3 components offered in the original `react-select` that are missing from `chakraComponents`. These are the `CrossIcon`, `DownChevron`, and `MenuPortal`. The `MenuPortal` could not be replaced at all [as mentioned earlier](#caveats), so if you'd like to customize it, use the original from the `components` import. The icons posed issues with prop compatibility when passing them into the core `Select` so the easiest way to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator` and pass custom icons in as children:
 
-CodeSandbox: https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js
+CodeSandbox: https://codesandbox.io/s/chakra-react-select-custom-icons-v3-utx0i5?file=/example.js
 
 ```js
 const components = {
@@ -609,8 +611,8 @@ const Example = () => (
 
 CodeSandbox Examples:
 
-- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js
-- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-odi90k?file=/app.tsx
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-option-v3-wt0jyw?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-v3-d4g3w1?file=/app.tsx
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
@@ -661,8 +663,8 @@ const App = () => (
 
 CodeSandbox examples:
 
-- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js
-- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx
+- Vanilla JS: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-v3-wcjoi9?file=/example.js
+- TypeScript: https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-v3-spwgcy?file=/app.tsx
 
 ## `useChakraSelectProps`
 
@@ -722,14 +724,14 @@ See this issue for some discussion about using this package with `react-hook-for
 By default, `react-hook-form` uses [uncontrolled components](https://reactjs.org/docs/uncontrolled-components.html) to reduced input renders however this only works for native HTML inputs. Because chakra-react-select is not a native HTML input, you'll need to use react-hook-form's [`Controller`](https://react-hook-form.com/api/usecontroller/controller) component or [`useController`](https://react-hook-form.com/api/usecontroller) hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here are some examples using each:
 
 - `Controller` multi select with built-in validation
-  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-v7llc?file=/example.js
-  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-typescript-v8ps5?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-v3-qnefi0?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-typescript-v3-74ej6x?file=/app.tsx
 - `useController` multi select with built-in validation
-  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-n8wuf?file=/example.js
-  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-typescript-qcm23?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-v3-dfzymf?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-typescript-v3-nvbnbg?file=/app.tsx
 - `useController` single select
-  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-11x4zk?file=/example.js
-  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-vylckh?file=/app.tsx
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-v3-yi33cn?file=/example.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-v3-3hvkm7?file=/app.tsx
 - Multi select with `yup` validation
   - Vanilla JS: _coming soon_
   - TypeScript: _coming soon_
@@ -752,7 +754,7 @@ See this issue for some discussion about using this package with `formik`: https
 
 When submitting a bug report, please include a minimum reproduction of your issue using one of these templates:
 
-- React Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
-- React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
-- Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
-- Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
+- React Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-v3-9ji1by?file=/example.js
+- React Typescript Starter: https://codesandbox.io/s/chakra-react-select-typescript-v3-lq24d0?file=/app.tsx
+- Next.js Vanilla JS Starter: https://codesandbox.io/s/chakra-react-select-next-js-v3-wbtmjv?file=/pages/index.js
+- Next.js Typescript Starter: https://codesandbox.io/s/chakra-react-select-next-js-typescript-v3-cl4htt?file=/pages/index.tsx
