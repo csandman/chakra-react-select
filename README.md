@@ -1,4 +1,6 @@
-# chakra-react-select
+# chakra-react-select v4
+
+> This version of `chakra-react-select` is updated for [Chakra UI v2](https://chakra-ui.com/guides/migration) which works exclusively with React v18. `chakra-react-select` v3 will be maintained until the majority of users have migrated. If you're still using Chakra UI v1 check [the docs for chakra-react-select v3 here](https://github.com/csandman/chakra-react-select/tree/v3).
 
 [![Build Status](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml/badge.svg?branch=main "Build Status")](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml?query=branch%3Amain)
 [![Lint Status](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml/badge.svg?branch=main "Lint Status")](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml?query=branch%3Amain)
@@ -51,7 +53,7 @@ Check out the demos here:
 
 ## Usage
 
-In order to use this package, you'll need to have `@chakra-ui/react` set up [like in the guide in their docs](https://chakra-ui.com/docs/getting-started#installation). If you don't have Chakra UI installed already, you can install it like this:
+In order to use this package, you'll need to have `@chakra-ui/react@2` set up [like in the guide in their docs](https://chakra-ui.com/guides/first-steps). If you already have `@chakra-ui/react@1` set up you can follow the steps in [the official migration guide](https://chakra-ui.com/guides/migration) to update to v2. If you don't have Chakra UI installed already, you can install it like this:
 
 ```sh
 npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
@@ -730,9 +732,9 @@ By default, `react-hook-form` uses [uncontrolled components](https://reactjs.org
 - `useController` single select
   - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-11x4zk?file=/example.js
   - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-vylckh?file=/app.tsx
-- Multi select with `yup` validation
-  - Vanilla JS: _coming soon_
-  - TypeScript: _coming soon_
+- Multi select with `yup` validation (advanced example)
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-tno8v?file=/src/app.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-typescript-n7slhu?file=/app.tsx
 
 ### [`formik`](https://formik.org/)
 

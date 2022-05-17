@@ -32,6 +32,7 @@
     "lint:src": "eslint .",
     "lint:types": "tsc --noEmit",
     "prepare": "husky install",
+    "postpublish": "git push --tags",
     "prepublishOnly": "npm run build",
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
   },
@@ -100,7 +101,8 @@
     "select"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "exports": {
     ".": {
