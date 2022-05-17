@@ -733,8 +733,8 @@ By default, `react-hook-form` uses [uncontrolled components](https://reactjs.org
   - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-v3-yi33cn?file=/example.js
   - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-v3-3hvkm7?file=/app.tsx
 - Multi select with `yup` validation
-  - Vanilla JS: _coming soon_
-  - TypeScript: _coming soon_
+  - Vanilla JS: https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-v3-iptkhu?file=/src/app.js
+  - TypeScript: https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-typescript-v3-odjkbd?file=/app.tsx
 
 ### [`formik`](https://formik.org/)
 
