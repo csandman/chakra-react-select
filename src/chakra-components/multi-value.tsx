@@ -190,6 +190,7 @@ const MultiValueRemove = <
       role="button"
       sx={sx}
       data-focus={isFocused ? true : undefined}
+      data-focus-visible={isFocused ? true : undefined}
     >
       {children || <TagCloseIcon />}
     </Box>
