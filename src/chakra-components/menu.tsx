@@ -14,7 +14,7 @@ import type {
   MenuProps,
   NoticeProps,
 } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
   props: MenuProps<Option, IsMulti, Group>
@@ -82,7 +82,7 @@ const MenuList = <
     ...list,
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
-    borderRadius: borderRadii[size as Size],
+    borderRadius: borderRadii[size || "md"],
   };
 
   const sx: SystemStyleObject = chakraStyles?.menuList
@@ -136,8 +136,8 @@ const LoadingMessage = <
   const initialStyles: SystemStyleObject = {
     color: placeholderColor,
     textAlign: "center",
-    padding: paddings[size as Size],
-    fontSize: fontSizes[size as Size],
+    padding: paddings[size || "md"],
+    fontSize: fontSizes[size || "md"],
   };
 
   const sx: SystemStyleObject = chakraStyles?.loadingMessage
@@ -191,8 +191,8 @@ const NoOptionsMessage = <
   const initialStyles: SystemStyleObject = {
     color: placeholderColor,
     textAlign: "center",
-    padding: paddings[size as Size],
-    fontSize: fontSizes[size as Size],
+    padding: paddings[size || "md"],
+    fontSize: fontSizes[size || "md"],
   };
 
   const sx: SystemStyleObject = chakraStyles?.noOptionsMessage

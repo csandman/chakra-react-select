@@ -13,7 +13,7 @@ import type {
   IndicatorSeparatorProps,
   LoadingIndicatorProps,
 } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 export const IndicatorSeparator = <
   Option,
@@ -82,7 +82,7 @@ export const DropdownIndicator = <
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[size as Size];
+  const iconSize = iconSizes[size || "md"];
 
   const initialStyles: SystemStyleObject = {
     ...addon,
@@ -233,7 +233,7 @@ export const LoadingIndicator = <
     lg: "md",
   };
 
-  const spinnerSize = spinnerSizes[size as Size];
+  const spinnerSize = spinnerSizes[size || "md"];
 
   const initialStyles: SystemStyleObject = { marginRight: 3 };
 
