@@ -198,8 +198,7 @@ export const ClearIndicator = <
         className
       )}
       sx={sx}
-      data-focus={isFocused ? true : undefined}
-      data-focus-visible={isFocused ? true : undefined}
+      data-focused={isFocused ? true : undefined}
       aria-label="Clear selected options"
       {...innerProps}
     >
