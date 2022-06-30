@@ -25,10 +25,13 @@ export const IndicatorSeparator = <
   const {
     className,
     cx,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, useBasicStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = { opacity: 1 };
+  const initialStyles: SystemStyleObject = {
+    opacity: 1,
+    ...(useBasicStyles && { display: "none" }),
+  };
 
   const sx: SystemStyleObject = chakraStyles?.indicatorSeparator
     ? chakraStyles.indicatorSeparator(initialStyles, props)
@@ -69,7 +72,7 @@ export const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { size, chakraStyles, useBasicStyles },
   } = props;
 
   const { addon } = useStyles();
@@ -91,6 +94,13 @@ export const DropdownIndicator = <
     borderWidth: 0,
     cursor: "pointer",
     fontSize: iconSize,
+    ...(useBasicStyles && {
+      bg: "transparent",
+      p: 0,
+      w: 6,
+      mx: 2,
+      cursor: "inherit",
+    }),
   };
   const sx: SystemStyleObject = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialStyles, props)
