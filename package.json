@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "A Chakra UI wrapper for the popular library React Select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
