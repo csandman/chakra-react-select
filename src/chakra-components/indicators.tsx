@@ -95,10 +95,11 @@ export const DropdownIndicator = <
     cursor: "pointer",
     fontSize: iconSize,
     ...(useBasicStyles && {
-      bg: "transparent",
-      p: 0,
-      w: 6,
-      mx: 2,
+      background: "transparent",
+      padding: 0,
+      width: 6,
+      marginRight: 2,
+      marginLeft: 1,
       cursor: "inherit",
     }),
   };
