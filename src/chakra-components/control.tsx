@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { StylesProvider, useMultiStyleConfig } from "@chakra-ui/system";
 import type { ControlProps, GroupBase } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 const Control = <
   Option,
@@ -49,7 +49,7 @@ const Control = <
     padding: 0,
     overflow: "hidden",
     height: "auto",
-    minHeight: heights[size as Size],
+    minHeight: heights[size || "md"],
   };
 
   const sx: SystemStyleObject = chakraStyles?.control
@@ -72,6 +72,7 @@ const Control = <
         sx={sx}
         {...innerProps}
         data-focus={isFocused ? true : undefined}
+        data-focus-visible={isFocused ? true : undefined}
         data-invalid={isInvalid ? true : undefined}
         data-disabled={isDisabled ? true : undefined}
       >

@@ -13,7 +13,7 @@ import type {
   IndicatorSeparatorProps,
   LoadingIndicatorProps,
 } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 export const IndicatorSeparator = <
   Option,
@@ -82,7 +82,7 @@ export const DropdownIndicator = <
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[size as Size];
+  const iconSize = iconSizes[size || "md"];
 
   const initialStyles: SystemStyleObject = {
     ...addon,
@@ -95,10 +95,11 @@ export const DropdownIndicator = <
     cursor: "pointer",
     fontSize: iconSize,
     ...(useBasicStyles && {
-      bg: "transparent",
-      p: 0,
-      w: 6,
-      mx: 2,
+      background: "transparent",
+      padding: 0,
+      width: 6,
+      marginRight: 2,
+      marginLeft: 1,
       cursor: "inherit",
     }),
   };
@@ -197,7 +198,8 @@ export const ClearIndicator = <
         className
       )}
       sx={sx}
-      data-focused={isFocused ? true : undefined}
+      data-focus={isFocused ? true : undefined}
+      data-focus-visible={isFocused ? true : undefined}
       aria-label="Clear selected options"
       {...innerProps}
     >
@@ -231,7 +233,7 @@ export const LoadingIndicator = <
     lg: "md",
   };
 
-  const spinnerSize = spinnerSizes[size as Size];
+  const spinnerSize = spinnerSizes[size || "md"];
 
   const initialStyles: SystemStyleObject = { marginRight: 3 };
 

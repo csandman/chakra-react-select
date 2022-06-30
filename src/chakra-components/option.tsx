@@ -5,7 +5,7 @@ import { MenuIcon } from "@chakra-ui/menu";
 import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
 import { useColorModeValue, useStyles } from "@chakra-ui/system";
 import type { GroupBase, OptionProps } from "react-select";
-import type { Size, SizeProps, ThemeObject } from "../types";
+import type { SizeProps, ThemeObject } from "../types";
 
 /**
  * The `CheckIcon` component from the Chakra UI Menu
@@ -82,8 +82,9 @@ const Option = <
     width: "100%",
     textAlign: "start",
     fontSize: size,
-    padding: paddings[size as Size],
-    bg: isFocused ? itemStyles._focus?.bg : "transparent",
+    padding: paddings[size || "md"],
+    bg: "transparent",
+    ...(isFocused && itemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,
       color: selectedColor,

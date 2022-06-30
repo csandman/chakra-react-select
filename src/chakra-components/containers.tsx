@@ -8,7 +8,7 @@ import type {
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 export const SelectContainer = <
   Option,
@@ -85,7 +85,7 @@ export const ValueContainer = <
     display: "flex",
     alignItems: "center",
     flex: 1,
-    padding: `0.125rem ${px[size as Size]}`,
+    padding: `0.125rem ${px[size || "md"]}`,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",

@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { useStyles, useTheme } from "@chakra-ui/system";
 import type { GroupBase, GroupHeadingProps, GroupProps } from "react-select";
-import type { Size, SizeProps } from "../types";
+import type { SizeProps } from "../types";
 
 const Group = <
   Option,
@@ -80,8 +80,8 @@ const GroupHeading = <
 
   const initialStyles: SystemStyleObject = {
     ...groupTitle,
-    fontSize: fontSizes[size as Size],
-    padding: paddings[size as Size],
+    fontSize: fontSizes[size || "md"],
+    padding: paddings[size || "md"],
     margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
