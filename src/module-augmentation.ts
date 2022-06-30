@@ -156,6 +156,16 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://react-select.com/styles#style-object}
      */
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
+
+    /**
+     * If passed, the dropdown indicator will be styled the same as Chakra UI's
+     * `Select` component
+     *
+     * @defaultValue `false`
+     * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
+     * @see {@link https://chakra-ui.com/docs/components/select}
+     */
+    useBasicStyles?: boolean;
   }
 }
 

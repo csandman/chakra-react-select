@@ -32,6 +32,7 @@ Check out the demos here:
   - [`tagVariant`](#tagvariant--options-subtle-solid-outline--default-subtle)
   - [`isInvalid`](#isinvalid--default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
+  - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color-check--default-color)
   - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
@@ -199,6 +200,20 @@ return (
 ```
 
 ![Orange errorBorderColor](./github/custom-error-border.png)
+
+#### `useBasicStyles` — Default: `false`
+
+If this prop is passed, the dropdown indicator at the right of the component will be styled in the same way [the original Chakra `Select` component](https://chakra-ui.com/docs/components/select) is styled, instead of being styled as an [`InputRightAddon`](https://chakra-ui.com/docs/components/input#left-and-right-addons). The original purpose of styling it as an addon was to create visual separation between the dropdown indicator and the button for clearing the selected options. However, as this button only appears when `isMulti` is passed, using this style could make more sense for a single select.
+
+```js
+return (
+  <Select useBasicStyles />
+);
+```
+
+![useBasicStyles](./github/use-basic-styles.png)
+
+![useBasicStyles dark mode](./github/use-basic-styles-dark.png)
 
 #### `hasStickyGroupHeaders` — Default: `false`
 
