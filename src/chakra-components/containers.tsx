@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type {
@@ -16,7 +15,7 @@ export const SelectContainer = <
   Group extends GroupBase<Option>
 >(
   props: ContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -65,7 +64,7 @@ export const ValueContainer = <
   Group extends GroupBase<Option>
 >(
   props: ValueContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -119,7 +118,7 @@ export const IndicatorsContainer = <
   Group extends GroupBase<Option>
 >(
   props: IndicatorsContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,

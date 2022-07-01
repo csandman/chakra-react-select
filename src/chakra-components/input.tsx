@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { chakra } from "@chakra-ui/system";
@@ -12,7 +11,7 @@ const Input = <
   Group extends GroupBase<Option>
 >(
   props: InputProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     className,
     cx,

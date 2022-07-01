@@ -1,24 +1,31 @@
 import React from "react";
-import type { ReactElement } from "react";
+import type { IconProps } from "@chakra-ui/icon";
+import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
+import { MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import {
-  StylesProvider,
+  createStylesContext,
+  useColorModeValue,
   useMultiStyleConfig,
-  useStyles,
   useTheme,
 } from "@chakra-ui/system";
 import type {
   GroupBase,
+  GroupHeadingProps,
+  GroupProps,
   MenuListProps,
   MenuProps,
   NoticeProps,
+  OptionProps,
 } from "react-select";
-import type { SizeProps } from "../types";
+import type { SizeProps, ThemeObject } from "../types";
+
+const [MenuStylesProvider, useMenuStyles] = createStylesContext("Menu");
 
 const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
   props: MenuProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     className,
     cx,
@@ -52,18 +59,20 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
       sx={sx}
       {...innerProps}
     >
-      <StylesProvider value={menuStyles}>{children}</StylesProvider>
+      <MenuStylesProvider value={menuStyles}>{children}</MenuStylesProvider>
     </Box>
   );
 };
 
-const MenuList = <
+export default Menu;
+
+export const MenuList = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
   props: MenuListProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     className,
     cx,
@@ -74,7 +83,7 @@ const MenuList = <
     selectProps: { size, chakraStyles },
   } = props;
 
-  const { list } = useStyles();
+  const { list } = useMenuStyles();
 
   const borderRadii: SizeProps = useTheme().radii;
 
@@ -106,13 +115,13 @@ const MenuList = <
   );
 };
 
-const LoadingMessage = <
+export const LoadingMessage = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
   props: NoticeProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -161,13 +170,13 @@ const LoadingMessage = <
   );
 };
 
-const NoOptionsMessage = <
+export const NoOptionsMessage = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>
 >(
   props: NoticeProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -216,5 +225,220 @@ const NoOptionsMessage = <
   );
 };
 
-export { LoadingMessage, MenuList, NoOptionsMessage };
-export default Menu;
+export const Group = <
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>
+>(
+  props: GroupProps<Option, IsMulti, Group>
+) => {
+  const {
+    children,
+    className,
+    cx,
+    theme,
+    getStyles,
+    Heading,
+    headingProps,
+    label,
+    selectProps,
+  } = props;
+
+  const { chakraStyles } = selectProps;
+
+  const sx: SystemStyleObject = chakraStyles?.group
+    ? chakraStyles.group({}, props)
+    : {};
+
+  return (
+    <Box className={cx({ group: true }, className)} sx={sx}>
+      <Heading
+        {...headingProps}
+        selectProps={selectProps}
+        cx={cx}
+        theme={theme}
+        getStyles={getStyles}
+      >
+        {label}
+      </Heading>
+      <Box>{children}</Box>
+    </Box>
+  );
+};
+
+export const GroupHeading = <
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>
+>(
+  props: GroupHeadingProps<Option, IsMulti, Group>
+) => {
+  const {
+    cx,
+    className,
+    children,
+    selectProps: { size, hasStickyGroupHeaders, chakraStyles },
+  } = props;
+
+  const {
+    groupTitle,
+    list: { bg },
+  } = useMenuStyles();
+
+  const chakraTheme = useTheme();
+  const fontSizes: SizeProps = {
+    sm: chakraTheme.fontSizes.xs,
+    md: chakraTheme.fontSizes.sm,
+    lg: chakraTheme.fontSizes.md,
+  };
+  const paddings: SizeProps = {
+    sm: "0.4rem 0.8rem",
+    md: "0.5rem 1rem",
+    lg: "0.6rem 1.2rem",
+  };
+
+  const initialStyles: SystemStyleObject = {
+    ...groupTitle,
+    fontSize: fontSizes[size || "md"],
+    padding: paddings[size || "md"],
+    margin: 0,
+    borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
+    position: hasStickyGroupHeaders ? "sticky" : "static",
+    top: -2,
+    bg,
+    zIndex: 1,
+  };
+
+  const sx: SystemStyleObject = chakraStyles?.groupHeading
+    ? chakraStyles.groupHeading(initialStyles, props)
+    : initialStyles;
+
+  return (
+    <Box className={cx({ "group-heading": true }, className)} sx={sx}>
+      {children}
+    </Box>
+  );
+};
+
+/**
+ * The `CheckIcon` component from the Chakra UI Menu
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/menu/src/menu.tsx#L314}
+ */
+const CheckIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 14 14" w="1em" h="1em" {...props}>
+    <polygon
+      fill="currentColor"
+      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
+    />
+  </Icon>
+);
+
+export const Option = <
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>
+>(
+  props: OptionProps<Option, IsMulti, Group>
+) => {
+  const {
+    className,
+    cx,
+    innerRef,
+    innerProps,
+    children,
+    isFocused,
+    isDisabled,
+    isSelected,
+    selectProps: {
+      size,
+      isMulti,
+      hideSelectedOptions,
+      selectedOptionStyle,
+      selectedOptionColor,
+      chakraStyles,
+    },
+  } = props;
+
+  const itemStyles = useMenuStyles().item as ThemeObject;
+
+  const paddings: SizeProps = {
+    sm: "0.3rem 0.6rem",
+    md: "0.4rem 0.8rem",
+    lg: "0.5rem 1rem",
+  };
+
+  /**
+   * Use the same selected color as the border of the select component
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
+   */
+  const selectedBg = useColorModeValue(
+    `${selectedOptionColor}.500`,
+    `${selectedOptionColor}.300`
+  );
+  const selectedColor = useColorModeValue("white", "black");
+
+  // Don't create exta space for the checkmark if using a multi select with
+  // options that dissapear when they're selected
+  const showCheckIcon: boolean =
+    selectedOptionStyle === "check" &&
+    (!isMulti || hideSelectedOptions === false);
+
+  const shouldHighlight: boolean =
+    selectedOptionStyle === "color" && isSelected;
+
+  const initialStyles: SystemStyleObject = {
+    ...itemStyles,
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    textAlign: "start",
+    fontSize: size,
+    padding: paddings[size || "md"],
+    bg: "transparent",
+    ...(isFocused && itemStyles._focus),
+    ...(shouldHighlight && {
+      bg: selectedBg,
+      color: selectedColor,
+      _active: { bg: selectedBg },
+    }),
+    ...(isDisabled && itemStyles._disabled),
+    ...(isDisabled && { _active: {} }),
+  };
+
+  const sx: SystemStyleObject = chakraStyles?.option
+    ? chakraStyles.option(initialStyles, props)
+    : initialStyles;
+
+  return (
+    <Box
+      role="button"
+      className={cx(
+        {
+          option: true,
+          "option--is-disabled": isDisabled,
+          "option--is-focused": isFocused,
+          "option--is-selected": isSelected,
+        },
+        className
+      )}
+      sx={sx}
+      ref={innerRef}
+      {...innerProps}
+      data-disabled={isDisabled ? true : undefined}
+      aria-disabled={isDisabled ? true : undefined}
+    >
+      {showCheckIcon && (
+        <MenuIcon
+          fontSize="0.8em"
+          marginEnd="0.75rem"
+          opacity={isSelected ? 1 : 0}
+        >
+          <CheckIcon />
+        </MenuIcon>
+      )}
+      {children}
+    </Box>
+  );
+};

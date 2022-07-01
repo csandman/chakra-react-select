@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
@@ -27,7 +26,7 @@ const MultiValue = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -151,7 +150,7 @@ const MultiValueContainer = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const { children, innerProps, sx } = props;
 
   return (
@@ -167,7 +166,7 @@ const MultiValueLabel = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const { children, innerProps, sx } = props;
 
   return (
@@ -182,7 +181,7 @@ const MultiValueLabel = <
  *
  * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/tag/src/tag.tsx#L75}
  */
-const TagCloseIcon: React.FC<IconProps> = (props) => (
+const TagCloseIcon = (props: IconProps) => (
   <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
     <path
       fill="currentColor"
@@ -197,7 +196,7 @@ const MultiValueRemove = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
-): ReactElement | null => {
+) => {
   const { children, innerProps, isFocused, data, sx } = props;
 
   if (hasIsFixed(data) && data.isFixed) {
