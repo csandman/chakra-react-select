@@ -26,6 +26,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "no-console": "error",
     "curly": ["error", "all"],
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
