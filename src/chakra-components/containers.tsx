@@ -71,6 +71,7 @@ export const ValueContainer = <
     cx,
     isMulti,
     hasValue,
+    innerProps,
     selectProps: { size, chakraStyles },
   } = props;
 
@@ -97,6 +98,7 @@ export const ValueContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "value-container": true,
