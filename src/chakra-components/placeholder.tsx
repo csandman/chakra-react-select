@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
+import { useColorModeValue } from "@chakra-ui/system";
 import type { GroupBase, PlaceholderProps } from "react-select";
 
 const Placeholder = <
@@ -15,8 +16,15 @@ const Placeholder = <
     className,
     cx,
     innerProps,
-    selectProps: { placeholderColor, chakraStyles },
+    selectProps: { chakraStyles },
   } = props;
+
+  /**
+   * The chakra UI global placeholder color
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
+   */
+  const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
 
   const initialStyles: SystemStyleObject = {
     color: placeholderColor,

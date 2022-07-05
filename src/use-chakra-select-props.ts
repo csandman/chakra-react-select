@@ -1,5 +1,4 @@
 import { useFormControl } from "@chakra-ui/form-control";
-import { useColorModeValue } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle, Size, TagVariant } from "./types";
@@ -43,13 +42,6 @@ const useChakraSelectProps = <
     onFocus,
     onBlur,
   });
-
-  /**
-   * The chakra UI global placeholder color
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
-   */
-  const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
 
   /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
   let realSize: Size = size;
@@ -96,7 +88,6 @@ const useChakraSelectProps = <
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,
     hasStickyGroupHeaders,
-    placeholderColor,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,

@@ -127,8 +127,15 @@ export const LoadingMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, placeholderColor, chakraStyles },
+    selectProps: { size, chakraStyles },
   } = props;
+
+  /**
+   * The chakra UI global placeholder color
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
+   */
+  const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
   const fontSizes: SizeProps = {
     sm: "0.875rem",
@@ -143,7 +150,7 @@ export const LoadingMessage = <
   };
 
   const initialStyles: SystemStyleObject = {
-    color: placeholderColor,
+    color,
     textAlign: "center",
     padding: paddings[size || "md"],
     fontSize: fontSizes[size || "md"],
@@ -182,8 +189,15 @@ export const NoOptionsMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, placeholderColor, chakraStyles },
+    selectProps: { size, chakraStyles },
   } = props;
+
+  /**
+   * The chakra UI global placeholder color
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
+   */
+  const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
   const fontSizes: SizeProps = {
     sm: "0.875rem",
@@ -198,7 +212,7 @@ export const NoOptionsMessage = <
   };
 
   const initialStyles: SystemStyleObject = {
-    color: placeholderColor,
+    color,
     textAlign: "center",
     padding: paddings[size || "md"],
     fontSize: fontSizes[size || "md"],
