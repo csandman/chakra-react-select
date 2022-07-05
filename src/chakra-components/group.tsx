@@ -23,6 +23,7 @@ const Group = <
     headingProps,
     label,
     selectProps,
+    innerProps,
   } = props;
 
   const { chakraStyles } = selectProps;
@@ -32,7 +33,7 @@ const Group = <
     : {};
 
   return (
-    <Box className={cx({ group: true }, className)} sx={sx}>
+    <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
       <Heading
         {...headingProps}
         selectProps={selectProps}

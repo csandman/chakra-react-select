@@ -43,6 +43,7 @@ export const SelectContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "--is-disabled": isDisabled,
@@ -52,7 +53,6 @@ export const SelectContainer = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>
@@ -72,6 +72,7 @@ export const ValueContainer = <
     cx,
     isMulti,
     hasValue,
+    innerProps,
     selectProps: { size, chakraStyles },
   } = props;
 
@@ -98,6 +99,7 @@ export const ValueContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "value-container": true,
