@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type {
@@ -16,7 +15,7 @@ export const SelectContainer = <
   Group extends GroupBase<Option>
 >(
   props: ContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -43,6 +42,7 @@ export const SelectContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "--is-disabled": isDisabled,
@@ -52,7 +52,6 @@ export const SelectContainer = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>
@@ -65,13 +64,14 @@ export const ValueContainer = <
   Group extends GroupBase<Option>
 >(
   props: ValueContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
     cx,
     isMulti,
     hasValue,
+    innerProps,
     selectProps: { size, chakraStyles },
   } = props;
 
@@ -98,6 +98,7 @@ export const ValueContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "value-container": true,
@@ -119,11 +120,12 @@ export const IndicatorsContainer = <
   Group extends GroupBase<Option>
 >(
   props: IndicatorsContainerProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
     cx,
+    innerProps,
     selectProps: { chakraStyles },
   } = props;
 
@@ -140,6 +142,7 @@ export const IndicatorsContainer = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           indicators: true,

@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
@@ -11,7 +10,15 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import type { OptionBase } from "../types";
+
+const hasColorScheme = (option: unknown): option is { colorScheme: unknown } =>
+  typeof option === "object" && option !== null && "colorScheme" in option;
+
+const hasIsFixed = (option: unknown): option is { isFixed: unknown } =>
+  typeof option === "object" && option !== null && "isFixed" in option;
+
+const hasVariant = (option: unknown): option is { variant: unknown } =>
+  typeof option === "object" && option !== null && "variant" in option;
 
 const MultiValue = <
   Option = unknown,
@@ -19,7 +26,7 @@ const MultiValue = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,
@@ -37,14 +44,27 @@ const MultiValue = <
 
   const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
 
-  const extraData = data as unknown as OptionBase;
+  let optionColorScheme = "";
+  let optionVariant = "";
+  let optionIsFixed = false;
+
+  if (hasColorScheme(data) && typeof data.colorScheme === "string") {
+    optionColorScheme = data.colorScheme;
+  }
+
+  if (hasVariant(data) && typeof data.variant === "string") {
+    optionVariant = data.variant;
+  }
+
+  if (hasIsFixed(data)) {
+    optionIsFixed = !!data.isFixed;
+  }
+
   const { container, closeButton, label } = useMultiStyleConfig("Tag", {
     size,
-    colorScheme: extraData.colorScheme || colorScheme,
+    colorScheme: optionColorScheme || colorScheme,
     variant:
-      extraData.variant ||
-      tagVariant ||
-      (extraData.isFixed ? "solid" : "subtle"),
+      optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
   const containerInitialStyles: SystemStyleObject = {
@@ -130,7 +150,7 @@ const MultiValueContainer = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const { children, innerProps, sx } = props;
 
   return (
@@ -146,7 +166,7 @@ const MultiValueLabel = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const { children, innerProps, sx } = props;
 
   return (
@@ -161,7 +181,7 @@ const MultiValueLabel = <
  *
  * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/tag/src/tag.tsx#L75}
  */
-const TagCloseIcon: React.FC<IconProps> = (props) => (
+const TagCloseIcon = (props: IconProps) => (
   <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
     <path
       fill="currentColor"
@@ -176,11 +196,10 @@ const MultiValueRemove = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
-): ReactElement | null => {
+) => {
   const { children, innerProps, isFocused, data, sx } = props;
 
-  const extraData = data as unknown as OptionBase;
-  if (extraData.isFixed) {
+  if (hasIsFixed(data) && data.isFixed) {
     return null;
   }
 

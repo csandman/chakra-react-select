@@ -3,22 +3,26 @@ import {
   SelectContainer,
   ValueContainer,
 } from "./containers";
-import Control from "./control";
-import Group, { GroupHeading } from "./group";
-import {
+import Control, {
   ClearIndicator,
   DropdownIndicator,
   IndicatorSeparator,
   LoadingIndicator,
-} from "./indicators";
+} from "./control";
 import Input from "./input";
-import Menu, { LoadingMessage, MenuList, NoOptionsMessage } from "./menu";
+import Menu, {
+  Group,
+  GroupHeading,
+  LoadingMessage,
+  MenuList,
+  NoOptionsMessage,
+  Option,
+} from "./menu";
 import MultiValue, {
   MultiValueContainer,
   MultiValueLabel,
   MultiValueRemove,
 } from "./multi-value";
-import Option from "./option";
 import Placeholder from "./placeholder";
 import SingleValue from "./single-value";
 

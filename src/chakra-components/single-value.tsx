@@ -1,5 +1,4 @@
 import React from "react";
-import type { ReactElement } from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, SingleValueProps } from "react-select";
@@ -10,7 +9,7 @@ const SingleValue = <
   Group extends GroupBase<Option>
 >(
   props: SingleValueProps<Option, IsMulti, Group>
-): ReactElement => {
+) => {
   const {
     children,
     className,

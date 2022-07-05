@@ -140,15 +140,6 @@ declare module "react-select/dist/declarations/src/Select" {
     errorBorderColor?: string;
 
     /**
-     * The color used to style the text in the `Placeholder`, `LoadingMessage`,
-     * and `NoOptionsMessage`.
-     *
-     * @defaultValue Light mode: `gray.400` | Dark mode: `whiteAlpha.400`
-     * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13}
-     */
-    placeholderColor?: string;
-
-    /**
      * Style transformation methods for each of the rendered components using,
      * Chakra's `SystemStyleObject` and the props passed into each component
      *
