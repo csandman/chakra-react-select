@@ -34,6 +34,7 @@ const Placeholder = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           placeholder: true,
@@ -41,7 +42,6 @@ const Placeholder = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>

@@ -178,6 +178,7 @@ export const ClearIndicator = <
 
   return (
     <Box
+      {...innerProps}
       role="button"
       className={cx(
         {
@@ -189,7 +190,6 @@ export const ClearIndicator = <
       sx={sx}
       data-focused={isFocused ? true : undefined}
       aria-label="Clear selected options"
-      {...innerProps}
     >
       {children || <CrossIcon sx={iconSx} />}
     </Box>
@@ -231,6 +231,7 @@ export const LoadingIndicator = <
 
   return (
     <Spinner
+      {...innerProps}
       className={cx(
         {
           indicator: true,
@@ -239,7 +240,6 @@ export const LoadingIndicator = <
         className
       )}
       sx={sx}
-      {...innerProps}
       size={propsSpinnerSize || spinnerSize}
       color={color}
       emptyColor={emptyColor}

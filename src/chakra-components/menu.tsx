@@ -47,10 +47,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
 
   return (
     <Box
+      {...innerProps}
       ref={innerRef}
       className={cx({ menu: true }, className)}
       sx={sx}
-      {...innerProps}
     >
       <StylesProvider value={menuStyles}>{children}</StylesProvider>
     </Box>
@@ -71,6 +71,7 @@ const MenuList = <
     children,
     maxHeight,
     isMulti,
+    innerProps,
     selectProps: { size, chakraStyles },
   } = props;
 
@@ -91,6 +92,7 @@ const MenuList = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-list": true,
@@ -146,6 +148,7 @@ const LoadingMessage = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-notice": true,
@@ -154,7 +157,6 @@ const LoadingMessage = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>
@@ -201,6 +203,7 @@ const NoOptionsMessage = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-notice": true,
@@ -209,7 +212,6 @@ const NoOptionsMessage = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>

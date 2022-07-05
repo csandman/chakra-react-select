@@ -99,6 +99,7 @@ const Option = <
 
   return (
     <Box
+      {...innerProps}
       role="button"
       className={cx(
         {
@@ -111,7 +112,6 @@ const Option = <
       )}
       sx={sx}
       ref={innerRef}
-      {...innerProps}
       data-disabled={isDisabled ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
     >
