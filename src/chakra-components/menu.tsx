@@ -54,10 +54,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
 
   return (
     <Box
+      {...innerProps}
       ref={innerRef}
       className={cx({ menu: true }, className)}
       sx={sx}
-      {...innerProps}
     >
       <MenuStylesProvider value={menuStyles}>{children}</MenuStylesProvider>
     </Box>
@@ -80,6 +80,7 @@ export const MenuList = <
     children,
     maxHeight,
     isMulti,
+    innerProps,
     selectProps: { size, chakraStyles },
   } = props;
 
@@ -100,6 +101,7 @@ export const MenuList = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-list": true,
@@ -162,6 +164,7 @@ export const LoadingMessage = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-notice": true,
@@ -170,7 +173,6 @@ export const LoadingMessage = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>
@@ -224,6 +226,7 @@ export const NoOptionsMessage = <
 
   return (
     <Box
+      {...innerProps}
       className={cx(
         {
           "menu-notice": true,
@@ -232,7 +235,6 @@ export const NoOptionsMessage = <
         className
       )}
       sx={sx}
-      {...innerProps}
     >
       {children}
     </Box>
@@ -256,6 +258,7 @@ export const Group = <
     headingProps,
     label,
     selectProps,
+    innerProps,
   } = props;
 
   const { chakraStyles } = selectProps;
@@ -265,7 +268,7 @@ export const Group = <
     : {};
 
   return (
-    <Box className={cx({ group: true }, className)} sx={sx}>
+    <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
       <Heading
         {...headingProps}
         selectProps={selectProps}
@@ -427,6 +430,7 @@ export const Option = <
 
   return (
     <Box
+      {...innerProps}
       role="button"
       className={cx(
         {
@@ -439,7 +443,6 @@ export const Option = <
       )}
       sx={sx}
       ref={innerRef}
-      {...innerProps}
       data-disabled={isDisabled ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
     >
