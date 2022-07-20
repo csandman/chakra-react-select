@@ -3,9 +3,8 @@ import type { IconProps } from "@chakra-ui/icon";
 import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { CSSObject } from "@chakra-ui/system";
 import {
-  createStylesContext,
   useColorModeValue,
   useMultiStyleConfig,
   useTheme,
@@ -21,8 +20,6 @@ import type {
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
 
-const [MenuStylesProvider, useMenuStyles] = createStylesContext("Menu");
-
 const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
   props: MenuProps<Option, IsMulti, Group>
 ) => {
@@ -36,9 +33,7 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     selectProps: { chakraStyles },
   } = props;
 
-  const menuStyles = useMultiStyleConfig("Menu", {});
-
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     position: "absolute",
     ...(placement === "bottom" && { top: "100%" }),
     ...(placement === "top" && { bottom: "100%" }),
@@ -48,9 +43,9 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     overflow: "hidden",
   };
 
-  const sx: SystemStyleObject = chakraStyles?.menu
-    ? chakraStyles.menu(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.menu
+    ? chakraStyles.menu(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -59,7 +54,7 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
       className={cx({ menu: true }, className)}
       sx={sx}
     >
-      <MenuStylesProvider value={menuStyles}>{children}</MenuStylesProvider>
+      {children}
     </Box>
   );
 };
@@ -84,20 +79,20 @@ export const MenuList = <
     selectProps: { size, chakraStyles },
   } = props;
 
-  const { list } = useMenuStyles();
+  const menuStyles = useMultiStyleConfig("Menu");
 
   const borderRadii: SizeProps = useTheme().radii;
 
-  const initialStyles: SystemStyleObject = {
-    ...list,
+  const initialSx: CSSObject = {
+    ...menuStyles.list,
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     borderRadius: borderRadii[size || "md"],
   };
 
-  const sx: SystemStyleObject = chakraStyles?.menuList
-    ? chakraStyles.menuList(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.menuList
+    ? chakraStyles.menuList(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -151,16 +146,16 @@ export const LoadingMessage = <
     lg: "10px 15px",
   };
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     color,
     textAlign: "center",
     padding: paddings[size || "md"],
     fontSize: fontSizes[size || "md"],
   };
 
-  const sx: SystemStyleObject = chakraStyles?.loadingMessage
-    ? chakraStyles.loadingMessage(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.loadingMessage
+    ? chakraStyles.loadingMessage(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -213,16 +208,16 @@ export const NoOptionsMessage = <
     lg: "10px 15px",
   };
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     color,
     textAlign: "center",
     padding: paddings[size || "md"],
     fontSize: fontSizes[size || "md"],
   };
 
-  const sx: SystemStyleObject = chakraStyles?.noOptionsMessage
-    ? chakraStyles.noOptionsMessage(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.noOptionsMessage
+    ? chakraStyles.noOptionsMessage(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -263,9 +258,7 @@ export const Group = <
 
   const { chakraStyles } = selectProps;
 
-  const sx: SystemStyleObject = chakraStyles?.group
-    ? chakraStyles.group({}, props)
-    : {};
+  const sx = chakraStyles?.group ? chakraStyles.group({}, props) : {};
 
   return (
     <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
@@ -297,10 +290,7 @@ export const GroupHeading = <
     selectProps: { size, hasStickyGroupHeaders, chakraStyles },
   } = props;
 
-  const {
-    groupTitle,
-    list: { bg },
-  } = useMenuStyles();
+  const menuStyles = useMultiStyleConfig("Menu");
 
   const chakraTheme = useTheme();
   const fontSizes: SizeProps = {
@@ -314,21 +304,21 @@ export const GroupHeading = <
     lg: "0.6rem 1.2rem",
   };
 
-  const initialStyles: SystemStyleObject = {
-    ...groupTitle,
+  const initialSx: CSSObject = {
+    ...menuStyles.groupTitle,
     fontSize: fontSizes[size || "md"],
     padding: paddings[size || "md"],
     margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
     top: -2,
-    bg,
+    bg: menuStyles.list.bg,
     zIndex: 1,
   };
 
-  const sx: SystemStyleObject = chakraStyles?.groupHeading
-    ? chakraStyles.groupHeading(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.groupHeading
+    ? chakraStyles.groupHeading(initialSx, props)
+    : initialSx;
 
   return (
     <Box className={cx({ "group-heading": true }, className)} sx={sx}>
@@ -377,7 +367,7 @@ export const Option = <
     },
   } = props;
 
-  const itemStyles = useMenuStyles().item as ThemeObject;
+  const menuItemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
 
   const paddings: SizeProps = {
     sm: "0.3rem 0.6rem",
@@ -405,8 +395,8 @@ export const Option = <
   const shouldHighlight: boolean =
     selectedOptionStyle === "color" && isSelected;
 
-  const initialStyles: SystemStyleObject = {
-    ...itemStyles,
+  const initialSx: CSSObject = {
+    ...menuItemStyles,
     display: "flex",
     alignItems: "center",
     width: "100%",
@@ -414,19 +404,19 @@ export const Option = <
     fontSize: size,
     padding: paddings[size || "md"],
     bg: "transparent",
-    ...(isFocused && itemStyles._focus),
+    ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,
       color: selectedColor,
       _active: { bg: selectedBg },
     }),
-    ...(isDisabled && itemStyles._disabled),
+    ...(isDisabled && menuItemStyles._disabled),
     ...(isDisabled && { _active: {} }),
   };
 
-  const sx: SystemStyleObject = chakraStyles?.option
-    ? chakraStyles.option(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.option
+    ? chakraStyles.option(initialSx, props)
+    : initialSx;
 
   return (
     <Box

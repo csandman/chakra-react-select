@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { CSSObject } from "@chakra-ui/system";
 import { useColorModeValue } from "@chakra-ui/system";
 import type { GroupBase, PlaceholderProps } from "react-select";
 
@@ -26,7 +26,7 @@ const Placeholder = <
    */
   const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     color: placeholderColor,
     mx: "0.125rem",
     position: "absolute",
@@ -35,9 +35,9 @@ const Placeholder = <
     userSelect: "none",
   };
 
-  const sx: SystemStyleObject = chakraStyles?.placeholder
-    ? chakraStyles.placeholder(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.placeholder
+    ? chakraStyles.placeholder(initialSx, props)
+    : initialSx;
 
   return (
     <Box

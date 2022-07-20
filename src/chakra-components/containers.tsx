@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { CSSObject } from "@chakra-ui/system";
 import type {
   ContainerProps,
   GroupBase,
@@ -27,7 +27,7 @@ export const SelectContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
     // When disabled, react-select sets the pointer-state to none which prevents
@@ -36,9 +36,9 @@ export const SelectContainer = <
     pointerEvents: "auto",
   };
 
-  const sx: SystemStyleObject = chakraStyles?.container
-    ? chakraStyles.container(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.container
+    ? chakraStyles.container(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -81,7 +81,7 @@ export const ValueContainer = <
     lg: "1rem",
   };
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     display: "flex",
     alignItems: "center",
     flex: 1,
@@ -92,9 +92,9 @@ export const ValueContainer = <
     overflow: "hidden",
   };
 
-  const sx: SystemStyleObject = chakraStyles?.valueContainer
-    ? chakraStyles.valueContainer(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.valueContainer
+    ? chakraStyles.valueContainer(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -129,16 +129,16 @@ export const IndicatorsContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     display: "flex",
     alignItems: "center",
     alignSelf: "stretch",
     flexShrink: 0,
   };
 
-  const sx: SystemStyleObject = chakraStyles?.indicatorsContainer
-    ? chakraStyles.indicatorsContainer(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.indicatorsContainer
+    ? chakraStyles.indicatorsContainer(initialSx, props)
+    : initialSx;
 
   return (
     <Box
