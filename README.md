@@ -435,7 +435,7 @@ Dropdown menu attached to control example:
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx)
 
-Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles example
+Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles example:
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-iydfe?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-qwq3o?file=/app.tsx)
@@ -500,7 +500,7 @@ Here is an example of using classNames to style the components:
 
 This package has always supported typescript, however until `3.0.0` none of the type inference was working on the props passed into this component. Now that they are, you may need to pass in some generics in order for your component to work properly.
 
-This package exports all of the named module members of the original `react-select` in case you need their built in types in any of your variable declarations. The root select `Props` type that is exported by `react-select` has been [extended using module augmentation](https://github.com/JedWatson/react-select/issues/4804#issuecomment-927223471) so if you import that type, it will include all of the extra props offered. This package also exports a few custom types that are specific to the custom props offered by this package:
+This package exports all of the named module members of the original `react-select` in case you need their built in types in any of your variable declarations. The root select `Props` type that is exported by `react-select` has been extended using module augmentation,<sup>[1](https://react-select.com/typescript#custom-select-props)</sup><sup>[2](https://github.com/JedWatson/react-select/issues/4804#issuecomment-927223471)</sup> so if you import that type it will include all of the extra props offered. This package also exports a few custom types that are specific to the custom props offered by this package:
 
 - `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed to customize the component styles. This is almost identical to the built in `StylesConfig` type, however it uses Chakra's `SystemStyleObject` type instead of react-select's emotion styles.
 - `OptionBase` — A type for your individual select options that includes the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
@@ -564,8 +564,6 @@ Like the original `react-select`, this package exports all of the custom compone
 
 It's important to note however, that there are 3 components offered in the original `react-select` that are missing from `chakraComponents`. These are the `CrossIcon`, `DownChevron`, and `MenuPortal`. The `MenuPortal` could not be replaced at all [as mentioned earlier](#caveats), so if you'd like to customize it, use the original from the `components` import. The icons posed issues with prop compatibility when passing them into the core `Select` so the easiest way to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator` and pass custom icons in as children:
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js)
-
 ```js
 const components = {
   ClearIndicator: (props) => (
@@ -580,6 +578,8 @@ const components = {
   ),
 };
 ```
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js)
 
 Here's a complete example of how you might use custom components to create a select with a custom `Option`:
 
@@ -711,7 +711,7 @@ One example of how you might use this is to customize the component `react-googl
 ```jsx
 import { useState } from "react";
 import { useChakraSelectProps } from "chakra-react-select";
-import ReactGooglePlacesAutocomplete from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 const GooglePlacesAutocomplete = () => {
   const [place, setPlace] = useState(null);
@@ -722,7 +722,7 @@ const GooglePlacesAutocomplete = () => {
   });
 
   return (
-    <ReactGooglePlacesAutocomplete
+    <GooglePlacesAutocomplete
       apiKey="YOUR API KEY HERE"
       selectProps={selectProps}
     />
