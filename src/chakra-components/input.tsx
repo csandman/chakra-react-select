@@ -36,6 +36,8 @@ const Input = <
     gridArea: "1 / 1 / 2 / 3",
     gridTemplateColumns: "0 min-content",
     color: "inherit",
+    marginX: "0.125rem",
+    paddingY: "0.125rem",
     _after: {
       content: 'attr(data-value) " "',
       visibility: "hidden",
@@ -44,7 +46,6 @@ const Input = <
       ...spacingSx,
     },
   };
-
   const containerSx = chakraStyles?.inputContainer
     ? chakraStyles.inputContainer(initialContainerSx, props)
     : initialContainerSx;
@@ -52,13 +53,11 @@ const Input = <
   const initialInputSx: CSSObject = {
     label: "input",
     color: "inherit",
-    bg: 0,
+    background: 0,
     opacity: isHidden ? 0 : 1,
     width: "100%",
-    py: "0.125rem",
     ...spacingSx,
   };
-
   const inputSx = chakraStyles?.input
     ? chakraStyles.input(initialInputSx, props)
     : initialInputSx;
