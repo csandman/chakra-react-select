@@ -4,7 +4,7 @@ import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { CSSObject } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ControlProps,
@@ -40,7 +40,7 @@ const Control = <
     },
   } = props;
 
-  const { field: fieldStyles } = useMultiStyleConfig("Input", {
+  const inputStyles = useMultiStyleConfig("Input", {
     focusBorderColor,
     errorBorderColor,
     size,
@@ -52,8 +52,8 @@ const Control = <
     lg: 12,
   };
 
-  const initialStyles: SystemStyleObject = {
-    ...fieldStyles,
+  const initialSx: CSSObject = {
+    ...inputStyles.field,
     display: "flex",
     padding: 0,
     overflow: "hidden",
@@ -61,9 +61,9 @@ const Control = <
     minHeight: heights[size || "md"],
   };
 
-  const sx: SystemStyleObject = chakraStyles?.control
-    ? chakraStyles.control(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.control
+    ? chakraStyles.control(initialSx, props)
+    : initialSx;
 
   return (
     <Box
@@ -102,14 +102,14 @@ export const IndicatorSeparator = <
     selectProps: { chakraStyles, useBasicStyles },
   } = props;
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     opacity: 1,
     ...(useBasicStyles && { display: "none" }),
   };
 
-  const sx: SystemStyleObject = chakraStyles?.indicatorSeparator
-    ? chakraStyles.indicatorSeparator(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.indicatorSeparator
+    ? chakraStyles.indicatorSeparator(initialSx, props)
+    : initialSx;
 
   return (
     <Divider
@@ -155,7 +155,7 @@ export const DropdownIndicator = <
     },
   } = props;
 
-  const { addon: addonStyles } = useMultiStyleConfig("Input", {
+  const inputStyles = useMultiStyleConfig("Input", {
     focusBorderColor,
     errorBorderColor,
     size,
@@ -168,8 +168,8 @@ export const DropdownIndicator = <
   };
   const iconSize = iconSizes[size || "md"];
 
-  const initialStyles: SystemStyleObject = {
-    ...addonStyles,
+  const initialSx: CSSObject = {
+    ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -187,15 +187,15 @@ export const DropdownIndicator = <
       cursor: "inherit",
     }),
   };
-  const sx: SystemStyleObject = chakraStyles?.dropdownIndicator
-    ? chakraStyles.dropdownIndicator(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.dropdownIndicator
+    ? chakraStyles.dropdownIndicator(initialSx, props)
+    : initialSx;
 
   const initialIconStyles = {
     height: "1em",
     width: "1em",
   };
-  const iconSx: SystemStyleObject = chakraStyles?.downChevron
+  const iconSx: CSSObject = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialIconStyles, props)
     : initialIconStyles;
 
@@ -249,7 +249,7 @@ export const ClearIndicator = <
     size,
   });
 
-  const initialStyles: SystemStyleObject = {
+  const initialSx: CSSObject = {
     ...closeButtonStyles,
     marginX: 1,
     display: "flex",
@@ -258,15 +258,15 @@ export const ClearIndicator = <
     flexShrink: 0,
     cursor: "pointer",
   };
-  const sx: SystemStyleObject = chakraStyles?.clearIndicator
-    ? chakraStyles.clearIndicator(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.clearIndicator
+    ? chakraStyles.clearIndicator(initialSx, props)
+    : initialSx;
 
-  const initialIconStyles: SystemStyleObject = {
+  const initialIconStyles: CSSObject = {
     width: "1em",
     height: "1em",
   };
-  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
+  const iconSx: CSSObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
@@ -316,11 +316,11 @@ export const LoadingIndicator = <
 
   const spinnerSize = spinnerSizes[size || "md"];
 
-  const initialStyles: SystemStyleObject = { marginRight: 3 };
+  const initialSx: CSSObject = { marginRight: 3 };
 
-  const sx: SystemStyleObject = chakraStyles?.loadingIndicator
-    ? chakraStyles.loadingIndicator(initialStyles, props)
-    : initialStyles;
+  const sx = chakraStyles?.loadingIndicator
+    ? chakraStyles.loadingIndicator(initialSx, props)
+    : initialSx;
 
   return (
     <Spinner

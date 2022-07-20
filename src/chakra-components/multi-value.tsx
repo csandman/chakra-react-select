@@ -2,7 +2,7 @@ import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { CSSObject } from "@chakra-ui/system";
 import { chakra, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   GroupBase,
@@ -60,38 +60,39 @@ const MultiValue = <
     optionIsFixed = !!data.isFixed;
   }
 
-  const { container, closeButton, label } = useMultiStyleConfig("Tag", {
+  const tagStyles = useMultiStyleConfig("Tag", {
     size,
     colorScheme: optionColorScheme || colorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
-  const containerInitialStyles: SystemStyleObject = {
+  const containerInitialSx: CSSObject = {
+    ...tagStyles.container,
     display: "inline-flex",
     verticalAlign: "top",
     alignItems: "center",
     maxWidth: "100%",
-    ...container,
     margin: "0.125rem",
   };
-  const containerSx: SystemStyleObject = chakraStyles?.multiValue
-    ? chakraStyles.multiValue(containerInitialStyles, props)
-    : containerInitialStyles;
+  const containerSx: CSSObject = chakraStyles?.multiValue
+    ? chakraStyles.multiValue(containerInitialSx, props)
+    : containerInitialSx;
 
-  const labelSx: SystemStyleObject = chakraStyles?.multiValueLabel
-    ? chakraStyles.multiValueLabel(label, props)
-    : label;
+  const labelInitialSx: CSSObject = tagStyles.label;
+  const labelSx = chakraStyles?.multiValueLabel
+    ? chakraStyles.multiValueLabel(labelInitialSx, props)
+    : labelInitialSx;
 
-  const removeInitialStyles: SystemStyleObject = {
+  const removeInitialSx: CSSObject = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    ...closeButton,
+    ...tagStyles.closeButton,
   };
-  const removeSx: SystemStyleObject = chakraStyles?.multiValueRemove
-    ? chakraStyles.multiValueRemove(removeInitialStyles, props)
-    : removeInitialStyles;
+  const removeSx = chakraStyles?.multiValueRemove
+    ? chakraStyles.multiValueRemove(removeInitialSx, props)
+    : removeInitialSx;
 
   return (
     <Container
