@@ -746,37 +746,37 @@ See this issue for some discussion about using this package with `react-hook-for
 
 By default, `react-hook-form` uses [uncontrolled components](https://reactjs.org/docs/uncontrolled-components.html) to reduced input renders however this only works for native HTML inputs. Because chakra-react-select is not a native HTML input, you'll need to use react-hook-form's [`Controller`](https://react-hook-form.com/api/usecontroller/controller) component or [`useController`](https://react-hook-form.com/api/usecontroller) hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here are some examples using each:
 
-`Controller` multi select with built-in validation
+#### `Controller` multi select with built-in validation
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-v7llc?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-typescript-v8ps5?file=/app.tsx)
 
-`useController` multi select with built-in validation
+#### `useController` multi select with built-in validation
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-n8wuf?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-typescript-qcm23?file=/app.tsx)
 
-`useController` single select
+#### `useController` single select
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-11x4zk?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-vylckh?file=/app.tsx)
 
-Multi select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
+#### Multi select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-tno8v?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-typescript-n7slhu?file=/app.tsx)
 
-Single select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
+#### Single select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-yup-validation-y5kjc1?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-yup-validation-typescript-phmv0u?file=/app.tsx)
 
-Multi select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
+#### Multi select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-zod-validation-cu0rku?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-zod-validation-typescript-5fyhfh?file=/app.tsx)
 
-Single select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
+#### Single select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-zod-validation-jd588n?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-zod-validation-typescript-m1dqme?file=/app.tsx)
@@ -785,17 +785,17 @@ Single select with [`zod`](https://github.com/colinhacks/zod) validation (advanc
 
 See this issue for some discussion about using this package with `formik`: https://github.com/csandman/chakra-react-select/issues/23
 
-Single select with built in validation
+#### Single select with built in validation
 
 - Vanilla JS: _coming soon_
 - TypeScript: _coming soon_
 
-Multi select with built in validation
+#### Multi select with built in validation
 
 - Vanilla JS: _coming soon_
 - TypeScript: _coming soon_
 
-Multi select with `yup` validation
+#### Multi select with `yup` validation
 
 - Vanilla JS: _coming soon_
 - TypeScript: _coming soon_
