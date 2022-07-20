@@ -3,12 +3,8 @@ import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
+import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
 import type { SystemStyleObject } from "@chakra-ui/system";
-import {
-  createStylesContext,
-  useMultiStyleConfig,
-  useStyleConfig,
-} from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ControlProps,
@@ -18,8 +14,6 @@ import type {
   LoadingIndicatorProps,
 } from "react-select";
 import type { SizeProps } from "../types";
-
-const [InputStylesProvider, useInputStyles] = createStylesContext("Input");
 
 const Control = <
   Option,
@@ -46,7 +40,7 @@ const Control = <
     },
   } = props;
 
-  const inputStyles = useMultiStyleConfig("Input", {
+  const { field: fieldStyles } = useMultiStyleConfig("Input", {
     focusBorderColor,
     errorBorderColor,
     size,
@@ -59,7 +53,7 @@ const Control = <
   };
 
   const initialStyles: SystemStyleObject = {
-    ...inputStyles.field,
+    ...fieldStyles,
     display: "flex",
     padding: 0,
     overflow: "hidden",
@@ -72,28 +66,26 @@ const Control = <
     : initialStyles;
 
   return (
-    <InputStylesProvider value={inputStyles}>
-      <Box
-        ref={innerRef}
-        className={cx(
-          {
-            control: true,
-            "control--is-disabled": isDisabled,
-            "control--is-focused": isFocused,
-            "control--menu-is-open": menuIsOpen,
-          },
-          className
-        )}
-        sx={sx}
-        {...innerProps}
-        data-focus={isFocused ? true : undefined}
-        data-focus-visible={isFocused ? true : undefined}
-        data-invalid={isInvalid ? true : undefined}
-        data-disabled={isDisabled ? true : undefined}
-      >
-        {children}
-      </Box>
-    </InputStylesProvider>
+    <Box
+      ref={innerRef}
+      className={cx(
+        {
+          control: true,
+          "control--is-disabled": isDisabled,
+          "control--is-focused": isFocused,
+          "control--menu-is-open": menuIsOpen,
+        },
+        className
+      )}
+      sx={sx}
+      {...innerProps}
+      data-focus={isFocused ? true : undefined}
+      data-focus-visible={isFocused ? true : undefined}
+      data-invalid={isInvalid ? true : undefined}
+      data-disabled={isDisabled ? true : undefined}
+    >
+      {children}
+    </Box>
   );
 };
 
@@ -154,10 +146,20 @@ export const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles, useBasicStyles },
+    selectProps: {
+      size,
+      chakraStyles,
+      useBasicStyles,
+      focusBorderColor,
+      errorBorderColor,
+    },
   } = props;
 
-  const { addon } = useInputStyles();
+  const { addon: addonStyles } = useMultiStyleConfig("Input", {
+    focusBorderColor,
+    errorBorderColor,
+    size,
+  });
 
   const iconSizes: SizeProps = {
     sm: "16px",
@@ -167,7 +169,7 @@ export const DropdownIndicator = <
   const iconSize = iconSizes[size || "md"];
 
   const initialStyles: SystemStyleObject = {
-    ...addon,
+    ...addonStyles,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

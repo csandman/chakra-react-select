@@ -5,7 +5,6 @@ import { Box } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import {
-  createStylesContext,
   useColorModeValue,
   useMultiStyleConfig,
   useTheme,
@@ -21,8 +20,6 @@ import type {
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
 
-const [MenuStylesProvider, useMenuStyles] = createStylesContext("Menu");
-
 const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
   props: MenuProps<Option, IsMulti, Group>
 ) => {
@@ -35,8 +32,6 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     placement,
     selectProps: { chakraStyles },
   } = props;
-
-  const menuStyles = useMultiStyleConfig("Menu", {});
 
   const initialStyles: SystemStyleObject = {
     position: "absolute",
@@ -59,7 +54,7 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
       className={cx({ menu: true }, className)}
       sx={sx}
     >
-      <MenuStylesProvider value={menuStyles}>{children}</MenuStylesProvider>
+      {children}
     </Box>
   );
 };
@@ -84,12 +79,12 @@ export const MenuList = <
     selectProps: { size, chakraStyles },
   } = props;
 
-  const { list } = useMenuStyles();
+  const { list: listStyles } = useMultiStyleConfig("Menu");
 
   const borderRadii: SizeProps = useTheme().radii;
 
   const initialStyles: SystemStyleObject = {
-    ...list,
+    ...listStyles,
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     borderRadius: borderRadii[size || "md"],
@@ -298,9 +293,9 @@ export const GroupHeading = <
   } = props;
 
   const {
-    groupTitle,
+    groupTitle: groupTitleStyles,
     list: { bg },
-  } = useMenuStyles();
+  } = useMultiStyleConfig("Menu");
 
   const chakraTheme = useTheme();
   const fontSizes: SizeProps = {
@@ -315,7 +310,7 @@ export const GroupHeading = <
   };
 
   const initialStyles: SystemStyleObject = {
-    ...groupTitle,
+    ...groupTitleStyles,
     fontSize: fontSizes[size || "md"],
     padding: paddings[size || "md"],
     margin: 0,
@@ -377,7 +372,7 @@ export const Option = <
     },
   } = props;
 
-  const itemStyles = useMenuStyles().item as ThemeObject;
+  const itemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
 
   const paddings: SizeProps = {
     sm: "0.3rem 0.6rem",
