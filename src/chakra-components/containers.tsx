@@ -89,7 +89,6 @@ export const ValueContainer = <
     WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
-    background: "red",
   };
 
   const sx = chakraStyles?.valueContainer
