@@ -1,7 +1,12 @@
 import { useFormControl } from "@chakra-ui/form-control";
-import type { GroupBase, Props } from "react-select";
+import type { GroupBase } from "react-select";
 import chakraComponents from "./chakra-components";
-import type { SelectedOptionStyle, Size, TagVariant } from "./types";
+import type {
+  SelectProps,
+  SelectedOptionStyle,
+  Size,
+  TagVariant,
+} from "./types";
 
 const useChakraSelectProps = <
   Option,
@@ -27,7 +32,11 @@ const useChakraSelectProps = <
   onFocus,
   onBlur,
   ...props
-}: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
+}: SelectProps<Option, IsMulti, Group>): SelectProps<
+  Option,
+  IsMulti,
+  Group
+> => {
   /**
    * Combine the props passed into the component with the props that can be set
    * on a surrounding form control to get the values of `isDisabled` and
@@ -75,7 +84,7 @@ const useChakraSelectProps = <
     realSelectedOptionColor = "blue";
   }
 
-  const select: Props<Option, IsMulti, Group> = {
+  const select: SelectProps<Option, IsMulti, Group> = {
     // Allow overriding of custom components
     components: {
       ...chakraComponents,

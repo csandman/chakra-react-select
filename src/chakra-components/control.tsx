@@ -7,13 +7,12 @@ import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
 import type { CSSObject } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
-  ControlProps,
   DropdownIndicatorProps,
   GroupBase,
   IndicatorSeparatorProps,
   LoadingIndicatorProps,
 } from "react-select";
-import type { SizeProps } from "../types";
+import type { ControlProps, SizeProps } from "../types";
 
 const Control = <
   Option,
@@ -37,6 +36,7 @@ const Control = <
       chakraStyles,
       focusBorderColor,
       errorBorderColor,
+      variant,
     },
   } = props;
 
@@ -44,6 +44,7 @@ const Control = <
     focusBorderColor,
     errorBorderColor,
     size,
+    variant,
   });
 
   const heights: SizeProps = {

@@ -6,7 +6,6 @@ import type {
 import type {
   ClearIndicatorProps,
   ContainerProps,
-  ControlProps,
   DropdownIndicatorProps,
   GroupBase,
   GroupHeadingProps,
@@ -21,8 +20,10 @@ import type {
   NoticeProps,
   OptionProps,
   PlaceholderProps,
+  Props,
+  ControlProps as ReactSelectControlProps,
+  ValueContainerProps as ReactSelectValueContainerProps,
   SingleValueProps,
-  ValueContainerProps,
 } from "react-select";
 
 export interface SxProps extends CSSWithMultiValues {
@@ -37,6 +38,8 @@ export interface SizeProps<PropType = string | number> {
   md: PropType;
   lg: PropType;
 }
+
+export type Variant = "outline" | "unstyled" | "flushed" | "filled";
 
 export type Size = "sm" | "md" | "lg";
 
@@ -56,7 +59,7 @@ export interface ChakraStylesConfig<
 > {
   clearIndicator?: StylesFunction<ClearIndicatorProps<Option, IsMulti, Group>>;
   container?: StylesFunction<ContainerProps<Option, IsMulti, Group>>;
-  control?: StylesFunction<ControlProps<Option, IsMulti, Group>>;
+  control?: StylesFunction<ReactSelectControlProps<Option, IsMulti, Group>>;
   dropdownIndicator?: StylesFunction<
     DropdownIndicatorProps<Option, IsMulti, Group>
   >;
@@ -93,4 +96,34 @@ export interface OptionBase {
   colorScheme?: string;
   isFixed?: boolean;
   isDisabled?: boolean;
+}
+
+export interface SelectProps<
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+> extends Props<Option, IsMulti, Group> {
+  variant?: Variant;
+}
+
+export interface ControlProps<
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>
+> extends ReactSelectControlProps<Option, IsMulti, Group> {
+  selectProps: ReactSelectControlProps<Option, IsMulti, Group>["selectProps"] &
+    SelectProps<Option, IsMulti, Group>;
+}
+
+export interface ValueContainerProps<
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>
+> extends ReactSelectValueContainerProps<Option, IsMulti, Group> {
+  selectProps: ReactSelectValueContainerProps<
+    Option,
+    IsMulti,
+    Group
+  >["selectProps"] &
+    SelectProps<Option, IsMulti, Group>;
 }
