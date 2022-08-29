@@ -72,7 +72,7 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: { size, chakraStyles, appearanceVariant: variant },
+    selectProps: { size, chakraStyles, variant },
   } = props;
 
   // Getting the css from input instead of select

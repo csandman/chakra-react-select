@@ -40,7 +40,7 @@ export interface SizeProps<PropType = string | number> {
 
 export type Size = "sm" | "md" | "lg";
 
-export type AppearanceVariant = "outline" | "unstyled" | "flushed" | "filled";
+export type Variant = "outline" | "unstyled" | "flushed" | "filled";
 
 export type TagVariant = "subtle" | "solid" | "outline";
 

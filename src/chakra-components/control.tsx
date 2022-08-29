@@ -37,7 +37,7 @@ const Control = <
       chakraStyles,
       focusBorderColor,
       errorBorderColor,
-      appearanceVariant: variant,
+      variant,
     },
   } = props;
 
