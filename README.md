@@ -34,6 +34,7 @@ Check out these demos:
 - [Extra Props](#extra-props)
   - [`size`](#size--options-sm-md-lg--default-md)
   - [`colorScheme`](#colorscheme)
+  - [`appearanceVariant`](#appearanceVariant)
   - [`tagVariant`](#tagvariant--options-subtle-solid-outline--default-subtle)
   - [`isInvalid`](#isinvalid--default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
@@ -138,6 +139,16 @@ return (
       },
     ]}
   />
+);
+```
+
+#### `appearanceVariant`
+
+You can set `outline`, `unstyled`, `flushed` or `filled`, which will reflect the same styles of Chakra-Ui select possible appearances [Check chakra-ui variants styles](https://chakra-ui.com/docs/components/select#changing-the-appearance)!
+
+```js
+return (
+  <Select appearanceVariant="flushed" />
 );
 ```
 

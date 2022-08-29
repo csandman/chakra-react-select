@@ -2,6 +2,7 @@
 import type { CSSObject } from "@chakra-ui/system";
 import type { GroupBase } from "react-select";
 import type {
+  AppearanceVariant,
   ChakraStylesConfig,
   SelectedOptionStyle,
   Size,
@@ -74,6 +75,16 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
     colorScheme?: string;
+
+    /**
+     * The `appearanceVariant` prop that changes the select main style
+     *
+     * Options: "outline" | "unstyled" | "flushed" | "filled"
+     *
+     * @defaultValue `outline`
+     * @see {@link https://chakra-ui.com/docs/components/select#changing-the-appearance}
+     */
+    appearanceVariant?: AppearanceVariant;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component

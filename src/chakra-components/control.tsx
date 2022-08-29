@@ -37,6 +37,7 @@ const Control = <
       chakraStyles,
       focusBorderColor,
       errorBorderColor,
+      appearanceVariant: variant,
     },
   } = props;
 
@@ -44,6 +45,7 @@ const Control = <
     focusBorderColor,
     errorBorderColor,
     size,
+    variant,
   });
 
   const heights: SizeProps = {
