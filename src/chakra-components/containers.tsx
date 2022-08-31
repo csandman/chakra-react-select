@@ -30,10 +30,7 @@ export const SelectContainer = <
   const initialSx: CSSObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
-    // When disabled, react-select sets the pointer-state to none which prevents
-    // the `not-allowed` cursor style from chakra from getting applied to the
-    // Control when it is disabled
-    pointerEvents: "auto",
+    ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
 
   const sx = chakraStyles?.container

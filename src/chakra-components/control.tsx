@@ -59,6 +59,7 @@ const Control = <
     overflow: "hidden",
     height: "auto",
     minHeight: heights[size || "md"],
+    ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 
   const sx = chakraStyles?.control
