@@ -28,7 +28,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: `sm` | `md` | `lg`
      *
      * @defaultValue `md`
-     * @see {@link https://github.com/csandman/chakra-react-select#size--options-sm-md-lg--default-md}
+     * @see {@link https://github.com/csandman/chakra-react-select#size--options-sm--md--lg--default-md}
      * @see {@link https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
      */
     size?: Size;
@@ -82,7 +82,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: "subtle" | "solid" | "outline"
      *
      * @defaultValue `subtle`
-     * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle-solid-outline--default-subtle}
+     * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle--solid--outline--default-subtle}
      * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
      */
     tagVariant?: TagVariant;
@@ -104,7 +104,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * Options: `color` | `check`
      *
      * @defaultValue `color`
-     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color-check--default-color}
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color--check--default-color}
      * @see {@link https://chakra-ui.com/docs/components/menu#menu-option-groups}
      */
     selectedOptionStyle?: SelectedOptionStyle;
