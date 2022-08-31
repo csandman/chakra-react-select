@@ -32,15 +32,15 @@ Check out these demos:
 
 - [Usage](#usage)
 - [Extra Props](#extra-props)
-  - [`size`](#size--options-sm-md-lg--default-md)
+  - [`size`](#size--options-sm--md--lg--default-md)
   - [`colorScheme`](#colorscheme)
-  - [`tagVariant`](#tagvariant--options-subtle-solid-outline--default-subtle)
+  - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
   - [`isInvalid`](#isinvalid--default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
   - [`useBasicStyles`](#usebasicstyles--default-false)
-  - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
-  - [`selectedOptionStyle`](#selectedoptionstyle--options-color-check--default-color)
+  - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
+  - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
   - [`isFixed`](#isfixed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
@@ -95,13 +95,13 @@ const {
 } = require("chakra-react-select");
 ```
 
-All of the types and other exports from the original `react-select` package are also exported from this package, so you can import any of them if you need them.
+All of exports, including types, from the original `react-select` package are also exported from this package, so you can import any of them if you need them. The only exception is the root `Select` components.
 
-In order to use this component, you can implement it and use it like you would normally use [react-select](https://react-select.com/home). It should accept almost all of the props that the original takes, with a few additions and exceptions listed below.
+Implementing this component in your application should be almost identical to how you'd normally use [react-select](https://react-select.com/home). It will accept all of the props that the original package does, with a few additions and exceptions listed below. So if you have a question on basic usage, your best bet is to check the original docs or google "How to (some functionality) with react-select" and just swap out `react-select` for `chakra-react-select`.
 
 ## Extra Props
 
-#### `size` — Options: `sm`, `md`, `lg` — Default: `md`
+#### `size` — Options: `sm` | `md` | `lg` — Default: `md`
 
 You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
 
@@ -114,6 +114,8 @@ return (
   </>
 );
 ```
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-sizes-w9sf8e?file=/example.js)
 
 #### `colorScheme`
 
@@ -141,7 +143,9 @@ return (
 );
 ```
 
-#### `tagVariant` — Options: `subtle`, `solid`, `outline` — Default: `subtle`
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-color-schemes-c38jlo?file=/example.js)
+
+#### `tagVariant` — Options: `subtle` | `solid` | `outline` — Default: `subtle`
 
 You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline` (default is `subtle`). These will reflect the `variant` prop available on the [Chakra `<Tag />` component](https://chakra-ui.com/docs/components/tag/props).
 
@@ -167,6 +171,8 @@ return (
 );
 ```
 
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-tag-variants-w31gnt?file=/example.js)
+
 #### `isInvalid` — Default: `false`
 
 You can pass `isInvalid` to the select component to style it like the Chakra `<Input />` is styled when it receives the same prop.
@@ -191,6 +197,8 @@ return (
 );
 ```
 
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-invalid-disabled-0hyl8l?file=/example.js)
+
 #### `focusBorderColor` — Default: `blue.500` | `errorBorderColor` — Default: `red.500`
 
 The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra color strings which will emulate the respective props being passed to [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors).
@@ -198,13 +206,15 @@ The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra co
 ```js
 return (
   <>
+    <Select errorBorderColor="orange.500" isInvalid />
     <Select focusBorderColor="green.500" />
-    <Select errorBorderColor="orange.500" />
   </>
 );
 ```
 
 ![Orange errorBorderColor](./github/custom-error-border.png)
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-colors-gjo4zd?file=/example.js)
 
 #### `useBasicStyles` — Default: `false`
 
@@ -220,23 +230,11 @@ return (
 
 ![useBasicStyles dark mode](./github/use-basic-styles-dark.png)
 
-#### `hasStickyGroupHeaders` — Default: `false`
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-usebasicstyles-jjnqsd?file=/example.js)
 
-One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+#### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
 
-```js
-return <Select hasStickyGroupHeaders />;
-```
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js)
-
-**NOTE:** It has recently been discovered that when using this prop, navigating up through the available options with the arrow key will keep the focused option underneath the header, as it will not scroll enough to account for it being there. So if this is an issue for you, avoid this prop. A fix for this is being investigated.
-
-![Sticky Group Headers](./github/sticky-group-headers.png)
-
-#### `selectedOptionStyle` — Options: `color`, `check` — Default: `color`
-
-In `v1.3.0` you can now pass the prop `selectedOptionStyle` with either `"color"` or `"check"` (defaults to `"color"`). The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/components/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
+As of `v1.3.0` you can pass the prop `selectedOptionStyle` with either `"color"` or `"check"`. The default option `"color"` will style a selected option similar to how react-select does it, by highlighting the selected option in the color blue. Alternatively if you pass `"check"` for the value, the selected option will be styled like the [Chakra UI Menu component](https://chakra-ui.com/docs/components/menu#menu-option-groups) and include a check icon next to the selected option(s). If `isMulti` and `selectedOptionStyle="check"` are passed, space will only be added for the check marks if `hideSelectedOptions={false}` is also passed.
 
 ```js
 return (
@@ -250,6 +248,8 @@ return (
 ![Color Highlighted Selected Option](./github/color-selected-option.png)
 
 ![Check Highlighted Selected Option](./github/check-selected-option.png)
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptionstyle-yxkcos?file=/example.js)
 
 #### `selectedOptionColor` — Default: `blue`
 
@@ -267,6 +267,22 @@ return (
 ![Purple Selected Option Color (light mode)](./github/purple-selected-option-light.png)
 
 ![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptioncolor-yyd321?file=/example.js)
+
+#### `hasStickyGroupHeaders` — Default: `false`
+
+One additional feature which isn’t specific to Chakra or react-select is sticky group headers. It adds a border to the bottom of the header and keeps it in view while its corresponding group of options is visible. This can be very nice for when you have long lists of grouped options so you can always tell which group of options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to the select component.
+
+```js
+return <Select hasStickyGroupHeaders />;
+```
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js)
+
+**NOTE:** It has recently been discovered that when using this prop, navigating up through the available options with the arrow key will keep the focused option underneath the header, as it will not scroll enough to account for it being there. So if this is an issue for you, avoid this prop. A fix for this is being investigated.
+
+![Sticky Group Headers](./github/sticky-group-headers.png)
 
 #### `isFixed`
 
@@ -319,7 +335,7 @@ function option(provided, state) {
 }
 ```
 
-All of the style keys offered in the original package can be used here, except for `input` as that does not allow me to use the `chakraStyles` from the select props. The `input` styles are also much more dynamic and should be left alone for the most part.
+All of the style keys offered in the original package can be used in the `chakraStyles` prop except for `menuPortal`. Along with [some other caveats](#caveats), this is explained below.
 
 Most of the components rendered by this package use the basic [Chakra `<Box />` component](https://chakra-ui.com/docs/components/box) with a few exceptions. Here are the style keys offered and the corresponding Chakra component that is rendered:
 
@@ -696,17 +712,25 @@ Being a wrapper for `react-select`, all of the customizations done to react-sele
 To do so, simply import the hook from this package, and call it by passing in any extra custom props you'd like into it and spread it onto a base `react-select` component:
 
 ```jsx
+import { useState } from "react";
 import { useChakraSelectProps } from "chakra-react-select";
 import Select from "react-select";
+import { options } from "./data";
 
-const CustomSelect = (customSelectProps) => {
-  const selectProps = useChakraSelectProps(customSelectProps);
+const CustomSelect = () => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const selectProps = useChakraSelectProps({
+    isMulti: true,
+    value: selectedOptions,
+    onChange: setSelectedOptions,
+  });
 
   return <Select {...selectProps} />;
 };
 ```
 
-One example of how you might use this is to customize the component `react-google-places-autocomplete`, which is an autocomplete dropdown for Google Places that uses the `AsyncSelect` from `react-select` as it's core. Therefore, it accepts all of the same select props as the core react-select does which means you can use the `useChakraSelectProps` hook to style it:
+One example of how you might use this is to customize the component `react-google-places-autocomplete`, which is an autocomplete dropdown for Google Places that uses the `AsyncSelect` from `react-select` as it's core. Therefore, it accepts all of the same select props as the core react-select does meaning you can use the `useChakraSelectProps` hook to style it:
 
 ```jsx
 import { useState } from "react";
