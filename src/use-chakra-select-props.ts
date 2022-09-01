@@ -27,6 +27,7 @@ const useChakraSelectProps = <
   chakraStyles = {},
   onFocus,
   onBlur,
+  menuIsOpen,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   /**
@@ -43,6 +44,9 @@ const useChakraSelectProps = <
     onFocus,
     onBlur,
   });
+
+  // Unless `menuIsOpen` is controlled, disable it if the select is readonly
+  const realMenuIsOpen = menuIsOpen ?? inputProps.readOnly ? false : undefined;
 
   /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
   let realSize: Size = size;
@@ -110,6 +114,8 @@ const useChakraSelectProps = <
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputProps.id,
+    isReadOnly: inputProps.readOnly,
+    menuIsOpen: realMenuIsOpen,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop

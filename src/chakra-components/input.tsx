@@ -73,7 +73,7 @@ const Input = <
         ref={innerRef}
         sx={inputSx}
         disabled={isDisabled}
-        readOnly={isReadOnly}
+        readOnly={isReadOnly ? true : undefined}
         aria-readonly={isReadOnly ? true : undefined}
         aria-required={isRequired ? true : undefined}
         {...innerProps}
