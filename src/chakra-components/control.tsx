@@ -34,6 +34,7 @@ const Control = <
     selectProps: {
       size,
       isInvalid,
+      isReadOnly,
       chakraStyles,
       focusBorderColor,
       errorBorderColor,
@@ -86,6 +87,7 @@ const Control = <
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
+      aria-readonly={isReadOnly ? true : undefined}
     >
       {children}
     </Box>
@@ -179,7 +181,6 @@ export const DropdownIndicator = <
     height: "100%",
     borderRadius: 0,
     borderWidth: 0,
-    cursor: "pointer",
     fontSize: iconSize,
     ...(useBasicStyles && {
       background: "transparent",

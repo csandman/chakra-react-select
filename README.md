@@ -35,7 +35,7 @@ Check out these demos:
   - [`size`](#size--options-sm--md--lg--default-md)
   - [`colorScheme`](#colorscheme)
   - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
-  - [`isInvalid`](#isinvalid--default-false)
+  - [`isInvalid` / `isReadOnly`](#isinvalid--default-false--isreadonly---default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
   - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
@@ -174,11 +174,11 @@ return (
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-tag-variants-w31gnt?file=/example.js)
 
-#### `isInvalid` — Default: `false`
+#### `isInvalid` — Default: `false` | `isReadOnly` - Default: `false`
 
-You can pass `isInvalid` to the select component to style it like the Chakra `<Input />` is styled when it receives the same prop.
+You can pass `isInvalid` to the select component to style it like the Chakra `Input` is styled when it receives the same prop. Alternatively you can pass `isReadOnly` to make the component non-interactive in the same way Chakra's `Input` does.
 
-You can pass also pass `isInvalid` or `isDisabled` to a wrapping `<FormControl />` and it will output their corresponding `<Input />` on the select.
+You can pass also pass `isInvalid`, `isDisabled`, or `isReadOnly` into a wrapping `<FormControl />` to achieve the same result as passing these props into the `Select` component.
 
 ```js
 return (
@@ -186,7 +186,11 @@ return (
     {/* This will show up with a red border */}
     <Select isInvalid />
 
-    {/* This will show up with a red border, and grayed out */}
+    {/* This will show up normally but will not be interactive */}
+    <Select isReadOnly />
+
+    {/* This will show up grayed out and will not be interactive */}
+    {/* Additionally, it will have a red border and the error message will be shown */}
     <FormControl isInvalid isDisabled>
       <FormLabel>Invalid & Disabled Select</FormLabel>
       <Select />

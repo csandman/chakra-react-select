@@ -41,14 +41,17 @@ declare module "react-select/dist/declarations/src/Select" {
      * If the `aria-invalid` prop is not passed, this prop will also set that
      *
      * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false}
+     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
      * @see {@link https://chakra-ui.com/docs/components/input/props}
+     * @see {@link https://chakra-ui.com/docs/components/form-control/props}
      */
     isInvalid?: boolean;
 
     /**
      * If `true`, the form control will be `readonly`
      *
+     * @defaultValue `false`
+     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
      * @see {@link https://chakra-ui.com/docs/components/input/props}
      * @see {@link https://chakra-ui.com/docs/components/form-control/props}
      */
