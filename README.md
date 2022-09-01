@@ -38,9 +38,9 @@ Check out these demos:
   - [`isInvalid`](#isinvalid--default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
   - [`useBasicStyles`](#usebasicstyles--default-false)
-  - [`variant`](#variant)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
+  - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
   - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
   - [`isFixed`](#isfixed)
 - [Styling](#styling)
@@ -252,16 +252,6 @@ return (
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptionstyle-yxkcos?file=/example.js)
 
-#### `variant`
-
-You can set `outline`, `unstyled`, `flushed` or `filled`, which will reflect the same styles of Chakra-Ui select possible appearances [Check chakra-ui variants styles](https://chakra-ui.com/docs/components/select#changing-the-appearance)!
-
-```js
-return (
-  <Select variant="flushed" />
-);
-```
-
 #### `selectedOptionColor` — Default: `blue`
 
 If you choose to stick with the default `selectedOptionStyle="color"`, you have one additional styling option. If you do not like the default of blue for the highlight color, you can pass the `selectedOptionColor` prop to change it. This prop will accept any named color from your color theme, and it will use the `500` value in light mode or the `300` value in dark mode.
@@ -280,6 +270,35 @@ return (
 ![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptioncolor-yyd321?file=/example.js)
+
+#### `variant` — Options: `outline` | `filled` | `flushed` | `unstyled` — Default: `outline`
+
+You can pass the `variant` prop with any of `outline`, `filled`, `flushed`, or `unstyled` to change the overall styling of the `Select`. These will reflect the various appearances available for [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input).
+
+```js
+return (
+  <>
+    <Select variant="outline" /> {/* Default */}
+    <Select variant="filled" />
+    <Select variant="flushed" />
+    <Select variant="unstyled" />
+  </>
+);
+```
+
+![variant in light mode](./github/variant-light.png)
+
+![variant in dark mode](./github/variant-dark.png)
+
+By default, the `flushed` and `unstyled` variants look a bit strange in combination with the `DropdownIndicator`. An easy way to make these styles look more natural is to pass the [`useBasicStyles`](#usebasicstyles--default-false) prop along with them to remove the background from the indicator. Or alternatively, you could hide the indicator completely using [`chakraStyles`](#chakrastyles).
+
+![variant with useBasicStyles](./github/variant-use-basic-styles.png)
+
+Another thing to note is that the default styling for `variant="filled"` and `isMulti` results in the select and selected option tags having the same background color when the select is not focused. The easiest solution for this is to pass the [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle) or [`colorScheme`](#colorscheme) prop to add some contrast between the two elements.
+
+![variant with useBasicStyles](./github/filled-variant.png)
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
 
 #### `hasStickyGroupHeaders` — Default: `false`
 

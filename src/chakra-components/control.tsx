@@ -102,12 +102,12 @@ export const IndicatorSeparator = <
   const {
     className,
     cx,
-    selectProps: { chakraStyles, useBasicStyles },
+    selectProps: { chakraStyles, useBasicStyles, variant },
   } = props;
 
   const initialSx: CSSObject = {
     opacity: 1,
-    ...(useBasicStyles && { display: "none" }),
+    ...(useBasicStyles || variant !== "outline" ? { display: "none" } : {}),
   };
 
   const sx = chakraStyles?.indicatorSeparator

@@ -73,9 +73,8 @@ export const ValueContainer = <
   } = props;
 
   // Getting the css from input instead of select
-  // to fit better with the search input feature
-
-  const chakraInputConfig = useMultiStyleConfig("Input", {
+  // to fit better with each of the variants
+  const inputStyles = useMultiStyleConfig("Input", {
     size,
     variant,
   });
@@ -84,7 +83,8 @@ export const ValueContainer = <
     display: "flex",
     alignItems: "center",
     flex: 1,
-    px: chakraInputConfig.field.px,
+    paddingY: "2px",
+    paddingX: inputStyles.field.px,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",
