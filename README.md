@@ -40,6 +40,7 @@ Check out these demos:
   - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
+  - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
   - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
   - [`isFixed`](#isfixed)
 - [Styling](#styling)
@@ -269,6 +270,35 @@ return (
 ![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptioncolor-yyd321?file=/example.js)
+
+#### `variant` — Options: `outline` | `filled` | `flushed` | `unstyled` — Default: `outline`
+
+You can pass the `variant` prop with any of `outline`, `filled`, `flushed`, or `unstyled` to change the overall styling of the `Select`. These will reflect the various appearances available for [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input).
+
+```js
+return (
+  <>
+    <Select variant="outline" /> {/* Default */}
+    <Select variant="filled" />
+    <Select variant="flushed" />
+    <Select variant="unstyled" />
+  </>
+);
+```
+
+![variant in light mode](./github/variant-light.png)
+
+![variant in dark mode](./github/variant-dark.png)
+
+By default, the `flushed` and `unstyled` variants look a bit strange in combination with the `DropdownIndicator`. An easy way to make these styles look more natural is to pass the [`useBasicStyles`](#usebasicstyles--default-false) prop along with them to remove the background from the indicator. Or alternatively, you could hide the indicator completely using [`chakraStyles`](#chakrastyles).
+
+![variant with useBasicStyles](./github/variant-use-basic-styles.png)
+
+Another thing to note is that the default styling for `variant="filled"` and `isMulti` results in the select and selected option tags having the same background color when the select is not focused. The easiest solution for this is to pass the [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle) or [`colorScheme`](#colorscheme) prop to add some contrast between the two elements.
+
+![variant with useBasicStyles](./github/filled-variant.png)
+
+[![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
 
 #### `hasStickyGroupHeaders` — Default: `false`
 

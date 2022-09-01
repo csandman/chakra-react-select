@@ -44,6 +44,8 @@ export type TagVariant = "subtle" | "solid" | "outline";
 
 export type SelectedOptionStyle = "color" | "check";
 
+export type Variant = "outline" | "filled" | "flushed" | "unstyled";
+
 export type StylesFunction<ComponentProps> = (
   provided: CSSObject,
   state: ComponentProps

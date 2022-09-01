@@ -1,13 +1,13 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
 import type { CSSObject } from "@chakra-ui/system";
+import { useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   ContainerProps,
   GroupBase,
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import type { SizeProps } from "../types";
 
 export const SelectContainer = <
   Option,
@@ -69,20 +69,22 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { size, chakraStyles, variant },
   } = props;
 
-  const px: SizeProps = {
-    sm: "0.75rem",
-    md: "1rem",
-    lg: "1rem",
-  };
+  // Getting the css from input instead of select
+  // to fit better with each of the variants
+  const inputStyles = useMultiStyleConfig("Input", {
+    size,
+    variant,
+  });
 
   const initialSx: CSSObject = {
     display: "flex",
     alignItems: "center",
     flex: 1,
-    padding: `0.125rem ${px[size || "md"]}`,
+    paddingY: "2px",
+    paddingX: inputStyles.field.px,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",

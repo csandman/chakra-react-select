@@ -1,7 +1,7 @@
 import { useFormControl } from "@chakra-ui/form-control";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import type { SelectedOptionStyle, Size, TagVariant } from "./types";
+import type { SelectedOptionStyle, Size, TagVariant, Variant } from "./types";
 
 const useChakraSelectProps = <
   Option,
@@ -21,6 +21,7 @@ const useChakraSelectProps = <
   hasStickyGroupHeaders = false,
   selectedOptionStyle = "color",
   selectedOptionColor = "blue",
+  variant = "outline",
   focusBorderColor,
   errorBorderColor,
   chakraStyles = {},
@@ -75,6 +76,17 @@ const useChakraSelectProps = <
     realSelectedOptionColor = "blue";
   }
 
+  let realVariant: Variant = variant;
+  const variantOptions: Variant[] = [
+    "outline",
+    "filled",
+    "flushed",
+    "unstyled",
+  ];
+  if (!variantOptions.includes(variant)) {
+    realVariant = "outline";
+  }
+
   const select: Props<Option, IsMulti, Group> = {
     // Allow overriding of custom components
     components: {
@@ -87,6 +99,7 @@ const useChakraSelectProps = <
     tagVariant: realTagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,
+    variant: realVariant,
     hasStickyGroupHeaders,
     chakraStyles,
     focusBorderColor,

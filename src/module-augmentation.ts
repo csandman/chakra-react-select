@@ -6,6 +6,7 @@ import type {
   SelectedOptionStyle,
   Size,
   TagVariant,
+  Variant,
 } from "./types";
 
 /**
@@ -157,6 +158,17 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://chakra-ui.com/docs/components/select}
      */
     useBasicStyles?: boolean;
+
+    /**
+     * The main style variant of the `Select` component
+     *
+     * Options: `outline` | `filled` | `flushed` | `unstyled`
+     *
+     * @defaultValue `outline`
+     * @see {@link https://chakra-ui.com/docs/components/select#changing-the-appearance}
+     * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
+     */
+    variant?: Variant;
   }
 }
 
