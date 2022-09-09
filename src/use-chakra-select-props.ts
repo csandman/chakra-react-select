@@ -46,7 +46,8 @@ const useChakraSelectProps = <
   });
 
   // Unless `menuIsOpen` is controlled, disable it if the select is readonly
-  const realMenuIsOpen = menuIsOpen ?? inputProps.readOnly ? false : undefined;
+  const realMenuIsOpen =
+    menuIsOpen ?? (inputProps.readOnly ? false : undefined);
 
   /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
   let realSize: Size = size;
