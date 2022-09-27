@@ -1,3 +1,4 @@
 {
-  "sandboxes": ["65ohb", "vz9ut"]
+  "sandboxes": ["65ohb", "vz9ut"],
+  "node": "16"
 }
