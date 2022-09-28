@@ -49,19 +49,13 @@ const Control = <
     variant,
   });
 
-  const heights: SizeProps = {
-    sm: 8,
-    md: 10,
-    lg: 12,
-  };
-
   const initialSx: SystemStyleObject = {
     ...inputStyles.field,
     display: "flex",
     padding: 0,
     overflow: "hidden",
     height: "auto",
-    minHeight: heights[size || "md"],
+    minH: inputStyles.field.h,
     ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 
