@@ -5,6 +5,10 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "cy": true,
+    "Cypress": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -53,5 +57,11 @@
         "disallowTypeAnnotations": true
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["./cypress/**/*.ts"],
+      "parserOptions": { "project": "./cypress/tsconfig.json" }
+    }
+  ]
 }
