@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, SingleValueProps } from "react-select";
 
 const SingleValue = <
@@ -19,7 +19,7 @@ const SingleValue = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     label: "singleValue",
     mx: "0.125rem",
     maxWidth: `calc(100% - 0.5rem)`,

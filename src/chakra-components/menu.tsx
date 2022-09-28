@@ -3,7 +3,7 @@ import type { IconProps } from "@chakra-ui/icon";
 import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import {
   useColorModeValue,
   useMultiStyleConfig,
@@ -33,7 +33,7 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     position: "absolute",
     ...(placement === "bottom" && { top: "100%" }),
     ...(placement === "top" && { bottom: "100%" }),
@@ -83,7 +83,7 @@ export const MenuList = <
 
   const borderRadii: SizeProps = useTheme().radii;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...menuStyles.list,
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
@@ -146,7 +146,7 @@ export const LoadingMessage = <
     lg: "10px 15px",
   };
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
     padding: paddings[size || "md"],
@@ -208,7 +208,7 @@ export const NoOptionsMessage = <
     lg: "10px 15px",
   };
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
     padding: paddings[size || "md"],
@@ -304,7 +304,7 @@ export const GroupHeading = <
     lg: "0.6rem 1.2rem",
   };
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
     fontSize: fontSizes[size || "md"],
     padding: paddings[size || "md"],
@@ -395,7 +395,7 @@ export const Option = <
   const shouldHighlight: boolean =
     selectedOptionStyle === "color" && isSelected;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...menuItemStyles,
     display: "flex",
     alignItems: "center",

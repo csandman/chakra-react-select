@@ -2,7 +2,7 @@ import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import { chakra, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   GroupBase,
@@ -67,7 +67,7 @@ const MultiValue = <
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
-  const containerInitialSx: CSSObject = {
+  const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,
     display: "inline-flex",
     verticalAlign: "top",
@@ -75,16 +75,16 @@ const MultiValue = <
     maxWidth: "100%",
     margin: "0.125rem",
   };
-  const containerSx: CSSObject = chakraStyles?.multiValue
+  const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialSx, props)
     : containerInitialSx;
 
-  const labelInitialSx: CSSObject = tagStyles.label;
+  const labelInitialSx: SystemStyleObject = tagStyles.label;
   const labelSx = chakraStyles?.multiValueLabel
     ? chakraStyles.multiValueLabel(labelInitialSx, props)
     : labelInitialSx;
 
-  const removeInitialSx: CSSObject = {
+  const removeInitialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

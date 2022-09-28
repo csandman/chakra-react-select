@@ -4,7 +4,7 @@ import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ControlProps,
@@ -55,7 +55,7 @@ const Control = <
     lg: 12,
   };
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...inputStyles.field,
     display: "flex",
     padding: 0,
@@ -107,7 +107,7 @@ export const IndicatorSeparator = <
     selectProps: { chakraStyles, useBasicStyles, variant },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     opacity: 1,
     ...(useBasicStyles || variant !== "outline" ? { display: "none" } : {}),
   };
@@ -173,7 +173,7 @@ export const DropdownIndicator = <
   };
   const iconSize = iconSizes[size || "md"];
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
@@ -199,7 +199,7 @@ export const DropdownIndicator = <
     height: "1em",
     width: "1em",
   };
-  const iconSx: CSSObject = chakraStyles?.downChevron
+  const iconSx: SystemStyleObject = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialIconStyles, props)
     : initialIconStyles;
 
@@ -253,7 +253,7 @@ export const ClearIndicator = <
     size,
   });
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...closeButtonStyles,
     marginX: 1,
     display: "flex",
@@ -266,11 +266,11 @@ export const ClearIndicator = <
     ? chakraStyles.clearIndicator(initialSx, props)
     : initialSx;
 
-  const initialIconStyles: CSSObject = {
+  const initialIconStyles: SystemStyleObject = {
     width: "1em",
     height: "1em",
   };
-  const iconSx: CSSObject = chakraStyles?.crossIcon
+  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
@@ -320,7 +320,7 @@ export const LoadingIndicator = <
 
   const spinnerSize = spinnerSizes[size || "md"];
 
-  const initialSx: CSSObject = { marginRight: 3 };
+  const initialSx: SystemStyleObject = { marginRight: 3 };
 
   const sx = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialSx, props)

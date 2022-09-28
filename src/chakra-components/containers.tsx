@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import { useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   ContainerProps,
@@ -27,7 +27,7 @@ export const SelectContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
@@ -79,7 +79,7 @@ export const ValueContainer = <
     variant,
   });
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     flex: 1,
@@ -128,7 +128,7 @@ export const IndicatorsContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     alignSelf: "stretch",

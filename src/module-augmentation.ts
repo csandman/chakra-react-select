@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase } from "react-select";
 import type {
   ChakraStylesConfig,
@@ -145,7 +145,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * Style transformation methods for each of the rendered components using,
-     * Chakra's `CSSObject` and the props passed into each component
+     * Chakra's `SystemStyleObject` and the props passed into each component
      *
      * @see {@link https://github.com/csandman/chakra-react-select#chakrastyles}
      * @see {@link https://react-select.com/styles#style-object}
@@ -181,7 +181,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     IsMulti extends boolean,
     Group extends GroupBase<Option>
   > {
-    sx: CSSObject;
+    sx: SystemStyleObject;
   }
 
   export interface MultiValueGenericProps<
@@ -189,7 +189,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     IsMulti extends boolean,
     Group extends GroupBase<Option>
   > {
-    sx: CSSObject;
+    sx: SystemStyleObject;
   }
 
   export interface MultiValueRemoveProps<
@@ -198,7 +198,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     Group extends GroupBase<Option>
   > {
     isFocused: boolean;
-    sx: CSSObject;
+    sx: SystemStyleObject;
   }
 }
 

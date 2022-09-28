@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import { chakra } from "@chakra-ui/system";
 import type { GroupBase, InputProps } from "react-select";
 import { cleanCommonProps } from "../utils";
@@ -21,7 +21,7 @@ const Input = <
   const { innerRef, isDisabled, isHidden, inputClassName, ...innerProps } =
     cleanCommonProps(props);
 
-  const spacingSx: CSSObject = {
+  const spacingSx: SystemStyleObject = {
     gridArea: "1 / 2",
     font: "inherit",
     minW: "2px",
@@ -30,7 +30,7 @@ const Input = <
     outline: 0,
   };
 
-  const initialContainerSx: CSSObject = {
+  const initialContainerSx: SystemStyleObject = {
     flex: "1 1 auto",
     display: "inline-grid",
     gridArea: "1 / 1 / 2 / 3",
@@ -50,7 +50,7 @@ const Input = <
     ? chakraStyles.inputContainer(initialContainerSx, props)
     : initialContainerSx;
 
-  const initialInputSx: CSSObject = {
+  const initialInputSx: SystemStyleObject = {
     label: "input",
     color: "inherit",
     background: 0,
