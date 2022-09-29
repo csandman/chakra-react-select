@@ -4,11 +4,7 @@ import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
-import {
-  useColorModeValue,
-  useMultiStyleConfig,
-  useTheme,
-} from "@chakra-ui/system";
+import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   GroupBase,
   GroupHeadingProps,
@@ -133,23 +129,17 @@ export const LoadingMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
-  const fontSizes: SizeProps = {
-    sm: "0.875rem",
-    md: "1rem",
-    lg: "1.125rem",
-  };
-
-  const paddings: SizeProps = {
-    sm: "6px 9px",
-    md: "8px 12px",
-    lg: "10px 15px",
+  const verticalPaddings: SizeProps = {
+    sm: "6px",
+    md: "8px",
+    lg: "10px",
   };
 
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    padding: paddings[size || "md"],
-    fontSize: fontSizes[size || "md"],
+    paddingY: verticalPaddings[size || "md"],
+    fontSize: size,
   };
 
   const sx = chakraStyles?.loadingMessage
@@ -195,23 +185,17 @@ export const NoOptionsMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
-  const fontSizes: SizeProps = {
-    sm: "0.875rem",
-    md: "1rem",
-    lg: "1.125rem",
-  };
-
-  const paddings: SizeProps = {
-    sm: "6px 9px",
-    md: "8px 12px",
-    lg: "10px 15px",
+  const verticalPaddings: SizeProps = {
+    sm: "6px",
+    md: "8px",
+    lg: "10px",
   };
 
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    padding: paddings[size || "md"],
-    fontSize: fontSizes[size || "md"],
+    paddingY: verticalPaddings[size || "md"],
+    fontSize: size,
   };
 
   const sx = chakraStyles?.noOptionsMessage
@@ -291,11 +275,10 @@ export const GroupHeading = <
 
   const menuStyles = useMultiStyleConfig("Menu");
 
-  const chakraTheme = useTheme();
   const fontSizes: SizeProps = {
-    sm: chakraTheme.fontSizes.xs,
-    md: chakraTheme.fontSizes.sm,
-    lg: chakraTheme.fontSizes.md,
+    sm: "xs",
+    md: "sm",
+    lg: "md",
   };
   const paddings: SizeProps = {
     sm: "0.4rem 0.8rem",
