@@ -24,8 +24,9 @@
     },
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["deprecation", "@typescript-eslint"],
   "rules": {
+    "deprecation/deprecation": "warn",
     "no-console": "error",
     "curly": ["error", "all"],
     "no-underscore-dangle": "off",
