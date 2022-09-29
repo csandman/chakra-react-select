@@ -80,14 +80,13 @@ export const MenuList = <
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
-
-  const borderRadii: SizeProps = useTheme().radii;
+  const inputStyles = useMultiStyleConfig("Input", { size });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
-    borderRadius: borderRadii[size || "md"],
+    borderRadius: inputStyles.field?.borderRadius,
   };
 
   const sx = chakraStyles?.menuList
