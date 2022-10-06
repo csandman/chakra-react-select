@@ -5,10 +5,6 @@
     "browser": true,
     "node": true
   },
-  "globals": {
-    "cy": true,
-    "Cypress": true
-  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -28,8 +24,9 @@
     },
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["deprecation", "@typescript-eslint"],
   "rules": {
+    "deprecation/deprecation": "warn",
     "no-console": "error",
     "curly": ["error", "all"],
     "no-underscore-dangle": "off",
@@ -57,11 +54,5 @@
         "disallowTypeAnnotations": true
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": ["./cypress/**/*.ts"],
-      "parserOptions": { "project": "./cypress/tsconfig.json" }
-    }
-  ]
+  }
 }

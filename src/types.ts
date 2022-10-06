@@ -1,7 +1,7 @@
 import type {
-  CSSObject,
   CSSWithMultiValues,
   RecursiveCSSObject,
+  SystemStyleObject,
 } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
@@ -47,9 +47,9 @@ export type SelectedOptionStyle = "color" | "check";
 export type Variant = "outline" | "filled" | "flushed" | "unstyled";
 
 export type StylesFunction<ComponentProps> = (
-  provided: CSSObject,
+  provided: SystemStyleObject,
   state: ComponentProps
-) => CSSObject;
+) => SystemStyleObject;
 
 export interface ChakraStylesConfig<
   Option = unknown,
