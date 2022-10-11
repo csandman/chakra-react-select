@@ -80,6 +80,7 @@ export const MenuList = <
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
+    minW: "100%",
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     borderRadius: inputStyles.field?.borderRadius,
