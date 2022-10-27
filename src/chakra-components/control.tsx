@@ -146,18 +146,20 @@ export const DropdownIndicator = <
     cx,
     innerProps,
     selectProps: {
-      size,
       chakraStyles,
       useBasicStyles,
+      size,
       focusBorderColor,
       errorBorderColor,
+      variant,
     },
   } = props;
 
   const inputStyles = useMultiStyleConfig("Input", {
+    size,
     focusBorderColor,
     errorBorderColor,
-    size,
+    variant,
   });
 
   const iconSizes: SizeProps = {

@@ -1,4 +1,5 @@
 import { useFormControl } from "@chakra-ui/form-control";
+import { useTheme } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle, Size, TagVariant, Variant } from "./types";
@@ -10,7 +11,7 @@ const useChakraSelectProps = <
 >({
   components = {},
   theme,
-  size = "md",
+  size,
   colorScheme = "gray",
   isDisabled,
   isInvalid,
@@ -21,7 +22,7 @@ const useChakraSelectProps = <
   hasStickyGroupHeaders = false,
   selectedOptionStyle = "color",
   selectedOptionColor = "blue",
-  variant = "outline",
+  variant,
   focusBorderColor,
   errorBorderColor,
   chakraStyles = {},
@@ -30,6 +31,10 @@ const useChakraSelectProps = <
   menuIsOpen,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
+  const chakraTheme = useTheme();
+  const { variant: defaultVariant, size: defaultSize } =
+    chakraTheme.components.Input.defaultProps;
+
   /**
    * Combine the props passed into the component with the props that can be set
    * on a surrounding form control to get the values of `isDisabled` and
@@ -50,9 +55,9 @@ const useChakraSelectProps = <
     menuIsOpen ?? (inputProps.readOnly ? false : undefined);
 
   /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
-  let realSize: Size = size;
+  let realSize: Size = size ?? (defaultSize === "xs" ? "sm" : defaultSize);
   const sizeOptions: Size[] = ["sm", "md", "lg"];
-  if (!sizeOptions.includes(size)) {
+  if (!sizeOptions.includes(realSize)) {
     realSize = "md";
   }
 
@@ -81,15 +86,15 @@ const useChakraSelectProps = <
     realSelectedOptionColor = "blue";
   }
 
-  let realVariant: Variant = variant;
+  let realVariant: Variant = variant ?? defaultVariant;
   const variantOptions: Variant[] = [
     "outline",
     "filled",
     "flushed",
     "unstyled",
   ];
-  if (!variantOptions.includes(variant)) {
-    realVariant = "outline";
+  if (!variantOptions.includes(realVariant)) {
+    realVariant = defaultVariant;
   }
 
   const select: Props<Option, IsMulti, Group> = {
