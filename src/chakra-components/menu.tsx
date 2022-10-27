@@ -6,6 +6,7 @@ import { MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
+  CoercedMenuPlacement,
   GroupBase,
   GroupHeadingProps,
   GroupProps,
@@ -15,6 +16,11 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
+
+const alignToControl = (placement: CoercedMenuPlacement) => {
+  const placementToCSSProp = { bottom: "top", top: "bottom" };
+  return placement ? placementToCSSProp[placement] : "top";
+};
 
 const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
   props: MenuProps<Option, IsMulti, Group>
@@ -31,12 +37,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
 
   const initialSx: SystemStyleObject = {
     position: "absolute",
-    ...(placement === "bottom" && { top: "100%" }),
-    ...(placement === "top" && { bottom: "100%" }),
+    [alignToControl(placement)]: "100%",
     marginY: "8px",
     width: "100%",
     zIndex: 1,
-    overflow: "hidden",
   };
 
   const sx = chakraStyles?.menu
@@ -84,6 +88,8 @@ export const MenuList = <
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
     borderRadius: inputStyles.field?.borderRadius,
+    position: "relative", // required for offset[Height, Top] > keyboard scroll
+    WebkitOverflowScrolling: "touch",
   };
 
   const sx = chakraStyles?.menuList
