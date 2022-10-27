@@ -498,21 +498,24 @@ Default [Chakra `<Select />`](https://chakra-ui.com/docs/form/select) styles exa
 
 ### Theme Styles
 
-As mentioned above, a few of the custom components this package implements either use styles from the global [Chakra component theme](https://chakra-ui.com/docs/styled-system/customize-theme#customizing-component-styles) or are themselves those components. As this package pulls directly from your Chakra theme, any changes you make to those components' themes will propagate to the components in this package. Here is a list of all components that will be affected by changes to your global styles:
+As mentioned above, a few of the custom components this package implements either use styles from the global [Chakra component theme](https://chakra-ui.com/docs/styled-system/customize-theme#customizing-component-styles) or are themselves those components. As this package pulls directly from your Chakra theme, any changes you make to those components' themes will propagate to the components in this package.
 
-| `react-select` component | `chakra-ui` component styles                                                                                    |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------- |
-| `ClearIndicator`         | [`CloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/close-button.ts) |
-| `Control`                | [`Input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts)              |
-| `DropdownIndicator`      | [`InputRightAddon`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/input.ts)    |
-| `GroupHeading`           | [`Menu` group title](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)    |
-| `IndicatorSeparator`     | [`Divider`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/divider.ts)          |
-| `LoadingIndicator`       | [`Spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/spinner.ts)          |
-| `MenuList`               | [`MenuList`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)            |
-| `MultiValueContainer`    | [`Tag`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)                  |
-| `MultiValueLabel`        | [`TagLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)             |
-| `MultiValueRemove`       | [`TagCloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/tag.ts)       |
-| `Option`                 | [`MenuItem`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/components/menu.ts)            |
+**NOTE:** Some of the theme styles are manually overridden when this package implements them. This is necessary for implementing styles for [`size`](#size--options-sm--md--lg--default-md) variants in components that do not natively have them in Chakra's default theme. This mostly concerns components that make up the `Menu`, but there are a few other cases where this exception applies. There is no alternative to this currently, so if your custom theme styles are not being applied correctly please use [`chakraStyles`](#chakrastyles) to style your components instead. `chakraStyles` always takes highest priority in overriding the styles of a component. See #194 for more info.
+
+Here is a list of all components that will be affected by changes to your theme:
+
+| `react-select` component | `chakra-ui` component styles                                                                                               |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `ClearIndicator`         | [`CloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/close-button.ts) |
+| `Control`                | [`Input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts)              |
+| `DropdownIndicator`      | [`InputRightAddon`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts)    |
+| `GroupHeading`           | [`Menu` group title](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)    |
+| `LoadingIndicator`       | [`Spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/spinner.ts)          |
+| `MenuList`               | [`MenuList`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)            |
+| `MultiValueContainer`    | [`Tag`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)                  |
+| `MultiValueLabel`        | [`TagLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)             |
+| `MultiValueRemove`       | [`TagCloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)       |
+| `Option`                 | [`MenuItem`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)            |
 
 In addition to specific component styles, any changes you make to your global color scheme will also be reflected in these custom components.
 
