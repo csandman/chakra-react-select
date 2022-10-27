@@ -55,7 +55,7 @@ const useChakraSelectProps = <
     menuIsOpen ?? (inputProps.readOnly ? false : undefined);
 
   /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
-  let realSize: Size = size ?? defaultSize === "xs" ? "sm" : defaultSize;
+  let realSize: Size = size ?? (defaultSize === "xs" ? "sm" : defaultSize);
   const sizeOptions: Size[] = ["sm", "md", "lg"];
   if (!sizeOptions.includes(realSize)) {
     realSize = "md";
