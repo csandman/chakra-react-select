@@ -106,6 +106,8 @@ Implementing this component in your application should be almost identical to ho
 
 You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`). These will reflect the sizes available on the [Chakra `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input) (with the exception of `xs` because it's too small to work).
 
+If no `size` is passed, it will default to `defaultProps.size` from the theme for Chakra's `Input` component. If your component theme for `Input` is not modified, it will be `md`.
+
 ```js
 return (
   <>
@@ -278,6 +280,8 @@ return (
 #### `variant` — Options: `outline` | `filled` | `flushed` | `unstyled` — Default: `outline`
 
 You can pass the `variant` prop with any of `outline`, `filled`, `flushed`, or `unstyled` to change the overall styling of the `Select`. These will reflect the various appearances available for [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input).
+
+If no `variant` is passed, it will default to `defaultProps.variant` from the theme for Chakra's `Input` component. If your component theme for `Input` is not modified, it will be `outline`.
 
 ```js
 return (
