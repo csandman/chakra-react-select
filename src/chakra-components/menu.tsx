@@ -392,7 +392,6 @@ export const Option = <
     textAlign: "start",
     fontSize: size,
     padding: paddings[size || "md"],
-    bg: "transparent",
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,
