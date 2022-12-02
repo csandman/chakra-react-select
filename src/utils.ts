@@ -5,7 +5,7 @@ import type { CommonPropsAndClassName, GroupBase } from "react-select";
  *
  * Borrowed from the original `react-select` package
  *
- * @see {@link https://github.com/JedWatson/react-select/blob/5d960cc31670dcd9c8f17341f9111349ec66aa21/packages/react-select/src/utils.ts#L75}
+ * @see {@link https://github.com/JedWatson/react-select/blob/edf5265ee0158c026c9e8527a6d0490a5ac2ef23/packages/react-select/src/utils.ts#L75-L110}
  */
 export const cleanCommonProps = <
   Option,
