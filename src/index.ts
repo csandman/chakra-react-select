@@ -27,6 +27,8 @@ export type {
 
 // Forward all available exports from the original `react-select` package
 export * from "react-select";
-export * from "react-select/async";
-export * from "react-select/async-creatable";
-export * from "react-select/creatable";
+export { useAsync } from "react-select/async";
+export { useCreatable } from "react-select/creatable";
+export type { AsyncProps } from "react-select/async";
+export type { CreatableProps } from "react-select/creatable";
+export type { AsyncCreatableProps } from "react-select/async-creatable";
