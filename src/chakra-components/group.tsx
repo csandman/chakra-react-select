@@ -24,6 +24,7 @@ const Group = <
     label,
     selectProps,
     innerProps,
+    getClassNames,
   } = props;
 
   const { chakraStyles } = selectProps;
@@ -40,6 +41,7 @@ const Group = <
         cx={cx}
         theme={theme}
         getStyles={getStyles}
+        getClassNames={getClassNames}
       >
         {label}
       </Heading>
