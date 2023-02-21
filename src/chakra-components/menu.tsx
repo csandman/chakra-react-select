@@ -77,13 +77,24 @@ export const MenuList = <
     maxHeight,
     isMulti,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: {
+      chakraStyles,
+      size: sizeProp,
+      variant,
+      focusBorderColor,
+      errorBorderColor,
+    },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
 
-  const realSize = useSize(size);
-  const inputStyles = useMultiStyleConfig("Input", { size: realSize });
+  const size = useSize(sizeProp);
+  const inputStyles = useMultiStyleConfig("Input", {
+    size,
+    variant,
+    focusBorderColor,
+    errorBorderColor,
+  });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
@@ -129,7 +140,7 @@ export const LoadingMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   /**
@@ -139,7 +150,7 @@ export const LoadingMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
     sm: "6px",
@@ -150,8 +161,8 @@ export const LoadingMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[realSize],
-    fontSize: realSize,
+    paddingY: verticalPaddings[size],
+    fontSize: size,
   };
 
   const sx = chakraStyles?.loadingMessage
@@ -187,7 +198,7 @@ export const NoOptionsMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   /**
@@ -197,7 +208,7 @@ export const NoOptionsMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
     sm: "6px",
@@ -208,8 +219,8 @@ export const NoOptionsMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[realSize],
-    fontSize: realSize,
+    paddingY: verticalPaddings[size],
+    fontSize: size,
   };
 
   const sx = chakraStyles?.noOptionsMessage
@@ -286,12 +297,12 @@ export const GroupHeading = <
     cx,
     className,
     children,
-    selectProps: { size, hasStickyGroupHeaders, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
 
   const fontSizes: SizeProps = {
     sm: "xs",
@@ -306,8 +317,8 @@ export const GroupHeading = <
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
-    fontSize: fontSizes[realSize],
-    padding: paddings[realSize],
+    fontSize: fontSizes[size],
+    padding: paddings[size],
     margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
@@ -358,16 +369,16 @@ export const Option = <
     isDisabled,
     isSelected,
     selectProps: {
-      size,
+      chakraStyles,
+      size: sizeProp,
       isMulti,
       hideSelectedOptions,
       selectedOptionStyle,
       selectedOptionColor,
-      chakraStyles,
     },
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
 
   const menuItemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
 
@@ -403,8 +414,8 @@ export const Option = <
     alignItems: "center",
     width: "100%",
     textAlign: "start",
-    fontSize: realSize,
-    padding: paddings[realSize],
+    fontSize: size,
+    padding: paddings[size],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,

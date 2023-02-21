@@ -33,19 +33,19 @@ const Control = <
     isFocused,
     menuIsOpen,
     selectProps: {
-      size,
-      isInvalid,
-      isReadOnly,
       chakraStyles,
+      size: sizeProp,
+      variant,
       focusBorderColor,
       errorBorderColor,
-      variant,
+      isInvalid,
+      isReadOnly,
     },
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
-    size: realSize,
+    size,
     focusBorderColor,
     errorBorderColor,
     variant,
@@ -150,16 +150,16 @@ export const DropdownIndicator = <
     selectProps: {
       chakraStyles,
       useBasicStyles,
-      size,
+      size: sizeProp,
       focusBorderColor,
       errorBorderColor,
       variant,
     },
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
-    size: realSize,
+    size,
     focusBorderColor,
     errorBorderColor,
     variant,
@@ -170,7 +170,7 @@ export const DropdownIndicator = <
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[realSize];
+  const iconSize = iconSizes[size];
 
   const initialSx: SystemStyleObject = {
     ...inputStyles.addon,
@@ -245,12 +245,12 @@ export const ClearIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
   const closeButtonStyles = useStyleConfig("CloseButton", {
-    realSize,
+    size,
   });
 
   const initialSx: SystemStyleObject = {
@@ -304,7 +304,7 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
     color,
     emptyColor,
     speed,
@@ -312,13 +312,13 @@ export const LoadingIndicator = <
     spinnerSize: propsSpinnerSize,
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
   const spinnerSizes: SizeProps<string> = {
     sm: "xs",
     md: "sm",
     lg: "md",
   };
-  const spinnerSize = spinnerSizes[realSize];
+  const spinnerSize = spinnerSizes[size];
 
   const initialSx: SystemStyleObject = { marginRight: 3 };
 

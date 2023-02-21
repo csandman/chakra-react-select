@@ -10,6 +10,7 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
+import { useSize } from "../utils";
 
 const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
   typeof option === "object" &&
@@ -51,7 +52,9 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
+  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+
+  const size = useSize(sizeProp);
 
   let optionColorScheme = "";
   let optionVariant = "";

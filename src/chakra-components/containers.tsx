@@ -70,16 +70,24 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: { size, chakraStyles, variant },
+    selectProps: {
+      chakraStyles,
+      size: sizeProp,
+      variant,
+      focusBorderColor,
+      errorBorderColor,
+    },
   } = props;
 
-  const realSize = useSize(size);
+  const size = useSize(sizeProp);
 
   // Getting the css from input instead of select
   // to fit better with each of the variants
   const inputStyles = useMultiStyleConfig("Input", {
-    size: realSize,
+    size,
     variant,
+    focusBorderColor,
+    errorBorderColor,
   });
 
   const initialSx: SystemStyleObject = {
