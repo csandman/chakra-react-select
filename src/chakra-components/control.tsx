@@ -46,9 +46,9 @@ const Control = <
   const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
     size,
+    variant,
     focusBorderColor,
     errorBorderColor,
-    variant,
   });
 
   const initialSx: SystemStyleObject = {
@@ -160,9 +160,9 @@ export const DropdownIndicator = <
   const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
     size,
+    variant,
     focusBorderColor,
     errorBorderColor,
-    variant,
   });
 
   const iconSizes: SizeProps = {
