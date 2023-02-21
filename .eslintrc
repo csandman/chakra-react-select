@@ -22,7 +22,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
   "plugins": ["deprecation", "@typescript-eslint"],
   "rules": {
