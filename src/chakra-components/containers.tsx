@@ -8,6 +8,7 @@ import type {
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
+import { useSize } from "../utils";
 
 export const SelectContainer = <
   Option,
@@ -72,10 +73,12 @@ export const ValueContainer = <
     selectProps: { size, chakraStyles, variant },
   } = props;
 
+  const realSize = useSize(size);
+
   // Getting the css from input instead of select
   // to fit better with each of the variants
   const inputStyles = useMultiStyleConfig("Input", {
-    size,
+    size: realSize,
     variant,
   });
 

@@ -43,10 +43,11 @@ const Control = <
     },
   } = props;
 
+  const realSize = useSize(size);
   const inputStyles = useMultiStyleConfig("Input", {
+    size: realSize,
     focusBorderColor,
     errorBorderColor,
-    size,
     variant,
   });
 
@@ -156,14 +157,14 @@ export const DropdownIndicator = <
     },
   } = props;
 
+  const realSize = useSize(size);
   const inputStyles = useMultiStyleConfig("Input", {
-    size,
+    size: realSize,
     focusBorderColor,
     errorBorderColor,
     variant,
   });
 
-  const realSize = useSize(size);
   const iconSizes: SizeProps = {
     sm: "16px",
     md: "20px",
@@ -247,8 +248,9 @@ export const ClearIndicator = <
     selectProps: { size, chakraStyles },
   } = props;
 
+  const realSize = useSize(size);
   const closeButtonStyles = useStyleConfig("CloseButton", {
-    size,
+    realSize,
   });
 
   const initialSx: SystemStyleObject = {

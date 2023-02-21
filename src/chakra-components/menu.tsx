@@ -81,7 +81,9 @@ export const MenuList = <
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
-  const inputStyles = useMultiStyleConfig("Input", { size });
+
+  const realSize = useSize(size);
+  const inputStyles = useMultiStyleConfig("Input", { size: realSize });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
