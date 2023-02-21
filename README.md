@@ -560,7 +560,7 @@ This package has always supported typescript, however until `3.0.0` none of the 
 This package exports all of the named module members of the original `react-select` in case you need their built-in types in any of your variable declarations. The root select `Props` type that is exported by `react-select` has been extended using module augmentation,<sup>[[1]](https://react-select.com/typescript#custom-select-props)</sup><sup>[[2]](https://github.com/JedWatson/react-select/issues/4804#issuecomment-927223471)</sup> so if you import that type it will include all of the extra props offered. This package also exports a few custom types that are specific to the custom props offered by this package:
 
 - `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed to customize the component styles. This is almost identical to the built-in `StylesConfig` type, however, it uses Chakra's [`CSSObject`](https://github.com/chakra-ui/chakra-ui/blob/790d2417a3f5d59e2d69229a027af671c2dc0cbc/packages/styled-system/src/system.types.ts#L81) type instead of react-select's emotion styles.
-- `OptionBase` — A type for your individual select options that include the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
+- `OptionBase` — A type for your individual select options that includes the custom props for styling each of your selected options. This type is made to give you a base to extend off of and pass in as a generic to the root `Select` component.
 - Each of the four Select components has a type exported with it:
   - `SelectComponent`
   - `AsyncSelectComponent`
