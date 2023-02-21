@@ -355,7 +355,7 @@ This package does however offer an alternative to the `styles` prop, `chakraStyl
 
 ### `chakraStyles`
 
-To use the `chakraStyles` prop first, check the documentation for [the original `styles` prop from the react-select docs](https://react-select.com/styles#style-object). This package offers an identical API for the `chakraStyles` prop, however, the `provided` and output style objects use [Chakra's `sx` prop](https://chakra-ui.com/docs/styled-system/the-sx-prop) instead of the default emotion styles the original package offers. This allows you to both use the shorthand styling props you'd normally use to style Chakra components, as well as tokens from your theme such as named colors.
+To use the `chakraStyles` prop, first, check the documentation for [the original `styles` prop from the react-select docs](https://react-select.com/styles#style-object). This package offers an identical API for the `chakraStyles` prop, however, the `provided` and output style objects use [Chakra's `sx` prop](https://chakra-ui.com/docs/styled-system/the-sx-prop) instead of the default emotion styles the original package offers. This allows you to both use the shorthand styling props you'd normally use to style Chakra components, as well as tokens from your theme such as named colors.
 
 The API for an individual style function looks like this:
 
