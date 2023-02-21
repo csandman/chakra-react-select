@@ -1,39 +1,8 @@
 import { useFormControl } from "@chakra-ui/form-control";
-import { useBreakpointValue } from "@chakra-ui/media-query";
 import { useTheme } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import type {
-  SelectedOptionStyle,
-  Size,
-  SizeProp,
-  TagVariant,
-  Variant,
-} from "./types";
-
-/** A typeguard to ensure the default size on the Input component is valid. */
-const isSize = (size: unknown): size is Size => {
-  const isString = typeof size === "string";
-  return isString && ["sm", "md", "lg"].includes(size);
-};
-
-const getDefaultSize = (size: unknown): Size => {
-  if (isSize(size)) {
-    return size;
-  }
-
-  if (size === "xs") {
-    return "sm";
-  }
-
-  // This shouldn't be necessary but it might help the size get closer to the
-  // user's goal if they have `xl` as a custom size.
-  if (size === "xl") {
-    return "lg";
-  }
-
-  return "md";
-};
+import type { SelectedOptionStyle, TagVariant, Variant } from "./types";
 
 const useChakraSelectProps = <
   Option,
@@ -63,9 +32,7 @@ const useChakraSelectProps = <
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   const chakraTheme = useTheme();
-  const { variant: defaultVariant, size: defaultSize } =
-    chakraTheme.components.Input.defaultProps;
-  const realDefaultSize = getDefaultSize(defaultSize);
+  const { variant: defaultVariant } = chakraTheme.components.Input.defaultProps;
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
@@ -83,17 +50,6 @@ const useChakraSelectProps = <
   // Unless `menuIsOpen` is controlled, disable it if the select is readonly
   const realMenuIsOpen =
     menuIsOpen ?? (inputProps.readOnly ? false : undefined);
-
-  // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
-  const definedSize: SizeProp = size ?? realDefaultSize;
-  // Or, if a breakpoint is passed, get the size based on the current screen size
-  const realSize: Size =
-    useBreakpointValue<Size>(
-      typeof definedSize === "string" ? [definedSize] : definedSize,
-      {
-        fallback: "md",
-      }
-    ) || defaultSize;
 
   // Ensure that the tag variant used is one of the options, either `subtle`,
   // `solid`, or `outline` (or undefined)
@@ -137,7 +93,7 @@ const useChakraSelectProps = <
     },
     // Custom select props
     colorScheme,
-    size: realSize,
+    size,
     tagVariant: realTagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,

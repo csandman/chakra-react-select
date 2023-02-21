@@ -14,6 +14,7 @@ import type {
   LoadingIndicatorProps,
 } from "react-select";
 import type { SizeProps } from "../types";
+import { useSize } from "../utils";
 
 const Control = <
   Option,
@@ -162,12 +163,13 @@ export const DropdownIndicator = <
     variant,
   });
 
+  const realSize = useSize(size);
   const iconSizes: SizeProps = {
     sm: "16px",
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[size || "md"];
+  const iconSize = iconSizes[realSize];
 
   const initialSx: SystemStyleObject = {
     ...inputStyles.addon,
@@ -308,13 +310,13 @@ export const LoadingIndicator = <
     spinnerSize: propsSpinnerSize,
   } = props;
 
+  const realSize = useSize(size);
   const spinnerSizes: SizeProps<string> = {
     sm: "xs",
     md: "sm",
     lg: "md",
   };
-
-  const spinnerSize = spinnerSizes[size || "md"];
+  const spinnerSize = spinnerSizes[realSize];
 
   const initialSx: SystemStyleObject = { marginRight: 3 };
 

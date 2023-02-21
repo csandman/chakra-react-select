@@ -16,6 +16,7 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
+import { useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
   const placementToCSSProp = { bottom: "top", top: "bottom" };
@@ -136,6 +137,8 @@ export const LoadingMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
+  const realSize = useSize(size);
+
   const verticalPaddings: SizeProps = {
     sm: "6px",
     md: "8px",
@@ -145,8 +148,8 @@ export const LoadingMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[size || "md"],
-    fontSize: size,
+    paddingY: verticalPaddings[realSize],
+    fontSize: realSize,
   };
 
   const sx = chakraStyles?.loadingMessage
@@ -192,6 +195,8 @@ export const NoOptionsMessage = <
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
+  const realSize = useSize(size);
+
   const verticalPaddings: SizeProps = {
     sm: "6px",
     md: "8px",
@@ -201,8 +206,8 @@ export const NoOptionsMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[size || "md"],
-    fontSize: size,
+    paddingY: verticalPaddings[realSize],
+    fontSize: realSize,
   };
 
   const sx = chakraStyles?.noOptionsMessage
@@ -284,6 +289,8 @@ export const GroupHeading = <
 
   const menuStyles = useMultiStyleConfig("Menu");
 
+  const realSize = useSize(size);
+
   const fontSizes: SizeProps = {
     sm: "xs",
     md: "sm",
@@ -297,8 +304,8 @@ export const GroupHeading = <
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
-    fontSize: fontSizes[size || "md"],
-    padding: paddings[size || "md"],
+    fontSize: fontSizes[realSize],
+    padding: paddings[realSize],
     margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
@@ -358,6 +365,8 @@ export const Option = <
     },
   } = props;
 
+  const realSize = useSize(size);
+
   const menuItemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
 
   const paddings: SizeProps = {
@@ -392,8 +401,8 @@ export const Option = <
     alignItems: "center",
     width: "100%",
     textAlign: "start",
-    fontSize: size,
-    padding: paddings[size || "md"],
+    fontSize: realSize,
+    padding: paddings[realSize],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,
