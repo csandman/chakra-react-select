@@ -244,6 +244,7 @@ export const Group = <
     label,
     selectProps,
     innerProps,
+    getClassNames,
   } = props;
 
   const { chakraStyles } = selectProps;
@@ -258,6 +259,7 @@ export const Group = <
         cx={cx}
         theme={theme}
         getStyles={getStyles}
+        getClassNames={getClassNames}
       >
         {label}
       </Heading>
@@ -392,7 +394,6 @@ export const Option = <
     textAlign: "start",
     fontSize: size,
     padding: paddings[size || "md"],
-    bg: "transparent",
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,
