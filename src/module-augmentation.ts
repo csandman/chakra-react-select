@@ -24,12 +24,13 @@ declare module "react-select/dist/declarations/src/Select" {
   > {
     /**
      * The size of the base control; matches the sizes of the chakra Input
-     * component with the exception of `xs`.
+     * component with the exception of `xs`. A [responsive style array/object](https://chakra-ui.com/docs/features/responsive-styles) can
+     * also be passed.
      *
      * Options: `sm` | `md` | `lg`
      *
      * @defaultValue `md`
-     * @see {@link https://github.com/csandman/chakra-react-select#size--options-sm--md--lg--default-md}
+     * @see {@link https://github.com/csandman/chakra-react-select#size--options-responsivevaluesm--md--lg--default-md}
      * @see {@link https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
      */
     size?: SizeProp;
