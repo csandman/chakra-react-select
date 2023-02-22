@@ -54,6 +54,14 @@
         "prefer": "type-imports",
         "disallowTypeAnnotations": true
       }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "{}": false
+        }
+      }
     ]
   }
 }

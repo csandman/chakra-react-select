@@ -83,7 +83,8 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
-     * which is represented by a chakra `Tag`.
+     * which is represented by a chakra `Tag`. You can also use any custom
+     * variants you have added to your theme.
      *
      * Options: "subtle" | "solid" | "outline"
      *
@@ -165,7 +166,9 @@ declare module "react-select/dist/declarations/src/Select" {
     useBasicStyles?: boolean;
 
     /**
-     * The main style variant of the `Select` component.
+     * The main style variant of the `Select` component. This will use styles
+     * from Chakra's `Input` component and any custom variants you have added to
+     * your theme may be used.
      *
      * Options: `outline` | `filled` | `flushed` | `unstyled`
      *

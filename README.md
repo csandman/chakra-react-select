@@ -201,6 +201,8 @@ return (
 You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline`
 (default is `subtle`). These will reflect the `variant` prop available on the
 [Chakra `<Tag />` component](https://chakra-ui.com/docs/components/tag/props).
+Alternatively, if you have added any custom variants to your theme, you can use
+those instead.
 
 Alternatively, you can add the `variant` key to any of your options objects and
 it will only style that option when selected. This will override the
@@ -362,6 +364,10 @@ You can pass the `variant` prop with any of `outline`, `filled`, `flushed`, or
 `unstyled` to change the overall styling of the `Select`. These will reflect the
 various appearances available for
 [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input).
+Alternatively, if you've added any custom variants to your Chakra theme you can
+use those instead. However, it is not guaranteed all styles will be applied how
+you intend them to as there are some differences in the structure of the
+Select's input component.
 
 If no `variant` is passed, it will default to `defaultProps.variant` from the
 theme for Chakra's `Input` component. If your component theme for `Input` is not
