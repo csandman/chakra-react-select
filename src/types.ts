@@ -43,11 +43,16 @@ export type Size = "sm" | "md" | "lg";
 
 export type SizeProp = Size | ResponsiveObject<Size> | Size[];
 
-export type TagVariant = "subtle" | "solid" | "outline";
+export type TagVariant = "subtle" | "solid" | "outline" | (string & {});
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = "outline" | "filled" | "flushed" | "unstyled";
+export type Variant =
+  | "outline"
+  | "filled"
+  | "flushed"
+  | "unstyled"
+  | (string & {});
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,

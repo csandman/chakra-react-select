@@ -2,7 +2,7 @@ import { useFormControl } from "@chakra-ui/form-control";
 import { useTheme } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import type { SelectedOptionStyle, TagVariant, Variant } from "./types";
+import type { SelectedOptionStyle } from "./types";
 
 const useChakraSelectProps = <
   Option,
@@ -51,16 +51,6 @@ const useChakraSelectProps = <
   const realMenuIsOpen =
     menuIsOpen ?? (inputProps.readOnly ? false : undefined);
 
-  // Ensure that the tag variant used is one of the options, either `subtle`,
-  // `solid`, or `outline` (or undefined)
-  let realTagVariant: TagVariant | undefined = tagVariant;
-  const tagVariantOptions: TagVariant[] = ["subtle", "solid", "outline"];
-  if (tagVariant !== undefined) {
-    if (!tagVariantOptions.includes(tagVariant)) {
-      realTagVariant = "subtle";
-    }
-  }
-
   // Ensure that the selected option style is either `color` or `check`
   let realSelectedOptionStyle: SelectedOptionStyle = selectedOptionStyle;
   const selectedOptionStyleOptions: SelectedOptionStyle[] = ["color", "check"];
@@ -74,17 +64,6 @@ const useChakraSelectProps = <
     realSelectedOptionColor = "blue";
   }
 
-  let realVariant: Variant = variant ?? defaultVariant;
-  const variantOptions: Variant[] = [
-    "outline",
-    "filled",
-    "flushed",
-    "unstyled",
-  ];
-  if (!variantOptions.includes(realVariant)) {
-    realVariant = defaultVariant;
-  }
-
   const select: Props<Option, IsMulti, Group> = {
     // Allow overriding of custom components
     components: {
@@ -94,10 +73,10 @@ const useChakraSelectProps = <
     // Custom select props
     colorScheme,
     size,
-    tagVariant: realTagVariant,
+    tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColor: realSelectedOptionColor,
-    variant: realVariant,
+    variant: variant ?? defaultVariant,
     hasStickyGroupHeaders,
     chakraStyles,
     focusBorderColor,
