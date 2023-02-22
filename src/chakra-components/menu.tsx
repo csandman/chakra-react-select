@@ -16,6 +16,7 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
+import { useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
   const placementToCSSProp = { bottom: "top", top: "bottom" };
@@ -76,11 +77,24 @@ export const MenuList = <
     maxHeight,
     isMulti,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: {
+      chakraStyles,
+      size: sizeProp,
+      variant,
+      focusBorderColor,
+      errorBorderColor,
+    },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
-  const inputStyles = useMultiStyleConfig("Input", { size });
+
+  const size = useSize(sizeProp);
+  const inputStyles = useMultiStyleConfig("Input", {
+    size,
+    variant,
+    focusBorderColor,
+    errorBorderColor,
+  });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
@@ -126,7 +140,7 @@ export const LoadingMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   /**
@@ -135,6 +149,8 @@ export const LoadingMessage = <
    * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
+
+  const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
     sm: "6px",
@@ -145,7 +161,7 @@ export const LoadingMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[size || "md"],
+    paddingY: verticalPaddings[size],
     fontSize: size,
   };
 
@@ -182,7 +198,7 @@ export const NoOptionsMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   /**
@@ -191,6 +207,8 @@ export const NoOptionsMessage = <
    * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
    */
   const color = useColorModeValue("gray.400", "whiteAlpha.400");
+
+  const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
     sm: "6px",
@@ -201,7 +219,7 @@ export const NoOptionsMessage = <
   const initialSx: SystemStyleObject = {
     color,
     textAlign: "center",
-    paddingY: verticalPaddings[size || "md"],
+    paddingY: verticalPaddings[size],
     fontSize: size,
   };
 
@@ -279,10 +297,12 @@ export const GroupHeading = <
     cx,
     className,
     children,
-    selectProps: { size, hasStickyGroupHeaders, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
+
+  const size = useSize(sizeProp);
 
   const fontSizes: SizeProps = {
     sm: "xs",
@@ -297,8 +317,8 @@ export const GroupHeading = <
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
-    fontSize: fontSizes[size || "md"],
-    padding: paddings[size || "md"],
+    fontSize: fontSizes[size],
+    padding: paddings[size],
     margin: 0,
     borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
     position: hasStickyGroupHeaders ? "sticky" : "static",
@@ -349,14 +369,16 @@ export const Option = <
     isDisabled,
     isSelected,
     selectProps: {
-      size,
+      chakraStyles,
+      size: sizeProp,
       isMulti,
       hideSelectedOptions,
       selectedOptionStyle,
       selectedOptionColor,
-      chakraStyles,
     },
   } = props;
+
+  const size = useSize(sizeProp);
 
   const menuItemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
 
@@ -393,7 +415,7 @@ export const Option = <
     width: "100%",
     textAlign: "start",
     fontSize: size,
-    padding: paddings[size || "md"],
+    padding: paddings[size],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       bg: selectedBg,

@@ -10,15 +10,25 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
+import { useSize } from "../utils";
 
-const hasColorScheme = (option: unknown): option is { colorScheme: unknown } =>
-  typeof option === "object" && option !== null && "colorScheme" in option;
+const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
+  typeof option === "object" &&
+  option !== null &&
+  "colorScheme" in option &&
+  typeof option.colorScheme === "string";
 
-const hasIsFixed = (option: unknown): option is { isFixed: unknown } =>
-  typeof option === "object" && option !== null && "isFixed" in option;
+const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
+  typeof option === "object" &&
+  option !== null &&
+  "isFixed" in option &&
+  typeof option.isFixed === "boolean";
 
-const hasVariant = (option: unknown): option is { variant: unknown } =>
-  typeof option === "object" && option !== null && "variant" in option;
+const hasVariant = (option: unknown): option is { variant: string } =>
+  typeof option === "object" &&
+  option !== null &&
+  "variant" in option &&
+  typeof option.variant === "string";
 
 const MultiValue = <
   Option = unknown,
@@ -42,17 +52,19 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
+  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+
+  const size = useSize(sizeProp);
 
   let optionColorScheme = "";
   let optionVariant = "";
   let optionIsFixed = false;
 
-  if (hasColorScheme(data) && typeof data.colorScheme === "string") {
+  if (hasColorScheme(data)) {
     optionColorScheme = data.colorScheme;
   }
 
-  if (hasVariant(data) && typeof data.variant === "string") {
+  if (hasVariant(data)) {
     optionVariant = data.variant;
   }
 

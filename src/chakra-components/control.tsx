@@ -14,6 +14,7 @@ import type {
   LoadingIndicatorProps,
 } from "react-select";
 import type { SizeProps } from "../types";
+import { useSize } from "../utils";
 
 const Control = <
   Option,
@@ -32,21 +33,22 @@ const Control = <
     isFocused,
     menuIsOpen,
     selectProps: {
-      size,
-      isInvalid,
-      isReadOnly,
       chakraStyles,
+      size: sizeProp,
+      variant,
       focusBorderColor,
       errorBorderColor,
-      variant,
+      isInvalid,
+      isReadOnly,
     },
   } = props;
 
+  const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
-    focusBorderColor,
-    errorBorderColor,
     size,
     variant,
+    focusBorderColor,
+    errorBorderColor,
   });
 
   const initialSx: SystemStyleObject = {
@@ -148,18 +150,19 @@ export const DropdownIndicator = <
     selectProps: {
       chakraStyles,
       useBasicStyles,
-      size,
+      size: sizeProp,
       focusBorderColor,
       errorBorderColor,
       variant,
     },
   } = props;
 
+  const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
     size,
+    variant,
     focusBorderColor,
     errorBorderColor,
-    variant,
   });
 
   const iconSizes: SizeProps = {
@@ -167,7 +170,7 @@ export const DropdownIndicator = <
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[size || "md"];
+  const iconSize = iconSizes[size];
 
   const initialSx: SystemStyleObject = {
     ...inputStyles.addon,
@@ -242,9 +245,10 @@ export const ClearIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
+  const size = useSize(sizeProp);
   const closeButtonStyles = useStyleConfig("CloseButton", {
     size,
   });
@@ -300,7 +304,7 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
     color,
     emptyColor,
     speed,
@@ -308,13 +312,13 @@ export const LoadingIndicator = <
     spinnerSize: propsSpinnerSize,
   } = props;
 
+  const size = useSize(sizeProp);
   const spinnerSizes: SizeProps<string> = {
     sm: "xs",
     md: "sm",
     lg: "md",
   };
-
-  const spinnerSize = spinnerSizes[size || "md"];
+  const spinnerSize = spinnerSizes[size];
 
   const initialSx: SystemStyleObject = { marginRight: 3 };
 

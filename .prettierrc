@@ -11,7 +11,7 @@
   "arrowParens": "always",
   "requirePragma": false,
   "insertPragma": false,
-  "proseWrap": "preserve",
+  "proseWrap": "always",
   "htmlWhitespaceSensitivity": "css",
   "endOfLine": "lf",
   "importOrder": [

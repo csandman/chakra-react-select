@@ -4,7 +4,7 @@ import type { GroupBase } from "react-select";
 import type {
   ChakraStylesConfig,
   SelectedOptionStyle,
-  Size,
+  SizeProp,
   TagVariant,
   Variant,
 } from "./types";
@@ -24,19 +24,20 @@ declare module "react-select/dist/declarations/src/Select" {
   > {
     /**
      * The size of the base control; matches the sizes of the chakra Input
-     * component with the exception of `xs`
+     * component with the exception of `xs`. A [responsive style array/object](https://chakra-ui.com/docs/features/responsive-styles) can
+     * also be passed.
      *
      * Options: `sm` | `md` | `lg`
      *
      * @defaultValue `md`
-     * @see {@link https://github.com/csandman/chakra-react-select#size--options-sm--md--lg--default-md}
+     * @see {@link https://github.com/csandman/chakra-react-select#size--options-responsivevaluesm--md--lg--default-md}
      * @see {@link https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
      */
-    size?: Size;
+    size?: SizeProp;
 
     /**
      * Determines whether or not to style the input with the invalid border
-     * color
+     * color.
      *
      * If the `aria-invalid` prop is not passed, this prop will also set that
      *
@@ -48,7 +49,7 @@ declare module "react-select/dist/declarations/src/Select" {
     isInvalid?: boolean;
 
     /**
-     * If `true`, the form control will be `readonly`
+     * If `true`, the form control will be `readonly`.
      *
      * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
@@ -59,6 +60,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * If true, the form control will be required. This has 2 side effects:
+     *
      * - The `FormLabel` will show a required indicator
      * - The form element (e.g, Input) will have `aria-required` set to true
      *
@@ -69,9 +71,9 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * A color name that matches a key from your chakra theme and will
-     * determine the color scheme of your `MultiValue` component
+     * determine the color scheme of your `MultiValue` component.
      *
-     * The styling matches the chakra `Tag` component
+     * The styling matches the chakra `Tag` component.
      *
      * @defaultValue `"gray"`
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
@@ -81,7 +83,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
-     * which is represented by a chakra `Tag`
+     * which is represented by a chakra `Tag`.
      *
      * Options: "subtle" | "solid" | "outline"
      *
@@ -94,7 +96,7 @@ declare module "react-select/dist/declarations/src/Select" {
     /**
      * Passing `true` for this prop will make the group headers
      * `position: sticky` and keep them stuck to the top while their
-     * corresponding group is in view
+     * corresponding group is in view.
      *
      * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#hasstickygroupheaders--default-false}
@@ -103,7 +105,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * Whether to style a selected option by highlighting it in a solid color
-     * or adding a check mark next to it like the chakra `Menu` component
+     * or adding a check mark next to it like the chakra `Menu` component.
      *
      * Options: `color` | `check`
      *
@@ -125,7 +127,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * The color value to style the border of the `Control` with when the
-     * select is focused
+     * select is focused.
      *
      * @defaultValue Light mode: `blue.500` | Dark mode: `blue.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
@@ -135,7 +137,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * The color value to style the border of the `Control` with when
-     * `isInvalid` is passed to the select
+     * `isInvalid` is passed to the select.
      *
      * @defaultValue Light mode: `red.500` | Dark mode: `red.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
@@ -145,7 +147,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * Style transformation methods for each of the rendered components using,
-     * Chakra's `SystemStyleObject` and the props passed into each component
+     * Chakra's `SystemStyleObject` and the props passed into each component.
      *
      * @see {@link https://github.com/csandman/chakra-react-select#chakrastyles}
      * @see {@link https://react-select.com/styles#style-object}
@@ -154,7 +156,7 @@ declare module "react-select/dist/declarations/src/Select" {
 
     /**
      * If passed, the dropdown indicator will be styled the same as Chakra UI's
-     * `Select` component
+     * `Select` component.
      *
      * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
@@ -163,7 +165,7 @@ declare module "react-select/dist/declarations/src/Select" {
     useBasicStyles?: boolean;
 
     /**
-     * The main style variant of the `Select` component
+     * The main style variant of the `Select` component.
      *
      * Options: `outline` | `filled` | `flushed` | `unstyled`
      *
@@ -209,16 +211,16 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     Group extends GroupBase<Option>
   > {
     /**
-     * The color of the filled in area of the spinner
+     * The color of the filled in area of the spinner.
      *
-     * Defaults to your Chakra theme's text color
+     * Defaults to your Chakra theme's text color.
      *
      * @defaultValue Light mode: `gray.700` | Dark mode: `whiteAlpha.900`
      */
     color?: string;
 
     /**
-     * The color of the empty area in the spinner
+     * The color of the empty area in the spinner.
      *
      * @defaultValue `transparent`
      * @see {@link https://chakra-ui.com/docs/components/spinner#spinner-with-empty-area-color}
@@ -228,7 +230,7 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     /**
      * The size prop for the Chakra `<Spinner />` component.
      *
-     * Defaults to one size smaller than the overall Select's size
+     * Defaults to one size smaller than the overall Select's size.
      *
      * @see {@link https://chakra-ui.com/docs/components/spinner#spinner-with-different-size}
      */
@@ -237,7 +239,9 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     /**
      * The speed of the spinner represented by the time it takes to make one full rotation.
      *
-     * This speed is represented by a [CSS `<time>`](https://developer.mozilla.org/en-US/docs/Web/CSS/time) variable which uses either seconds or milliseconds
+     * This speed is represented by a
+     * [CSS `<time>`](https://developer.mozilla.org/en-US/docs/Web/CSS/time)
+     * variable which uses either seconds or milliseconds.
      *
      * @defaultValue `0.45s`
      * @example
@@ -249,7 +253,7 @@ declare module "react-select/dist/declarations/src/components/indicators" {
     speed?: string;
 
     /**
-     * The thickness of the spinner
+     * The thickness of the spinner.
      *
      * @defaultValue `2px`
      * @example

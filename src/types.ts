@@ -1,6 +1,7 @@
 import type {
   CSSWithMultiValues,
   RecursiveCSSObject,
+  ResponsiveObject,
   SystemStyleObject,
 } from "@chakra-ui/system";
 import type {
@@ -39,6 +40,8 @@ export interface SizeProps<PropType = string | number> {
 }
 
 export type Size = "sm" | "md" | "lg";
+
+export type SizeProp = Size | ResponsiveObject<Size> | Size[];
 
 export type TagVariant = "subtle" | "solid" | "outline";
 
