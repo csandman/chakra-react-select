@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SystemStyleObject } from "@chakra-ui/system";
-import type { GroupBase } from "react-select";
+import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
   SelectedOptionStyle,
@@ -177,6 +177,18 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
+
+    /**
+     * @deprecated This prop is not used for `chakra-react-select`, use
+     * {@link chakraStyles} instead.
+     */
+    styles: StylesConfig<Option, IsMulti, Group>;
+
+    /**
+     * @deprecated This prop is not used for `chakra-react-select`, all theme
+     * values are pulled from your Chakra UI theme.
+     */
+    theme?: ThemeConfig;
   }
 }
 
