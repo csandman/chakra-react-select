@@ -20,7 +20,6 @@ const useChakraSelectProps = <
   isRequired,
   inputId,
   tagVariant,
-  hasStickyGroupHeaders = false,
   selectedOptionStyle = "color",
   selectedOptionColorScheme,
   // eslint-disable-next-line deprecation/deprecation
@@ -81,7 +80,6 @@ const useChakraSelectProps = <
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColorScheme: realSelectedOptionColorScheme,
     variant: variant ?? defaultVariant,
-    hasStickyGroupHeaders,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
