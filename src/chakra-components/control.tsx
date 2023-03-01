@@ -79,7 +79,6 @@ const Control = <
       )}
       sx={sx}
       {...innerProps}
-      data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
