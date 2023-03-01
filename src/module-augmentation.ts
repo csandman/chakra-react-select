@@ -122,7 +122,12 @@ declare module "react-select/dist/declarations/src/Select" {
      * and the `300` value in dark mode.
      *
      * @defaultValue `blue`
-     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolor--default-blue}
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
+     */
+    selectedOptionColorScheme?: string;
+
+    /**
+     * @deprecated Replaced by {@link selectedOptionColorScheme}
      */
     selectedOptionColor?: string;
 

@@ -10,6 +10,7 @@ const useChakraSelectProps = <
   Group extends GroupBase<Option> = GroupBase<Option>
 >({
   components = {},
+  // eslint-disable-next-line deprecation/deprecation
   theme,
   size,
   colorScheme = "gray",
@@ -21,7 +22,9 @@ const useChakraSelectProps = <
   tagVariant,
   hasStickyGroupHeaders = false,
   selectedOptionStyle = "color",
-  selectedOptionColor = "blue",
+  selectedOptionColorScheme,
+  // eslint-disable-next-line deprecation/deprecation
+  selectedOptionColor,
   variant,
   focusBorderColor,
   errorBorderColor,
@@ -59,9 +62,10 @@ const useChakraSelectProps = <
   }
 
   // Ensure that the color used for the selected options is a string
-  let realSelectedOptionColor: string = selectedOptionColor;
+  let realSelectedOptionColorScheme: string =
+    selectedOptionColorScheme || selectedOptionColor || "blue";
   if (typeof selectedOptionColor !== "string") {
-    realSelectedOptionColor = "blue";
+    realSelectedOptionColorScheme = "blue";
   }
 
   const select: Props<Option, IsMulti, Group> = {
@@ -75,7 +79,7 @@ const useChakraSelectProps = <
     size,
     tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
-    selectedOptionColor: realSelectedOptionColor,
+    selectedOptionColorScheme: realSelectedOptionColorScheme,
     variant: variant ?? defaultVariant,
     hasStickyGroupHeaders,
     chakraStyles,
