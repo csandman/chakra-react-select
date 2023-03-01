@@ -100,7 +100,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * corresponding group is in view.
      *
      * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#hasstickygroupheaders--default-false}
+     * @deprecated This prop should probably not have existed and will be
+     * removed soon.
      */
     hasStickyGroupHeaders?: boolean;
 

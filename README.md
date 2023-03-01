@@ -59,8 +59,6 @@ https://react-select.com/home
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColorScheme`](#selectedoptioncolorscheme--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
-  - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
-  - [`isFixed`](#isfixed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
@@ -434,60 +432,6 @@ elements.
 ![variant with useBasicStyles](./github/filled-variant.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
-
----
-
-#### `hasStickyGroupHeaders` — Default: `false`
-
-One additional feature which isn’t specific to Chakra or react-select is sticky
-group headers. It adds a border to the bottom of the header and keeps it in view
-while its corresponding group of options is visible. This can be very nice when
-you have long lists of grouped options so you can always tell which group of
-options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to
-the select component.
-
-```js
-return <Select hasStickyGroupHeaders />;
-```
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js)
-
-**NOTE:** It has recently been discovered that when using this prop, navigating
-up through the available options with the arrow key will keep the focused option
-underneath the header, as it will not scroll enough to account for it being
-there. So if this is an issue for you, avoid this prop. A fix for this is being
-investigated.
-
-![Sticky Group Headers](./github/sticky-group-headers.png)
-
----
-
-#### `isFixed`
-
-In your options objects, you can add the key `isFixed: true` to emulate the
-example in the [react-select docs](https://react-select.com/home#fixed-options).
-This will prevent the options which have this flag from having the remove button
-on their corresponding tag, and it changes the default `tagVariant` for that tag
-to be solid. This only applies when using `isMulti`.
-
-```js
-return (
-  <Select
-    isMulti
-    options={[
-      {
-        label: "I can't be removed",
-        value: "fixed",
-        isFixed: true,
-      },
-      {
-        label: "I can be removed",
-        value: "not-fixed",
-      },
-    ]}
-  />
-);
-```
 
 ---
 
