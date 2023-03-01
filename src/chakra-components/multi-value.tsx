@@ -18,17 +18,17 @@ const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
   "colorScheme" in option &&
   typeof option.colorScheme === "string";
 
-const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
-  typeof option === "object" &&
-  option !== null &&
-  "isFixed" in option &&
-  typeof option.isFixed === "boolean";
-
 const hasVariant = (option: unknown): option is { variant: string } =>
   typeof option === "object" &&
   option !== null &&
   "variant" in option &&
   typeof option.variant === "string";
+
+const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
+  typeof option === "object" &&
+  option !== null &&
+  "isFixed" in option &&
+  typeof option.isFixed === "boolean";
 
 const MultiValue = <
   Option = unknown,
@@ -48,6 +48,7 @@ const MultiValue = <
     isFocused,
     removeProps,
     selectProps,
+    cropWithEllipsis,
   } = props;
 
   const { Container, Label, Remove } = components;
@@ -69,7 +70,7 @@ const MultiValue = <
   }
 
   if (hasIsFixed(data)) {
-    optionIsFixed = !!data.isFixed;
+    optionIsFixed = data.isFixed;
   }
 
   const tagStyles = useMultiStyleConfig("Tag", {
@@ -81,26 +82,33 @@ const MultiValue = <
 
   const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,
-    display: "inline-flex",
-    verticalAlign: "top",
+    display: "flex",
     alignItems: "center",
-    maxWidth: "100%",
+    minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
   };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialSx, props)
     : containerInitialSx;
 
-  const labelInitialSx: SystemStyleObject = tagStyles.label;
+  const labelInitialSx: SystemStyleObject = {
+    ...tagStyles.label,
+    overflow: "hidden",
+    textOverflow:
+      cropWithEllipsis || cropWithEllipsis === undefined
+        ? "ellipsis"
+        : undefined,
+    whiteSpace: "nowrap",
+  };
   const labelSx = chakraStyles?.multiValueLabel
     ? chakraStyles.multiValueLabel(labelInitialSx, props)
     : labelInitialSx;
 
   const removeInitialSx: SystemStyleObject = {
+    ...tagStyles.closeButton,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    ...tagStyles.closeButton,
   };
   const removeSx = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialSx, props)
