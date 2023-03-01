@@ -58,10 +58,8 @@ https://react-select.com/home
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
   - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
-  - [`selectedOptionColor`](#selectedoptioncolor--default-blue)
+  - [`selectedOptionColorScheme`](#selectedoptioncolorscheme--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
-  - [`hasStickyGroupHeaders`](#hasstickygroupheaders--default-false)
-  - [`isFixed`](#isfixed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
@@ -164,6 +162,8 @@ return (
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-sizes-w9sf8e?file=/example.js)
 
+---
+
 #### `colorScheme`
 
 You can pass the `colorScheme` prop to the select component to change all of the
@@ -196,6 +196,8 @@ return (
 ```
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-color-schemes-c38jlo?file=/example.js)
+
+---
 
 #### `tagVariant` — Options: `subtle` | `solid` | `outline` — Default: `subtle`
 
@@ -230,6 +232,8 @@ return (
 ```
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-tag-variants-w31gnt?file=/example.js)
+
+---
 
 #### `isInvalid` — Default: `false` | `isReadOnly` - Default: `false`
 
@@ -266,6 +270,8 @@ return (
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-invalid-disabled-0hyl8l?file=/example.js)
 
+---
+
 #### `focusBorderColor` — Default: `blue.500` | `errorBorderColor` — Default: `red.500`
 
 The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra
@@ -284,6 +290,8 @@ return (
 ![Orange errorBorderColor](./github/custom-error-border.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-colors-gjo4zd?file=/example.js)
+
+---
 
 #### `useBasicStyles` — Default: `false`
 
@@ -308,6 +316,8 @@ return (
 ![useBasicStyles dark mode](./github/use-basic-styles-dark.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-usebasicstyles-jjnqsd?file=/example.js)
+
+---
 
 #### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
 
@@ -336,19 +346,32 @@ return (
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptionstyle-yxkcos?file=/example.js)
 
-#### `selectedOptionColor` — Default: `blue`
+---
+
+#### `selectedOptionColorScheme` — Default: `blue`
 
 If you choose to stick with the default `selectedOptionStyle="color"`, you have
 one additional styling option. If you do not like the default of blue for the
-highlight color, you can pass the `selectedOptionColor` prop to change it. This
-prop will accept any named color from your color theme, and it will use the
-`500` value in light mode or the `300` value in dark mode.
+highlight color, you can pass the `selectedOptionColorScheme` prop to change it.
+This prop will accept any named color from your theme's color palette, and it
+will use the `500` value in light mode or the `300` value in dark mode.
+
+> **NOTE:** This prop can only be used for named colors from your theme, not
+> arbitrary hex/rgb colors. If you would like to use a specific color for the
+> background that's not a part of your theme, use the
+> [`chakraStyles`](#chakrastyles) prop to customize it (see
+> [#99](https://github.com/csandman/chakra-react-select/discussions/99) for an
+> example).
+>
+> Prior to `v4.6.0` this prop was named `selectedOptionColor`, and it was
+> renamed to prevent confusion about its purpose. `selectedOptionColor` is still
+> available but will be removed in the next major version.
 
 ```js
 return (
   <>
-    <Select selectedOptionColor="blue" /> {/* Default */}
-    <Select selectedOptionColor="purple" />
+    <Select selectedOptionColorScheme="blue" /> {/* Default */}
+    <Select selectedOptionColorScheme="purple" />
   </>
 );
 ```
@@ -358,6 +381,8 @@ return (
 ![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptioncolor-yyd321?file=/example.js)
+
+---
 
 #### `variant` — Options: `outline` | `filled` | `flushed` | `unstyled` — Default: `outline`
 
@@ -409,55 +434,7 @@ elements.
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
 
-#### `hasStickyGroupHeaders` — Default: `false`
-
-One additional feature which isn’t specific to Chakra or react-select is sticky
-group headers. It adds a border to the bottom of the header and keeps it in view
-while its corresponding group of options is visible. This can be very nice when
-you have long lists of grouped options so you can always tell which group of
-options you're looking at. To add it, pass the `hasStickyGroupHeaders` prop to
-the select component.
-
-```js
-return <Select hasStickyGroupHeaders />;
-```
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-hasstickygroupheaders-wg39g?file=/example.js)
-
-**NOTE:** It has recently been discovered that when using this prop, navigating
-up through the available options with the arrow key will keep the focused option
-underneath the header, as it will not scroll enough to account for it being
-there. So if this is an issue for you, avoid this prop. A fix for this is being
-investigated.
-
-![Sticky Group Headers](./github/sticky-group-headers.png)
-
-#### `isFixed`
-
-In your options objects, you can add the key `isFixed: true` to emulate the
-example in the [react-select docs](https://react-select.com/home#fixed-options).
-This will prevent the options which have this flag from having the remove button
-on their corresponding tag, and it changes the default `tagVariant` for that tag
-to be solid. This only applies when using `isMulti`.
-
-```js
-return (
-  <Select
-    isMulti
-    options={[
-      {
-        label: "I can't be removed",
-        value: "fixed",
-        isFixed: true,
-      },
-      {
-        label: "I can be removed",
-        value: "not-fixed",
-      },
-    ]}
-  />
-);
-```
+---
 
 If you have any other requests for Chakra-like features that could be added, or
 problems with the current features,
@@ -749,7 +726,20 @@ Here is an example of using classNames to style the components:
 This package has always supported typescript, however until `3.0.0` none of the
 type inference was working on the props passed into this component. Now that
 they are, you may need to pass in some generics for your component to work
-properly.
+properly, but **in most cases you shouldn't need to**. Here is a snippet from
+the original documentation on the subject:
+
+> ### Select generics
+>
+> There are three generics used by the Select component: `Option`, `IsMulti`,
+> and `Group`. All of them are optional and TypeScript attempts to detect them
+> automatically, but sometimes it might need some help. Many of the
+> `react-select` types include the three generics like this:
+>
+> — https://react-select.com/typescript
+
+Read their [full documentation](https://react-select.com/typescript) on the
+topic for more info.
 
 This package exports all of the named module members of the original
 `react-select` in case you need their built-in types in any of your variable
@@ -790,7 +780,6 @@ import { GroupBase, OptionBase, Select } from "chakra-react-select";
  * type OptionBase = {
  *   variant?: string;
  *   colorScheme?: string;
- *   isFixed?: boolean;
  *   isDisabled?: boolean;
  * };
  * ```
@@ -814,7 +803,7 @@ const colorOptions = [
 
 function CustomMultiSelect() {
   return {
-    <Select<ColorOption, true, GroupBase<ColorOption>>
+    <Select<ColorOption, true, GroupBase<ColorOption>> // <-- None of these generics should be required
       isMulti
       name="colors"
       options={colorOptions}

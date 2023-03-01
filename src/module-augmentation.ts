@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SystemStyleObject } from "@chakra-ui/system";
-import type { GroupBase } from "react-select";
+import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
   SelectedOptionStyle,
@@ -100,7 +100,8 @@ declare module "react-select/dist/declarations/src/Select" {
      * corresponding group is in view.
      *
      * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#hasstickygroupheaders--default-false}
+     * @deprecated This prop should probably not have existed and will be
+     * removed soon.
      */
     hasStickyGroupHeaders?: boolean;
 
@@ -122,7 +123,12 @@ declare module "react-select/dist/declarations/src/Select" {
      * and the `300` value in dark mode.
      *
      * @defaultValue `blue`
-     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolor--default-blue}
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
+     */
+    selectedOptionColorScheme?: string;
+
+    /**
+     * @deprecated Replaced by {@link selectedOptionColorScheme}
      */
     selectedOptionColor?: string;
 
@@ -177,6 +183,18 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
+
+    /**
+     * @deprecated This prop is not used in `chakra-react-select`, use
+     * {@link chakraStyles} instead.
+     */
+    styles: StylesConfig<Option, IsMulti, Group>;
+
+    /**
+     * @deprecated This prop is not used in `chakra-react-select`, all theme
+     * values are pulled from your Chakra UI theme.
+     */
+    theme?: ThemeConfig;
   }
 }
 
