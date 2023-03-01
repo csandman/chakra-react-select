@@ -3,7 +3,7 @@ import type { MutableRefObject, ReactElement, RefAttributes } from "react";
 import type { GroupBase, SelectInstance } from "react-select";
 import CreatableReactSelect from "react-select/creatable";
 import type { CreatableProps } from "react-select/creatable";
-import useChakraSelectProps from "./use-chakra-select-props";
+import useChakraSelectProps from "../use-chakra-select-props";
 
 export type CreatableSelectComponent = <
   Option = unknown,

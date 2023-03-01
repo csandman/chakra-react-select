@@ -44,7 +44,9 @@ const Control = <
   } = props;
 
   const size = useSize(sizeProp);
-  const inputStyles = useMultiStyleConfig("Input", {
+  const {
+    field: { h: minH, ...fieldStyles },
+  } = useMultiStyleConfig("Input", {
     size,
     variant,
     focusBorderColor,
@@ -52,12 +54,15 @@ const Control = <
   });
 
   const initialSx: SystemStyleObject = {
-    ...inputStyles.field,
+    ...fieldStyles,
+    position: "relative",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
     padding: 0,
     overflow: "hidden",
-    height: "auto",
-    minH: inputStyles.field.h,
+    minH,
     ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 

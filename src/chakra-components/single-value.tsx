@@ -20,15 +20,12 @@ const SingleValue = <
   } = props;
 
   const initialSx: SystemStyleObject = {
-    label: "singleValue",
+    gridArea: "1 / 1 / 2 / 3",
     mx: "0.125rem",
-    maxWidth: `calc(100% - 0.5rem)`,
+    maxWidth: "100%",
     overflow: "hidden",
-    position: "absolute",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
-    top: "50%",
-    transform: "translateY(-50%)",
   };
 
   const sx = chakraStyles?.singleValue

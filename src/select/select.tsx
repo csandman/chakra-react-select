@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import type { MutableRefObject, ReactElement, RefAttributes } from "react";
 import ReactSelect from "react-select";
 import type { GroupBase, Props, SelectInstance } from "react-select";
-import useChakraSelectProps from "./use-chakra-select-props";
+import useChakraSelectProps from "../use-chakra-select-props";
 
 export type SelectComponent = <
   Option = unknown,
