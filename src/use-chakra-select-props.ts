@@ -94,8 +94,7 @@ const useChakraSelectProps = <
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
-    "aria-invalid":
-      props["aria-invalid"] ?? inputProps["aria-invalid"] ? true : undefined,
+    "aria-invalid": props["aria-invalid"] ?? inputProps["aria-invalid"],
   };
 
   return select;

@@ -76,6 +76,7 @@ export const ValueContainer = <
       variant,
       focusBorderColor,
       errorBorderColor,
+      controlShouldRenderValue,
     },
   } = props;
 
@@ -91,7 +92,7 @@ export const ValueContainer = <
   });
 
   const initialSx: SystemStyleObject = {
-    display: "flex",
+    display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
     flex: 1,
     paddingY: "2px",

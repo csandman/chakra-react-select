@@ -23,11 +23,11 @@ const Input = <
 
   const spacingSx: SystemStyleObject = {
     gridArea: "1 / 2",
-    font: "inherit",
     minW: "2px",
     border: 0,
     margin: 0,
     outline: 0,
+    padding: 0,
   };
 
   const initialContainerSx: SystemStyleObject = {
@@ -38,6 +38,10 @@ const Input = <
     color: "inherit",
     marginX: "0.125rem",
     paddingY: "0.125rem",
+    visibility: isDisabled ? "hidden" : "visible",
+    // Force css to recompute when value change due to @emotion bug.
+    // We can remove it whenever the bug is fixed.
+    transform: value ? "translateZ(0)" : "",
     _after: {
       content: 'attr(data-value) " "',
       visibility: "hidden",
@@ -51,8 +55,6 @@ const Input = <
     : initialContainerSx;
 
   const initialInputSx: SystemStyleObject = {
-    label: "input",
-    color: "inherit",
     background: 0,
     opacity: isHidden ? 0 : 1,
     width: "100%",

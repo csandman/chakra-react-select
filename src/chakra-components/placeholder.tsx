@@ -24,14 +24,12 @@ const Placeholder = <
    *
    * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
    */
-  const placeholderColor = useColorModeValue("gray.400", "whiteAlpha.400");
+  const color = useColorModeValue("gray.400", "whiteAlpha.400");
 
   const initialSx: SystemStyleObject = {
-    color: placeholderColor,
+    gridArea: "1 / 1 / 2 / 3",
+    color,
     mx: "0.125rem",
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
     userSelect: "none",
   };
 
