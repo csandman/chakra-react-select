@@ -1,18 +1,17 @@
 import "./module-augmentation";
 
-export { default as Select } from "./select";
-export { default as CreatableSelect } from "./creatable-select";
-export { default as AsyncSelect } from "./async-select";
-export { default as AsyncCreatableSelect } from "./async-creatable-select";
+export { default as Select } from "./select/select";
+export { default as CreatableSelect } from "./select/creatable-select";
+export { default as AsyncSelect } from "./select/async-select";
+export { default as AsyncCreatableSelect } from "./select/async-creatable-select";
 
 export { default as chakraComponents } from "./chakra-components";
-
 export { default as useChakraSelectProps } from "./use-chakra-select-props";
 
-export type { SelectComponent } from "./select";
-export type { CreatableSelectComponent } from "./creatable-select";
-export type { AsyncSelectComponent } from "./async-select";
-export type { AsyncCreatableSelectComponent } from "./async-creatable-select";
+export type { SelectComponent } from "./select/select";
+export type { CreatableSelectComponent } from "./select/creatable-select";
+export type { AsyncSelectComponent } from "./select/async-select";
+export type { AsyncCreatableSelectComponent } from "./select/async-creatable-select";
 
 export type {
   SxProps,
