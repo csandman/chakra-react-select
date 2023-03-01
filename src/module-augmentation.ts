@@ -179,13 +179,13 @@ declare module "react-select/dist/declarations/src/Select" {
     variant?: Variant;
 
     /**
-     * @deprecated This prop is not used for `chakra-react-select`, use
+     * @deprecated This prop is not used in `chakra-react-select`, use
      * {@link chakraStyles} instead.
      */
     styles: StylesConfig<Option, IsMulti, Group>;
 
     /**
-     * @deprecated This prop is not used for `chakra-react-select`, all theme
+     * @deprecated This prop is not used in `chakra-react-select`, all theme
      * values are pulled from your Chakra UI theme.
      */
     theme?: ThemeConfig;
