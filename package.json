@@ -46,6 +46,7 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
+    "@chakra-ui/react": "^2.5.1",
     "react-select": "5.7.0"
   },
   "peerDependencies": {

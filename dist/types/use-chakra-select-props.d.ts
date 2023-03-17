@@ -1,0 +1,4 @@
+import type { GroupBase, Props } from "react-select";
+declare const useChakraSelectProps: <Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>({ components, theme, size, colorScheme, isDisabled, isInvalid, isReadOnly, isRequired, inputId, tagVariant, selectedOptionStyle, selectedOptionColorScheme, selectedOptionColor, variant, focusBorderColor, errorBorderColor, chakraStyles, onFocus, onBlur, menuIsOpen, ...props }: Props<Option, IsMulti, Group>) => Props<Option, IsMulti, Group>;
+export default useChakraSelectProps;
+//# sourceMappingURL=use-chakra-select-props.d.ts.map
