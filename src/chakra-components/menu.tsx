@@ -380,7 +380,7 @@ export const Option = <
 
   const size = useSize(sizeProp);
 
-  const menuItemStyles = useMultiStyleConfig("Menu").item as ThemeObject;
+  const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
 
   const paddings: SizeProps = {
     sm: "0.3rem 0.6rem",

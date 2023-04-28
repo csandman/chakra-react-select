@@ -1,6 +1,5 @@
 import type {
-  CSSWithMultiValues,
-  RecursiveCSSObject,
+  Pseudos,
   ResponsiveObject,
   SystemStyleObject,
 } from "@chakra-ui/system";
@@ -26,12 +25,15 @@ import type {
   ValueContainerProps,
 } from "react-select";
 
-export interface SxProps extends CSSWithMultiValues {
-  _disabled?: CSSWithMultiValues;
-  _focus?: CSSWithMultiValues;
-}
-
-export type ThemeObject = RecursiveCSSObject<SxProps>;
+/**
+ * This is needed because Chakra improperly types their `SystemStyleObject` to not include pseudo selectors,
+ * even though the objects actually include them.
+ *
+ * @see {@link https://github.com/chakra-ui/chakra-ui/issues/6261}
+ */
+export type ThemeObject = SystemStyleObject & {
+  [K in keyof Pseudos]?: SystemStyleObject;
+};
 
 export interface SizeProps<PropType = string | number> {
   sm: PropType;
