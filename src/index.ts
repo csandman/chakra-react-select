@@ -14,7 +14,6 @@ export type { AsyncSelectComponent } from "./select/async-select";
 export type { AsyncCreatableSelectComponent } from "./select/async-creatable-select";
 
 export type {
-  SxProps,
   SizeProps,
   Size,
   TagVariant,
