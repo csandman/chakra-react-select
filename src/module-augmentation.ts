@@ -15,12 +15,11 @@ import type {
  *
  * @see {@link https://react-select.com/typescript#custom-select-props}
  */
-
 declare module "react-select/dist/declarations/src/Select" {
   export interface Props<
     Option,
     IsMulti extends boolean,
-    Group extends GroupBase<Option>
+    Group extends GroupBase<Option>,
   > {
     /**
      * The size of the base control; matches the sizes of the chakra Input
@@ -202,7 +201,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
-    Group extends GroupBase<Option>
+    Group extends GroupBase<Option>,
   > {
     sx: SystemStyleObject;
   }
@@ -210,7 +209,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
   export interface MultiValueGenericProps<
     Option,
     IsMulti extends boolean,
-    Group extends GroupBase<Option>
+    Group extends GroupBase<Option>,
   > {
     sx: SystemStyleObject;
   }
@@ -218,7 +217,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
   export interface MultiValueRemoveProps<
     Option,
     IsMulti extends boolean,
-    Group extends GroupBase<Option>
+    Group extends GroupBase<Option>,
   > {
     isFocused: boolean;
     sx: SystemStyleObject;
@@ -229,7 +228,7 @@ declare module "react-select/dist/declarations/src/components/indicators" {
   export interface LoadingIndicatorProps<
     Option,
     IsMulti extends boolean,
-    Group extends GroupBase<Option>
+    Group extends GroupBase<Option>,
   > {
     /**
      * The color of the filled in area of the spinner.
