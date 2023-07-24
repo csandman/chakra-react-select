@@ -7,7 +7,7 @@ import type { GroupBase, PlaceholderProps } from "react-select";
 const Placeholder = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: PlaceholderProps<Option, IsMulti, Group>
 ) => {

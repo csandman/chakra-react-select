@@ -67,7 +67,7 @@ export default Menu;
 export const MenuList = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: MenuListProps<Option, IsMulti, Group>
 ) => {
@@ -133,7 +133,7 @@ export const MenuList = <
 export const LoadingMessage = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: NoticeProps<Option, IsMulti, Group>
 ) => {
@@ -191,7 +191,7 @@ export const LoadingMessage = <
 export const NoOptionsMessage = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: NoticeProps<Option, IsMulti, Group>
 ) => {
@@ -249,7 +249,7 @@ export const NoOptionsMessage = <
 export const Group = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: GroupProps<Option, IsMulti, Group>
 ) => {
@@ -291,7 +291,7 @@ export const Group = <
 export const GroupHeading = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: GroupHeadingProps<Option, IsMulti, Group>
 ) => {
@@ -357,7 +357,7 @@ const CheckIcon = (props: IconProps) => (
 export const Option = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: OptionProps<Option, IsMulti, Group>
 ) => {

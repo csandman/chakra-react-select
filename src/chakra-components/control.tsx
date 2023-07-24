@@ -19,7 +19,7 @@ import { useSize } from "../utils";
 const Control = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ControlProps<Option, IsMulti, Group>
 ) => {
@@ -98,7 +98,7 @@ const Control = <
 export const IndicatorSeparator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: IndicatorSeparatorProps<Option, IsMulti, Group>
 ) => {
@@ -143,7 +143,7 @@ export const DownChevron = (props: IconProps) => (
 export const DropdownIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -241,7 +241,7 @@ export const CrossIcon = (props: IconProps) => (
 export const ClearIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -301,7 +301,7 @@ export const ClearIndicator = <
 export const LoadingIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: LoadingIndicatorProps<Option, IsMulti, Group>
 ) => {

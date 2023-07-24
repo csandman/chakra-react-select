@@ -306,9 +306,7 @@ However, as this button only appears when `isMulti` is passed, using this style
 could make more sense for a single select.
 
 ```js
-return (
-  <Select useBasicStyles />
-);
+return <Select useBasicStyles />;
 ```
 
 ![useBasicStyles](./github/use-basic-styles.png)
@@ -586,13 +584,15 @@ return (
   <Select
     menuPortalTarget={document.body}
     styles={{
-      menuPortal: (provided) => ({ ...provided, zIndex: 100 })
+      menuPortal: (provided) => ({ ...provided, zIndex: 100 }),
     }}
-    chakraStyles={{
-      // All other component styles
-    }}
+    chakraStyles={
+      {
+        // All other component styles
+      }
+    }
   />
-)
+);
 ```
 
 2. Pass the `classNamePrefix` prop [as described below]() and style the
@@ -600,14 +600,14 @@ return (
 
 ```jsx
 // example.js
-import "styles.css"
+import "styles.css";
 
 return (
   <Select
     menuPortalTarget={document.body}
     classNamePrefix="chakra-react-select"
   />
-)
+);
 ```
 
 ```css

@@ -8,7 +8,7 @@ import useChakraSelectProps from "../use-chakra-select-props";
 export type CreatableSelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: CreatableProps<Option, IsMulti, Group> &
     RefAttributes<SelectInstance<Option, IsMulti, Group>>
