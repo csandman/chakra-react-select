@@ -19,7 +19,7 @@ import { useSize } from "../utils";
 const Control = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ControlProps<Option, IsMulti, Group>
 ) => {
@@ -45,13 +45,22 @@ const Control = <
 
   const size = useSize(sizeProp);
   const {
-    field: { h: minH, ...fieldStyles },
+    field: { height, h, ...fieldStyles },
   } = useMultiStyleConfig("Input", {
     size,
     variant,
     focusBorderColor,
     errorBorderColor,
   });
+
+  /**
+   * `@chakra-ui/theme@3.2.0` introduced a breaking change that switched from using `h` to `height` for the Input sizing.
+   *
+   * We need to keep checking for either to maintain backwards compatibility.
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/releases/tag/%40chakra-ui%2Ftheme%403.2.0}
+   */
+  const minH = height || h;
 
   const initialSx: SystemStyleObject = {
     ...fieldStyles,
@@ -62,6 +71,7 @@ const Control = <
     flexWrap: "wrap",
     padding: 0,
     overflow: "hidden",
+    height: "auto",
     minH,
     ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
@@ -98,7 +108,7 @@ const Control = <
 export const IndicatorSeparator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: IndicatorSeparatorProps<Option, IsMulti, Group>
 ) => {
@@ -143,7 +153,7 @@ export const DownChevron = (props: IconProps) => (
 export const DropdownIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -241,7 +251,7 @@ export const CrossIcon = (props: IconProps) => (
 export const ClearIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -301,7 +311,7 @@ export const ClearIndicator = <
 export const LoadingIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: LoadingIndicatorProps<Option, IsMulti, Group>
 ) => {

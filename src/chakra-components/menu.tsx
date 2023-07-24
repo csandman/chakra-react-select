@@ -67,7 +67,7 @@ export default Menu;
 export const MenuList = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: MenuListProps<Option, IsMulti, Group>
 ) => {
@@ -90,6 +90,9 @@ export const MenuList = <
 
   const menuStyles = useMultiStyleConfig("Menu");
 
+  // We're pulling in the border radius from the theme for the input component
+  // so we can match the menu lists' border radius to it, but in 2.8.0 the value
+  // was changed to being pulled from a theme variable instead of being hardcoded
   const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
     size,
@@ -97,13 +100,16 @@ export const MenuList = <
     focusBorderColor,
     errorBorderColor,
   });
+  const fieldStyles = inputStyles.field as Record<string, string>;
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
     minW: "100%",
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
-    borderRadius: inputStyles.field?.borderRadius,
+    // This is hacky, but it works. May be removed in the future
+    "--input-border-radius": fieldStyles?.["--input-border-radius"],
+    borderRadius: fieldStyles?.borderRadius || menuStyles.list?.borderRadius,
     position: "relative", // required for offset[Height, Top] > keyboard scroll
     WebkitOverflowScrolling: "touch",
   };
@@ -133,7 +139,7 @@ export const MenuList = <
 export const LoadingMessage = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: NoticeProps<Option, IsMulti, Group>
 ) => {
@@ -145,13 +151,6 @@ export const LoadingMessage = <
     selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
-  /**
-   * The chakra UI global placeholder color
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
-   */
-  const color = useColorModeValue("gray.400", "whiteAlpha.400");
-
   const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
@@ -161,7 +160,7 @@ export const LoadingMessage = <
   };
 
   const initialSx: SystemStyleObject = {
-    color,
+    color: "chakra-subtle-text",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
@@ -191,7 +190,7 @@ export const LoadingMessage = <
 export const NoOptionsMessage = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: NoticeProps<Option, IsMulti, Group>
 ) => {
@@ -203,13 +202,6 @@ export const NoOptionsMessage = <
     selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
-  /**
-   * The chakra UI global placeholder color
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/styles.ts#L13}
-   */
-  const color = useColorModeValue("gray.400", "whiteAlpha.400");
-
   const size = useSize(sizeProp);
 
   const verticalPaddings: SizeProps = {
@@ -219,7 +211,7 @@ export const NoOptionsMessage = <
   };
 
   const initialSx: SystemStyleObject = {
-    color,
+    color: "chakra-subtle-text",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
@@ -249,7 +241,7 @@ export const NoOptionsMessage = <
 export const Group = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: GroupProps<Option, IsMulti, Group>
 ) => {
@@ -291,7 +283,7 @@ export const Group = <
 export const GroupHeading = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: GroupHeadingProps<Option, IsMulti, Group>
 ) => {
@@ -299,6 +291,7 @@ export const GroupHeading = <
     cx,
     className,
     children,
+    // eslint-disable-next-line deprecation/deprecation
     selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
 
@@ -357,7 +350,7 @@ const CheckIcon = (props: IconProps) => (
 export const Option = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: OptionProps<Option, IsMulti, Group>
 ) => {

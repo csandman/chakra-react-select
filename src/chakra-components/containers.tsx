@@ -13,7 +13,7 @@ import { useSize } from "../utils";
 export const SelectContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ContainerProps<Option, IsMulti, Group>
 ) => {
@@ -59,7 +59,7 @@ export const SelectContainer = <
 export const ValueContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ValueContainerProps<Option, IsMulti, Group>
 ) => {
@@ -128,7 +128,7 @@ export const ValueContainer = <
 export const IndicatorsContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: IndicatorsContainerProps<Option, IsMulti, Group>
 ) => {

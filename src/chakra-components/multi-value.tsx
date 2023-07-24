@@ -33,7 +33,7 @@ const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
 const MultiValue = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueProps<Option, IsMulti, Group>
 ) => {
@@ -168,7 +168,7 @@ const MultiValue = <
 const MultiValueContainer = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
@@ -184,7 +184,7 @@ const MultiValueContainer = <
 const MultiValueLabel = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
@@ -214,7 +214,7 @@ const TagCloseIcon = (props: IconProps) => (
 const MultiValueRemove = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {

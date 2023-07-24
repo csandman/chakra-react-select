@@ -7,7 +7,7 @@ import type { SelectedOptionStyle } from "./types";
 const useChakraSelectProps = <
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >({
   components = {},
   // eslint-disable-next-line deprecation/deprecation

@@ -14,7 +14,7 @@ export const cleanCommonProps = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>,
-  AdditionalProps
+  AdditionalProps,
 >(
   props: Partial<CommonPropsAndClassName<Option, IsMulti, Group>> &
     AdditionalProps
