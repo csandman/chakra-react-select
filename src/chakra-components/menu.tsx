@@ -299,6 +299,7 @@ export const GroupHeading = <
     cx,
     className,
     children,
+    // eslint-disable-next-line deprecation/deprecation
     selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
 
