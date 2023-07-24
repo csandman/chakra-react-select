@@ -2,10 +2,9 @@ import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
-import { MenuIcon } from "@chakra-ui/menu";
+import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
-import { Menu as ChakraMenu } from '@chakra-ui/menu'
 import type {
   CoercedMenuPlacement,
   GroupBase,
@@ -50,14 +49,16 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     : initialSx;
 
   return (
-    <Box
-      {...innerProps}
-      ref={innerRef}
-      className={cx({ menu: true }, className)}
-      sx={sx}
-    >
-      {children}
-    </Box>
+    <ChakraMenu>
+      <Box
+        {...innerProps}
+        ref={innerRef}
+        className={cx({ menu: true }, className)}
+        sx={sx}
+      >
+        {children}
+      </Box>
+    </ChakraMenu>
   );
 };
 
@@ -450,16 +451,13 @@ export const Option = <
       aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
-        {/* Need to provide Menu Context to MenuIcon */}
-        <ChakraMenu>
-          <MenuIcon
-            fontSize="0.8em"
-            marginEnd="0.75rem"
-            opacity={isSelected ? 1 : 0}
-          >
-            <CheckIcon />
-          </MenuIcon>
-        </ChakraMenu>
+        <MenuIcon
+          fontSize="0.8em"
+          marginEnd="0.75rem"
+          opacity={isSelected ? 1 : 0}
+        >
+          <CheckIcon />
+        </MenuIcon>
       )}
       {children}
     </Box>
