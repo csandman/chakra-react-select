@@ -5,6 +5,7 @@ import { Box } from "@chakra-ui/layout";
 import { MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
 import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
+import { Menu as ChakraMenu } from '@chakra-ui/menu'
 import type {
   CoercedMenuPlacement,
   GroupBase,
@@ -449,13 +450,16 @@ export const Option = <
       aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
-        <MenuIcon
-          fontSize="0.8em"
-          marginEnd="0.75rem"
-          opacity={isSelected ? 1 : 0}
-        >
-          <CheckIcon />
-        </MenuIcon>
+        {/* Need to provide Menu Context to MenuIcon */}
+        <ChakraMenu>
+          <MenuIcon
+            fontSize="0.8em"
+            marginEnd="0.75rem"
+            opacity={isSelected ? 1 : 0}
+          >
+            <CheckIcon />
+          </MenuIcon>
+        </ChakraMenu>
       )}
       {children}
     </Box>
