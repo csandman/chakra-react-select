@@ -90,6 +90,9 @@ export const MenuList = <
 
   const menuStyles = useMultiStyleConfig("Menu");
 
+  // We're pulling in the border radius from the theme for the input component
+  // so we can match the menu lists' border radius to it, but in 2.8.0 the value
+  // was changed to being pulled from a theme variable instead of being hardcoded
   const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
     size,
@@ -97,13 +100,16 @@ export const MenuList = <
     focusBorderColor,
     errorBorderColor,
   });
+  const fieldStyles = inputStyles.field as Record<string, string>;
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
     minW: "100%",
     maxHeight: `${maxHeight}px`,
     overflowY: "auto",
-    borderRadius: inputStyles.field?.borderRadius,
+    // This is hacky, but it works. May be removed in the future
+    "--input-border-radius": fieldStyles?.["--input-border-radius"],
+    borderRadius: fieldStyles?.borderRadius || menuStyles.list?.borderRadius,
     position: "relative", // required for offset[Height, Top] > keyboard scroll
     WebkitOverflowScrolling: "touch",
   };
