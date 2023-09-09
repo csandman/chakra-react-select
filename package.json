@@ -68,7 +68,7 @@
     "@babel/preset-typescript": "^7.22.5",
     "@chakra-ui/babel-plugin": "^1.0.8",
     "@chakra-ui/form-control": "^2.1.0",
-    "@chakra-ui/icon": "^3.1.0",
+    "@chakra-ui/icon": "^3.2.0",
     "@chakra-ui/layout": "^2.3.0",
     "@chakra-ui/media-query": "^3.3.0",
     "@chakra-ui/menu": "^2.2.0",

@@ -1,6 +1,6 @@
 import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
-import Icon from "@chakra-ui/icon";
+import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { SystemStyleObject } from "@chakra-ui/system";
