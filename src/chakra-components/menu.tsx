@@ -1,9 +1,7 @@
 import React from "react";
-import type { IconProps } from "@chakra-ui/icon";
-import Icon from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
 import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   CoercedMenuPlacement,
@@ -336,15 +334,15 @@ export const GroupHeading = <
 /**
  * The `CheckIcon` component from the Chakra UI Menu
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/menu/src/menu.tsx#L314}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/eb0316ddf96dd259433724062e923c33e6eee729/packages/components/menu/src/menu-item-option.tsx#L10-L17}
  */
-const CheckIcon = (props: IconProps) => (
-  <Icon viewBox="0 0 14 14" w="1em" h="1em" {...props}>
+const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
+  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
     <polygon
       fill="currentColor"
       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
     />
-  </Icon>
+  </svg>
 );
 
 export const Option = <
