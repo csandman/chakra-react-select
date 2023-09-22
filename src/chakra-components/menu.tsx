@@ -97,6 +97,7 @@ export const MenuList = <
   return (
     <Box
       {...innerProps}
+      role="listbox"
       className={cx(
         {
           "menu-list": true,
@@ -421,7 +422,7 @@ export const Option = <
   return (
     <Box
       {...innerProps}
-      role="button"
+      role="option"
       className={cx(
         {
           option: true,
