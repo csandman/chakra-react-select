@@ -5,7 +5,7 @@
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node10",
     "strict": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,

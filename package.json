@@ -12,7 +12,6 @@
   "bugs": {
     "url": "https://github.com/csandman/chakra-react-select/issues"
   },
-  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
