@@ -2,7 +2,7 @@ import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import { chakra, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   GroupBase,
@@ -10,20 +10,30 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
+import { useSize } from "../utils";
 
-const hasColorScheme = (option: unknown): option is { colorScheme: unknown } =>
-  typeof option === "object" && option !== null && "colorScheme" in option;
+const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
+  typeof option === "object" &&
+  option !== null &&
+  "colorScheme" in option &&
+  typeof option.colorScheme === "string";
 
-const hasIsFixed = (option: unknown): option is { isFixed: unknown } =>
-  typeof option === "object" && option !== null && "isFixed" in option;
+const hasVariant = (option: unknown): option is { variant: string } =>
+  typeof option === "object" &&
+  option !== null &&
+  "variant" in option &&
+  typeof option.variant === "string";
 
-const hasVariant = (option: unknown): option is { variant: unknown } =>
-  typeof option === "object" && option !== null && "variant" in option;
+const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
+  typeof option === "object" &&
+  option !== null &&
+  "isFixed" in option &&
+  typeof option.isFixed === "boolean";
 
 const MultiValue = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueProps<Option, IsMulti, Group>
 ) => {
@@ -38,26 +48,29 @@ const MultiValue = <
     isFocused,
     removeProps,
     selectProps,
+    cropWithEllipsis,
   } = props;
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size } = selectProps;
+  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+
+  const size = useSize(sizeProp);
 
   let optionColorScheme = "";
   let optionVariant = "";
   let optionIsFixed = false;
 
-  if (hasColorScheme(data) && typeof data.colorScheme === "string") {
+  if (hasColorScheme(data)) {
     optionColorScheme = data.colorScheme;
   }
 
-  if (hasVariant(data) && typeof data.variant === "string") {
+  if (hasVariant(data)) {
     optionVariant = data.variant;
   }
 
   if (hasIsFixed(data)) {
-    optionIsFixed = !!data.isFixed;
+    optionIsFixed = data.isFixed;
   }
 
   const tagStyles = useMultiStyleConfig("Tag", {
@@ -67,28 +80,35 @@ const MultiValue = <
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
-  const containerInitialSx: CSSObject = {
+  const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,
-    display: "inline-flex",
-    verticalAlign: "top",
+    display: "flex",
     alignItems: "center",
-    maxWidth: "100%",
+    minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
   };
-  const containerSx: CSSObject = chakraStyles?.multiValue
+  const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialSx, props)
     : containerInitialSx;
 
-  const labelInitialSx: CSSObject = tagStyles.label;
+  const labelInitialSx: SystemStyleObject = {
+    ...tagStyles.label,
+    overflow: "hidden",
+    textOverflow:
+      cropWithEllipsis || cropWithEllipsis === undefined
+        ? "ellipsis"
+        : undefined,
+    whiteSpace: "nowrap",
+  };
   const labelSx = chakraStyles?.multiValueLabel
     ? chakraStyles.multiValueLabel(labelInitialSx, props)
     : labelInitialSx;
 
-  const removeInitialSx: CSSObject = {
+  const removeInitialSx: SystemStyleObject = {
+    ...tagStyles.closeButton,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    ...tagStyles.closeButton,
   };
   const removeSx = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialSx, props)
@@ -148,7 +168,7 @@ const MultiValue = <
 const MultiValueContainer = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
@@ -164,7 +184,7 @@ const MultiValueContainer = <
 const MultiValueLabel = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
@@ -194,7 +214,7 @@ const TagCloseIcon = (props: IconProps) => (
 const MultiValueRemove = <
   Option = unknown,
   IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {

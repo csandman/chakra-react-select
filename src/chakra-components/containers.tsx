@@ -1,18 +1,19 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
+import { useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   ContainerProps,
   GroupBase,
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import type { SizeProps } from "../types";
+import { useSize } from "../utils";
 
 export const SelectContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ContainerProps<Option, IsMulti, Group>
 ) => {
@@ -27,13 +28,10 @@ export const SelectContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
-    // When disabled, react-select sets the pointer-state to none which prevents
-    // the `not-allowed` cursor style from chakra from getting applied to the
-    // Control when it is disabled
-    pointerEvents: "auto",
+    ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
 
   const sx = chakraStyles?.container
@@ -61,7 +59,7 @@ export const SelectContainer = <
 export const ValueContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ValueContainerProps<Option, IsMulti, Group>
 ) => {
@@ -72,20 +70,33 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: {
+      chakraStyles,
+      size: sizeProp,
+      variant,
+      focusBorderColor,
+      errorBorderColor,
+      controlShouldRenderValue,
+    },
   } = props;
 
-  const px: SizeProps = {
-    sm: "0.75rem",
-    md: "1rem",
-    lg: "1rem",
-  };
+  const size = useSize(sizeProp);
 
-  const initialSx: CSSObject = {
-    display: "flex",
+  // Getting the css from input instead of select
+  // to fit better with each of the variants
+  const inputStyles = useMultiStyleConfig("Input", {
+    size,
+    variant,
+    focusBorderColor,
+    errorBorderColor,
+  });
+
+  const initialSx: SystemStyleObject = {
+    display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
     flex: 1,
-    padding: `0.125rem ${px[size || "md"]}`,
+    paddingY: "2px",
+    paddingX: inputStyles.field.px,
     flexWrap: "wrap",
     WebkitOverflowScrolling: "touch",
     position: "relative",
@@ -117,7 +128,7 @@ export const ValueContainer = <
 export const IndicatorsContainer = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: IndicatorsContainerProps<Option, IsMulti, Group>
 ) => {
@@ -129,7 +140,7 @@ export const IndicatorsContainer = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     alignSelf: "stretch",

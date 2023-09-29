@@ -1,16 +1,18 @@
 import { useFormControl } from "@chakra-ui/form-control";
+import { useTheme } from "@chakra-ui/system";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import type { SelectedOptionStyle, Size, TagVariant } from "./types";
+import type { SelectedOptionStyle } from "./types";
 
 const useChakraSelectProps = <
   Option,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >({
   components = {},
+  // eslint-disable-next-line deprecation/deprecation
   theme,
-  size = "md",
+  size,
   colorScheme = "gray",
   isDisabled,
   isInvalid,
@@ -18,21 +20,25 @@ const useChakraSelectProps = <
   isRequired,
   inputId,
   tagVariant,
-  hasStickyGroupHeaders = false,
   selectedOptionStyle = "color",
-  selectedOptionColor = "blue",
+  selectedOptionColorScheme,
+  // eslint-disable-next-line deprecation/deprecation
+  selectedOptionColor,
+  variant,
   focusBorderColor,
   errorBorderColor,
   chakraStyles = {},
   onFocus,
   onBlur,
+  menuIsOpen,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
-  /**
-   * Combine the props passed into the component with the props that can be set
-   * on a surrounding form control to get the values of `isDisabled` and
-   * `isInvalid`
-   */
+  const chakraTheme = useTheme();
+  const { variant: defaultVariant } = chakraTheme.components.Input.defaultProps;
+
+  // Combine the props passed into the component with the props that can be set
+  // on a surrounding form control to get the values of `isDisabled` and
+  // `isInvalid`
   const inputProps = useFormControl({
     id: inputId,
     isDisabled,
@@ -43,36 +49,22 @@ const useChakraSelectProps = <
     onBlur,
   });
 
-  /** Ensure that the size used is one of the options, either `sm`, `md`, or `lg` */
-  let realSize: Size = size;
-  const sizeOptions: Size[] = ["sm", "md", "lg"];
-  if (!sizeOptions.includes(size)) {
-    realSize = "md";
-  }
+  // Unless `menuIsOpen` is controlled, disable it if the select is readonly
+  const realMenuIsOpen =
+    menuIsOpen ?? (inputProps.readOnly ? false : undefined);
 
-  /**
-   * Ensure that the tag variant used is one of the options, either `subtle`,
-   * `solid`, or `outline` (or undefined)
-   */
-  let realTagVariant: TagVariant | undefined = tagVariant;
-  const tagVariantOptions: TagVariant[] = ["subtle", "solid", "outline"];
-  if (tagVariant !== undefined) {
-    if (!tagVariantOptions.includes(tagVariant)) {
-      realTagVariant = "subtle";
-    }
-  }
-
-  /** Ensure that the selected option style is either `color` or `check` */
+  // Ensure that the selected option style is either `color` or `check`
   let realSelectedOptionStyle: SelectedOptionStyle = selectedOptionStyle;
   const selectedOptionStyleOptions: SelectedOptionStyle[] = ["color", "check"];
   if (!selectedOptionStyleOptions.includes(selectedOptionStyle)) {
     realSelectedOptionStyle = "color";
   }
 
-  /** Ensure that the color used for the selected options is a string */
-  let realSelectedOptionColor: string = selectedOptionColor;
-  if (typeof selectedOptionColor !== "string") {
-    realSelectedOptionColor = "blue";
+  // Ensure that the color used for the selected options is a string
+  let realSelectedOptionColorScheme: string =
+    selectedOptionColorScheme || selectedOptionColor || "blue";
+  if (typeof realSelectedOptionColorScheme !== "string") {
+    realSelectedOptionColorScheme = "blue";
   }
 
   const select: Props<Option, IsMulti, Group> = {
@@ -83,11 +75,11 @@ const useChakraSelectProps = <
     },
     // Custom select props
     colorScheme,
-    size: realSize,
-    tagVariant: realTagVariant,
+    size,
+    tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
-    selectedOptionColor: realSelectedOptionColor,
-    hasStickyGroupHeaders,
+    selectedOptionColorScheme: realSelectedOptionColorScheme,
+    variant: variant ?? defaultVariant,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
@@ -97,11 +89,12 @@ const useChakraSelectProps = <
     isDisabled: inputProps.disabled,
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputProps.id,
+    isReadOnly: inputProps.readOnly,
+    menuIsOpen: realMenuIsOpen,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
-    "aria-invalid":
-      props["aria-invalid"] ?? inputProps["aria-invalid"] ? true : undefined,
+    "aria-invalid": props["aria-invalid"] ?? inputProps["aria-invalid"],
   };
 
   return select;

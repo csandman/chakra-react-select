@@ -4,7 +4,7 @@ import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
-import type { CSSObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ControlProps,
@@ -14,11 +14,12 @@ import type {
   LoadingIndicatorProps,
 } from "react-select";
 import type { SizeProps } from "../types";
+import { useSize } from "../utils";
 
 const Control = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ControlProps<Option, IsMulti, Group>
 ) => {
@@ -32,33 +33,47 @@ const Control = <
     isFocused,
     menuIsOpen,
     selectProps: {
-      size,
-      isInvalid,
       chakraStyles,
+      size: sizeProp,
+      variant,
       focusBorderColor,
       errorBorderColor,
+      isInvalid,
+      isReadOnly,
     },
   } = props;
 
-  const inputStyles = useMultiStyleConfig("Input", {
+  const size = useSize(sizeProp);
+  const {
+    field: { height, h, ...fieldStyles },
+  } = useMultiStyleConfig("Input", {
+    size,
+    variant,
     focusBorderColor,
     errorBorderColor,
-    size,
   });
 
-  const heights: SizeProps = {
-    sm: 8,
-    md: 10,
-    lg: 12,
-  };
+  /**
+   * `@chakra-ui/theme@3.2.0` introduced a breaking change that switched from using `h` to `height` for the Input sizing.
+   *
+   * We need to keep checking for either to maintain backwards compatibility.
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/releases/tag/%40chakra-ui%2Ftheme%403.2.0}
+   */
+  const minH = height || h;
 
-  const initialSx: CSSObject = {
-    ...inputStyles.field,
+  const initialSx: SystemStyleObject = {
+    ...fieldStyles,
+    position: "relative",
     display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
     padding: 0,
     overflow: "hidden",
     height: "auto",
-    minHeight: heights[size || "md"],
+    minH,
+    ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 
   const sx = chakraStyles?.control
@@ -83,6 +98,7 @@ const Control = <
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
+      aria-readonly={isReadOnly ? true : undefined}
     >
       {children}
     </Box>
@@ -92,19 +108,19 @@ const Control = <
 export const IndicatorSeparator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: IndicatorSeparatorProps<Option, IsMulti, Group>
 ) => {
   const {
     className,
     cx,
-    selectProps: { chakraStyles, useBasicStyles },
+    selectProps: { chakraStyles, useBasicStyles, variant },
   } = props;
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     opacity: 1,
-    ...(useBasicStyles && { display: "none" }),
+    ...(useBasicStyles || variant !== "outline" ? { display: "none" } : {}),
   };
 
   const sx = chakraStyles?.indicatorSeparator
@@ -137,7 +153,7 @@ export const DownChevron = (props: IconProps) => (
 export const DropdownIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -147,18 +163,21 @@ export const DropdownIndicator = <
     cx,
     innerProps,
     selectProps: {
-      size,
       chakraStyles,
       useBasicStyles,
+      size: sizeProp,
       focusBorderColor,
       errorBorderColor,
+      variant,
     },
   } = props;
 
+  const size = useSize(sizeProp);
   const inputStyles = useMultiStyleConfig("Input", {
+    size,
+    variant,
     focusBorderColor,
     errorBorderColor,
-    size,
   });
 
   const iconSizes: SizeProps = {
@@ -166,9 +185,9 @@ export const DropdownIndicator = <
     md: "20px",
     lg: "24px",
   };
-  const iconSize = iconSizes[size || "md"];
+  const iconSize = iconSizes[size];
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
@@ -176,7 +195,6 @@ export const DropdownIndicator = <
     height: "100%",
     borderRadius: 0,
     borderWidth: 0,
-    cursor: "pointer",
     fontSize: iconSize,
     ...(useBasicStyles && {
       background: "transparent",
@@ -195,7 +213,7 @@ export const DropdownIndicator = <
     height: "1em",
     width: "1em",
   };
-  const iconSx: CSSObject = chakraStyles?.downChevron
+  const iconSx: SystemStyleObject = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialIconStyles, props)
     : initialIconStyles;
 
@@ -233,7 +251,7 @@ export const CrossIcon = (props: IconProps) => (
 export const ClearIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -242,14 +260,15 @@ export const ClearIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
+  const size = useSize(sizeProp);
   const closeButtonStyles = useStyleConfig("CloseButton", {
     size,
   });
 
-  const initialSx: CSSObject = {
+  const initialSx: SystemStyleObject = {
     ...closeButtonStyles,
     marginX: 1,
     display: "flex",
@@ -262,11 +281,11 @@ export const ClearIndicator = <
     ? chakraStyles.clearIndicator(initialSx, props)
     : initialSx;
 
-  const initialIconStyles: CSSObject = {
+  const initialIconStyles: SystemStyleObject = {
     width: "1em",
     height: "1em",
   };
-  const iconSx: CSSObject = chakraStyles?.crossIcon
+  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
@@ -292,7 +311,7 @@ export const ClearIndicator = <
 export const LoadingIndicator = <
   Option,
   IsMulti extends boolean,
-  Group extends GroupBase<Option>
+  Group extends GroupBase<Option>,
 >(
   props: LoadingIndicatorProps<Option, IsMulti, Group>
 ) => {
@@ -300,7 +319,7 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { size, chakraStyles },
+    selectProps: { chakraStyles, size: sizeProp },
     color,
     emptyColor,
     speed,
@@ -308,15 +327,15 @@ export const LoadingIndicator = <
     spinnerSize: propsSpinnerSize,
   } = props;
 
+  const size = useSize(sizeProp);
   const spinnerSizes: SizeProps<string> = {
     sm: "xs",
     md: "sm",
     lg: "md",
   };
+  const spinnerSize = spinnerSizes[size];
 
-  const spinnerSize = spinnerSizes[size || "md"];
-
-  const initialSx: CSSObject = { marginRight: 3 };
+  const initialSx: SystemStyleObject = { marginRight: 3 };
 
   const sx = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialSx, props)

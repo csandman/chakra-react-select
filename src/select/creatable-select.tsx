@@ -1,22 +1,22 @@
 import React, { forwardRef } from "react";
 import type { MutableRefObject, ReactElement, RefAttributes } from "react";
 import type { GroupBase, SelectInstance } from "react-select";
-import AsyncCreatableReactSelect from "react-select/async-creatable";
-import type { AsyncCreatableProps } from "react-select/async-creatable";
-import useChakraSelectProps from "./use-chakra-select-props";
+import CreatableReactSelect from "react-select/creatable";
+import type { CreatableProps } from "react-select/creatable";
+import useChakraSelectProps from "../use-chakra-select-props";
 
-export type AsyncCreatableSelectComponent = <
+export type CreatableSelectComponent = <
   Option = unknown,
   IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+  Group extends GroupBase<Option> = GroupBase<Option>,
 >(
-  props: AsyncCreatableProps<Option, IsMulti, Group> &
+  props: CreatableProps<Option, IsMulti, Group> &
     RefAttributes<SelectInstance<Option, IsMulti, Group>>
 ) => ReactElement;
 
-const AsyncCreatableSelect = forwardRef(
+const CreatableSelect = forwardRef(
   <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
-    props: AsyncCreatableProps<Option, IsMulti, Group>,
+    props: CreatableProps<Option, IsMulti, Group>,
     ref:
       | ((instance: SelectInstance<Option, IsMulti, Group> | null) => void)
       | MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
@@ -24,8 +24,8 @@ const AsyncCreatableSelect = forwardRef(
   ) => {
     const chakraSelectProps = useChakraSelectProps(props);
 
-    return <AsyncCreatableReactSelect ref={ref} {...chakraSelectProps} />;
+    return <CreatableReactSelect ref={ref} {...chakraSelectProps} />;
   }
-) as AsyncCreatableSelectComponent;
+) as CreatableSelectComponent;
 
-export default AsyncCreatableSelect;
+export default CreatableSelect;

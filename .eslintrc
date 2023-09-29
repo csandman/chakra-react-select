@@ -24,14 +24,16 @@
     },
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["deprecation", "@typescript-eslint"],
   "rules": {
+    "deprecation/deprecation": "warn",
     "no-console": "error",
     "curly": ["error", "all"],
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-key": "error",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -51,6 +53,14 @@
       {
         "prefer": "type-imports",
         "disallowTypeAnnotations": true
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "{}": false
+        }
       }
     ]
   }

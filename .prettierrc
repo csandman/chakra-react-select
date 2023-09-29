@@ -11,9 +11,10 @@
   "arrowParens": "always",
   "requirePragma": false,
   "insertPragma": false,
-  "proseWrap": "preserve",
+  "proseWrap": "always",
   "htmlWhitespaceSensitivity": "css",
   "endOfLine": "lf",
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
     "^react$",
     "^@chakra-ui/react$",
