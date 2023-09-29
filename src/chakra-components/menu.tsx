@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
-import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
+import { useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   CoercedMenuPlacement,
   GroupBase,
@@ -31,8 +31,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     innerProps,
     innerRef,
     placement,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
 
   const initialSx: SystemStyleObject = {
     position: "absolute",
@@ -40,6 +42,7 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     marginY: "8px",
     width: "100%",
     zIndex: 1,
+    ...crsStyles.menu,
   };
 
   const sx = chakraStyles?.menu
@@ -100,6 +103,8 @@ export const MenuList = <
   });
   const fieldStyles = inputStyles.field as Record<string, string>;
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
     minW: "100%",
@@ -110,6 +115,7 @@ export const MenuList = <
     borderRadius: fieldStyles?.borderRadius || menuStyles.list?.borderRadius,
     position: "relative", // required for offset[Height, Top] > keyboard scroll
     WebkitOverflowScrolling: "touch",
+    ...crsStyles.menuList,
   };
 
   const sx = chakraStyles?.menuList
@@ -146,7 +152,7 @@ export const LoadingMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps: { chakraStyles, size: sizeProp, variant },
   } = props;
 
   const size = useSize(sizeProp);
@@ -157,11 +163,14 @@ export const LoadingMessage = <
     lg: "10px",
   };
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
   const initialSx: SystemStyleObject = {
     color: "chakra-subtle-text",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
+    ...crsStyles.loadingMessage,
   };
 
   const sx = chakraStyles?.loadingMessage
@@ -197,7 +206,7 @@ export const NoOptionsMessage = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps: { chakraStyles, size: sizeProp, variant },
   } = props;
 
   const size = useSize(sizeProp);
@@ -208,11 +217,14 @@ export const NoOptionsMessage = <
     lg: "10px",
   };
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
   const initialSx: SystemStyleObject = {
     color: "chakra-subtle-text",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
+    ...crsStyles.noOptionsMessage,
   };
 
   const sx = chakraStyles?.noOptionsMessage
@@ -257,9 +269,13 @@ export const Group = <
     getClassNames,
   } = props;
 
-  const { chakraStyles } = selectProps;
+  const { chakraStyles, size, variant } = selectProps;
 
-  const sx = chakraStyles?.group ? chakraStyles.group({}, props) : {};
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
+  const sx = chakraStyles?.group
+    ? chakraStyles.group(crsStyles.group || {}, props)
+    : {};
 
   return (
     <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
@@ -289,8 +305,13 @@ export const GroupHeading = <
     cx,
     className,
     children,
-    // eslint-disable-next-line deprecation/deprecation
-    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
+    selectProps: {
+      chakraStyles,
+      size: sizeProp,
+      // eslint-disable-next-line deprecation/deprecation
+      hasStickyGroupHeaders,
+      variant,
+    },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
@@ -308,6 +329,8 @@ export const GroupHeading = <
     lg: "0.6rem 1.2rem",
   };
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
   const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
     fontSize: fontSizes[size],
@@ -318,6 +341,7 @@ export const GroupHeading = <
     top: -2,
     bg: menuStyles.list.bg,
     zIndex: 1,
+    ...crsStyles.groupHeading,
   };
 
   const sx = chakraStyles?.groupHeading
@@ -368,6 +392,7 @@ export const Option = <
       hideSelectedOptions,
       selectedOptionStyle,
       selectedOptionColorScheme,
+      variant,
     },
   } = props;
 
@@ -381,17 +406,6 @@ export const Option = <
     lg: "0.5rem 1rem",
   };
 
-  /**
-   * Use the same selected color as the border of the select component
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
-   */
-  const selectedBg = useColorModeValue(
-    `${selectedOptionColorScheme}.500`,
-    `${selectedOptionColorScheme}.300`
-  );
-  const selectedColor = useColorModeValue("white", "black");
-
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
   const showCheckIcon: boolean =
@@ -400,6 +414,17 @@ export const Option = <
 
   const shouldHighlight: boolean =
     selectedOptionStyle === "color" && isSelected;
+
+  const activeStyles: SystemStyleObject = {
+    color: "white",
+    bg: `${selectedOptionColorScheme}.500`,
+    _dark: {
+      color: "black",
+      bg: `${selectedOptionColorScheme}.300`,
+    },
+  };
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,
@@ -411,12 +436,12 @@ export const Option = <
     padding: paddings[size],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
-      bg: selectedBg,
-      color: selectedColor,
-      _active: { bg: selectedBg },
+      ...activeStyles,
+      _active: activeStyles,
     }),
     ...(isDisabled && menuItemStyles._disabled),
     ...(isDisabled && { _active: {} }),
+    ...crsStyles.option,
   };
 
   const sx = chakraStyles?.option

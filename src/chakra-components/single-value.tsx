@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import { type SystemStyleObject, useMultiStyleConfig } from "@chakra-ui/system";
 import type { GroupBase, SingleValueProps } from "react-select";
 
 const SingleValue = <
@@ -16,8 +16,10 @@ const SingleValue = <
     cx,
     isDisabled,
     innerProps,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
 
   const initialSx: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",
@@ -26,6 +28,7 @@ const SingleValue = <
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+    ...crsStyles.singleValue,
   };
 
   const sx = chakraStyles?.singleValue

@@ -25,13 +25,16 @@ export const SelectContainer = <
     isDisabled,
     isRtl,
     hasValue,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
 
   const initialSx: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
+    ...crsStyles.container,
   };
 
   const sx = chakraStyles?.container
@@ -91,6 +94,11 @@ export const ValueContainer = <
     errorBorderColor,
   });
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    size,
+    variant,
+  });
+
   const initialSx: SystemStyleObject = {
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
@@ -101,6 +109,7 @@ export const ValueContainer = <
     WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
+    ...crsStyles.valueContainer,
   };
 
   const sx = chakraStyles?.valueContainer
@@ -137,14 +146,20 @@ export const IndicatorsContainer = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    size,
+    variant,
+  });
 
   const initialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     alignSelf: "stretch",
     flexShrink: 0,
+    ...crsStyles.indicatorsContainer,
   };
 
   const sx = chakraStyles?.indicatorsContainer

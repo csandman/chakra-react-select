@@ -53,7 +53,13 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+  const {
+    chakraStyles,
+    colorScheme,
+    tagVariant,
+    size: sizeProp,
+    variant,
+  } = selectProps;
 
   const size = useSize(sizeProp);
 
@@ -80,12 +86,15 @@ const MultiValue = <
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+
   const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,
     display: "flex",
     alignItems: "center",
     minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
+    ...crsStyles.multiValue,
   };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialSx, props)
@@ -99,6 +108,7 @@ const MultiValue = <
         ? "ellipsis"
         : undefined,
     whiteSpace: "nowrap",
+    ...crsStyles.multiValueLabel,
   };
   const labelSx = chakraStyles?.multiValueLabel
     ? chakraStyles.multiValueLabel(labelInitialSx, props)
@@ -109,6 +119,7 @@ const MultiValue = <
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    ...crsStyles.multiValueRemove,
   };
   const removeSx = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialSx, props)
