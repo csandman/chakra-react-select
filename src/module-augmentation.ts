@@ -165,6 +165,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * `Select` component.
      *
      * @defaultValue `false`
+     * @deprecated The styles returned from `useBasicStyles` are now used by default. This prop will be removed soon.
      * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
      * @see {@link https://chakra-ui.com/docs/components/select}
      */
