@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/csandman/chakra-react-select/issues"
   },
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
@@ -33,6 +34,7 @@
     "format": "concurrently npm:format:*",
     "format:code": "prettier --write .",
     "format:package": "prettier-package-json --write",
+    "postinstall": "patch-package",
     "lint": "concurrently npm:lint:*",
     "lint:src": "eslint .",
     "lint:types": "tsc --noEmit",
@@ -45,7 +47,8 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "react-select": "5.7.4"
+    "patch-package": "^8.0.0",
+    "react-select": "5.7.5"
   },
   "peerDependencies": {
     "@chakra-ui/form-control": "^2.0.0",
@@ -99,7 +102,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "keywords": [
     "accessibility",
