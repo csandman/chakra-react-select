@@ -1,5 +1,5 @@
 {
   "buildCommand": "build",
-  "sandboxes": ["65ohb", "vz9ut", "v8lt7q", "h6uwj1"],
+  "sandboxes": ["65ohb", "vz9ut", "v8lt7q", "h6uwj1", "khdm6y"],
   "node": "16"
 }
