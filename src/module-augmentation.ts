@@ -9,6 +9,8 @@ import type {
   Variant,
 } from "./types";
 
+export {};
+
 /**
  * Module augmentation is used to add extra props to the existing interfaces
  * from `react-select` as per the docs
