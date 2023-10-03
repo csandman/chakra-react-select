@@ -39,7 +39,6 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "patch-package": "^8.0.0",
     "react-select": "5.7.0"
   },
   "peerDependencies": {
