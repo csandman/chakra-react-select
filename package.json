@@ -26,7 +26,6 @@
     "format": "concurrently npm:format:*",
     "format:code": "prettier --write .",
     "format:package": "prettier-package-json --write",
-    "postinstall": "patch-package",
     "lint": "concurrently npm:lint:*",
     "lint:src": "eslint .",
     "lint:types": "tsc --noEmit",
