@@ -40,7 +40,7 @@
   "types": "dist/types/index.d.ts",
   "dependencies": {
     "patch-package": "^8.0.0",
-    "react-select": "5.7.5"
+    "react-select": "5.7.0"
   },
   "peerDependencies": {
     "@chakra-ui/form-control": "^2.0.0",
