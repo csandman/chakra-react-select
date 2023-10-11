@@ -17,6 +17,7 @@ const useChakraSelectProps = <
   isDisabled,
   isInvalid,
   isReadOnly,
+  required,
   isRequired,
   inputId,
   tagVariant,
@@ -90,6 +91,7 @@ const useChakraSelectProps = <
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputProps.id,
     isReadOnly: inputProps.readOnly,
+    required: required ?? inputProps.required,
     menuIsOpen: realMenuIsOpen,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
