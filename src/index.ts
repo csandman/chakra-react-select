@@ -18,6 +18,7 @@ export type {
   Size,
   TagVariant,
   SelectedOptionStyle,
+  ColorScheme,
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,
