@@ -63,5 +63,16 @@
         }
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["codemod/**/*.ts"],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-dynamic-require": "off",
+        "global-require": "off"
+      }
+    }
+  ]
 }
