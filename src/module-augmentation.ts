@@ -61,8 +61,8 @@ declare module "react-select/dist/declarations/src/Select" {
     /**
      * If true, the form control will be required. This has 2 side effects:
      *
-     * - The `FormLabel` will show a required indicator
-     * - The form element (e.g, Input) will have `aria-required` set to true
+     * - The hidden input element will get the required attribute, triggering native form validation on submit
+     * - The combobox input will have `aria-required` set to true
      *
      * @see {@link https://chakra-ui.com/docs/components/input/props}
      * @see {@link https://chakra-ui.com/docs/components/form-control/props}
