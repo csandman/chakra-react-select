@@ -305,13 +305,7 @@ export const GroupHeading = <
     cx,
     className,
     children,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      // eslint-disable-next-line deprecation/deprecation
-      hasStickyGroupHeaders,
-      variant,
-    },
+    selectProps: { chakraStyles, size: sizeProp, variant },
   } = props;
 
   const menuStyles = useMultiStyleConfig("Menu");
@@ -336,8 +330,6 @@ export const GroupHeading = <
     fontSize: fontSizes[size],
     padding: paddings[size],
     margin: 0,
-    borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
-    position: hasStickyGroupHeaders ? "sticky" : "static",
     top: -2,
     bg: menuStyles.list.bg,
     zIndex: 1,
