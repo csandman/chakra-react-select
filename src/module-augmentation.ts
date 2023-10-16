@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
+import type {} from "react-select/base";
 import type {
   ChakraStylesConfig,
   SelectedOptionStyle,
@@ -15,7 +16,7 @@ import type {
  *
  * @see {@link https://react-select.com/typescript#custom-select-props}
  */
-declare module "react-select/dist/declarations/src/Select" {
+declare module "react-select/base" {
   export interface Props<
     Option,
     IsMulti extends boolean,
@@ -195,9 +196,7 @@ declare module "react-select/dist/declarations/src/Select" {
      */
     theme?: ThemeConfig;
   }
-}
 
-declare module "react-select/dist/declarations/src/components/MultiValue" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
@@ -222,9 +221,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     isFocused: boolean;
     sx: SystemStyleObject;
   }
-}
 
-declare module "react-select/dist/declarations/src/components/indicators" {
   export interface LoadingIndicatorProps<
     Option,
     IsMulti extends boolean,
