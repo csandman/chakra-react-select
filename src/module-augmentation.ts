@@ -9,6 +9,12 @@ import type {
   Variant,
 } from "./types";
 
+/**
+ * This is necessary for the module `react-select/base` to be seen by TypeScript.
+ * Without it the module augmentation will not work properly.
+ *
+ * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
+ */
 export type {} from "react-select/base";
 
 /**
