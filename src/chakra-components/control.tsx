@@ -184,6 +184,7 @@ export const DropdownIndicator = <
     height: "100%",
     width: 6,
     marginRight: 2,
+    marginLeft: 1,
     fontSize: "xl",
     ...crsStyles.dropdownIndicator,
   };
