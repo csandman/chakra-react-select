@@ -697,10 +697,7 @@ Every key that can be used in the `chakraStyles` object can also be used for the
 theme styles. Here's an example of how it can be implemented:
 
 ```tsx
-import {
-  createMultiStyleConfigHelpers,
-  extendTheme,
-} from "@chakra-ui/styled-system";
+import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
 
 const { defineMultiStyleConfig, definePartsStyle } =
   createMultiStyleConfigHelpers([
