@@ -84,17 +84,17 @@ export default function transformer(file: FileInfo, api: API) {
 
           // TODO: Decide if I want to rename this one
           // Replace `colorScheme` prop with `tagColorScheme`
-          $select
-            .find(j.JSXAttribute)
-            .filter((nodePath) => nodePath.node.name.name === "colorScheme")
-            .forEach((attribute) =>
-              j(attribute).replaceWith(
-                j.jsxAttribute(
-                  j.jsxIdentifier("tagColorScheme"),
-                  attribute.node.value
-                )
-              )
-            );
+          // $select
+          //   .find(j.JSXAttribute)
+          //   .filter((nodePath) => nodePath.node.name.name === "colorScheme")
+          //   .forEach((attribute) =>
+          //     j(attribute).replaceWith(
+          //       j.jsxAttribute(
+          //         j.jsxIdentifier("tagColorScheme"),
+          //         attribute.node.value
+          //       )
+          //     )
+          //   );
         });
       });
     })
