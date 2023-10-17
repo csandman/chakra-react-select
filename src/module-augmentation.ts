@@ -11,12 +11,20 @@ import type {
 } from "./types";
 
 /**
+ * This is necessary for the module `react-select/base` to be seen by TypeScript.
+ * Without it the module augmentation will not work properly.
+ *
+ * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
+ */
+export type {} from "react-select/base";
+
+/**
  * Module augmentation is used to add extra props to the existing interfaces
  * from `react-select` as per the docs
  *
  * @see {@link https://react-select.com/typescript#custom-select-props}
  */
-declare module "react-select/dist/declarations/src/Select" {
+declare module "react-select/base" {
   export interface Props<
     Option,
     IsMulti extends boolean,
@@ -172,7 +180,7 @@ declare module "react-select/dist/declarations/src/Select" {
   }
 }
 
-declare module "react-select/dist/declarations/src/components/MultiValue" {
+declare module "react-select" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
@@ -197,9 +205,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     isFocused: boolean;
     sx: SystemStyleObject;
   }
-}
 
-declare module "react-select/dist/declarations/src/components/indicators" {
   export interface LoadingIndicatorProps<
     Option,
     IsMulti extends boolean,

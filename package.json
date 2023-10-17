@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "4.7.4",
+  "version": "4.7.5",
   "description": "A Chakra UI wrapper for the popular library React Select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
@@ -45,7 +45,7 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "react-select": "5.7.0"
+    "react-select": "5.7.7"
   },
   "peerDependencies": {
     "@chakra-ui/form-control": "^2.0.0",
