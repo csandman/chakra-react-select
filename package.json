@@ -45,7 +45,7 @@
   "sideEffects": false,
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "react-select": "5.7.0"
+    "react-select": "5.7.7"
   },
   "peerDependencies": {
     "@chakra-ui/form-control": "^2.0.0",
