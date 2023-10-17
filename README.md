@@ -65,6 +65,7 @@ https://react-select.com/home
     - [Caveats](#caveats)
     - [Examples](#examples)
   - [Theme Styles](#theme-styles)
+  - [Extending the Theme](#extending-the-theme)
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
@@ -680,6 +681,134 @@ color scheme will also be reflected in these custom components.
 **NOTE:** Only make changes to your global component themes if you want them to
 appear in all instances of that component. Otherwise, just change the individual
 components' styles using the `chakraStyles` prop.
+
+### Extending the Theme
+
+As of `v5.0.0`, it is now possible to customize your Select instances globally
+by extending the Chakra theme! These theme styles are layered on top of the
+theme styles pulled from other Chakra components, for backwards compatibility's
+sake, but will always override those. They will also be overridden by any styles
+passed into [`chakraStyles`](#chakrastyles), so it's somewhat of the middle
+layer of styles.
+
+The theme styles can be defined using Chakra's
+[multipart component style config](https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components).
+Every key that can be used in the `chakraStyles` object can also be used for the
+theme styles. Here's an example of how it can be implemented:
+
+```tsx
+import {
+  createMultiStyleConfigHelpers,
+  extendTheme,
+} from "@chakra-ui/styled-system";
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers([
+    "clearIndicator",
+    "container",
+    "control",
+    "dropdownIndicator",
+    "downChevron",
+    "crossIcon",
+    "group",
+    "groupHeading",
+    "indicatorsContainer",
+    "indicatorSeparator",
+    "input",
+    "inputContainer",
+    "loadingIndicator",
+    "loadingMessage",
+    "menu",
+    "menuList",
+    "multiValue",
+    "multiValueLabel",
+    "multiValueRemove",
+    "noOptionsMessage",
+    "option",
+    "placeholder",
+    "singleValue",
+    "valueContainer",
+  ]);
+
+const ChakraReactSelect = defineMultiStyleConfig({
+  baseStyle: {
+    clearIndicator: {},
+    container: {},
+    control: {},
+    dropdownIndicator: {},
+    downChevron: {},
+    crossIcon: {},
+    group: {},
+    groupHeading: {},
+    indicatorsContainer: {},
+    indicatorSeparator: {},
+    input: {},
+    inputContainer: {},
+    loadingIndicator: {},
+    loadingMessage: {},
+    menu: {},
+    menuList: {},
+    multiValue: {},
+    multiValueLabel: {},
+    multiValueRemove: {},
+    noOptionsMessage: {},
+    option: {},
+    placeholder: {},
+    singleValue: {},
+    valueContainer: {},
+  },
+  sizes: {
+    sm: {
+      control: {},
+      // ...
+    },
+    md: {
+      control: {},
+      // ...
+    },
+    lg: {
+      control: {},
+      // ...
+    },
+  },
+  variants: {
+    outline: {
+      control: {},
+      // ...
+    },
+    filled: {
+      // ...
+    },
+    flushed: {
+      // ...
+    },
+    unstyled: {
+      // ...
+    },
+  },
+  defaultProps: {
+    size: "lg",
+    variant: "filled",
+  },
+});
+
+const theme = extendTheme({
+  components: {
+    ChakraReactSelect,
+  },
+});
+
+const Root = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  );
+};
+```
+
+When calling `createMultiStyleConfigHelpers` you should only include the keys
+for the theme styles actually intend to use
 
 ### `className`
 
