@@ -8,7 +8,7 @@ import type { Size, SizeProp } from "./types";
  *
  * Borrowed from the original `react-select` package
  *
- * @see {@link https://github.com/JedWatson/react-select/blob/edf5265ee0158c026c9e8527a6d0490a5ac2ef23/packages/react-select/src/utils.ts#L75-L110}
+ * @see {@link https://github.com/JedWatson/react-select/blob/2f94e8d/packages/react-select/src/utils.ts#L79-L110}
  */
 export const cleanCommonProps = <
   Option,
