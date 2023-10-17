@@ -196,7 +196,9 @@ declare module "react-select/base" {
      */
     theme?: ThemeConfig;
   }
+}
 
+declare module "react-select" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
