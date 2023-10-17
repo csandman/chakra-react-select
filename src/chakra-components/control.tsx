@@ -53,6 +53,11 @@ const Control = <
     errorBorderColor,
   });
 
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    size,
+    variant,
+  });
+
   /**
    * `@chakra-ui/theme@3.2.0` introduced a breaking change that switched from using `h` to `height` for the Input sizing.
    *
@@ -74,6 +79,7 @@ const Control = <
     height: "auto",
     minH,
     ...(isDisabled ? { pointerEvents: "none" } : {}),
+    ...crsStyles.control,
   };
 
   const sx = chakraStyles?.control
