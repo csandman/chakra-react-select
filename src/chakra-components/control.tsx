@@ -124,6 +124,7 @@ export const IndicatorSeparator = <
   });
 
   const initialSx: SystemStyleObject = {
+    opacity: 1,
     display: "none",
     ...crsStyles.indicatorSeparator,
   };
