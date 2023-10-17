@@ -33,7 +33,12 @@ const useChakraSelectProps = <
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   const chakraTheme = useTheme();
-  const { variant: defaultVariant } = chakraTheme.components.Input.defaultProps;
+
+  const { variant: defaultInputVariant } =
+    chakraTheme.components.Input.defaultProps;
+
+  const { variant: defaultVariant, size: defaultSize } =
+    chakraTheme.components.ChakraReactSelect?.defaultProps || {};
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
@@ -67,11 +72,11 @@ const useChakraSelectProps = <
     },
     // Custom select props
     colorScheme,
-    size,
     tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColorScheme,
-    variant: variant ?? defaultVariant,
+    size: size ?? defaultSize,
+    variant: variant ?? defaultVariant ?? defaultInputVariant,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
