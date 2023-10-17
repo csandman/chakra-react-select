@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
-import type {} from "react-select/base";
 import type {
   ChakraStylesConfig,
   SelectedOptionStyle,
@@ -9,6 +8,8 @@ import type {
   TagVariant,
   Variant,
 } from "./types";
+
+export type {} from "react-select/base";
 
 /**
  * Module augmentation is used to add extra props to the existing interfaces
