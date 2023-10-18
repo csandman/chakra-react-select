@@ -728,7 +728,7 @@ const { defineMultiStyleConfig, definePartsStyle } =
   ]);
 
 const ChakraReactSelect = defineMultiStyleConfig({
-  baseStyle: {
+  baseStyle: definePartsStyle({
     clearIndicator: {},
     container: {},
     control: {},
@@ -753,35 +753,35 @@ const ChakraReactSelect = defineMultiStyleConfig({
     placeholder: {},
     singleValue: {},
     valueContainer: {},
-  },
+  }),
   sizes: {
-    sm: {
+    sm: definePartsStyle({
       control: {},
       // ...
-    },
-    md: {
+    }),
+    md: definePartsStyle({
       control: {},
       // ...
-    },
-    lg: {
+    }),
+    lg: definePartsStyle({
       control: {},
       // ...
-    },
+    }),
   },
   variants: {
-    outline: {
+    outline: definePartsStyle({
       control: {},
       // ...
-    },
-    filled: {
+    }),
+    filled: definePartsStyle({
       // ...
-    },
-    flushed: {
+    }),
+    flushed: definePartsStyle({
       // ...
-    },
-    unstyled: {
+    }),
+    unstyled: definePartsStyle({
       // ...
-    },
+    }),
   },
   defaultProps: {
     size: "lg",
