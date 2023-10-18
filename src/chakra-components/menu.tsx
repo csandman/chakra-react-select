@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
-import { useMultiStyleConfig } from "@chakra-ui/system";
+import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   CoercedMenuPlacement,
   GroupBase,
@@ -390,6 +390,17 @@ export const Option = <
     lg: "0.5rem",
   };
 
+  /**
+   * Use the same selected color as the border of the select component
+   *
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
+   */
+  const selectedBg = useColorModeValue(
+    `${selectedOptionColorScheme}.500`,
+    `${selectedOptionColorScheme}.300`
+  );
+  const selectedColor = useColorModeValue("white", "black");
+
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
   const showCheckIcon: boolean =
@@ -398,15 +409,6 @@ export const Option = <
 
   const shouldHighlight: boolean =
     selectedOptionStyle === "color" && isSelected;
-
-  const activeStyles: SystemStyleObject = {
-    color: "white",
-    bg: `${selectedOptionColorScheme}.500`,
-    _dark: {
-      color: "black",
-      bg: `${selectedOptionColorScheme}.300`,
-    },
-  };
 
   const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
@@ -421,8 +423,9 @@ export const Option = <
     paddingY: verticalPaddingOptions[size],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
-      ...activeStyles,
-      _active: activeStyles,
+      bg: selectedBg,
+      color: selectedColor,
+      _active: { bg: selectedBg },
     }),
     ...(isDisabled && menuItemStyles._disabled),
     ...(isDisabled && { _active: {} }),
