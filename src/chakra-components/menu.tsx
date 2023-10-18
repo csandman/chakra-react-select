@@ -422,13 +422,15 @@ export const Option = <
     paddingX: horizontalPaddingOptions[size],
     paddingY: verticalPaddingOptions[size],
     ...(isFocused && menuItemStyles._focus),
+    ...(isDisabled && {
+      ...menuItemStyles._disabled,
+      _active: {},
+    }),
     ...(shouldHighlight && {
       bg: selectedBg,
       color: selectedColor,
       _active: { bg: selectedBg },
     }),
-    ...(isDisabled && menuItemStyles._disabled),
-    ...(isDisabled && { _active: {} }),
     ...crsStyles.option,
   };
 
