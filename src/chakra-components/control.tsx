@@ -280,6 +280,7 @@ export const ClearIndicator = <
   const initialIconStyles: SystemStyleObject = {
     width: "1em",
     height: "1em",
+    ...crsStyles.crossIcon,
   };
   const iconSx: SystemStyleObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
