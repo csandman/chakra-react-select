@@ -198,12 +198,12 @@ export const DropdownIndicator = <
     ? chakraStyles.dropdownIndicator(initialSx, props)
     : initialSx;
 
-  const initialIconStyles = {
+  const initialIconStyles: SystemStyleObject = {
     height: "1em",
     width: "1em",
     ...crsStyles.downChevron,
   };
-  const downChevronSx: SystemStyleObject = chakraStyles?.downChevron
+  const downChevronSx = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialIconStyles, props)
     : initialIconStyles;
 
@@ -227,7 +227,7 @@ export const DropdownIndicator = <
 /**
  * Borrowed from Chakra UI source
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/close-button/src/close-button.tsx#L14}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/close-button/src/close-button.tsx#L12-L21}
  */
 export const CrossIcon = (props: IconProps) => (
   <Icon focusable="false" aria-hidden {...props}>
@@ -282,7 +282,7 @@ export const ClearIndicator = <
     height: "1em",
     ...crsStyles.crossIcon,
   };
-  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
+  const iconSx = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
