@@ -92,8 +92,10 @@ export const MenuList = <
   // We're pulling in the border radius from the theme for the input component
   // so we can match the menu lists' border radius to it, but in 2.8.0 the value
   // was changed to being pulled from a theme variable instead of being hardcoded
-  const inputStyles = useMultiStyleConfig("Input", selectProps);
-  const fieldStyles = inputStyles.field as Record<string, string>;
+  const fieldStyles = useMultiStyleConfig("Input", selectProps).field as Record<
+    string,
+    string
+  >;
 
   const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
