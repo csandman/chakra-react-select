@@ -332,9 +332,6 @@ export const GroupHeading = <
     fontSize: fontSizes[size],
     padding: paddings[size],
     margin: 0,
-    top: -2,
-    bg: menuStyles.list.bg,
-    zIndex: 1,
     ...crsStyles.groupHeading,
   };
 
