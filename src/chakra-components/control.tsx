@@ -32,31 +32,16 @@ const Control = <
     isDisabled,
     isFocused,
     menuIsOpen,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      isInvalid,
-      isReadOnly,
-    },
+    selectProps,
   } = props;
 
-  const size = useSize(sizeProp);
+  const { chakraStyles, isInvalid, isReadOnly } = selectProps;
+
   const {
     field: { height, h, ...fieldStyles },
-  } = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
-  });
+  } = useMultiStyleConfig("Input", selectProps);
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size,
-    variant,
-  });
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   /**
    * `@chakra-ui/theme@3.2.0` introduced a breaking change that switched from using `h` to `height` for the Input sizing.
@@ -118,16 +103,11 @@ export const IndicatorSeparator = <
 >(
   props: IndicatorSeparatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    className,
-    cx,
-    selectProps: { chakraStyles, variant, size },
-  } = props;
+  const { className, cx, selectProps } = props;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size,
-    variant,
-  });
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     opacity: 1,
@@ -170,18 +150,11 @@ export const DropdownIndicator = <
 >(
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles, size, variant },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size,
-    variant,
-  });
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     display: "flex",
@@ -245,23 +218,13 @@ export const ClearIndicator = <
 >(
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles, size: sizeProp, variant },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
 
-  const size = useSize(sizeProp);
-  const closeButtonStyles = useStyleConfig("CloseButton", {
-    size,
-  });
+  const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size: sizeProp,
-    variant,
-  });
+  const closeButtonStyles = useStyleConfig("CloseButton", selectProps);
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     ...closeButtonStyles,
@@ -316,13 +279,15 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp, variant },
+    selectProps,
     color,
     emptyColor,
     speed,
     thickness,
     spinnerSize: propsSpinnerSize,
   } = props;
+
+  const { chakraStyles, size: sizeProp } = selectProps;
 
   const size = useSize(sizeProp);
   const spinnerSizes: SizeProps<string> = {
@@ -332,10 +297,7 @@ export const LoadingIndicator = <
   };
   const spinnerSize = spinnerSizes[size];
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size: sizeProp,
-    variant,
-  });
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     marginRight: 3,

@@ -8,7 +8,6 @@ import type {
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import { useSize } from "../utils";
 
 export const SelectContainer = <
   Option,
@@ -25,10 +24,12 @@ export const SelectContainer = <
     isDisabled,
     isRtl,
     hasValue,
-    selectProps: { chakraStyles, size, variant },
+    selectProps,
   } = props;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     position: "relative",
@@ -73,31 +74,16 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      controlShouldRenderValue,
-    },
+    selectProps,
   } = props;
 
-  const size = useSize(sizeProp);
+  const { chakraStyles, controlShouldRenderValue } = selectProps;
 
   // Getting the css from input instead of select
   // to fit better with each of the variants
-  const inputStyles = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
-  });
+  const inputStyles = useMultiStyleConfig("Input", selectProps);
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
-    size,
-    variant,
-  });
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",

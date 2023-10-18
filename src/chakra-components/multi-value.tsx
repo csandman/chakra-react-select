@@ -10,7 +10,6 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import { useSize } from "../utils";
 
 const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
   typeof option === "object" &&
@@ -53,15 +52,7 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const {
-    chakraStyles,
-    colorScheme,
-    tagVariant,
-    size: sizeProp,
-    variant,
-  } = selectProps;
-
-  const size = useSize(sizeProp);
+  const { chakraStyles, colorScheme, tagVariant } = selectProps;
 
   let optionColorScheme = "";
   let optionVariant = "";
@@ -80,13 +71,13 @@ const MultiValue = <
   }
 
   const tagStyles = useMultiStyleConfig("Tag", {
-    size,
+    ...selectProps,
     colorScheme: optionColorScheme || colorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,

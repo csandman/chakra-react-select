@@ -10,15 +10,11 @@ const Placeholder = <
 >(
   props: PlaceholderProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles, size, variant },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",

@@ -12,12 +12,10 @@ const Input = <
 >(
   props: InputProps<Option, IsMulti, Group>
 ) => {
-  const {
-    className,
-    cx,
-    value,
-    selectProps: { chakraStyles, isReadOnly, isRequired, size, variant },
-  } = props;
+  const { className, cx, value, selectProps } = props;
+
+  const { chakraStyles, isReadOnly, isRequired } = selectProps;
+
   const { innerRef, isDisabled, isHidden, inputClassName, ...innerProps } =
     cleanCommonProps(props);
 
@@ -30,7 +28,7 @@ const Input = <
     padding: 0,
   };
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialContainerSx: SystemStyleObject = {
     flex: "1 1 auto",
