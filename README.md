@@ -693,39 +693,30 @@ layer of styles.
 
 The theme styles can be defined using Chakra's
 [multipart component style config](https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components).
+
+There are a few ways these theme styles can be written, either with static style
+objects/functions, or with the `createMultiStyleConfigHelpers` function which
+gives you a couple other helper functions to define your styles in a more
+type-safe way. The documentation on these style definitions is a bit sparse, so
+I highly recommend looking at the source code for some of the built in Chakra
+component themes for further examples:
+
+- `Input` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts
+- `Tag` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts
+- `Menu` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts
+
 Every key that can be used in the `chakraStyles` object can also be used for the
 theme styles. Here's an example of how it can be implemented:
 
 ```tsx
 import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
+import { chakraReactSelectAnatomy } from "chakra-react-select";
 
 const { defineMultiStyleConfig, definePartsStyle } =
-  createMultiStyleConfigHelpers([
-    "clearIndicator",
-    "container",
-    "control",
-    "dropdownIndicator",
-    "downChevron",
-    "crossIcon",
-    "group",
-    "groupHeading",
-    "indicatorsContainer",
-    "indicatorSeparator",
-    "input",
-    "inputContainer",
-    "loadingIndicator",
-    "loadingMessage",
-    "menu",
-    "menuList",
-    "multiValue",
-    "multiValueLabel",
-    "multiValueRemove",
-    "noOptionsMessage",
-    "option",
-    "placeholder",
-    "singleValue",
-    "valueContainer",
-  ]);
+  createMultiStyleConfigHelpers(chakraReactSelectAnatomy.keys);
 
 const ChakraReactSelect = defineMultiStyleConfig({
   baseStyle: definePartsStyle({
@@ -755,9 +746,16 @@ const ChakraReactSelect = defineMultiStyleConfig({
     valueContainer: {},
   }),
   sizes: {
-    sm: definePartsStyle({
-      control: {},
-      // ...
+    sm: definePartsStyle((props) => {
+      // All of the select props are passed into these style functions
+      // and can be used to modify your final styles.
+      const { colorScheme: c } = props;
+
+      return {
+        control: {
+          bg: `colors.${c}.100`,
+        },
+      };
     }),
     md: definePartsStyle({
       control: {},
@@ -784,8 +782,8 @@ const ChakraReactSelect = defineMultiStyleConfig({
     }),
   },
   defaultProps: {
-    size: "lg",
-    variant: "filled",
+    size: "md",
+    variant: "outline",
   },
 });
 

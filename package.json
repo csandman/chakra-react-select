@@ -48,6 +48,7 @@
     "react-select": "5.7.7"
   },
   "peerDependencies": {
+    "@chakra-ui/anatomy": "^2.0.0",
     "@chakra-ui/form-control": "^2.0.0",
     "@chakra-ui/icon": "^3.0.0",
     "@chakra-ui/layout": "^2.0.0",
@@ -66,6 +67,7 @@
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.23.0",
+    "@chakra-ui/anatomy": "^2.2.1",
     "@chakra-ui/babel-plugin": "^1.0.8",
     "@chakra-ui/form-control": "^2.1.1",
     "@chakra-ui/icon": "^3.2.0",
