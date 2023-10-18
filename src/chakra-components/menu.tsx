@@ -391,10 +391,16 @@ export const Option = <
 
   const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
 
-  const paddings: SizeProps = {
-    sm: "0.3rem 0.6rem",
-    md: "0.4rem 0.8rem",
-    lg: "0.5rem 1rem",
+  const horizontalPaddingOptions: SizeProps = {
+    sm: "0.6rem",
+    md: "0.8rem",
+    lg: "1rem",
+  };
+
+  const verticalPaddingOptions: SizeProps = {
+    sm: "0.3rem",
+    md: "0.4rem",
+    lg: "0.5rem",
   };
 
   // Don't create exta space for the checkmark if using a multi select with
@@ -424,7 +430,8 @@ export const Option = <
     width: "100%",
     textAlign: "start",
     fontSize: size,
-    padding: paddings[size],
+    paddingX: horizontalPaddingOptions[size],
+    paddingY: verticalPaddingOptions[size],
     ...(isFocused && menuItemStyles._focus),
     ...(shouldHighlight && {
       ...activeStyles,
