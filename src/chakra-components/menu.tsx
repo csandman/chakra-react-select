@@ -273,11 +273,11 @@ export const Group = <
 
   const crsStyles = useMultiStyleConfig("ChakraReactSelect", { size, variant });
 
-  const initialStyles: SystemStyleObject = crsStyles.group || {};
+  const initialSx: SystemStyleObject = crsStyles.group || {};
 
   const sx = chakraStyles?.group
-    ? chakraStyles.group(initialStyles, props)
-    : initialStyles;
+    ? chakraStyles.group(initialSx, props)
+    : initialSx;
 
   return (
     <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
