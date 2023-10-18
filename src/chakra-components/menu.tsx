@@ -421,11 +421,6 @@ export const Option = <
     fontSize: size,
     paddingX: horizontalPaddingOptions[size],
     paddingY: verticalPaddingOptions[size],
-    ...(isFocused && menuItemStyles._focus),
-    ...(isDisabled && {
-      ...menuItemStyles._disabled,
-      _active: {},
-    }),
     ...(shouldHighlight && {
       bg: selectedBg,
       color: selectedColor,
@@ -453,7 +448,7 @@ export const Option = <
       )}
       sx={sx}
       ref={innerRef}
-      data-disabled={isDisabled ? true : undefined}
+      data-focus={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
     >
       {showCheckIcon && (
