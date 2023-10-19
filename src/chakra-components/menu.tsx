@@ -456,7 +456,7 @@ export const Option = <
       ref={innerRef}
       data-focus={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
-      aria-selected={!isDisabled ? isSelected : isSelected || undefined}
+      aria-selected={isSelected}
     >
       {showCheckIcon && (
         <MenuIcon
