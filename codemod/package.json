@@ -1,0 +1,39 @@
+{
+  "name": "crs-codemod",
+  "version": "1.0.0",
+  "description": "A set of codemods for chakra-react-select",
+  "license": "ISC",
+  "author": "Chris Sandvik <chris.sandvik@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "csandman/chakra-react-select",
+    "directory": "codemod"
+  },
+  "bin": "./bin/crs-codemod.js",
+  "files": [
+    "bin/*.js",
+    "transforms/*.js"
+  ],
+  "scripts": {
+    "prebuild": "rimraf **/*.{d.ts,js}",
+    "build": "tsc -d -p tsconfig.json",
+    "dev": "tsc -d -w -p tsconfig.json"
+  },
+  "dependencies": {
+    "execa": "^4.1.0",
+    "globby": "^11.1.0",
+    "inquirer": "^7.3.3",
+    "is-git-clean": "^1.1.0",
+    "jscodeshift": "^0.15.0",
+    "meow": "^7.1.1",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^7.3.3",
+    "@types/is-git-clean": "^1.1.0",
+    "@types/jscodeshift": "^0.11.7",
+    "@types/node": "^20.8.4",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2"
+  }
+}

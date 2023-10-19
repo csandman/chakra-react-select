@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
 import type { SystemStyleObject } from "@chakra-ui/system";
-import { chakra } from "@chakra-ui/system";
+import { chakra, useMultiStyleConfig } from "@chakra-ui/system";
 import type { GroupBase, InputProps } from "react-select";
 import { cleanCommonProps } from "../utils";
 
@@ -12,12 +12,10 @@ const Input = <
 >(
   props: InputProps<Option, IsMulti, Group>
 ) => {
-  const {
-    className,
-    cx,
-    value,
-    selectProps: { chakraStyles, isReadOnly, isRequired },
-  } = props;
+  const { className, cx, value, selectProps } = props;
+
+  const { chakraStyles, isReadOnly, isRequired } = selectProps;
+
   const { innerRef, isDisabled, isHidden, inputClassName, ...innerProps } =
     cleanCommonProps(props);
 
@@ -29,6 +27,8 @@ const Input = <
     outline: 0,
     padding: 0,
   };
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialContainerSx: SystemStyleObject = {
     flex: "1 1 auto",
@@ -49,6 +49,7 @@ const Input = <
       padding: 0,
       ...spacingSx,
     },
+    ...crsStyles.inputContainer,
   };
   const containerSx = chakraStyles?.inputContainer
     ? chakraStyles.inputContainer(initialContainerSx, props)
@@ -59,6 +60,7 @@ const Input = <
     opacity: isHidden ? 0 : 1,
     width: "100%",
     ...spacingSx,
+    ...crsStyles.input,
   };
   const inputSx = chakraStyles?.input
     ? chakraStyles.input(initialInputSx, props)

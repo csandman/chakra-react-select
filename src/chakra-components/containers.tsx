@@ -8,7 +8,6 @@ import type {
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import { useSize } from "../utils";
 
 export const SelectContainer = <
   Option,
@@ -25,13 +24,18 @@ export const SelectContainer = <
     isDisabled,
     isRtl,
     hasValue,
-    selectProps: { chakraStyles },
+    selectProps,
   } = props;
+
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
+    ...crsStyles.container,
   };
 
   const sx = chakraStyles?.container
@@ -70,26 +74,16 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      controlShouldRenderValue,
-    },
+    selectProps,
   } = props;
 
-  const size = useSize(sizeProp);
+  const { chakraStyles, controlShouldRenderValue } = selectProps;
 
   // Getting the css from input instead of select
   // to fit better with each of the variants
-  const inputStyles = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
-  });
+  const inputStyles = useMultiStyleConfig("Input", selectProps);
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
@@ -101,6 +95,7 @@ export const ValueContainer = <
     WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
+    ...crsStyles.valueContainer,
   };
 
   const sx = chakraStyles?.valueContainer
@@ -132,19 +127,18 @@ export const IndicatorsContainer = <
 >(
   props: IndicatorsContainerProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
+
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const initialSx: SystemStyleObject = {
     display: "flex",
     alignItems: "center",
     alignSelf: "stretch",
     flexShrink: 0,
+    ...crsStyles.indicatorsContainer,
   };
 
   const sx = chakraStyles?.indicatorsContainer

@@ -3,6 +3,7 @@ import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
+  ColorScheme,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -10,12 +11,20 @@ import type {
 } from "./types";
 
 /**
+ * This is necessary for the module `react-select/base` to be seen by TypeScript.
+ * Without it the module augmentation will not work properly.
+ *
+ * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
+ */
+export type {} from "react-select/base";
+
+/**
  * Module augmentation is used to add extra props to the existing interfaces
  * from `react-select` as per the docs
  *
  * @see {@link https://react-select.com/typescript#custom-select-props}
  */
-declare module "react-select/dist/declarations/src/Select" {
+declare module "react-select/base" {
   export interface Props<
     Option,
     IsMulti extends boolean,
@@ -60,8 +69,8 @@ declare module "react-select/dist/declarations/src/Select" {
     /**
      * If true, the form control will be required. This has 2 side effects:
      *
-     * - The `FormLabel` will show a required indicator
-     * - The form element (e.g, Input) will have `aria-required` set to true
+     * - The hidden input element will get the required attribute, triggering native form validation on submit
+     * - The combobox input will have `aria-required` set to true
      *
      * @see {@link https://chakra-ui.com/docs/components/input/props}
      * @see {@link https://chakra-ui.com/docs/components/form-control/props}
@@ -78,7 +87,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
-    colorScheme?: string;
+    colorScheme?: ColorScheme;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -92,17 +101,6 @@ declare module "react-select/dist/declarations/src/Select" {
      * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
      */
     tagVariant?: TagVariant;
-
-    /**
-     * Passing `true` for this prop will make the group headers
-     * `position: sticky` and keep them stuck to the top while their
-     * corresponding group is in view.
-     *
-     * @defaultValue `false`
-     * @deprecated This prop should probably not have existed and will be
-     * removed soon.
-     */
-    hasStickyGroupHeaders?: boolean;
 
     /**
      * Whether to style a selected option by highlighting it in a solid color
@@ -124,12 +122,7 @@ declare module "react-select/dist/declarations/src/Select" {
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
      */
-    selectedOptionColorScheme?: string;
-
-    /**
-     * @deprecated Replaced by {@link selectedOptionColorScheme}
-     */
-    selectedOptionColor?: string;
+    selectedOptionColorScheme?: ColorScheme;
 
     /**
      * The color value to style the border of the `Control` with when the
@@ -161,16 +154,6 @@ declare module "react-select/dist/declarations/src/Select" {
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
 
     /**
-     * If passed, the dropdown indicator will be styled the same as Chakra UI's
-     * `Select` component.
-     *
-     * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
-     * @see {@link https://chakra-ui.com/docs/components/select}
-     */
-    useBasicStyles?: boolean;
-
-    /**
      * The main style variant of the `Select` component. This will use styles
      * from Chakra's `Input` component and any custom variants you have added to
      * your theme may be used.
@@ -197,7 +180,7 @@ declare module "react-select/dist/declarations/src/Select" {
   }
 }
 
-declare module "react-select/dist/declarations/src/components/MultiValue" {
+declare module "react-select" {
   export interface MultiValueProps<
     Option,
     IsMulti extends boolean,
@@ -222,9 +205,7 @@ declare module "react-select/dist/declarations/src/components/MultiValue" {
     isFocused: boolean;
     sx: SystemStyleObject;
   }
-}
 
-declare module "react-select/dist/declarations/src/components/indicators" {
   export interface LoadingIndicatorProps<
     Option,
     IsMulti extends boolean,

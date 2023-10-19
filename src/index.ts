@@ -7,6 +7,7 @@ export { default as AsyncCreatableSelect } from "./select/async-creatable-select
 
 export { default as chakraComponents } from "./chakra-components";
 export { default as useChakraSelectProps } from "./use-chakra-select-props";
+export { default as chakraReactSelectAnatomy } from "./anatomy";
 
 export type { SelectComponent } from "./select/select";
 export type { CreatableSelectComponent } from "./select/creatable-select";
@@ -18,6 +19,7 @@ export type {
   Size,
   TagVariant,
   SelectedOptionStyle,
+  ColorScheme,
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,

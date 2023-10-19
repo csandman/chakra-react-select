@@ -17,13 +17,12 @@ const useChakraSelectProps = <
   isDisabled,
   isInvalid,
   isReadOnly,
+  required,
   isRequired,
   inputId,
   tagVariant,
   selectedOptionStyle = "color",
-  selectedOptionColorScheme,
-  // eslint-disable-next-line deprecation/deprecation
-  selectedOptionColor,
+  selectedOptionColorScheme = "blue",
   variant,
   focusBorderColor,
   errorBorderColor,
@@ -34,7 +33,12 @@ const useChakraSelectProps = <
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   const chakraTheme = useTheme();
-  const { variant: defaultVariant } = chakraTheme.components.Input.defaultProps;
+
+  const { variant: defaultInputVariant } =
+    chakraTheme.components.Input.defaultProps;
+
+  const { variant: defaultVariant, size: defaultSize } =
+    chakraTheme.components.ChakraReactSelect?.defaultProps || {};
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
@@ -60,13 +64,6 @@ const useChakraSelectProps = <
     realSelectedOptionStyle = "color";
   }
 
-  // Ensure that the color used for the selected options is a string
-  let realSelectedOptionColorScheme: string =
-    selectedOptionColorScheme || selectedOptionColor || "blue";
-  if (typeof realSelectedOptionColorScheme !== "string") {
-    realSelectedOptionColorScheme = "blue";
-  }
-
   const select: Props<Option, IsMulti, Group> = {
     // Allow overriding of custom components
     components: {
@@ -75,11 +72,11 @@ const useChakraSelectProps = <
     },
     // Custom select props
     colorScheme,
-    size,
     tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
-    selectedOptionColorScheme: realSelectedOptionColorScheme,
-    variant: variant ?? defaultVariant,
+    selectedOptionColorScheme,
+    size: size ?? defaultSize,
+    variant: variant ?? defaultVariant ?? defaultInputVariant,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
@@ -90,6 +87,7 @@ const useChakraSelectProps = <
     isInvalid: !!inputProps["aria-invalid"],
     inputId: inputProps.id,
     isReadOnly: inputProps.readOnly,
+    required: required ?? inputProps.required,
     menuIsOpen: realMenuIsOpen,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to

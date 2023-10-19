@@ -65,6 +65,7 @@ https://react-select.com/home
     - [Caveats](#caveats)
     - [Examples](#examples)
   - [Theme Styles](#theme-styles)
+  - [Extending the Theme](#extending-the-theme)
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
@@ -680,6 +681,129 @@ color scheme will also be reflected in these custom components.
 **NOTE:** Only make changes to your global component themes if you want them to
 appear in all instances of that component. Otherwise, just change the individual
 components' styles using the `chakraStyles` prop.
+
+### Extending the Theme
+
+As of `v5.0.0`, it is now possible to customize your Select instances globally
+by extending the Chakra theme! These theme styles are layered on top of the
+theme styles pulled from other Chakra components, for backwards compatibility's
+sake, but will always override those. They will also be overridden by any styles
+passed into [`chakraStyles`](#chakrastyles), so it's somewhat of the middle
+layer of styles.
+
+The theme styles can be defined using Chakra's
+[multipart component style config](https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components).
+
+There are a few ways these theme styles can be written, either with static style
+objects/functions, or with the `createMultiStyleConfigHelpers` function which
+gives you a couple other helper functions to define your styles in a more
+type-safe way. The documentation on these style definitions is a bit sparse, so
+I highly recommend looking at the source code for some of the built in Chakra
+component themes for further examples:
+
+- `Input` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts
+- `Tag` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts
+- `Menu` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts
+
+Every key that can be used in the `chakraStyles` object can also be used for the
+theme styles. Here's an example of how it can be implemented:
+
+```tsx
+import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
+import { chakraReactSelectAnatomy } from "chakra-react-select";
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(chakraReactSelectAnatomy.keys);
+
+const ChakraReactSelect = defineMultiStyleConfig({
+  baseStyle: definePartsStyle({
+    clearIndicator: {},
+    container: {},
+    control: {},
+    dropdownIndicator: {},
+    downChevron: {},
+    crossIcon: {},
+    group: {},
+    groupHeading: {},
+    indicatorsContainer: {},
+    indicatorSeparator: {},
+    input: {},
+    inputContainer: {},
+    loadingIndicator: {},
+    loadingMessage: {},
+    menu: {},
+    menuList: {},
+    multiValue: {},
+    multiValueLabel: {},
+    multiValueRemove: {},
+    noOptionsMessage: {},
+    option: {},
+    placeholder: {},
+    singleValue: {},
+    valueContainer: {},
+  }),
+  sizes: {
+    sm: definePartsStyle((props) => {
+      // All of the select props are passed into these style functions
+      // and can be used to modify your final styles.
+      const { colorScheme: c } = props;
+
+      return {
+        control: {
+          bg: `colors.${c}.100`,
+        },
+      };
+    }),
+    md: definePartsStyle({
+      control: {},
+      // ...
+    }),
+    lg: definePartsStyle({
+      control: {},
+      // ...
+    }),
+  },
+  variants: {
+    outline: definePartsStyle({
+      control: {},
+      // ...
+    }),
+    filled: definePartsStyle({
+      // ...
+    }),
+    flushed: definePartsStyle({
+      // ...
+    }),
+    unstyled: definePartsStyle({
+      // ...
+    }),
+  },
+  defaultProps: {
+    size: "md",
+    variant: "outline",
+  },
+});
+
+const theme = extendTheme({
+  components: {
+    ChakraReactSelect,
+  },
+});
+
+const Root = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  );
+};
+```
+
+When calling `createMultiStyleConfigHelpers` you should only include the keys
+for the theme styles actually intend to use
 
 ### `className`
 

@@ -10,7 +10,6 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import { useSize } from "../utils";
 
 const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
   typeof option === "object" &&
@@ -53,9 +52,7 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
-
-  const size = useSize(sizeProp);
+  const { chakraStyles, colorScheme, tagVariant } = selectProps;
 
   let optionColorScheme = "";
   let optionVariant = "";
@@ -74,11 +71,13 @@ const MultiValue = <
   }
 
   const tagStyles = useMultiStyleConfig("Tag", {
-    size,
+    ...selectProps,
     colorScheme: optionColorScheme || colorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
   const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,
@@ -86,6 +85,7 @@ const MultiValue = <
     alignItems: "center",
     minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
+    ...crsStyles.multiValue,
   };
   const containerSx: SystemStyleObject = chakraStyles?.multiValue
     ? chakraStyles.multiValue(containerInitialSx, props)
@@ -99,6 +99,7 @@ const MultiValue = <
         ? "ellipsis"
         : undefined,
     whiteSpace: "nowrap",
+    ...crsStyles.multiValueLabel,
   };
   const labelSx = chakraStyles?.multiValueLabel
     ? chakraStyles.multiValueLabel(labelInitialSx, props)
@@ -109,6 +110,7 @@ const MultiValue = <
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    ...crsStyles.multiValueRemove,
   };
   const removeSx = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialSx, props)
