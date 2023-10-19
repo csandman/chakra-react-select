@@ -14,7 +14,10 @@ const Placeholder = <
 
   const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",

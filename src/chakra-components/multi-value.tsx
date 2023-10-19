@@ -72,12 +72,16 @@ const MultiValue = <
 
   const tagStyles = useMultiStyleConfig("Tag", {
     ...selectProps,
+    ...props,
     colorScheme: optionColorScheme || colorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const containerInitialSx: SystemStyleObject = {
     ...tagStyles.container,

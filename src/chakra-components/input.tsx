@@ -28,7 +28,10 @@ const Input = <
     padding: 0,
   };
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialContainerSx: SystemStyleObject = {
     flex: "1 1 auto",

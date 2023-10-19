@@ -29,7 +29,10 @@ export const SelectContainer = <
 
   const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     position: "relative",
@@ -79,11 +82,17 @@ export const ValueContainer = <
 
   const { chakraStyles, controlShouldRenderValue } = selectProps;
 
-  // Getting the css from input instead of select
+  // Getting the styles from input instead of select
   // to fit better with each of the variants
-  const inputStyles = useMultiStyleConfig("Input", selectProps);
+  const inputStyles = useMultiStyleConfig("Input", {
+    ...selectProps,
+    ...props,
+  });
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
@@ -131,7 +140,10 @@ export const IndicatorsContainer = <
 
   const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     display: "flex",

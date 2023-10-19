@@ -36,7 +36,10 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
 
   const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     position: "absolute",
@@ -87,17 +90,23 @@ export const MenuList = <
 
   const { chakraStyles } = selectProps;
 
-  const menuStyles = useMultiStyleConfig("Menu", selectProps);
+  const menuStyles = useMultiStyleConfig("Menu", {
+    ...selectProps,
+    ...props,
+  });
 
   // We're pulling in the border radius from the theme for the input component
   // so we can match the menu lists' border radius to it, but in 2.8.0 the value
   // was changed to being pulled from a theme variable instead of being hardcoded
-  const fieldStyles = useMultiStyleConfig("Input", selectProps).field as Record<
-    string,
-    string
-  >;
+  const fieldStyles = useMultiStyleConfig("Input", {
+    ...selectProps,
+    ...props,
+  }).field as Record<string, string>;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.list,
@@ -154,7 +163,10 @@ export const LoadingMessage = <
     lg: "10px",
   };
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     color: "chakra-subtle-text",
@@ -204,7 +216,10 @@ export const NoOptionsMessage = <
     lg: "10px",
   };
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     color: "chakra-subtle-text",
@@ -258,7 +273,10 @@ export const Group = <
 
   const { chakraStyles } = selectProps;
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = crsStyles.group || {};
 
@@ -296,7 +314,10 @@ export const GroupHeading = <
 
   const { chakraStyles, size: sizeProp } = selectProps;
 
-  const menuStyles = useMultiStyleConfig("Menu", selectProps);
+  const menuStyles = useMultiStyleConfig("Menu", {
+    ...selectProps,
+    ...props,
+  });
 
   const size = useSize(sizeProp);
 
@@ -311,7 +332,10 @@ export const GroupHeading = <
     lg: "0.6rem 1.2rem",
   };
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     ...menuStyles.groupTitle,
@@ -414,7 +438,10 @@ export const Option = <
 
   const shouldHighlight = selectedOptionStyle === "color";
 
-  const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,
