@@ -404,12 +404,11 @@ export const Option = <
 
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
-  const showCheckIcon: boolean =
+  const showCheckIcon =
     selectedOptionStyle === "check" &&
     (!isMulti || hideSelectedOptions === false);
 
-  const shouldHighlight: boolean =
-    selectedOptionStyle === "color" && isSelected;
+  const shouldHighlight = selectedOptionStyle === "color";
 
   const crsStyles = useMultiStyleConfig("ChakraReactSelect", selectProps);
 
@@ -423,9 +422,11 @@ export const Option = <
     paddingX: horizontalPaddingOptions[size],
     paddingY: verticalPaddingOptions[size],
     ...(shouldHighlight && {
-      bg: selectedBg,
-      color: selectedColor,
-      _active: { bg: selectedBg },
+      _selected: {
+        bg: selectedBg,
+        color: selectedColor,
+        _active: { bg: selectedBg },
+      },
     }),
     ...crsStyles.option,
   };
@@ -451,6 +452,7 @@ export const Option = <
       ref={innerRef}
       data-focus={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
+      aria-selected={!isDisabled ? isSelected : isSelected || undefined}
     >
       {showCheckIcon && (
         <MenuIcon
