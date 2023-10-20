@@ -2,7 +2,7 @@
   "name": "crs-codemod",
   "version": "1.0.0",
   "description": "A set of codemods for chakra-react-select",
-  "license": "ISC",
+  "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
   "repository": {
     "type": "git",
