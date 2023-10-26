@@ -143,7 +143,7 @@ export const IndicatorSeparator = <
  * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/select/src/select.tsx#L168-L179}
  */
 export const DownChevron = (props: IconProps) => (
-  <Icon {...props}>
+  <Icon role="presentation" focusable="false" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
       d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
