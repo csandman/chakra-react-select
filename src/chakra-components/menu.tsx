@@ -382,9 +382,9 @@ export const Option = <
   };
 
   /**
-   * Use the same selected color as the border of the select component
+   * Use the same selected color as the border/shadow of the select/input components
    *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/theme/src/components/input.ts#L92-L93}
    */
   const selectedBg = useColorModeValue(
     `${selectedOptionColorScheme}.500`,
