@@ -139,7 +139,8 @@ export const IndicatorSeparator = <
 /**
  * Borrowed from the `@chakra-ui/icons` package to prevent needing it as a dependency
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/select/src/select.tsx#L168-L179}
  */
 export const DownChevron = (props: IconProps) => (
   <Icon {...props}>
@@ -237,7 +238,7 @@ export const DropdownIndicator = <
 /**
  * Borrowed from Chakra UI source
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/close-button/src/close-button.tsx#L14}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/close-button/src/close-button.tsx#L12-L21}
  */
 export const CrossIcon = (props: IconProps) => (
   <Icon focusable="false" aria-hidden {...props}>
