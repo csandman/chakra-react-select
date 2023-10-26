@@ -14,7 +14,7 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
-import { useSize } from "../utils";
+import { cleanCommonProps, useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
   const placementToCSSProp = { bottom: "top", top: "bottom" };
@@ -288,10 +288,11 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    children,
     // eslint-disable-next-line deprecation/deprecation
     selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
+
+  const { data, ...innerProps } = cleanCommonProps(props);
 
   const menuStyles = useMultiStyleConfig("Menu");
 
@@ -325,9 +326,11 @@ export const GroupHeading = <
     : initialSx;
 
   return (
-    <Box className={cx({ "group-heading": true }, className)} sx={sx}>
-      {children}
-    </Box>
+    <Box
+      {...innerProps}
+      className={cx({ "group-heading": true }, className)}
+      sx={sx}
+    />
   );
 };
 
