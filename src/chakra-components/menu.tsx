@@ -413,6 +413,7 @@ export const Option = <
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,
+    cursor: "pointer",
     display: "flex",
     alignItems: "center",
     width: "100%",
