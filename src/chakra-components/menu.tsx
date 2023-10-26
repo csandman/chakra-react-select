@@ -118,6 +118,7 @@ export const MenuList = <
 
   return (
     <Box
+      role="listbox"
       {...innerProps}
       className={cx(
         {
@@ -259,7 +260,10 @@ export const Group = <
 
   const { chakraStyles } = selectProps;
 
-  const sx = chakraStyles?.group ? chakraStyles.group({}, props) : {};
+  const initialSx: SystemStyleObject = {};
+  const sx = chakraStyles?.group
+    ? chakraStyles.group(initialSx, props)
+    : initialSx;
 
   return (
     <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
@@ -374,14 +378,18 @@ export const Option = <
     },
   } = props;
 
-  const size = useSize(sizeProp);
-
   const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
 
-  const paddings: SizeProps = {
-    sm: "0.3rem 0.6rem",
-    md: "0.4rem 0.8rem",
-    lg: "0.5rem 1rem",
+  const size = useSize(sizeProp);
+  const horizontalPaddingOptions: SizeProps = {
+    sm: "0.6rem",
+    md: "0.8rem",
+    lg: "1rem",
+  };
+  const verticalPaddingOptions: SizeProps = {
+    sm: "0.3rem",
+    md: "0.4rem",
+    lg: "0.5rem",
   };
 
   /**
@@ -410,25 +418,24 @@ export const Option = <
     width: "100%",
     textAlign: "start",
     fontSize: size,
-    padding: paddings[size],
-    ...(isFocused && menuItemStyles._focus),
+    paddingX: horizontalPaddingOptions[size],
+    paddingY: verticalPaddingOptions[size],
     ...(shouldHighlight && {
-      bg: selectedBg,
-      color: selectedColor,
-      _active: { bg: selectedBg },
+      _selected: {
+        bg: selectedBg,
+        color: selectedColor,
+        _active: { bg: selectedBg },
+      },
     }),
-    ...(isDisabled && menuItemStyles._disabled),
-    ...(isDisabled && { _active: {} }),
   };
 
   const sx = chakraStyles?.option
     ? chakraStyles.option(initialSx, props)
     : initialSx;
-
   return (
     <Box
+      role="option"
       {...innerProps}
-      role="button"
       className={cx(
         {
           option: true,
@@ -440,8 +447,9 @@ export const Option = <
       )}
       sx={sx}
       ref={innerRef}
-      data-disabled={isDisabled ? true : undefined}
+      data-focus={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
+      aria-selected={isSelected}
     >
       {showCheckIcon && (
         <MenuIcon

@@ -16,7 +16,7 @@ const Input = <
     className,
     cx,
     value,
-    selectProps: { chakraStyles, isReadOnly, isRequired },
+    selectProps: { chakraStyles, isReadOnly },
   } = props;
   const { innerRef, isDisabled, isHidden, inputClassName, ...innerProps } =
     cleanCommonProps(props);
@@ -76,8 +76,6 @@ const Input = <
         sx={inputSx}
         disabled={isDisabled}
         readOnly={isReadOnly ? true : undefined}
-        aria-readonly={isReadOnly ? true : undefined}
-        aria-required={isRequired ? true : undefined}
         {...innerProps}
       />
     </Box>

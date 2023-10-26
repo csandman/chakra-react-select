@@ -98,7 +98,7 @@ const Control = <
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
-      aria-readonly={isReadOnly ? true : undefined}
+      data-readonly={isReadOnly ? true : undefined}
     >
       {children}
     </Box>
