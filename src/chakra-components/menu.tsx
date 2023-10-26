@@ -394,12 +394,11 @@ export const Option = <
 
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
-  const showCheckIcon: boolean =
+  const showCheckIcon =
     selectedOptionStyle === "check" &&
     (!isMulti || hideSelectedOptions === false);
 
-  const shouldHighlight: boolean =
-    selectedOptionStyle === "color" && isSelected;
+  const shouldHighlight = selectedOptionStyle === "color";
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,

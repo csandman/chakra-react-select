@@ -188,7 +188,7 @@ export const DropdownIndicator = <
   };
   const iconSize = iconSizes[size];
 
-  const initialSx: SystemStyleObject = {
+  const initialDropdownIndicatorSx: SystemStyleObject = {
     ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
@@ -206,17 +206,17 @@ export const DropdownIndicator = <
       cursor: "inherit",
     }),
   };
-  const sx = chakraStyles?.dropdownIndicator
-    ? chakraStyles.dropdownIndicator(initialSx, props)
-    : initialSx;
+  const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
+    ? chakraStyles.dropdownIndicator(initialDropdownIndicatorSx, props)
+    : initialDropdownIndicatorSx;
 
-  const initialIconStyles = {
+  const initialDownChevronSx: SystemStyleObject = {
     height: "1em",
     width: "1em",
   };
-  const iconSx: SystemStyleObject = chakraStyles?.downChevron
-    ? chakraStyles.downChevron(initialIconStyles, props)
-    : initialIconStyles;
+  const downChevronSx = chakraStyles?.downChevron
+    ? chakraStyles.downChevron(initialDownChevronSx, props)
+    : initialDownChevronSx;
 
   return (
     <Box
@@ -228,9 +228,9 @@ export const DropdownIndicator = <
         },
         className
       )}
-      sx={sx}
+      sx={dropdownIndicatorSx}
     >
-      {children || <DownChevron sx={iconSx} />}
+      {children || <DownChevron sx={downChevronSx} />}
     </Box>
   );
 };
