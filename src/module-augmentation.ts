@@ -3,6 +3,7 @@ import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
+  ColorScheme,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -86,7 +87,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
-    colorScheme?: string;
+    colorScheme?: ColorScheme;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -132,12 +133,12 @@ declare module "react-select/base" {
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
      */
-    selectedOptionColorScheme?: string;
+    selectedOptionColorScheme?: ColorScheme;
 
     /**
      * @deprecated Replaced by {@link selectedOptionColorScheme}
      */
-    selectedOptionColor?: string;
+    selectedOptionColor?: ColorScheme;
 
     /**
      * The color value to style the border of the `Control` with when the

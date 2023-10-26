@@ -2,6 +2,7 @@ import type {
   Pseudos,
   ResponsiveObject,
   SystemStyleObject,
+  ThemeTypings,
 } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
@@ -45,16 +46,13 @@ export type Size = "sm" | "md" | "lg";
 
 export type SizeProp = Size | ResponsiveObject<Size> | Size[];
 
-export type TagVariant = "subtle" | "solid" | "outline" | (string & {});
+export type TagVariant = ThemeTypings["components"]["Tag"]["variants"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant =
-  | "outline"
-  | "filled"
-  | "flushed"
-  | "unstyled"
-  | (string & {});
+export type Variant = ThemeTypings["components"]["Input"]["variants"];
+
+export type ColorScheme = ThemeTypings["colorSchemes"];
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,
