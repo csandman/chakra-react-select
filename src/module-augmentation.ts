@@ -3,6 +3,7 @@ import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
+  ColorScheme,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -68,8 +69,8 @@ declare module "react-select/base" {
     /**
      * If true, the form control will be required. This has 2 side effects:
      *
-     * - The `FormLabel` will show a required indicator
-     * - The form element (e.g, Input) will have `aria-required` set to true
+     * - The hidden input element will get the required attribute, triggering native form validation on submit
+     * - The combobox input will have `aria-required` set to true
      *
      * @see {@link https://chakra-ui.com/docs/components/input/props}
      * @see {@link https://chakra-ui.com/docs/components/form-control/props}
@@ -86,7 +87,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
-    colorScheme?: string;
+    colorScheme?: ColorScheme;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -100,17 +101,6 @@ declare module "react-select/base" {
      * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
      */
     tagVariant?: TagVariant;
-
-    /**
-     * Passing `true` for this prop will make the group headers
-     * `position: sticky` and keep them stuck to the top while their
-     * corresponding group is in view.
-     *
-     * @defaultValue `false`
-     * @deprecated This prop should probably not have existed and will be
-     * removed soon.
-     */
-    hasStickyGroupHeaders?: boolean;
 
     /**
      * Whether to style a selected option by highlighting it in a solid color
@@ -132,12 +122,7 @@ declare module "react-select/base" {
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
      */
-    selectedOptionColorScheme?: string;
-
-    /**
-     * @deprecated Replaced by {@link selectedOptionColorScheme}
-     */
-    selectedOptionColor?: string;
+    selectedOptionColorScheme?: ColorScheme;
 
     /**
      * The color value to style the border of the `Control` with when the
@@ -167,16 +152,6 @@ declare module "react-select/base" {
      * @see {@link https://react-select.com/styles#style-object}
      */
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
-
-    /**
-     * If passed, the dropdown indicator will be styled the same as Chakra UI's
-     * `Select` component.
-     *
-     * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
-     * @see {@link https://chakra-ui.com/docs/components/select}
-     */
-    useBasicStyles?: boolean;
 
     /**
      * The main style variant of the `Select` component. This will use styles

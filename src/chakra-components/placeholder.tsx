@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import { type SystemStyleObject, useMultiStyleConfig } from "@chakra-ui/system";
 import type { GroupBase, PlaceholderProps } from "react-select";
 
 const Placeholder = <
@@ -10,19 +10,21 @@ const Placeholder = <
 >(
   props: PlaceholderProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
+
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",
     color: "chakra-placeholder-color",
     mx: "0.125rem",
     userSelect: "none",
+    ...crsStyles.placeholder,
   };
 
   const sx = chakraStyles?.placeholder

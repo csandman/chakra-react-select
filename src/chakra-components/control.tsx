@@ -32,25 +32,21 @@ const Control = <
     isDisabled,
     isFocused,
     menuIsOpen,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      isInvalid,
-      isReadOnly,
-    },
+    selectProps,
   } = props;
 
-  const size = useSize(sizeProp);
+  const { chakraStyles, isInvalid, isReadOnly } = selectProps;
+
   const {
     field: { height, h, ...fieldStyles },
   } = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
+    ...selectProps,
+    ...props,
+  });
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
   });
 
   /**
@@ -74,6 +70,7 @@ const Control = <
     height: "auto",
     minH,
     ...(isDisabled ? { pointerEvents: "none" } : {}),
+    ...crsStyles.control,
   };
 
   const sx = chakraStyles?.control
@@ -94,11 +91,10 @@ const Control = <
       )}
       sx={sx}
       {...innerProps}
-      data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
-      aria-readonly={isReadOnly ? true : undefined}
+      data-readonly={isReadOnly ? true : undefined}
     >
       {children}
     </Box>
@@ -112,15 +108,19 @@ export const IndicatorSeparator = <
 >(
   props: IndicatorSeparatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    className,
-    cx,
-    selectProps: { chakraStyles, useBasicStyles, variant },
-  } = props;
+  const { className, cx, selectProps } = props;
+
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
 
   const initialSx: SystemStyleObject = {
     opacity: 1,
-    ...(useBasicStyles || variant !== "outline" ? { display: "none" } : {}),
+    display: "none",
+    ...crsStyles.indicatorSeparator,
   };
 
   const sx = chakraStyles?.indicatorSeparator
@@ -139,10 +139,11 @@ export const IndicatorSeparator = <
 /**
  * Borrowed from the `@chakra-ui/icons` package to prevent needing it as a dependency
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/select/src/select.tsx#L168-L179}
  */
 export const DownChevron = (props: IconProps) => (
-  <Icon {...props}>
+  <Icon role="presentation" focusable="false" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
       d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
@@ -157,63 +158,36 @@ export const DropdownIndicator = <
 >(
   props: DropdownIndicatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: {
-      chakraStyles,
-      useBasicStyles,
-      size: sizeProp,
-      focusBorderColor,
-      errorBorderColor,
-      variant,
-    },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
 
-  const size = useSize(sizeProp);
-  const inputStyles = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
+  const { chakraStyles } = selectProps;
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
   });
 
-  const iconSizes: SizeProps = {
-    sm: "16px",
-    md: "20px",
-    lg: "24px",
-  };
-  const iconSize = iconSizes[size];
-
   const initialSx: SystemStyleObject = {
-    ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    borderRadius: 0,
-    borderWidth: 0,
-    fontSize: iconSize,
-    ...(useBasicStyles && {
-      background: "transparent",
-      padding: 0,
-      width: 6,
-      marginRight: 2,
-      marginLeft: 1,
-      cursor: "inherit",
-    }),
+    width: 6,
+    marginRight: 2,
+    marginLeft: 1,
+    fontSize: "xl",
+    ...crsStyles.dropdownIndicator,
   };
-  const sx = chakraStyles?.dropdownIndicator
+  const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialSx, props)
     : initialSx;
 
-  const initialIconStyles = {
+  const initialIconStyles: SystemStyleObject = {
     height: "1em",
     width: "1em",
+    ...crsStyles.downChevron,
   };
-  const iconSx: SystemStyleObject = chakraStyles?.downChevron
+  const downChevronSx = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialIconStyles, props)
     : initialIconStyles;
 
@@ -227,9 +201,9 @@ export const DropdownIndicator = <
         },
         className
       )}
-      sx={sx}
+      sx={dropdownIndicatorSx}
     >
-      {children || <DownChevron sx={iconSx} />}
+      {children || <DownChevron sx={downChevronSx} />}
     </Box>
   );
 };
@@ -237,7 +211,7 @@ export const DropdownIndicator = <
 /**
  * Borrowed from Chakra UI source
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/close-button/src/close-button.tsx#L14}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/close-button/src/close-button.tsx#L12-L21}
  */
 export const CrossIcon = (props: IconProps) => (
   <Icon focusable="false" aria-hidden {...props}>
@@ -255,17 +229,15 @@ export const ClearIndicator = <
 >(
   props: ClearIndicatorProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    className,
-    cx,
-    innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
-  } = props;
+  const { children, className, cx, innerProps, selectProps } = props;
 
-  const size = useSize(sizeProp);
-  const closeButtonStyles = useStyleConfig("CloseButton", {
-    size,
+  const { chakraStyles } = selectProps;
+
+  const closeButtonStyles = useStyleConfig("CloseButton", selectProps);
+
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
   });
 
   const initialSx: SystemStyleObject = {
@@ -276,6 +248,7 @@ export const ClearIndicator = <
     justifyContent: "center",
     flexShrink: 0,
     cursor: "pointer",
+    ...crsStyles.clearIndicator,
   };
   const sx = chakraStyles?.clearIndicator
     ? chakraStyles.clearIndicator(initialSx, props)
@@ -284,8 +257,9 @@ export const ClearIndicator = <
   const initialIconStyles: SystemStyleObject = {
     width: "1em",
     height: "1em",
+    ...crsStyles.crossIcon,
   };
-  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
+  const iconSx = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
@@ -319,13 +293,15 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps,
     color,
     emptyColor,
     speed,
     thickness,
     spinnerSize: propsSpinnerSize,
   } = props;
+
+  const { chakraStyles, size: sizeProp } = selectProps;
 
   const size = useSize(sizeProp);
   const spinnerSizes: SizeProps<string> = {
@@ -335,7 +311,15 @@ export const LoadingIndicator = <
   };
   const spinnerSize = spinnerSizes[size];
 
-  const initialSx: SystemStyleObject = { marginRight: 3 };
+  const crsStyles = useMultiStyleConfig("ChakraReactSelect", {
+    ...selectProps,
+    ...props,
+  });
+
+  const initialSx: SystemStyleObject = {
+    marginRight: 3,
+    ...crsStyles.loadingIndicator,
+  };
 
   const sx = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialSx, props)

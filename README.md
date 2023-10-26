@@ -56,15 +56,17 @@ https://react-select.com/home
   - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
   - [`isInvalid` / `isReadOnly`](#isinvalid--default-false--isreadonly---default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
-  - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColorScheme`](#selectedoptioncolorscheme--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
+  - [`useBasicStyles` (deprecated)](#usebasicstyles-deprecated)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
     - [Examples](#examples)
   - [Theme Styles](#theme-styles)
+  - [Extending the Theme](#extending-the-theme)
+    - [Examples](#examples-1)
   - [`className`](#classname)
 - [TypeScript Support](#typescript-support)
 - [Customizing Components](#customizing-components)
@@ -293,30 +295,6 @@ return (
 
 ---
 
-#### `useBasicStyles` — Default: `false`
-
-If this prop is passed, the dropdown indicator at the right of the component
-will be styled in the same way
-[the original Chakra `Select` component](https://chakra-ui.com/docs/components/select)
-is styled, instead of being styled as an
-[`InputRightAddon`](https://chakra-ui.com/docs/components/input#left-and-right-addons).
-The original purpose of styling it as an addon was to create a visual separation
-between the dropdown indicator and the button for clearing the selected options.
-However, as this button only appears when `isMulti` is passed, using this style
-could make more sense for a single select.
-
-```js
-return <Select useBasicStyles />;
-```
-
-![useBasicStyles](./github/use-basic-styles.png)
-
-![useBasicStyles dark mode](./github/use-basic-styles-dark.png)
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-usebasicstyles-jjnqsd?file=/example.js)
-
----
-
 #### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
 
 As of `v1.3.0` you can pass the prop `selectedOptionStyle` with either `"color"`
@@ -431,6 +409,14 @@ elements.
 ![variant with useBasicStyles](./github/filled-variant.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
+
+---
+
+#### `useBasicStyles` (deprecated)
+
+This prop was removed in `v5.0.0`, as these styles are now the default styles
+applied to the component. If you'd like to keep the legacy styles, take a look
+at [the example below](#examples-1).
 
 ---
 
@@ -680,6 +666,195 @@ color scheme will also be reflected in these custom components.
 **NOTE:** Only make changes to your global component themes if you want them to
 appear in all instances of that component. Otherwise, just change the individual
 components' styles using the `chakraStyles` prop.
+
+### Extending the Theme
+
+As of `v5.0.0`, it is now possible to customize your Select instances globally
+by extending the Chakra theme! These theme styles are layered on top of the
+theme styles pulled from other Chakra components, for backwards compatibility's
+sake, but will always override those. They will also be overridden by any styles
+passed into [`chakraStyles`](#chakrastyles), so it's somewhat of the middle
+layer of styles.
+
+The theme styles can be defined using Chakra's: multipart component style
+config:
+https://chakra-ui.com/docs/styled-system/component-style#styling-multipart-components
+
+There are a few ways these theme styles can be written, either with static style
+objects/functions, or with the `createMultiStyleConfigHelpers` function which
+gives you a couple other helper functions to define your styles in a more
+type-safe way. The documentation on these style definitions is a bit sparse, so
+I highly recommend looking at the source code for some of the built in Chakra
+component themes for further examples:
+
+- `Input` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts
+- `Tag` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts
+- `Menu` -
+  https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts
+
+Every key that can be used in the `chakraStyles` object can also be used for the
+theme styles. Here's an example of how it can be implemented:
+
+```tsx
+import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
+import { chakraReactSelectAnatomy } from "chakra-react-select";
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(chakraReactSelectAnatomy.keys);
+
+const ChakraReactSelect = defineMultiStyleConfig({
+  baseStyle: definePartsStyle({
+    clearIndicator: {},
+    container: {},
+    control: {},
+    dropdownIndicator: {},
+    downChevron: {},
+    crossIcon: {},
+    group: {},
+    groupHeading: {},
+    indicatorsContainer: {},
+    indicatorSeparator: {},
+    input: {},
+    inputContainer: {},
+    loadingIndicator: {},
+    loadingMessage: {},
+    menu: {},
+    menuList: {},
+    multiValue: {},
+    multiValueLabel: {},
+    multiValueRemove: {},
+    noOptionsMessage: {},
+    option: {},
+    placeholder: {},
+    singleValue: {},
+    valueContainer: {},
+  }),
+  sizes: {
+    sm: definePartsStyle((props) => {
+      // All of the select props are passed into these style functions
+      // and can be used to modify your final styles.
+      const { colorScheme: c } = props;
+
+      return {
+        control: {
+          bg: `colors.${c}.100`,
+        },
+      };
+    }),
+    md: definePartsStyle({
+      control: {},
+      // ...
+    }),
+    lg: definePartsStyle({
+      control: {},
+      // ...
+    }),
+  },
+  variants: {
+    outline: definePartsStyle({
+      control: {},
+      // ...
+    }),
+    filled: definePartsStyle({
+      // ...
+    }),
+    flushed: definePartsStyle({
+      // ...
+    }),
+    unstyled: definePartsStyle({
+      // ...
+    }),
+    // You can also create your own variants
+    myCustomVariant: definePartsStyle({
+      // ...
+    }),
+  },
+  defaultProps: {
+    size: "md",
+    variant: "outline",
+  },
+});
+
+const theme = extendTheme({
+  components: {
+    ChakraReactSelect,
+  },
+});
+
+const Root = () => {
+  return (
+    <ChakraProvider theme={theme}>
+      <App />
+    </ChakraProvider>
+  );
+};
+```
+
+#### Examples
+
+As of `v5.0.0`, a few changes were made to base styles of the component.
+Specifically, the [`useBasicStyles`](#usebasicstyles-deprecated) prop was
+removed, in favor of making the select look more like Chakra's built-in `Select`
+component. This might not be a change people would like to make, however, and
+using the new theming it is very easy to add these styles back in to your Select
+components globally.
+
+Here's an example of how you can accomplish this:
+
+```tsx
+import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
+import { chakraReactSelectAnatomy } from "chakra-react-select";
+
+const { defineMultiStyleConfig, definePartsStyle } =
+  createMultiStyleConfigHelpers(chakraReactSelectAnatomy.keys);
+
+const ChakraReactSelect = defineMultiStyleConfig({
+  baseStyle: definePartsStyle({
+    // Legacy dropdown indicator styles
+    dropdownIndicator: {
+      margin: 0,
+      paddingX: 4,
+      width: "auto",
+      background: "gray.100",
+      borderLeftWidth: 1,
+      _dark: {
+        background: "whiteAlpha.300",
+      },
+    },
+  }),
+  sizes: {
+    sm: {
+      dropdownIndicator: {
+        paddingX: 3,
+      },
+    },
+  },
+});
+
+const theme = extendTheme({
+  components: {
+    ChakraReactSelect,
+  },
+});
+
+export default theme;
+```
+
+[![CS-TS]](https://codesandbox.io/s/zr4j7v?file=/theme.ts)
+
+---
+
+One other prop, which was previously deprecated and officially removed in
+`v5.0.0` is `hasStickGroupHeaders`. This applied styles to the `GroupHeading`
+component, making sure they stay in view as long as their associated group is in
+view. This was removed because it was out of place with the rest of this
+package, which is not intended to add any non-Chakra related features to the
+base React Select package. It also has an issue where navigating up using the up
+arrow key will always keep the highlighted option below the header. However, if
+this is a style you'd still like to use, it is also simple to add with your
+theme.
 
 ### `className`
 
