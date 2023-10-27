@@ -3,6 +3,7 @@ import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
+  ColorScheme,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -68,11 +69,14 @@ declare module "react-select/base" {
     /**
      * If true, the form control will be required. This has 2 side effects:
      *
-     * - The `FormLabel` will show a required indicator
-     * - The form element (e.g, Input) will have `aria-required` set to true
+     * - The hidden input element will get the required attribute, triggering native form validation on submit
+     * - The combobox input will have `aria-required` set to true
      *
      * @see {@link https://chakra-ui.com/docs/components/input/props}
      * @see {@link https://chakra-ui.com/docs/components/form-control/props}
+	@@ -86,7 +87,7 @@ declare module "react-select/base" {
+     * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
+     * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
     isRequired?: boolean;
 
@@ -86,7 +90,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
-    colorScheme?: string;
+    colorScheme?: ColorScheme;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -132,12 +136,12 @@ declare module "react-select/base" {
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
      */
-    selectedOptionColorScheme?: string;
+    selectedOptionColorScheme?: ColorScheme;
 
     /**
      * @deprecated Replaced by {@link selectedOptionColorScheme}
      */
-    selectedOptionColor?: string;
+    selectedOptionColor?: ColorScheme;
 
     /**
      * The color value to style the border of the `Control` with when the

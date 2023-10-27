@@ -14,7 +14,7 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps, ThemeObject } from "../types";
-import { useSize } from "../utils";
+import { cleanCommonProps, useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
   const placementToCSSProp = { bottom: "top", top: "bottom" };
@@ -118,6 +118,7 @@ export const MenuList = <
 
   return (
     <Box
+      role="listbox"
       {...innerProps}
       className={cx(
         {
@@ -259,7 +260,10 @@ export const Group = <
 
   const { chakraStyles } = selectProps;
 
-  const sx = chakraStyles?.group ? chakraStyles.group({}, props) : {};
+  const initialSx: SystemStyleObject = {};
+  const sx = chakraStyles?.group
+    ? chakraStyles.group(initialSx, props)
+    : initialSx;
 
   return (
     <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
@@ -288,10 +292,11 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    children,
     // eslint-disable-next-line deprecation/deprecation
     selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
   } = props;
+
+  const { data, ...innerProps } = cleanCommonProps(props);
 
   const menuStyles = useMultiStyleConfig("Menu");
 
@@ -325,9 +330,11 @@ export const GroupHeading = <
     : initialSx;
 
   return (
-    <Box className={cx({ "group-heading": true }, className)} sx={sx}>
-      {children}
-    </Box>
+    <Box
+      {...innerProps}
+      className={cx({ "group-heading": true }, className)}
+      sx={sx}
+    />
   );
 };
 
@@ -371,20 +378,24 @@ export const Option = <
     },
   } = props;
 
-  const size = useSize(sizeProp);
-
   const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
 
-  const paddings: SizeProps = {
-    sm: "0.3rem 0.6rem",
-    md: "0.4rem 0.8rem",
-    lg: "0.5rem 1rem",
+  const size = useSize(sizeProp);
+  const horizontalPaddingOptions: SizeProps = {
+    sm: "0.6rem",
+    md: "0.8rem",
+    lg: "1rem",
+  };
+  const verticalPaddingOptions: SizeProps = {
+    sm: "0.3rem",
+    md: "0.4rem",
+    lg: "0.5rem",
   };
 
   /**
-   * Use the same selected color as the border of the select component
+   * Use the same selected color as the border/shadow of the select/input components
    *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/theme/src/components/input.ts#L73}
+   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/theme/src/components/input.ts#L92-L93}
    */
   const selectedBg = useColorModeValue(
     `${selectedOptionColorScheme}.500`,
@@ -394,39 +405,38 @@ export const Option = <
 
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
-  const showCheckIcon: boolean =
+  const showCheckIcon =
     selectedOptionStyle === "check" &&
     (!isMulti || hideSelectedOptions === false);
 
-  const shouldHighlight: boolean =
-    selectedOptionStyle === "color" && isSelected;
+  const shouldHighlight = selectedOptionStyle === "color";
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,
+    cursor: "pointer",
     display: "flex",
     alignItems: "center",
     width: "100%",
     textAlign: "start",
     fontSize: size,
-    padding: paddings[size],
-    ...(isFocused && menuItemStyles._focus),
+    paddingX: horizontalPaddingOptions[size],
+    paddingY: verticalPaddingOptions[size],
     ...(shouldHighlight && {
-      bg: selectedBg,
-      color: selectedColor,
-      _active: { bg: selectedBg },
+      _selected: {
+        bg: selectedBg,
+        color: selectedColor,
+        _active: { bg: selectedBg },
+      },
     }),
-    ...(isDisabled && menuItemStyles._disabled),
-    ...(isDisabled && { _active: {} }),
   };
 
   const sx = chakraStyles?.option
     ? chakraStyles.option(initialSx, props)
     : initialSx;
-
   return (
     <Box
+      role="option"
       {...innerProps}
-      role="button"
       className={cx(
         {
           option: true,
@@ -438,8 +448,9 @@ export const Option = <
       )}
       sx={sx}
       ref={innerRef}
-      data-disabled={isDisabled ? true : undefined}
+      data-focus={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
+      aria-selected={isSelected}
     >
       {showCheckIcon && (
         <MenuIcon

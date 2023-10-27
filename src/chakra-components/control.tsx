@@ -98,7 +98,7 @@ const Control = <
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={isInvalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
-      aria-readonly={isReadOnly ? true : undefined}
+      data-readonly={isReadOnly ? true : undefined}
     >
       {children}
     </Box>
@@ -139,10 +139,11 @@ export const IndicatorSeparator = <
 /**
  * Borrowed from the `@chakra-ui/icons` package to prevent needing it as a dependency
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/icons/src/ChevronDown.tsx}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/select/src/select.tsx#L168-L179}
  */
 export const DownChevron = (props: IconProps) => (
-  <Icon {...props}>
+  <Icon role="presentation" focusable="false" aria-hidden="true" {...props}>
     <path
       fill="currentColor"
       d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
@@ -187,7 +188,7 @@ export const DropdownIndicator = <
   };
   const iconSize = iconSizes[size];
 
-  const initialSx: SystemStyleObject = {
+  const initialDropdownIndicatorSx: SystemStyleObject = {
     ...inputStyles.addon,
     display: "flex",
     alignItems: "center",
@@ -205,17 +206,17 @@ export const DropdownIndicator = <
       cursor: "inherit",
     }),
   };
-  const sx = chakraStyles?.dropdownIndicator
-    ? chakraStyles.dropdownIndicator(initialSx, props)
-    : initialSx;
+  const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
+    ? chakraStyles.dropdownIndicator(initialDropdownIndicatorSx, props)
+    : initialDropdownIndicatorSx;
 
-  const initialIconStyles = {
+  const initialDownChevronSx: SystemStyleObject = {
     height: "1em",
     width: "1em",
   };
-  const iconSx: SystemStyleObject = chakraStyles?.downChevron
-    ? chakraStyles.downChevron(initialIconStyles, props)
-    : initialIconStyles;
+  const downChevronSx = chakraStyles?.downChevron
+    ? chakraStyles.downChevron(initialDownChevronSx, props)
+    : initialDownChevronSx;
 
   return (
     <Box
@@ -227,9 +228,9 @@ export const DropdownIndicator = <
         },
         className
       )}
-      sx={sx}
+      sx={dropdownIndicatorSx}
     >
-      {children || <DownChevron sx={iconSx} />}
+      {children || <DownChevron sx={downChevronSx} />}
     </Box>
   );
 };
@@ -237,7 +238,7 @@ export const DropdownIndicator = <
 /**
  * Borrowed from Chakra UI source
  *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/close-button/src/close-button.tsx#L14}
+ * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/close-button/src/close-button.tsx#L12-L21}
  */
 export const CrossIcon = (props: IconProps) => (
   <Icon focusable="false" aria-hidden {...props}>
