@@ -39,7 +39,7 @@
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
   },
   "sideEffects": false,
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "react-select": "5.7.7"
   },
