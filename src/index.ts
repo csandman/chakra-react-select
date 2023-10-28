@@ -1,5 +1,3 @@
-import "./module-augmentation";
-
 export { default as Select } from "./select/select";
 export { default as CreatableSelect } from "./select/creatable-select";
 export { default as AsyncSelect } from "./select/async-select";
