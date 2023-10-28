@@ -7,5 +7,6 @@ export default defineConfig({
   sourcemap: true,
   dts: true,
   minify: true,
+  skipNodeModulesBundle: true,
   bundle: false,
 });
