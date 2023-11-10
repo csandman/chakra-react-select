@@ -50,6 +50,7 @@ const Control = <
     overflow: "hidden",
     height: "auto",
     minHeight: heights[size as Size],
+    ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 
   const sx: SystemStyleObject = chakraStyles?.control

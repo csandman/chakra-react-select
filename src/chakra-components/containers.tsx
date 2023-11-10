@@ -31,10 +31,6 @@ export const SelectContainer = <
   const initialStyles: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
-    // When disabled, react-select sets the pointer-state to none which prevents
-    // the `not-allowed` cursor style from chakra from getting applied to the
-    // Control when it is disabled
-    pointerEvents: "auto",
   };
 
   const sx: SystemStyleObject = chakraStyles?.container
