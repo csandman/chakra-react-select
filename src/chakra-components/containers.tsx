@@ -31,6 +31,7 @@ export const SelectContainer = <
   const initialStyles: SystemStyleObject = {
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
+    ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
 
   const sx: SystemStyleObject = chakraStyles?.container
