@@ -30,6 +30,7 @@
     "no-console": "error",
     "curly": ["error", "all"],
     "no-underscore-dangle": "off",
+    "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
@@ -63,5 +64,13 @@
         }
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.{ts,tsx}"],
+      "rules": {
+        "import/no-extraneous-dependencies": "error"
+      }
+    }
+  ]
 }
