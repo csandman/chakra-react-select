@@ -1,10 +1,14 @@
 import React from "react";
-import type { IconProps } from "@chakra-ui/icon";
-import { Icon } from "@chakra-ui/icon";
-import { Box, Divider } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
-import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
-import type { SystemStyleObject } from "@chakra-ui/system";
+import {
+  Box,
+  Divider,
+  Icon,
+  type IconProps,
+  Spinner,
+  type SystemStyleObject,
+  useMultiStyleConfig,
+  useStyleConfig,
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ControlProps,

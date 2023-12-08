@@ -1,5 +1,4 @@
-import { useBreakpointValue } from "@chakra-ui/media-query";
-import { useTheme } from "@chakra-ui/system";
+import { useBreakpointValue, useTheme } from "@chakra-ui/react";
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
 import type { Size, SizeProp } from "./types";
 

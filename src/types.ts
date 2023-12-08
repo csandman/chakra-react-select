@@ -1,9 +1,10 @@
 import type {
+  BaseThemeTypings,
   Pseudos,
   ResponsiveObject,
   SystemStyleObject,
   ThemeTypings,
-} from "@chakra-ui/system";
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -46,11 +47,11 @@ export type Size = "sm" | "md" | "lg";
 
 export type SizeProp = Size | ResponsiveObject<Size> | Size[];
 
-export type TagVariant = ThemeTypings["components"]["Tag"]["variants"];
+export type TagVariant = BaseThemeTypings["components"]["Tag"]["variants"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = ThemeTypings["components"]["Input"]["variants"];
+export type Variant = BaseThemeTypings["components"]["Input"]["variants"];
 
 export type ColorScheme = ThemeTypings["colorSchemes"];
 

@@ -1,7 +1,9 @@
 import React from "react";
-import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
-import { useMultiStyleConfig } from "@chakra-ui/system";
+import {
+  Box,
+  type SystemStyleObject,
+  useMultiStyleConfig,
+} from "@chakra-ui/react";
 import type {
   ContainerProps,
   GroupBase,
