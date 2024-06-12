@@ -1,5 +1,4 @@
 import type {
-  BaseThemeTypings,
   Pseudos,
   ResponsiveObject,
   SystemStyleObject,
@@ -47,11 +46,16 @@ export type Size = "sm" | "md" | "lg";
 
 export type SizeProp = Size | ResponsiveObject<Size> | Size[];
 
-export type TagVariant = BaseThemeTypings["components"]["Tag"]["variants"];
+export type TagVariant = "subtle" | "solid" | "outline" | (string & {});
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = BaseThemeTypings["components"]["Input"]["variants"];
+export type Variant =
+  | "outline"
+  | "filled"
+  | "flushed"
+  | "unstyled"
+  | (string & {});
 
 export type ColorScheme = ThemeTypings["colorSchemes"];
 

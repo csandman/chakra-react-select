@@ -444,8 +444,7 @@ There are a few ways to style the components that make up `chakra-react-select`.
 It's important to note that this package does not use the `theme` or `styles`
 props that are implemented in `react-select`. The `theme` prop isn't used as
 most of the components' base styles are pulling from your Chakra theme, and
-customizing your base theme (such as colors or component styles) should in turn
-change the styles in this package.
+[customizing your base theme (such as colors or component styles) should in turn change the styles in this package.](#theme-styles)
 
 This package does however offer an alternative to the `styles` prop,
 `chakraStyles`. It mostly emulates the behavior of the original `styles` prop,
@@ -648,16 +647,18 @@ or are themselves those components. As this package pulls directly from your
 Chakra theme, any changes you make to those components' themes will propagate to
 the components in this package.
 
-**NOTE:** Some of the theme styles are manually overridden when this package
-implements them. This is necessary for implementing styles for
-[`size`](#size--options-sm--md--lg--default-md) variants in components that do
-not natively have them in Chakra's default theme. This mostly concerns
-components that make up the `Menu`, but there are a few other cases where this
-exception applies. There is no alternative to this currently, so if your custom
-theme styles are not being applied correctly please use
-[`chakraStyles`](#chakrastyles) to style your components instead. `chakraStyles`
-always takes the highest priority in overriding the styles of a component. See
-#194 for more info.
+> **NOTE:** Some of the theme styles are manually overridden when this package
+> implements them. This is necessary for implementing styles for
+> [`size`](#size--options-responsivevaluesm--md--lg--default-md) variants in
+> components that do not natively have them in Chakra's default theme. This
+> mostly concerns components that make up the `Menu`, but there are a few other
+> cases where this exception applies. There is no alternative to this currently,
+> so if your custom theme styles are not being applied correctly please use
+> [`chakraStyles`](#chakrastyles) to style your components instead.
+> `chakraStyles` always takes the highest priority in overriding the styles of a
+> component. See
+> [#194](https://github.com/csandman/chakra-react-select/issues/194) for more
+> info.
 
 Here is a list of all components that will be affected by changes to your theme:
 
@@ -677,9 +678,9 @@ Here is a list of all components that will be affected by changes to your theme:
 In addition to specific component styles, any changes you make to your global
 color scheme will also be reflected in these custom components.
 
-**NOTE:** Only make changes to your global component themes if you want them to
-appear in all instances of that component. Otherwise, just change the individual
-components' styles using the `chakraStyles` prop.
+> **NOTE:** Only make changes to your global component themes if you want them
+> to appear in all instances of that component. Otherwise, just change the
+> individual components' styles using the `chakraStyles` prop.
 
 ### `className`
 
@@ -723,11 +724,11 @@ Here is an example of using classNames to style the components:
 
 ## TypeScript Support
 
-This package has always supported typescript, however until `3.0.0` none of the
+This package has always supported typescript, however until `v3.0.0` none of the
 type inference was working on the props passed into this component. Now that
-they are, you may need to pass in some generics for your component to work
-properly, but **in most cases you shouldn't need to**. Here is a snippet from
-the original documentation on the subject:
+they are, you may need to pass in some generics for your component to be typed
+properly, but **in most cases you shouldn't need to because their types should
+be inferred**. Here is a snippet from the original documentation on the subject:
 
 > ### Select generics
 >
@@ -750,11 +751,14 @@ so if you import that type it will include all of the extra props offered. This
 package also exports a few custom types that are specific to the custom props
 offered by this package:
 
-- `ChakraStylesConfig` — The type for the prop `chakraStyles` that can be passed
-  to customize the component styles. This is almost identical to the built-in
-  `StylesConfig` type, however, it uses Chakra's
+- `ChakraStylesConfig<Option, IsMulti, Group>` — The type for the prop
+  `chakraStyles` that can be passed to customize the component styles. This is
+  almost identical to the built-in `StylesConfig` type, however, it uses
+  Chakra's
   [`CSSObject`](https://github.com/chakra-ui/chakra-ui/blob/790d2417a3f5d59e2d69229a027af671c2dc0cbc/packages/styled-system/src/system.types.ts#L81)
-  type instead of react-select's emotion styles.
+  type instead of react-select's emotion styles. It also has the same three
+  generics as your `Select` component which would be required if you define your
+  styles separately from your component.
 - `OptionBase` — A type for your individual select options that includes the
   custom props for styling each of your selected options. This type is made to
   give you a base to extend off of and pass in as a generic to the root `Select`
@@ -777,7 +781,7 @@ import { GroupBase, OptionBase, Select } from "chakra-react-select";
  * used by this package to customize the styles of your selected options
  *
  * ```
- * type OptionBase = {
+ * interface OptionBase {
  *   variant?: string;
  *   colorScheme?: string;
  *   isDisabled?: boolean;
@@ -1028,8 +1032,9 @@ const GooglePlacesAutocomplete = () => {
 export default GooglePlacesAutocomplete;
 ```
 
-**NOTE:** An API key would be needed to create a CodeSandbox example for this so
-you will have to implement it in your own project if you'd like to test it out.
+> **NOTE:** An API key would be needed to create a CodeSandbox example for this
+> so you will have to implement it in your own project if you'd like to test it
+> out.
 
 ## Usage with React Form Libraries
 
@@ -1038,10 +1043,10 @@ _This section is a work in progress, check back soon for more examples_
 This package can be used with form controllers such as Formik or React Hook Form
 in the same way you would with the original React Select, and the quickest way
 to figure out how to do so would be to Google something along the lines of
-"react-select with formik/react-hook-form/etc" and replace `react-select` in
-those examples with `chakra-react-select`. However, here are a few examples to
-help you get started. If you'd like to see examples using other form providers,
-you can
+"react-select with formik/react-hook-form/etc" and replace the `react-select`
+component in those examples with a `chakra-react-select` component. However,
+here are a few examples to help you get started. If you'd like to see examples
+using other form providers, you can
 [submit it as a Q&A discussion](https://github.com/csandman/chakra-react-select/discussions/categories/q-a).
 
 ### [`react-hook-form`](https://react-hook-form.com/)
@@ -1059,45 +1064,61 @@ component or [`useController`](https://react-hook-form.com/api/usecontroller)
 hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here
 are some examples using each:
 
+---
+
 #### `Controller` multi select with built-in validation
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-v7llc?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-controller-typescript-v8ps5?file=/app.tsx)
+
+---
 
 #### `useController` multi select with built-in validation
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-n8wuf?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-typescript-qcm23?file=/app.tsx)
 
+---
+
 #### `useController` single select
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-vanilla-js-11x4zk?file=/example.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-usecontroller-single-select-typescript-vylckh?file=/app.tsx)
+
+---
 
 #### Multi select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-tno8v?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-yup-validation-typescript-n7slhu?file=/app.tsx)
 
+---
+
 #### Single select with [`yup`](https://github.com/jquense/yup) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-yup-validation-y5kjc1?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-yup-validation-typescript-phmv0u?file=/app.tsx)
+
+---
 
 #### Multi select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-zod-validation-cu0rku?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-react-hook-form-with-zod-validation-typescript-5fyhfh?file=/app.tsx)
 
+---
+
 #### Single select with [`zod`](https://github.com/colinhacks/zod) validation (advanced example)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-zod-validation-jd588n?file=/src/app.js)
 [![CS-TS]](https://codesandbox.io/s/chakra-react-select-single-react-hook-form-with-zod-validation-typescript-m1dqme?file=/app.tsx)
 
+---
+
 ### [`formik`](https://formik.org/)
 
-See this issue for some discussion about using this package with `formik`:
-https://github.com/csandman/chakra-react-select/issues/23
+See this discussion for some examples of using this package with `formik`:
+https://github.com/csandman/chakra-react-select/discussions/111
 
 #### Single select with built-in validation
 
