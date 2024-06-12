@@ -118,7 +118,6 @@ export const MenuList = <
 
   return (
     <Box
-      role="listbox"
       {...innerProps}
       className={cx(
         {
@@ -435,7 +434,6 @@ export const Option = <
     : initialSx;
   return (
     <Box
-      role="option"
       {...innerProps}
       className={cx(
         {
