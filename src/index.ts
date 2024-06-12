@@ -8,7 +8,7 @@ import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
  *
  * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
  */
-import type {} from "react-select/base";
+import type { Props } from "react-select/base";
 import type {
   ChakraStylesConfig,
   ColorScheme,
@@ -17,38 +17,6 @@ import type {
   TagVariant,
   Variant,
 } from "./types";
-
-export { default as Select } from "./select/select";
-export { default as CreatableSelect } from "./select/creatable-select";
-export { default as AsyncSelect } from "./select/async-select";
-export { default as AsyncCreatableSelect } from "./select/async-creatable-select";
-
-export { default as chakraComponents } from "./chakra-components";
-export { default as useChakraSelectProps } from "./use-chakra-select-props";
-
-export type { SelectComponent } from "./select/select";
-export type { CreatableSelectComponent } from "./select/creatable-select";
-export type { AsyncSelectComponent } from "./select/async-select";
-export type { AsyncCreatableSelectComponent } from "./select/async-creatable-select";
-
-export type {
-  SizeProps,
-  Size,
-  TagVariant,
-  SelectedOptionStyle,
-  ColorScheme,
-  StylesFunction,
-  ChakraStylesConfig,
-  OptionBase,
-} from "./types";
-
-// Forward all available exports from the original `react-select` package
-export * from "react-select";
-export { useAsync } from "react-select/async";
-export { useCreatable } from "react-select/creatable";
-export type { AsyncProps } from "react-select/async";
-export type { CreatableProps } from "react-select/creatable";
-export type { AsyncCreatableProps } from "react-select/async-creatable";
 
 /**
  * Module augmentation is used to add extra props to the existing interfaces
@@ -327,3 +295,36 @@ declare module "react-select" {
     thickness?: string;
   }
 }
+
+export { default as Select } from "./select/select";
+export { default as CreatableSelect } from "./select/creatable-select";
+export { default as AsyncSelect } from "./select/async-select";
+export { default as AsyncCreatableSelect } from "./select/async-creatable-select";
+
+export { default as chakraComponents } from "./chakra-components";
+export { default as useChakraSelectProps } from "./use-chakra-select-props";
+
+export type { SelectComponent } from "./select/select";
+export type { CreatableSelectComponent } from "./select/creatable-select";
+export type { AsyncSelectComponent } from "./select/async-select";
+export type { AsyncCreatableSelectComponent } from "./select/async-creatable-select";
+
+export type {
+  SizeProps,
+  Size,
+  TagVariant,
+  SelectedOptionStyle,
+  ColorScheme,
+  StylesFunction,
+  ChakraStylesConfig,
+  OptionBase,
+} from "./types";
+
+// Forward all available exports from the original `react-select` package
+export * from "react-select";
+export type { Props };
+export { useAsync } from "react-select/async";
+export { useCreatable } from "react-select/creatable";
+export type { AsyncProps } from "react-select/async";
+export type { CreatableProps } from "react-select/creatable";
+export type { AsyncCreatableProps } from "react-select/async-creatable";
