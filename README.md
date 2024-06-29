@@ -52,14 +52,14 @@ https://react-select.com/home
 - [Usage](#usage)
 - [Extra Props](#extra-props)
   - [`size`](#size--options-responsivevaluesm--md--lg--default-md)
-  - [`colorScheme`](#colorscheme)
+  - [`tagColorScheme`](#tagcolorscheme)
   - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
   - [`isInvalid` / `isReadOnly`](#isinvalid--default-false--isreadonly---default-false)
   - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
-  - [`useBasicStyles`](#usebasicstyles--default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColorScheme`](#selectedoptioncolorscheme--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
+  - [`useBasicStyles` (removed)](#usebasicstyles-removed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
@@ -150,7 +150,7 @@ If no `size` is passed, it will default to `defaultProps.size` from the theme
 for Chakra's `Input` component. If your component theme for `Input` is not
 modified, it will be `md`.
 
-```js
+```jsx
 return (
   <>
     <Select size="sm" />
@@ -164,22 +164,26 @@ return (
 
 ---
 
-#### `colorScheme`
+#### `tagColorScheme`
 
-You can pass the `colorScheme` prop to the select component to change all of the
-selected options tags' colors. You can view the whole list of available color
-schemes in [the Chakra docs](https://chakra-ui.com/docs/components/tag/props),
-or if you have a custom color palette, any of the custom color names in that
-will be available instead.
+> Renamed from `colorScheme` in
+> [`v5.0.0`](https://github.com/csandman/chakra-react-select/releases/tag/v5.0.0)
+
+You can pass the `tagColorScheme` prop to the select component to change all of
+the selected options tags' colors. You can view the whole list of available
+color schemes in
+[the Chakra docs](https://chakra-ui.com/docs/components/tag/props), or if you
+have a custom color palette, any of the custom color names in that will be
+available instead.
 
 Alternatively, you can add the `colorScheme` key to any of your options objects
 and it will only style that option when selected.
 
-```js
+```jsx
 return (
   <Select
-    {/* The global color scheme */}
-    colorScheme="purple"
+    {/* The global tag color scheme */}
+    tagColorScheme="purple"
     options={[
       {
         label: "I am red",
@@ -211,7 +215,7 @@ Alternatively, you can add the `variant` key to any of your options objects and
 it will only style that option when selected. This will override the
 `tagVariant` prop on the select if both are set
 
-```js
+```jsx
 return (
   <Select
     {/* The global variant */}
@@ -246,7 +250,7 @@ You can pass also pass `isInvalid`, `isDisabled`, or `isReadOnly` into a
 wrapping `<FormControl />` to achieve the same result as passing these props
 into the `Select` component.
 
-```js
+```jsx
 return (
   <>
     {/* This will show up with a red border */}
@@ -278,7 +282,7 @@ The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra
 color strings which will emulate the respective props being passed to
 [Chakra's `<Input />` component](https://chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors).
 
-```js
+```jsx
 return (
   <>
     <Select errorBorderColor="orange.500" isInvalid />
@@ -290,30 +294,6 @@ return (
 ![Orange errorBorderColor](./github/custom-error-border.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-colors-gjo4zd?file=/example.js)
-
----
-
-#### `useBasicStyles` — Default: `false`
-
-If this prop is passed, the dropdown indicator at the right of the component
-will be styled in the same way
-[the original Chakra `Select` component](https://chakra-ui.com/docs/components/select)
-is styled, instead of being styled as an
-[`InputRightAddon`](https://chakra-ui.com/docs/components/input#left-and-right-addons).
-The original purpose of styling it as an addon was to create a visual separation
-between the dropdown indicator and the button for clearing the selected options.
-However, as this button only appears when `isMulti` is passed, using this style
-could make more sense for a single select.
-
-```js
-return <Select useBasicStyles />;
-```
-
-![useBasicStyles](./github/use-basic-styles.png)
-
-![useBasicStyles dark mode](./github/use-basic-styles-dark.png)
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-usebasicstyles-jjnqsd?file=/example.js)
 
 ---
 
@@ -365,7 +345,7 @@ will use the `500` value in light mode or the `300` value in dark mode.
 > renamed to prevent confusion about its purpose. `selectedOptionColor` is still
 > available but will be removed in the next major version.
 
-```js
+```jsx
 return (
   <>
     <Select selectedOptionColorScheme="blue" /> {/* Default */}
@@ -397,7 +377,7 @@ If no `variant` is passed, it will default to `defaultProps.variant` from the
 theme for Chakra's `Input` component. If your component theme for `Input` is not
 modified, it will be `outline`.
 
-```js
+```jsx
 return (
   <>
     <Select variant="outline" /> {/* Default */}
@@ -431,6 +411,70 @@ elements.
 ![variant with useBasicStyles](./github/filled-variant.png)
 
 [![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
+
+---
+
+#### `useBasicStyles` (removed)
+
+This prop was removed in `v5.0.0`, as these styles are now the default styles
+applied to the component. If you'd like to keep the legacy styles, here are some
+examples (for each
+[`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline))
+of how you could accomplish that with the [`chakraStyles`](#chakrastyles) prop:
+
+```jsx
+return (
+  <>
+    <Select
+      variant="outline" // default
+      chakraStyles={{
+        indicatorSeparator: (base) => ({
+          ...base,
+          display: "block",
+        }),
+        dropdownIndicator: (base) => ({
+          ...base,
+          width: "auto",
+          margin: 0,
+          paddingX: 4, // or 3 for size="sm"
+          background: "gray.100",
+          _dark: {
+            background: "whiteAlpha.300",
+          },
+        }),
+      }}
+    />
+
+    <Select
+      variant="filled"
+      chakraStyles={{
+        dropdownIndicator: (base) => ({
+          ...base,
+          width: "auto",
+          margin: 0,
+          paddingX: 4, // or 3 for size="sm"
+          background: "gray.100",
+          _dark: {
+            background: "whiteAlpha.300",
+          },
+        }),
+      }}
+    />
+
+    <Select
+      variant="flushed" // or variant="unstyled"
+      chakraStyles={{
+        dropdownIndicator: (base) => ({
+          ...base,
+          width: "auto",
+          margin: 0,
+          paddingX: 4, // or 3 for size="sm"
+        }),
+      }}
+    />
+  </>
+);
+```
 
 ---
 
@@ -836,7 +880,7 @@ prop compatibility when passing them into the core `Select` so the easiest way
 to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator`
 and pass custom icons in as children:
 
-```js
+```jsx
 const components = {
   ClearIndicator: (props) => (
     <chakraComponents.ClearIndicator {...props}>
