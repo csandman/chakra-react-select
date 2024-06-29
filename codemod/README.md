@@ -31,9 +31,9 @@ Replacing `<transform>` and `<path>` with appropriate values.
 ### Version 5 (`v5`)
 
 ```sh
-npx crs-codemod v5 .
+npx crs-codemod@latest v5 .
 # or
-npx crs-codemod v5 ./src
+npx crs-codemod@latest v5 ./src
 ```
 
 > **NOTE:** This codemod currently has a side effect where it may remove some
