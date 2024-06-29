@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
+    "moduleResolution": "bundler",
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "node10",
     "strict": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
@@ -13,7 +13,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
