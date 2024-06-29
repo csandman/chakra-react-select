@@ -173,16 +173,6 @@ declare module "react-select/base" {
     chakraStyles?: ChakraStylesConfig<Option, IsMulti, Group>;
 
     /**
-     * If passed, the dropdown indicator will be styled the same as Chakra UI's
-     * `Select` component.
-     *
-     * @defaultValue `false`
-     * @see {@link https://github.com/csandman/chakra-react-select#usebasicstyles--default-false}
-     * @see {@link https://chakra-ui.com/docs/components/select}
-     */
-    useBasicStyles?: boolean;
-
-    /**
      * The main style variant of the `Select` component. This will use styles
      * from Chakra's `Input` component and any custom variants you have added to
      * your theme may be used.
