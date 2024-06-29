@@ -11,12 +11,13 @@
   https://img.shields.io/badge/CodeSandbox-JavaScript-f4dc1b?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB
   "CodeSandbox JavaScript Demo"
 
-# chakra-react-select v4
+# chakra-react-select v5
 
 > This version of `chakra-react-select` is updated for
 > [Chakra UI v2](https://v2.chakra-ui.com/getting-started/migration) which works
-> exclusively with React v18. `chakra-react-select` v3 will be maintained until
-> the majority of users have migrated. If you're still using Chakra UI v1 check
+> exclusively with React v18. `chakra-react-select` v3, which is compatible with
+> Chakra UI v1, will be maintained until the majority of users have migrated. If
+> you're still using Chakra UI v1 check
 > [the docs for chakra-react-select v3 here](https://github.com/csandman/chakra-react-select/tree/v3).
 
 [![](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml/badge.svg?branch=main "Build Status")](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml?query=branch%3Amain)
