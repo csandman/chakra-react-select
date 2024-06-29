@@ -24,13 +24,18 @@
     },
     "project": "tsconfig.eslint.json"
   },
-  "plugins": ["deprecation", "@typescript-eslint"],
+  "plugins": [
+    "deprecation",
+    "@typescript-eslint"
+  ],
   "rules": {
     "deprecation/deprecation": "warn",
     "no-console": "error",
-    "curly": ["error", "all"],
+    "curly": [
+      "error",
+      "all"
+    ],
     "no-underscore-dangle": "off",
-    "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
@@ -38,7 +43,10 @@
     "react/jsx-filename-extension": [
       "error",
       {
-        "extensions": [".js", ".tsx"]
+        "extensions": [
+          ".js",
+          ".tsx"
+        ]
       }
     ],
     "react/function-component-definition": [
@@ -64,13 +72,5 @@
         }
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": ["src/**/*.{ts,tsx}"],
-      "rules": {
-        "import/no-extraneous-dependencies": "error"
-      }
-    }
-  ]
+  }
 }
