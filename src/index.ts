@@ -106,17 +106,6 @@ declare module "react-select/base" {
     tagVariant?: TagVariant;
 
     /**
-     * Passing `true` for this prop will make the group headers
-     * `position: sticky` and keep them stuck to the top while their
-     * corresponding group is in view.
-     *
-     * @defaultValue `false`
-     * @deprecated This prop should probably not have existed and will be
-     * removed soon.
-     */
-    hasStickyGroupHeaders?: boolean;
-
-    /**
      * Whether to style a selected option by highlighting it in a solid color
      * or adding a check mark next to it like the chakra `Menu` component.
      *
