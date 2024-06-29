@@ -33,7 +33,7 @@
     "lint:src": "eslint .",
     "lint:types": "tsc --noEmit",
     "lint-fix": "eslint --fix src",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prepublishOnly": "npm run build",
     "postpublish": "git push --tags",
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
