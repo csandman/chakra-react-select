@@ -32,14 +32,14 @@ declare module "react-select/base" {
   > {
     /**
      * The size of the base control; matches the sizes of the chakra Input
-     * component with the exception of `xs`. A [responsive style array/object](https://chakra-ui.com/docs/features/responsive-styles) can
+     * component with the exception of `xs`. A [responsive style array/object](https://v2.chakra-ui.com/docs/features/responsive-styles) can
      * also be passed.
      *
      * Options: `sm` | `md` | `lg`
      *
      * @defaultValue `md`
      * @see {@link https://github.com/csandman/chakra-react-select#size--options-responsivevaluesm--md--lg--default-md}
-     * @see {@link https://chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
      */
     size?: SizeProp;
 
@@ -51,8 +51,8 @@ declare module "react-select/base" {
      *
      * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://chakra-ui.com/docs/components/input/props}
-     * @see {@link https://chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
      */
     isInvalid?: boolean;
 
@@ -61,8 +61,8 @@ declare module "react-select/base" {
      *
      * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://chakra-ui.com/docs/components/input/props}
-     * @see {@link https://chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
      */
     isReadOnly?: boolean;
 
@@ -72,11 +72,11 @@ declare module "react-select/base" {
      * - The hidden input element will get the required attribute, triggering native form validation on submit
      * - The combobox input will have `aria-required` set to true
      *
-     * @see {@link https://chakra-ui.com/docs/components/input/props}
-     * @see {@link https://chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
 	@@ -86,7 +87,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
-     * @see {@link https://chakra-ui.com/docs/components/tag/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
      */
     isRequired?: boolean;
 
@@ -88,7 +88,7 @@ declare module "react-select/base" {
      *
      * @defaultValue `"gray"`
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
-     * @see {@link https://chakra-ui.com/docs/components/tag/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
      */
     tagColorScheme?: ColorScheme;
 
@@ -101,7 +101,7 @@ declare module "react-select/base" {
      *
      * @defaultValue `subtle`
      * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle--solid--outline--default-subtle}
-     * @see {@link https://chakra-ui.com/docs/data-display/tag#props}
+     * @see {@link https://v2.chakra-ui.com/docs/data-display/tag#props}
      */
     tagVariant?: TagVariant;
 
@@ -113,7 +113,7 @@ declare module "react-select/base" {
      *
      * @defaultValue `color`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color--check--default-color}
-     * @see {@link https://chakra-ui.com/docs/components/menu#menu-option-groups}
+     * @see {@link https://v2.chakra-ui.com/docs/components/menu#menu-option-groups}
      */
     selectedOptionStyle?: SelectedOptionStyle;
 
@@ -133,7 +133,7 @@ declare module "react-select/base" {
      *
      * @defaultValue Light mode: `blue.500` | Dark mode: `blue.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
-     * @see {@link https://chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
      */
     focusBorderColor?: string;
 
@@ -143,7 +143,7 @@ declare module "react-select/base" {
      *
      * @defaultValue Light mode: `red.500` | Dark mode: `red.300`
      * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
-     * @see {@link https://chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
+     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
      */
     errorBorderColor?: string;
 
@@ -164,7 +164,7 @@ declare module "react-select/base" {
      * Options: `outline` | `filled` | `flushed` | `unstyled`
      *
      * @defaultValue `outline`
-     * @see {@link https://chakra-ui.com/docs/components/select#changing-the-appearance}
+     * @see {@link https://v2.chakra-ui.com/docs/components/select#changing-the-appearance}
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
@@ -227,7 +227,7 @@ declare module "react-select" {
      * The color of the empty area in the spinner.
      *
      * @defaultValue `transparent`
-     * @see {@link https://chakra-ui.com/docs/components/spinner#spinner-with-empty-area-color}
+     * @see {@link https://v2.chakra-ui.com/docs/components/spinner#spinner-with-empty-area-color}
      */
     emptyColor?: string;
 
@@ -236,7 +236,7 @@ declare module "react-select" {
      *
      * Defaults to one size smaller than the overall Select's size.
      *
-     * @see {@link https://chakra-ui.com/docs/components/spinner#spinner-with-different-size}
+     * @see {@link https://v2.chakra-ui.com/docs/components/spinner#spinner-with-different-size}
      */
     spinnerSize?: "xs" | "sm" | "md" | "lg" | "xl";
 
@@ -252,7 +252,7 @@ declare module "react-select" {
      * ```jsx
      * <Spinner speed="0.2s"/>
      * ```
-     * @see {@link https://chakra-ui.com/docs/components/spinner/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/spinner/props}
      */
     speed?: string;
 
@@ -264,7 +264,7 @@ declare module "react-select" {
      * ```jsx
      * <Spinner thickness="4px"/>
      * ```
-     * @see {@link https://chakra-ui.com/docs/components/spinner/props}
+     * @see {@link https://v2.chakra-ui.com/docs/components/spinner/props}
      */
     thickness?: string;
   }
