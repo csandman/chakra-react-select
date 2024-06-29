@@ -310,14 +310,16 @@ export type { AsyncSelectComponent } from "./select/async-select";
 export type { AsyncCreatableSelectComponent } from "./select/async-creatable-select";
 
 export type {
-  SizeProps,
   Size,
+  SizeProp,
   TagVariant,
+  Variant,
   SelectedOptionStyle,
   ColorScheme,
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,
+  ThemeObject,
 } from "./types";
 
 // Forward all available exports from the original `react-select` package
