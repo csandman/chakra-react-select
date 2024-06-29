@@ -84,13 +84,13 @@ declare module "react-select/base" {
      * A color name that matches a key from your chakra theme and will
      * determine the color scheme of your `MultiValue` component.
      *
-     * The styling matches the chakra `Tag` component.
+     * The variable is passed to the theme key for the Chakra `Tag` component.
      *
      * @defaultValue `"gray"`
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://chakra-ui.com/docs/components/tag/props}
      */
-    colorScheme?: ColorScheme;
+    tagColorScheme?: ColorScheme;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component

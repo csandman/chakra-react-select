@@ -13,7 +13,7 @@ const useChakraSelectProps = <
   // eslint-disable-next-line deprecation/deprecation
   theme,
   size,
-  colorScheme = "gray",
+  tagColorScheme = "gray",
   isDisabled,
   isInvalid,
   isReadOnly,
@@ -72,7 +72,7 @@ const useChakraSelectProps = <
       ...components,
     },
     // Custom select props
-    colorScheme,
+    tagColorScheme,
     size,
     tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
