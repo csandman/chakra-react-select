@@ -139,11 +139,6 @@ declare module "react-select/base" {
     selectedOptionColorScheme?: ColorScheme;
 
     /**
-     * @deprecated Replaced by {@link selectedOptionColorScheme}
-     */
-    selectedOptionColor?: ColorScheme;
-
-    /**
      * The color value to style the border of the `Control` with when the
      * select is focused.
      *
