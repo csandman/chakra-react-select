@@ -1,6 +1,6 @@
 {
   "name": "crs-codemod",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A set of codemods for chakra-react-select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
@@ -17,7 +17,8 @@
   "scripts": {
     "prebuild": "rimraf **/*.{d.ts,js}",
     "build": "tsc -d -p tsconfig.json",
-    "dev": "tsc -d -w -p tsconfig.json"
+    "dev": "tsc -d -w -p tsconfig.json",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "execa": "^4.1.0",

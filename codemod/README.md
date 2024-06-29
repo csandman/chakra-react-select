@@ -16,7 +16,7 @@ and are written using [`jscodeshift`](https://github.com/facebook/jscodeshift).
 In your terminal, navigate (`cd`) into your project's folder, then run:
 
 ```sh
-npx crs-codemod <transform> <path>
+npx crs-codemod@latest <transform> <path>
 ```
 
 Replacing `<transform>` and `<path>` with appropriate values.
@@ -56,6 +56,9 @@ following modifications to your every instance of them:
     [`v4.6.0`](https://github.com/csandman/chakra-react-select/releases/tag/v4.6.0)
     to reduce confusion about what values can be passed to it. It has been fully
     removed in `v5.0.0`.
+- Renames the prop `colorScheme` to `tagColorScheme`.
+  - This prop's name was changed as it didn't represent specifically what it was
+    for originally.
 - Removes the `hasStickyGroupHeaders` prop
   - This prop was deprecated in
     [`v4.6.0`](https://github.com/csandman/chakra-react-select/releases/tag/v4.6.0)
