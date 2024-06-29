@@ -36,7 +36,7 @@ npx crs-codemod v5 .
 npx crs-codemod v5 ./src
 ```
 
-> **NOTE:** This codemod currently has a side effect where it removes any
+> **NOTE:** This codemod currently has a side effect where it may remove some
 > [TypeScript generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 > you pass into your `Select` components. This appears to be a shortcoming of
 > `jscodeshift`, as it appears not to recognize generics used in JSX. While in
