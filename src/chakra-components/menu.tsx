@@ -12,7 +12,7 @@ import type {
   NoticeProps,
   OptionProps,
 } from "react-select";
-import type { SizeProps, ThemeObject } from "../types";
+import type { SizeProps } from "../types";
 import { cleanCommonProps, useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
@@ -376,7 +376,7 @@ export const Option = <
     },
   } = props;
 
-  const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
+  const menuItemStyles = useMultiStyleConfig("Menu").item;
 
   const size = useSize(sizeProp);
   const horizontalPaddingOptions: SizeProps = {
