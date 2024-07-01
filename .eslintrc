@@ -36,7 +36,6 @@
     "deprecation/deprecation": "warn",
     "import/prefer-default-export": "off",
     "no-console": "error",
-    "no-underscore-dangle": "off",
     "react/function-component-definition": [
       "error",
       {
