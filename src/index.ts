@@ -293,7 +293,6 @@ export type {
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,
-  ThemeObject,
 } from "./types";
 
 // Forward all available exports from the original `react-select` package
