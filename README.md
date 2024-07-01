@@ -19,6 +19,10 @@
 > Chakra UI v1, will be maintained until the majority of users have migrated. If
 > you're still using Chakra UI v1 check
 > [the docs for chakra-react-select v3 here](https://github.com/csandman/chakra-react-select/tree/v3).
+>
+> This version also includes some breaking changes from v4, but there is a
+> codemod included to help make migrating painless!
+> [Check out the guide on using the provided codemod here](codemod/README.md).
 
 [![](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml/badge.svg?branch=main "Build Status")](https://github.com/csandman/chakra-react-select/actions/workflows/build.yml?query=branch%3Amain)
 [![](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml/badge.svg?branch=main "Lint Status")](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml?query=branch%3Amain)
