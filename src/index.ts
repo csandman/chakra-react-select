@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { SystemStyleObject } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 
 /**
@@ -319,7 +319,6 @@ export type {
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,
-  ThemeObject,
 } from "./types";
 
 // Forward all available exports from the original `react-select` package
