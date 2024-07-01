@@ -3,7 +3,7 @@ import type {
   ResponsiveObject,
   SystemStyleObject,
   ThemeTypings,
-} from "@chakra-ui/react";
+} from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ContainerProps,
