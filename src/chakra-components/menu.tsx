@@ -1,11 +1,7 @@
-import {
-  Box,
-  Menu as ChakraMenu,
-  MenuIcon,
-  useColorModeValue,
-  useMultiStyleConfig,
-} from "@chakra-ui/react";
-import type { PropsOf, SystemStyleObject } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/layout";
+import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
+import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
+import { useColorModeValue, useMultiStyleConfig } from "@chakra-ui/system";
 import type {
   CoercedMenuPlacement,
   GroupBase,

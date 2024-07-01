@@ -1,12 +1,9 @@
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
-import {
-  Box,
-  Divider,
-  Icon,
-  Spinner,
-  useMultiStyleConfig,
-  useStyleConfig,
-} from "@chakra-ui/react";
+import type { IconProps } from "@chakra-ui/icon";
+import { Icon } from "@chakra-ui/icon";
+import { Box, Divider } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
+import { useMultiStyleConfig, useStyleConfig } from "@chakra-ui/system";
+import type { SystemStyleObject } from "@chakra-ui/system";
 import type {
   ClearIndicatorProps,
   ControlProps,
