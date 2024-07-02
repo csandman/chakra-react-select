@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
@@ -13,7 +12,7 @@ import type {
   NoticeProps,
   OptionProps,
 } from "react-select";
-import type { SizeProps, ThemeObject } from "../types";
+import type { SizeProps } from "../types";
 import { cleanCommonProps, useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
@@ -291,8 +290,7 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    // eslint-disable-next-line deprecation/deprecation
-    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   const { data, ...innerProps } = cleanCommonProps(props);
@@ -317,11 +315,6 @@ export const GroupHeading = <
     fontSize: fontSizes[size],
     padding: paddings[size],
     margin: 0,
-    borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
-    position: hasStickyGroupHeaders ? "sticky" : "static",
-    top: -2,
-    bg: menuStyles.list.bg,
-    zIndex: 1,
   };
 
   const sx = chakraStyles?.groupHeading
@@ -377,7 +370,7 @@ export const Option = <
     },
   } = props;
 
-  const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
+  const menuItemStyles = useMultiStyleConfig("Menu").item;
 
   const size = useSize(sizeProp);
   const horizontalPaddingOptions: SizeProps = {

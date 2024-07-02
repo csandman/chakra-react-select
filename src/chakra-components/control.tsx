@@ -1,4 +1,3 @@
-import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";
@@ -115,12 +114,13 @@ export const IndicatorSeparator = <
   const {
     className,
     cx,
-    selectProps: { chakraStyles, useBasicStyles, variant },
+    selectProps: { chakraStyles },
   } = props;
 
   const initialSx: SystemStyleObject = {
     opacity: 1,
-    ...(useBasicStyles || variant !== "outline" ? { display: "none" } : {}),
+    // To match the default styles of the Chakra select, we don't want to show the separator
+    display: "none",
   };
 
   const sx = chakraStyles?.indicatorSeparator
@@ -165,7 +165,6 @@ export const DropdownIndicator = <
     innerProps,
     selectProps: {
       chakraStyles,
-      useBasicStyles,
       size: sizeProp,
       focusBorderColor,
       errorBorderColor,
@@ -174,37 +173,22 @@ export const DropdownIndicator = <
   } = props;
 
   const size = useSize(sizeProp);
-  const inputStyles = useMultiStyleConfig("Input", {
+  const selectStyles = useMultiStyleConfig("Select", {
     size,
     variant,
     focusBorderColor,
     errorBorderColor,
   });
 
-  const iconSizes: SizeProps = {
-    sm: "16px",
-    md: "20px",
-    lg: "24px",
-  };
-  const iconSize = iconSizes[size];
-
   const initialDropdownIndicatorSx: SystemStyleObject = {
-    ...inputStyles.addon,
-    display: "flex",
+    ...selectStyles.icon,
+    display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
-    borderRadius: 0,
-    borderWidth: 0,
-    fontSize: iconSize,
-    ...(useBasicStyles && {
-      background: "transparent",
-      padding: 0,
-      width: 6,
-      marginRight: 2,
-      marginLeft: 1,
-      cursor: "inherit",
-    }),
+    position: "static",
+    marginRight: 2,
+    marginLeft: 1,
+    pointerEvents: "none",
   };
   const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialDropdownIndicatorSx, props)
