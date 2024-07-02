@@ -297,7 +297,7 @@ export type {
 
 // Forward all available exports from the original `react-select` package
 export * from "react-select";
-export type { Props };
+// export type { Props };
 export { useAsync } from "react-select/async";
 export { useCreatable } from "react-select/creatable";
 export type { AsyncProps } from "react-select/async";
