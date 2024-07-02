@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import type { MutableRefObject, ReactElement, RefAttributes } from "react";
 import ReactSelect from "react-select";
 import type { GroupBase, Props, SelectInstance } from "react-select";

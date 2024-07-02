@@ -1,4 +1,3 @@
-import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box, Divider } from "@chakra-ui/layout";

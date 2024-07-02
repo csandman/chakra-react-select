@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@chakra-ui/layout";
 import { Menu as ChakraMenu, MenuIcon } from "@chakra-ui/menu";
 import type { PropsOf, SystemStyleObject } from "@chakra-ui/system";
