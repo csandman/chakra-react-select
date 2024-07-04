@@ -212,34 +212,34 @@ declare module "react-select/base" {
 
 declare module "react-select" {
   export interface MultiValueProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>,
+    Option = unknown,
+    IsMulti extends boolean = boolean,
+    Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     sx: SystemStyleObject;
   }
 
   export interface MultiValueGenericProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>,
+    Option = unknown,
+    IsMulti extends boolean = boolean,
+    Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     sx: SystemStyleObject;
   }
 
   export interface MultiValueRemoveProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>,
+    Option = unknown,
+    IsMulti extends boolean = boolean,
+    Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     isFocused: boolean;
     sx: SystemStyleObject;
   }
 
   export interface LoadingIndicatorProps<
-    Option,
-    IsMulti extends boolean,
-    Group extends GroupBase<Option>,
+    Option = unknown,
+    IsMulti extends boolean = boolean,
+    Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     /**
      * The color of the filled in area of the spinner.
