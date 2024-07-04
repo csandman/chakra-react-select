@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SystemStyleObject } from "@chakra-ui/system";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
-
-/**
- * This is necessary for the module `react-select/base` to be seen by TypeScript.
- * Without it the module augmentation will not work properly.
- *
- * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
- */
-import type { Props } from "react-select/base";
 import type {
   ChakraStylesConfig,
   ColorScheme,
@@ -17,6 +9,15 @@ import type {
   TagVariant,
   Variant,
 } from "./types";
+
+/**
+ * This is necessary for the module `react-select/base` to be seen by TypeScript.
+ * Without it the module augmentation will not work properly.
+ *
+ * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1765467219}
+ * @see {@link https://github.com/JedWatson/react-select/pull/5762#issuecomment-1766814503}
+ */
+export type { Props as ReactSelectBaseProps } from "react-select/base";
 
 /**
  * Module augmentation is used to add extra props to the existing interfaces
@@ -324,7 +325,6 @@ export type {
 
 // Forward all available exports from the original `react-select` package
 export * from "react-select";
-export type { Props };
 export { useAsync } from "react-select/async";
 export { useCreatable } from "react-select/creatable";
 export type { AsyncProps } from "react-select/async";
