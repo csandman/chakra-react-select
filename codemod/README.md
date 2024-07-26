@@ -36,15 +36,6 @@ npx crs-codemod@latest v5 .
 npx crs-codemod@latest v5 ./src
 ```
 
-> **NOTE:** This codemod currently has a side effect where it may remove some
-> [TypeScript generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
-> you pass into your `Select` components. This appears to be a shortcoming of
-> `jscodeshift`, as it appears not to recognize generics used in JSX. While in
-> most cases you shouldn't need generics in order for your component to be typed
-> properly, there are some edge cases where they are necessary. If you have a
-> need for them, you should either add them back in after the codemod is run, or
-> manually make the following transformations.
-
 This codemod runs on all versions of the `Select` component (`Select`,
 `AsyncSelect`, `AsyncCreatableSelect`, `CreatableSelect`), and performs the
 following modifications to your every instance of them:
