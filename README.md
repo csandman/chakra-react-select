@@ -1,15 +1,12 @@
-[cs-ts-demo]:
-  https://img.shields.io/badge/CodeSandbox-TypeScript-047bd4?logo=codesandbox&style=for-the-badge&labelColor=040404&logoColor=DBDBDB
-  "CodeSandbox TypeScript Demo"
-[cs-js-demo]:
-  https://img.shields.io/badge/CodeSandbox-JavaScript-f4dc1b?logo=codesandbox&style=for-the-badge&labelColor=040404&logoColor=DBDBDB
-  "CodeSandbox JavaScript Demo"
-[cs-ts]:
+[CS-TS]:
   https://img.shields.io/badge/CodeSandbox-TypeScript-047bd4?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB
   "CodeSandbox TypeScript Demo"
-[cs-js]:
+[CS-JS]:
   https://img.shields.io/badge/CodeSandbox-JavaScript-f4dc1b?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB
   "CodeSandbox JavaScript Demo"
+[SB-TS]:
+  https://developer.stackblitz.com/img/open_in_stackblitz.svg
+  "StackBlitz Demo"
 
 # chakra-react-select v5
 
@@ -39,12 +36,13 @@ This component is a wrapper for the popular react component
 [react-select](https://react-select.com/home) made using the UI library
 [Chakra UI](https://v2.chakra-ui.com/).
 
-![Chakra React Select Banner](./github/chakra-react-select.png)
+|                     Light Mode                      |                     Dark Mode                     |
+| :-------------------------------------------------: | :-----------------------------------------------: |
+| ![Light Mode Demo](./.github/images/demo-light.png) | ![Dark Mode Demo](./.github/images/demo-dark.png) |
 
-Check out these demos:
+Check out the demo here:
 
-[![CS-JS-demo]](https://codesandbox.io/s/chakra-react-select-demo-65ohb?file=/example.js)
-[![CS-TS-demo]](https://codesandbox.io/s/chakra-react-select-ts-demo-vz9ut?file=/app.tsx)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-lzaqwr?file=src%2Fapp.tsx)
 
 **NOTE:** Before leaving an issue on this project, remember that this is just a
 _wrapper_ for `react-select`, not a standalone package. A large percentage of
@@ -78,7 +76,9 @@ https://react-select.com/home
 - [Usage with React Form Libraries](#usage-with-react-form-libraries)
   - [`react-hook-form`](#react-hook-form)
   - [`formik`](#formik)
-- [CodeSandbox Templates](#codesandbox-templates)
+- [Templates](#templates)
+  - [CodeSandbox](#codesandbox)
+  - [StackBlitz](#stackblitz)
 
 ## Usage
 
@@ -155,7 +155,7 @@ If no `size` is passed, it will default to `defaultProps.size` from the theme
 for Chakra's `Input` component. If your component theme for `Input` is not
 modified, it will be `md`.
 
-```jsx
+```tsx
 return (
   <>
     <Select size="sm" />
@@ -165,7 +165,9 @@ return (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-sizes-w9sf8e?file=/example.js)
+![Sizes](./.github/images/sizes.png)
+
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-yt6kde?file=src%2Fapp.tsx)
 
 ---
 
@@ -184,7 +186,7 @@ available instead.
 Alternatively, you can add the `colorScheme` key to any of your options objects
 and it will only style that option when selected.
 
-```jsx
+```tsx
 return (
   <Select
     {/* The global tag color scheme */}
@@ -204,7 +206,9 @@ return (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-color-schemes-c38jlo?file=/example.js)
+![Tag Color Schemes](./.github/images/tag-color-schemes.png)
+
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-dt4uk2?file=src%2Fapp.tsx)
 
 ---
 
@@ -220,7 +224,7 @@ Alternatively, you can add the `variant` key to any of your options objects and
 it will only style that option when selected. This will override the
 `tagVariant` prop on the select if both are set
 
-```jsx
+```tsx
 return (
   <Select
     {/* The global variant */}
@@ -240,7 +244,9 @@ return (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-tag-variants-w31gnt?file=/example.js)
+![Tag Variants](./.github/images/tag-variants.png)
+
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-mvdnnv?file=src%2Fapp.tsx)
 
 ---
 
@@ -255,7 +261,7 @@ You can pass also pass `isInvalid`, `isDisabled`, or `isReadOnly` into a
 wrapping `<FormControl />` to achieve the same result as passing these props
 into the `Select` component.
 
-```jsx
+```tsx
 return (
   <>
     {/* This will show up with a red border */}
@@ -277,7 +283,9 @@ return (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-invalid-disabled-0hyl8l?file=/example.js)
+![Invalid/Disabled States](./.github/images/invalid-disabled.png)
+
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-xqdhav?file=src%2Fapp.tsx)
 
 ---
 
@@ -287,7 +295,7 @@ The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra
 color strings which will emulate the respective props being passed to
 [Chakra's `<Input />` component](https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors).
 
-```jsx
+```tsx
 return (
   <>
     <Select errorBorderColor="orange.500" isInvalid />
@@ -296,9 +304,9 @@ return (
 );
 ```
 
-![Orange errorBorderColor](./github/custom-error-border.png)
+![Orange errorBorderColor](./.github/images/custom-borders.png)
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-colors-gjo4zd?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-vhcvmv?file=src%2Fapp.tsx)
 
 ---
 
@@ -323,11 +331,11 @@ return (
 );
 ```
 
-![Color Highlighted Selected Option](./github/color-selected-option.png)
+![Color Highlighted Selected Option](./.github/images/color-selected-option.png)
 
-![Check Highlighted Selected Option](./github/check-selected-option.png)
+![Check Highlighted Selected Option](./.github/images/check-selected-option.png)
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptionstyle-yxkcos?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-eugrxc?file=src%2Fapp.tsx)
 
 ---
 
@@ -350,7 +358,7 @@ will use the `500` value in light mode or the `300` value in dark mode.
 > renamed to prevent confusion about its purpose. `selectedOptionColor` is still
 > available but will be removed in the next major version.
 
-```jsx
+```tsx
 return (
   <>
     <Select selectedOptionColorScheme="blue" /> {/* Default */}
@@ -359,11 +367,11 @@ return (
 );
 ```
 
-![Purple Selected Option Color (light mode)](./github/purple-selected-option-light.png)
+![Purple Selected Option Color (light mode)](./.github/images/purple-selected-option-light.png)
 
-![Purple Selected Option Color (dark mode)](./github/purple-selected-option-dark.png)
+![Purple Selected Option Color (dark mode)](./.github/images/purple-selected-option-dark.png)
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-border-selectedoptioncolor-yyd321?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-m5qlmg?file=package.json,src%2Fapp.tsx)
 
 ---
 
@@ -382,7 +390,7 @@ If no `variant` is passed, it will default to `defaultProps.variant` from the
 theme for Chakra's `Input` component. If your component theme for `Input` is not
 modified, it will be `outline`.
 
-```jsx
+```tsx
 return (
   <>
     <Select variant="outline" /> {/* Default */}
@@ -393,19 +401,11 @@ return (
 );
 ```
 
-![variant in light mode](./github/variant-light.png)
+![variant in light mode](./.github/images/variant-light.png)
 
-![variant in dark mode](./github/variant-dark.png)
+![variant in dark mode](./.github/images/variant-dark.png)
 
-By default, the `flushed` and `unstyled` variants look a bit strange in
-combination with the `DropdownIndicator`. An easy way to make these styles look
-more natural is to pass the [`useBasicStyles`](#usebasicstyles--default-false)
-prop along with them to remove the background from the indicator. Alternatively,
-you could hide the indicator completely using [`chakraStyles`](#chakrastyles).
-
-![variant with useBasicStyles](./github/variant-use-basic-styles.png)
-
-Another thing to note is that the default styling for `variant="filled"` and
+One thing to note is that the default styling for `variant="filled"` and
 `isMulti` results in the select and selected option tags having the same
 background color when the select is not focused. The easiest solution for this
 is to pass the
@@ -413,9 +413,9 @@ is to pass the
 [`colorScheme`](#colorscheme) prop to add some contrast between the two
 elements.
 
-![variant with useBasicStyles](./github/filled-variant.png)
+![filled variant](./.github/images/filled-variant.png)
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-variant-5cf755?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-ghaked?file=package.json,src%2Fapp.tsx)
 
 ---
 
@@ -427,9 +427,9 @@ examples (for each
 [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline))
 of how you could accomplish that with the [`chakraStyles`](#chakrastyles) prop:
 
-```jsx
-return (
-  <>
+```tsx
+const App = () => (
+  <Box>
     <Select
       variant="outline" // default
       chakraStyles={{
@@ -477,7 +477,7 @@ return (
         }),
       }}
     />
-  </>
+  </Box>
 );
 ```
 
@@ -611,7 +611,7 @@ const chakraStyles = {
 };
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-dropdown-indicator-flip-lhc4ep?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-o6ugku?file=src%2Fapp.tsx)
 
 Additionally, there is one key that is available in the `styles` prop that does
 not exist in the `chakraStyles` object; `menuPortal`. This key applies to the
@@ -627,18 +627,16 @@ component, you have two options:
 1. Pass the original `styles` prop with the `menuPortal` key. This is the only
    key in the `styles` object that will be applied to your components.
 
-```jsx
+```tsx
 return (
   <Select
     menuPortalTarget={document.body}
     styles={{
       menuPortal: (provided) => ({ ...provided, zIndex: 100 }),
     }}
-    chakraStyles={
-      {
-        // All other component styles
-      }
-    }
+    chakraStyles={{
+      // All other component styles
+    }}
   />
 );
 ```
@@ -646,14 +644,14 @@ return (
 2. Pass the `classNamePrefix` prop [as described below]() and style the
    `MenuPortal` with CSS using the className `prefix__menu-portal`.
 
-```jsx
+```tsx
 // example.js
 import "styles.css";
 
 return (
   <Select
     menuPortalTarget={document.body}
-    classNamePrefix="chakra-react-select"
+    classNamePrefix="crs"
   />
 );
 ```
@@ -661,7 +659,7 @@ return (
 ```css
 /* styles.css */
 
-.chakra-react-select__menu-portal {
+.crs__menu-portal {
   z-index: 100;
 }
 ```
@@ -675,17 +673,7 @@ submit a pull request.
 
 Dropdown menu attached to control example:
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-chakrastyles-vanilla-kgdnf?file=/example.js)
-[![CS-TS]](https://codesandbox.io/s/chakra-react-select-chakrastyles-5yh6q?file=/app.tsx)
-
-Default [Chakra `<Select />`](https://v2.chakra-ui.com/docs/form/select) styles
-example:
-
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-vanilla-iydfe?file=/example.js)
-[![CS-TS]](https://codesandbox.io/s/chakra-react-select-styled-like-a-default-chakra-select-qwq3o?file=/app.tsx)
-
-> _NOTE: This can now be accomplished with the
-> [`useBasicStyles`](#usebasicstyles--default-false) prop_
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-nh58wg?file=src%2Fapp.tsx)
 
 ### Theme Styles
 
@@ -769,7 +757,7 @@ describing how it works:
 
 Here is an example of using classNames to style the components:
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-classnameprefix-demo-4r2pe?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-zupcmm?file=src%2Fapp.tsx,src%2Fstyles.css)
 
 ## TypeScript Support
 
@@ -885,29 +873,37 @@ prop compatibility when passing them into the core `Select` so the easiest way
 to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator`
 and pass custom icons in as children:
 
-```jsx
-const components = {
+```tsx
+import { CloseIcon, TriangleDownIcon } from "@chakra-ui/icons";
+import { chakraComponents } from "chakra-react-select";
+
+const components: SelectComponentsConfig<Option, true, GroupBase<Option>> = {
   ClearIndicator: (props) => (
     <chakraComponents.ClearIndicator {...props}>
-      <Icon as={IoMdCloseCircleOutline} w={4} h={4} />
+      <CloseIcon />
     </chakraComponents.ClearIndicator>
   ),
   DropdownIndicator: (props) => (
     <chakraComponents.DropdownIndicator {...props}>
-      <Icon as={AiFillCaretDown} />
+      <TriangleDownIcon />
     </chakraComponents.DropdownIndicator>
   ),
 };
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-custom-icons-xf7scd?file=/example.js)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-a8zme3?file=src%2Fapp.tsx)
 
 Here's a complete example of how you might use custom components to create a
 select with a custom `Option`:
 
-```ts
-import { Icon } from "@chakra-ui/react";
-import { Select, chakraComponents } from "chakra-react-select";
+```tsx
+import { Icon, TagLeftIcon } from "@chakra-ui/react";
+import {
+  type GroupBase,
+  Select,
+  type SelectComponentsConfig,
+  chakraComponents,
+} from "chakra-react-select";
 import {
   GiCherry,
   GiChocolateBar,
@@ -915,41 +911,68 @@ import {
   GiStrawberry,
 } from "react-icons/gi";
 
-const flavorOptions = [
+interface FlavorOption {
+  label: string;
+  value: string;
+  Icon: React.FC;
+  iconColor: string;
+}
+
+const flavorOptions: FlavorOption[] = [
   {
     value: "coffee",
     label: "Coffee",
-    icon: <Icon as={GiCoffeeBeans} color="orange.700" mr={2} h={5} w={5} />,
+    Icon: GiCoffeeBeans,
+    iconColor: "orange.700",
   },
   {
     value: "chocolate",
     label: "Chocolate",
-    icon: <Icon as={GiChocolateBar} color="yellow.800" mr={2} h={5} w={5} />,
+    Icon: GiChocolateBar,
+    iconColor: "yellow.800",
   },
   {
     value: "strawberry",
     label: "Strawberry",
-    icon: <Icon as={GiStrawberry} color="red.500" mr={2} h={5} w={5} />,
+    Icon: GiStrawberry,
+    iconColor: "red.500",
   },
   {
     value: "cherry",
     label: "Cherry",
-    icon: <Icon as={GiCherry} color="red.600" mr={2} h={5} w={5} />,
+    Icon: GiCherry,
+    iconColor: "red.600",
   },
 ];
 
-// Make sure this is defined outside of the component which returns your select
-// or you'll run into rendering issues
-const customComponents = {
+const customComponents: SelectComponentsConfig<
+  FlavorOption,
+  true,
+  GroupBase<FlavorOption>
+> = {
   Option: ({ children, ...props }) => (
     <chakraComponents.Option {...props}>
-      {props.data.icon} {children}
+      <Icon
+        as={props.data.Icon}
+        color={props.data.iconColor}
+        mr={2}
+        h={5}
+        w={5}
+      />
+      {children}
     </chakraComponents.Option>
+  ),
+  MultiValueContainer: ({ children, ...props }) => (
+    <chakraComponents.MultiValueContainer {...props}>
+      <TagLeftIcon as={props.data.Icon} color={props.data.iconColor} />
+      {children}
+    </chakraComponents.MultiValueContainer>
   ),
 };
 
-const Example = () => (
+const App = () => (
   <Select
+    isMulti
     name="flavors"
     options={flavorOptions}
     placeholder="Select some flavors..."
@@ -958,8 +981,7 @@ const Example = () => (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-custom-option-d99s7?file=/example.js)
-[![CS-TS]](https://codesandbox.io/s/chakra-react-select-custom-icon-components-typescript-odi90k?file=/app.tsx)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-jgfakl?file=src%2Fapp.tsx)
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
@@ -972,7 +994,7 @@ which are normally available on the Chakra UI
 [`Spinner`](https://v2.chakra-ui.com/docs/components/spinner). Here is an
 example demonstrating which extra props are offered:
 
-```jsx
+```tsx
 import { AsyncSelect, chakraComponents } from "chakra-react-select";
 
 // These are the defaults for each of the custom props
@@ -1015,8 +1037,7 @@ const App = () => (
 );
 ```
 
-[![CS-JS]](https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-1n9q6d?file=/example.js)
-[![CS-TS]](https://codesandbox.io/s/chakra-react-select-custom-loadingindicator-typescript-5gx6kz?file=/app.tsx)
+[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-1tqrma?file=src%2Fapp.tsx)
 
 ## `useChakraSelectProps`
 
@@ -1032,7 +1053,7 @@ To do so, simply import the hook from this package, and call it by passing in
 any extra custom props you'd like into it and spread it onto a base
 `react-select` component:
 
-```jsx
+```tsx
 import { useState } from "react";
 import { useChakraSelectProps } from "chakra-react-select";
 import Select from "react-select";
@@ -1057,7 +1078,7 @@ Places that uses the `AsyncSelect` from `react-select` as it's core. Therefore,
 it accepts all of the same select props as the core react-select does meaning
 you can use the `useChakraSelectProps` hook to style it:
 
-```jsx
+```tsx
 import { useState } from "react";
 import { useChakraSelectProps } from "chakra-react-select";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
@@ -1112,6 +1133,10 @@ react-hook-form's
 component or [`useController`](https://react-hook-form.com/api/usecontroller)
 hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here
 are some examples using each:
+
+> **NOTE:** These examples still need to be updated to the newest version of
+> `chakra-react-select` at some point, but they should still give you a good
+> idea of how to implement what you want.
 
 ---
 
@@ -1184,10 +1209,12 @@ https://github.com/csandman/chakra-react-select/discussions/111
 - Vanilla JS: _coming soon_
 - TypeScript: _coming soon_
 
-## CodeSandbox Templates
+## Templates
 
 When submitting a bug report, please include a minimum reproduction of your
 issue using one of these templates:
+
+### CodeSandbox
 
 - React Vanilla JS Starter:
   https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
@@ -1197,3 +1224,14 @@ issue using one of these templates:
   https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
 - Next.js Typescript Starter:
   https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
+
+### StackBlitz
+
+Recently, CodeSandbox severely limited their free tier, so this project has
+started to move away from it. Here are a couple StackBlitz templates you can use
+as an alternative.
+
+- Vanilla JS Starter:
+  https://stackblitz.com/edit/vitejs-vite-fatlrb?file=src%2Fapp.jsx
+- TypeScript Starter:
+  https://stackblitz.com/edit/vitejs-vite-evghcw?file=src%2Fapp.tsx
