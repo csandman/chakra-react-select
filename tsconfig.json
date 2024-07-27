@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2019",
     "module": "esnext",
-    "moduleResolution": "bundler",
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "strict": true,
-    "isolatedModules": true,
-    "noFallthroughCasesInSwitch": true,
-    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src"],
