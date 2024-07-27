@@ -1,4 +1,3 @@
-import React from "react";
 import type { IconProps } from "@chakra-ui/icon";
 import { Icon } from "@chakra-ui/icon";
 import { Box } from "@chakra-ui/layout";
@@ -53,7 +52,12 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+  const {
+    chakraStyles,
+    tagColorScheme,
+    tagVariant,
+    size: sizeProp,
+  } = selectProps;
 
   const size = useSize(sizeProp);
 
@@ -75,7 +79,7 @@ const MultiValue = <
 
   const tagStyles = useMultiStyleConfig("Tag", {
     size,
-    colorScheme: optionColorScheme || colorScheme,
+    colorScheme: optionColorScheme || tagColorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });

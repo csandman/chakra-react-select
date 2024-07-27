@@ -13,7 +13,7 @@ const useChakraSelectProps = <
   // eslint-disable-next-line deprecation/deprecation
   theme,
   size,
-  colorScheme = "gray",
+  tagColorScheme = "gray",
   isDisabled,
   isInvalid,
   isReadOnly,
@@ -22,9 +22,7 @@ const useChakraSelectProps = <
   inputId,
   tagVariant,
   selectedOptionStyle = "color",
-  selectedOptionColorScheme,
-  // eslint-disable-next-line deprecation/deprecation
-  selectedOptionColor,
+  selectedOptionColorScheme = "blue",
   variant,
   focusBorderColor,
   errorBorderColor,
@@ -62,8 +60,7 @@ const useChakraSelectProps = <
   }
 
   // Ensure that the color used for the selected options is a string
-  let realSelectedOptionColorScheme: string =
-    selectedOptionColorScheme || selectedOptionColor || "blue";
+  let realSelectedOptionColorScheme: string = selectedOptionColorScheme;
   if (typeof realSelectedOptionColorScheme !== "string") {
     realSelectedOptionColorScheme = "blue";
   }
@@ -75,7 +72,7 @@ const useChakraSelectProps = <
       ...components,
     },
     // Custom select props
-    colorScheme,
+    tagColorScheme,
     size,
     tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
