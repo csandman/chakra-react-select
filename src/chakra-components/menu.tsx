@@ -290,8 +290,7 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    // eslint-disable-next-line deprecation/deprecation
-    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   const { data, ...innerProps } = cleanCommonProps(props);
@@ -316,11 +315,6 @@ export const GroupHeading = <
     fontSize: fontSizes[size],
     padding: paddings[size],
     margin: 0,
-    borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
-    position: hasStickyGroupHeaders ? "sticky" : "static",
-    top: -2,
-    bg: menuStyles.list.bg,
-    zIndex: 1,
   };
 
   const sx = chakraStyles?.groupHeading

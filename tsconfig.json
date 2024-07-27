@@ -1,10 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "module": "ESNext",
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
+    "strict": true,
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
