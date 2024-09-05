@@ -12,20 +12,23 @@
   "bugs": {
     "url": "https://github.com/csandman/chakra-react-select/issues"
   },
-  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
+      "module": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
       "default": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsup",
+    "check-exports": "attw --pack .",
     "format": "concurrently npm:format:*",
     "format:code": "prettier --write .",
     "format:package": "prettier-package-json --write",
@@ -48,6 +51,7 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.4",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
