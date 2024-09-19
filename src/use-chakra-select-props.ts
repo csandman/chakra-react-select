@@ -66,7 +66,7 @@ const useChakraSelectProps = <
 
   // Ensure that the color used for the selected options is a string
   let realSelectedOptionColorScheme: string = selectedOptionColorScheme;
-  if (!(selectedOptionColorScheme in chakraTheme.colors)) {
+  if (typeof selectedOptionColorScheme !== "string") {
     realSelectedOptionColorScheme = "blue";
   }
 
