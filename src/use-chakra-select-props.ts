@@ -13,17 +13,17 @@ const useChakraSelectProps = <
   // eslint-disable-next-line deprecation/deprecation
   theme,
   size,
-  tagColorScheme = "gray",
   isDisabled,
   isInvalid,
   isReadOnly,
   required,
   isRequired,
   inputId,
-  tagVariant,
   selectedOptionStyle = "color",
   selectedOptionColorScheme = "blue",
   variant,
+  tagColorScheme,
+  tagVariant,
   focusBorderColor,
   errorBorderColor,
   chakraStyles = {},
@@ -33,7 +33,12 @@ const useChakraSelectProps = <
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   const chakraTheme = useTheme();
-  const { variant: defaultVariant } = chakraTheme.components.Input.defaultProps;
+  const { variant: defaultVariant = "outline" } =
+    chakraTheme?.components?.Input?.defaultProps ?? {};
+  const {
+    colorScheme: defaultTagColorScheme = "gray",
+    variant: defaultTagVariant = "subtle",
+  } = chakraTheme?.components?.Tag?.defaultProps ?? {};
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
@@ -65,19 +70,19 @@ const useChakraSelectProps = <
     realSelectedOptionColorScheme = "blue";
   }
 
-  const select: Props<Option, IsMulti, Group> = {
+  const selectProps: Props<Option, IsMulti, Group> = {
     // Allow overriding of custom components
     components: {
       ...chakraComponents,
       ...components,
     },
     // Custom select props
-    tagColorScheme,
     size,
-    tagVariant,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColorScheme: realSelectedOptionColorScheme,
     variant: variant ?? defaultVariant,
+    tagColorScheme: tagColorScheme ?? defaultTagColorScheme,
+    tagVariant: tagVariant ?? defaultTagVariant,
     chakraStyles,
     focusBorderColor,
     errorBorderColor,
@@ -96,7 +101,7 @@ const useChakraSelectProps = <
     "aria-invalid": props["aria-invalid"] ?? inputProps["aria-invalid"],
   };
 
-  return select;
+  return selectProps;
 };
 
 export default useChakraSelectProps;
