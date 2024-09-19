@@ -34,11 +34,11 @@ const useChakraSelectProps = <
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   const chakraTheme = useTheme();
   const { variant: defaultVariant = "outline" } =
-    chakraTheme.components.Input.defaultProps;
+    chakraTheme?.components?.Input?.defaultProps ?? {};
   const {
     colorScheme: defaultTagColorScheme = "gray",
     variant: defaultTagVariant = "subtle",
-  } = chakraTheme.components.Tag.defaultProps;
+  } = chakraTheme?.components?.Tag?.defaultProps ?? {};
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
