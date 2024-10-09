@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -11,9 +11,10 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "isolatedModules": true,
     "jsx": "react-jsx",
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
