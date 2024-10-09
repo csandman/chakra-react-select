@@ -1,8 +1,5 @@
-import type { IconProps } from "@chakra-ui/icon";
-import { Icon } from "@chakra-ui/icon";
-import { Box } from "@chakra-ui/layout";
-import type { SystemStyleObject } from "@chakra-ui/system";
-import { chakra, useMultiStyleConfig } from "@chakra-ui/system";
+import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
+import { Box, Icon, chakra, useMultiStyleConfig } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
