@@ -1,5 +1,4 @@
-import { useFormControl } from "@chakra-ui/form-control";
-import { useTheme } from "@chakra-ui/system";
+import { useFormControl, useTheme } from "@chakra-ui/react";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle } from "./types";

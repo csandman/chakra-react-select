@@ -56,6 +56,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
+    "react/react-in-jsx-scope": "off",
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
