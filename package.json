@@ -41,7 +41,7 @@
     "start": "nodemon --watch src --exec npm run build -e ts,tsx"
   },
   "dependencies": {
-    "react-select": "5.8.1"
+    "react-select": "5.8.x"
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.x",
