@@ -411,7 +411,7 @@ export const Option = <
     selectedOptionStyle === "check" &&
     (!isMulti || hideSelectedOptions === false);
 
-  const shouldHighlight = selectedOptionStyle === "color";
+  const shouldHighlight = selectedOptionStyle === "color" && isSelected;
 
   const initialSx: SystemStyleObject = {
     ...menuItemStyles,
@@ -423,13 +423,13 @@ export const Option = <
     fontSize: size,
     paddingX: horizontalPaddingOptions[size],
     paddingY: verticalPaddingOptions[size],
-    ...(shouldHighlight && {
-      _selected: {
-        bg: selectedBg,
-        color: selectedColor,
-        _active: { bg: selectedBg },
-      },
-    }),
+    ...(shouldHighlight
+      ? {
+          bg: selectedBg,
+          color: selectedColor,
+          _active: { bg: selectedBg },
+        }
+      : {}),
   };
 
   const sx = chakraStyles?.option
