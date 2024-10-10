@@ -24,7 +24,11 @@ const alignToControl = (placement: CoercedMenuPlacement) => {
   return placement ? placementToCSSProp[placement] : "top";
 };
 
-const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
+export const Menu = <
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>,
+>(
   props: MenuProps<Option, IsMulti, Group>
 ) => {
   const {
@@ -62,8 +66,6 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     </ChakraMenu>
   );
 };
-
-export default Menu;
 
 export const MenuList = <
   Option,

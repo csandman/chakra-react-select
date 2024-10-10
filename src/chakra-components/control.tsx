@@ -18,7 +18,7 @@ import type {
 import type { SizeProps } from "../types";
 import { useSize } from "../utils";
 
-const Control = <
+export const Control = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>,
@@ -348,5 +348,3 @@ export const LoadingIndicator = <
     />
   );
 };
-
-export default Control;
