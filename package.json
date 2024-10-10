@@ -32,7 +32,7 @@
     "lint": "concurrently npm:lint:*",
     "lint:exports": "attw --pack .",
     "lint:src": "eslint .",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "tsc",
     "lint-fix": "eslint --fix src",
     "prepare": "husky",
     "prepublishOnly": "npm run build && npm run lint",
