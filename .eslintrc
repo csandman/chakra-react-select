@@ -29,17 +29,20 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "deprecation/deprecation": "warn",
-    "no-console": "error",
     "curly": [
       "error",
       "all"
     ],
-    "no-underscore-dangle": "off",
+    "deprecation/deprecation": "warn",
     "import/prefer-default-export": "off",
-    "react/prop-types": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-key": "error",
+    "no-console": "error",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
     "react/jsx-filename-extension": [
       "error",
       {
@@ -49,22 +52,10 @@
         ]
       }
     ],
-    "react/function-component-definition": [
-      "error",
-      {
-        "namedComponents": "arrow-function",
-        "unnamedComponents": "arrow-function"
-      }
-    ],
+    "react/jsx-key": "error",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/ban-ts-comment": "warn",
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      {
-        "prefer": "type-imports",
-        "disallowTypeAnnotations": true
-      }
-    ],
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -72,6 +63,27 @@
           "{}": false
         }
       }
+    ],
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        "prefer": "type-imports",
+        "disallowTypeAnnotations": true
+      }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "codemod/**/*.ts"
+      ],
+      "rules": {
+        "no-console": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "import/no-dynamic-require": "off",
+        "global-require": "off"
+      }
+    }
+  ]
 }

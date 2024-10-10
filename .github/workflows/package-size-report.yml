@@ -1,8 +1,6 @@
 name: Package Size Report
 
-on:
-  pull_request:
-    branches: [main]
+on: pull_request
 
 jobs:
   pkg-size-report:
@@ -11,12 +9,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: "16" # ⬅ Specify a version of Node.js to build your app
+          node-version: 20
 
       - name: Package size report
         uses: pkg-size/action@v1

@@ -26,7 +26,7 @@ const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
   "isFixed" in option &&
   typeof option.isFixed === "boolean";
 
-const MultiValue = <
+export const MultiValue = <
   Option = unknown,
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -49,7 +49,12 @@ const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const { chakraStyles, colorScheme, tagVariant, size: sizeProp } = selectProps;
+  const {
+    chakraStyles,
+    tagColorScheme,
+    tagVariant,
+    size: sizeProp,
+  } = selectProps;
 
   const size = useSize(sizeProp);
 
@@ -71,7 +76,7 @@ const MultiValue = <
 
   const tagStyles = useMultiStyleConfig("Tag", {
     size,
-    colorScheme: optionColorScheme || colorScheme,
+    colorScheme: optionColorScheme || tagColorScheme,
     variant:
       optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
   });
@@ -161,7 +166,7 @@ const MultiValue = <
   );
 };
 
-const MultiValueContainer = <
+export const MultiValueContainer = <
   Option = unknown,
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -177,7 +182,7 @@ const MultiValueContainer = <
   );
 };
 
-const MultiValueLabel = <
+export const MultiValueLabel = <
   Option = unknown,
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -207,7 +212,7 @@ const TagCloseIcon = (props: IconProps) => (
   </Icon>
 );
 
-const MultiValueRemove = <
+export const MultiValueRemove = <
   Option = unknown,
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>,
@@ -232,6 +237,3 @@ const MultiValueRemove = <
     </Box>
   );
 };
-
-export { MultiValueContainer, MultiValueLabel, MultiValueRemove };
-export default MultiValue;

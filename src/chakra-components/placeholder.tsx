@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, PlaceholderProps } from "react-select";
 
-const Placeholder = <
+export const Placeholder = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>,
@@ -43,5 +43,3 @@ const Placeholder = <
     </Box>
   );
 };
-
-export default Placeholder;

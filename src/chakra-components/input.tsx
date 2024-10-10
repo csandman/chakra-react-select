@@ -3,7 +3,7 @@ import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, InputProps } from "react-select";
 import { cleanCommonProps } from "../utils";
 
-const Input = <
+export const Input = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>,
@@ -79,5 +79,3 @@ const Input = <
     </Box>
   );
 };
-
-export default Input;

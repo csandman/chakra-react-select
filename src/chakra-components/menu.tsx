@@ -16,7 +16,7 @@ import type {
   NoticeProps,
   OptionProps,
 } from "react-select";
-import type { SizeProps, ThemeObject } from "../types";
+import type { SizeProps } from "../types";
 import { cleanCommonProps, useSize } from "../utils";
 
 const alignToControl = (placement: CoercedMenuPlacement) => {
@@ -24,7 +24,11 @@ const alignToControl = (placement: CoercedMenuPlacement) => {
   return placement ? placementToCSSProp[placement] : "top";
 };
 
-const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
+export const Menu = <
+  Option,
+  IsMulti extends boolean,
+  Group extends GroupBase<Option>,
+>(
   props: MenuProps<Option, IsMulti, Group>
 ) => {
   const {
@@ -62,8 +66,6 @@ const Menu = <Option, IsMulti extends boolean, Group extends GroupBase<Option>>(
     </ChakraMenu>
   );
 };
-
-export default Menu;
 
 export const MenuList = <
   Option,
@@ -294,8 +296,7 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    // eslint-disable-next-line deprecation/deprecation
-    selectProps: { chakraStyles, size: sizeProp, hasStickyGroupHeaders },
+    selectProps: { chakraStyles, size: sizeProp },
   } = props;
 
   const { data, ...innerProps } = cleanCommonProps(props);
@@ -320,11 +321,6 @@ export const GroupHeading = <
     fontSize: fontSizes[size],
     padding: paddings[size],
     margin: 0,
-    borderBottomWidth: hasStickyGroupHeaders ? "1px" : 0,
-    position: hasStickyGroupHeaders ? "sticky" : "static",
-    top: -2,
-    bg: menuStyles.list.bg,
-    zIndex: 1,
   };
 
   const sx = chakraStyles?.groupHeading
@@ -380,7 +376,7 @@ export const Option = <
     },
   } = props;
 
-  const menuItemStyles: ThemeObject = useMultiStyleConfig("Menu").item;
+  const menuItemStyles = useMultiStyleConfig("Menu").item;
 
   const size = useSize(sizeProp);
   const horizontalPaddingOptions: SizeProps = {

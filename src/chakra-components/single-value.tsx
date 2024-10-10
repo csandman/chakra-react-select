@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, SingleValueProps } from "react-select";
 
-const SingleValue = <
+export const SingleValue = <
   Option,
   IsMulti extends boolean,
   Group extends GroupBase<Option>,
@@ -47,5 +47,3 @@ const SingleValue = <
     </Box>
   );
 };
-
-export default SingleValue;
