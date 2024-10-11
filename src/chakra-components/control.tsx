@@ -1,11 +1,11 @@
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
 import {
   Box,
-  Divider,
-  Icon,
+  IconButton,
+  Separator,
   Spinner,
-  useMultiStyleConfig,
-  useStyleConfig,
+  type SystemStyleObject,
+  useRecipe,
+  useSlotRecipe,
 } from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
@@ -17,6 +17,7 @@ import type {
 } from "react-select";
 import type { SizeProps } from "../types";
 import { useSize } from "../utils";
+import { ChevronDownIcon, CloseIcon } from "./icons";
 
 export const Control = <
   Option,
@@ -34,53 +35,31 @@ export const Control = <
     isDisabled,
     isFocused,
     menuIsOpen,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      isInvalid,
-      isReadOnly,
-    },
+    selectProps: { chakraStyles, size, variant, invalid, readOnly },
   } = props;
 
-  const size = useSize(sizeProp);
-  const {
-    field: { height, h, ...fieldStyles },
-  } = useMultiStyleConfig("Input", {
+  const inputRecipe = useRecipe({ key: "input" });
+  const inputStyles = inputRecipe({
     size,
     variant,
-    focusBorderColor,
-    errorBorderColor,
   });
 
-  /**
-   * `@chakra-ui/theme@3.2.0` introduced a breaking change that switched from using `h` to `height` for the Input sizing.
-   *
-   * We need to keep checking for either to maintain backwards compatibility.
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/releases/tag/%40chakra-ui%2Ftheme%403.2.0}
-   */
-  const minH = height || h;
-
-  const initialSx: SystemStyleObject = {
-    ...fieldStyles,
+  const initialCss: SystemStyleObject = {
+    ...inputStyles,
     position: "relative",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    padding: 0,
+    paddingY: "2px",
     overflow: "hidden",
     height: "auto",
-    minH,
+    cursor: "text",
+    // TODO: figure out if this is the best way
+    minHeight: "var(--select-trigger-height)",
     ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
 
-  const sx = chakraStyles?.control
-    ? chakraStyles.control(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.control
+    ? chakraStyles.control(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -94,13 +73,13 @@ export const Control = <
         },
         className
       )}
-      sx={sx}
+      css={css}
       {...innerProps}
       data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
-      data-invalid={isInvalid ? true : undefined}
+      data-invalid={invalid ? true : undefined}
       data-disabled={isDisabled ? true : undefined}
-      data-readonly={isReadOnly ? true : undefined}
+      data-readonly={readOnly ? true : undefined}
     >
       {children}
     </Box>
@@ -120,39 +99,23 @@ export const IndicatorSeparator = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: SystemStyleObject = {
-    opacity: 1,
+  const initialCss: SystemStyleObject = {
     // To match the default styles of the Chakra select, we don't want to show the separator
     display: "none",
   };
 
-  const sx = chakraStyles?.indicatorSeparator
-    ? chakraStyles.indicatorSeparator(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.indicatorSeparator
+    ? chakraStyles.indicatorSeparator(initialCss, props)
+    : initialCss;
 
   return (
-    <Divider
+    <Separator
       className={cx({ "indicator-separator": true }, className)}
-      sx={sx}
+      css={css}
       orientation="vertical"
     />
   );
 };
-
-/**
- * Borrowed from the `@chakra-ui/icons` package to prevent needing it as a dependency
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/icons/src/ChevronDown.tsx}
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/select/src/select.tsx#L168-L179}
- */
-export const DownChevron = (props: IconProps) => (
-  <Icon role="presentation" focusable="false" aria-hidden="true" {...props}>
-    <path
-      fill="currentColor"
-      d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
-    />
-  </Icon>
-);
 
 export const DropdownIndicator = <
   Option,
@@ -166,44 +129,33 @@ export const DropdownIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      focusBorderColor,
-      errorBorderColor,
-      variant,
-    },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
-  const size = useSize(sizeProp);
-  const selectStyles = useMultiStyleConfig("Select", {
+  const selectStyles = useSlotRecipe({ key: "select" })({
     size,
     variant,
-    focusBorderColor,
-    errorBorderColor,
   });
 
-  const initialDropdownIndicatorSx: SystemStyleObject = {
-    ...selectStyles.icon,
+  const initialDropdownIndicatorCss: SystemStyleObject = {
+    ...selectStyles.indicator,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    position: "static",
-    marginRight: 2,
-    marginLeft: 1,
-    pointerEvents: "none",
   };
-  const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
-    ? chakraStyles.dropdownIndicator(initialDropdownIndicatorSx, props)
-    : initialDropdownIndicatorSx;
+  const dropdownIndicatorCss = chakraStyles?.dropdownIndicator
+    ? chakraStyles.dropdownIndicator(initialDropdownIndicatorCss, props)
+    : initialDropdownIndicatorCss;
 
-  const initialDownChevronSx: SystemStyleObject = {
+  const initialDownChevronCss: SystemStyleObject = {
+    ...selectStyles.indicator,
     height: "1em",
     width: "1em",
+    fontSize: "1.2em",
   };
-  const downChevronSx = chakraStyles?.downChevron
-    ? chakraStyles.downChevron(initialDownChevronSx, props)
-    : initialDownChevronSx;
+  const downChevronCss = chakraStyles?.downChevron
+    ? chakraStyles.downChevron(initialDownChevronCss, props)
+    : initialDownChevronCss;
 
   return (
     <Box
@@ -215,26 +167,12 @@ export const DropdownIndicator = <
         },
         className
       )}
-      sx={dropdownIndicatorSx}
+      css={dropdownIndicatorCss}
     >
-      {children || <DownChevron sx={downChevronSx} />}
+      {children || <ChevronDownIcon css={downChevronCss} />}
     </Box>
   );
 };
-
-/**
- * Borrowed from Chakra UI source
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/close-button/src/close-button.tsx#L12-L21}
- */
-export const CrossIcon = (props: IconProps) => (
-  <Icon focusable="false" aria-hidden {...props}>
-    <path
-      fill="currentColor"
-      d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
-    />
-  </Icon>
-);
 
 export const ClearIndicator = <
   Option,
@@ -248,32 +186,26 @@ export const ClearIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
-  const size = useSize(sizeProp);
-  const closeButtonStyles = useStyleConfig("CloseButton", {
+  const selectStyles = useSlotRecipe({ key: "select" })({
     size,
+    variant,
   });
 
-  const initialSx: SystemStyleObject = {
-    ...closeButtonStyles,
-    marginX: 1,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    cursor: "pointer",
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.clearTrigger,
   };
-  const sx = chakraStyles?.clearIndicator
-    ? chakraStyles.clearIndicator(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.clearIndicator
+    ? chakraStyles.clearIndicator(initialCss, props)
+    : initialCss;
 
   const initialIconStyles: SystemStyleObject = {
     width: "1em",
     height: "1em",
   };
-  const iconSx: SystemStyleObject = chakraStyles?.crossIcon
+  const iconCss: SystemStyleObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
@@ -287,11 +219,14 @@ export const ClearIndicator = <
         },
         className
       )}
-      sx={sx}
+      css={css}
       aria-label="Clear selected options"
+      asChild
       {...innerProps}
     >
-      {children || <CrossIcon sx={iconSx} />}
+      <IconButton size="sm" variant="plain" pointerEvents="auto">
+        {children || <CloseIcon css={iconCss} />}
+      </IconButton>
     </Box>
   );
 };
@@ -309,25 +244,22 @@ export const LoadingIndicator = <
     innerProps,
     selectProps: { chakraStyles, size: sizeProp },
     color,
-    emptyColor,
-    speed,
-    thickness,
     spinnerSize: propsSpinnerSize,
   } = props;
 
   const size = useSize(sizeProp);
-  const spinnerSizes: SizeProps<string> = {
+  const spinnerSizes: SizeProps<"sm" | "md" | "lg" | "xl" | "xs"> = {
     sm: "xs",
     md: "sm",
     lg: "md",
   };
   const spinnerSize = spinnerSizes[size];
 
-  const initialSx: SystemStyleObject = { marginRight: 3 };
+  const initialCss: SystemStyleObject = { marginRight: 3 };
 
-  const sx = chakraStyles?.loadingIndicator
-    ? chakraStyles.loadingIndicator(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.loadingIndicator
+    ? chakraStyles.loadingIndicator(initialCss, props)
+    : initialCss;
 
   return (
     <Spinner
@@ -338,13 +270,10 @@ export const LoadingIndicator = <
         },
         className
       )}
-      sx={sx}
+      css={css}
       {...innerProps}
       size={propsSpinnerSize || spinnerSize}
       color={color}
-      emptyColor={emptyColor}
-      speed={speed}
-      thickness={thickness}
     />
   );
 };

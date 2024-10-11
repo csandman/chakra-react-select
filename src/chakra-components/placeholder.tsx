@@ -17,16 +17,16 @@ export const Placeholder = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: SystemStyleObject = {
+  const initialCss: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",
-    color: "chakra-placeholder-color",
+    color: "fg.subtle",
     mx: "0.125rem",
     userSelect: "none",
   };
 
-  const sx = chakraStyles?.placeholder
-    ? chakraStyles.placeholder(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.placeholder
+    ? chakraStyles.placeholder(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -37,7 +37,7 @@ export const Placeholder = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>

@@ -43,22 +43,19 @@
     "react-select": "5.8.x"
   },
   "peerDependencies": {
-    "@chakra-ui/react": "2.x",
-    "@emotion/react": "^11.8.1",
+    "@chakra-ui/react": "next",
+    "next-themes": "^0.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
-    "@chakra-ui/react": "^2.10.2",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
+    "@chakra-ui/react": "next",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/react": "^18.3.11",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "concurrently": "^9.0.1",
-    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -70,6 +67,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
+    "next-themes": "^0.3.0",
     "prettier": "^3.3.3",
     "prettier-package-json": "^2.8.0",
     "react": "^18.3.1",

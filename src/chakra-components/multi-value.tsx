@@ -1,30 +1,27 @@
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
-import { Box, Icon, chakra, useMultiStyleConfig } from "@chakra-ui/react";
+import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
+import { Box, chakra, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import { useSize } from "../utils";
+import type { TagVariant } from "../types";
+import { CloseIcon } from "./icons";
 
-const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
+const hasColorPalette = (
+  option: unknown
+): option is { colorPalette: ColorPalette } =>
   typeof option === "object" &&
   option !== null &&
-  "colorScheme" in option &&
-  typeof option.colorScheme === "string";
+  "colorPalette" in option &&
+  typeof option.colorPalette === "string";
 
-const hasVariant = (option: unknown): option is { variant: string } =>
+const hasVariant = (option: unknown): option is { variant: TagVariant } =>
   typeof option === "object" &&
   option !== null &&
   "variant" in option &&
   typeof option.variant === "string";
-
-const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
-  typeof option === "object" &&
-  option !== null &&
-  "isFixed" in option &&
-  typeof option.isFixed === "boolean";
 
 export const MultiValue = <
   Option = unknown,
@@ -49,50 +46,36 @@ export const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const {
-    chakraStyles,
-    tagColorScheme,
-    tagVariant,
-    size: sizeProp,
-  } = selectProps;
+  const { chakraStyles, tagColorPalette, tagVariant, size } = selectProps;
 
-  const size = useSize(sizeProp);
-
-  let optionColorScheme = "";
-  let optionVariant = "";
-  let optionIsFixed = false;
-
-  if (hasColorScheme(data)) {
-    optionColorScheme = data.colorScheme;
+  let optionColorPalette: ColorPalette | undefined = tagColorPalette;
+  if (hasColorPalette(data)) {
+    optionColorPalette = data.colorPalette;
   }
 
+  let optionVariant: TagVariant;
   if (hasVariant(data)) {
     optionVariant = data.variant;
   }
 
-  if (hasIsFixed(data)) {
-    optionIsFixed = data.isFixed;
-  }
-
-  const tagStyles = useMultiStyleConfig("Tag", {
+  const tagStyles = useSlotRecipe({ key: "tag" })({
     size,
-    colorScheme: optionColorScheme || tagColorScheme,
-    variant:
-      optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
+    variant: optionVariant || tagVariant,
   });
 
-  const containerInitialSx: SystemStyleObject = {
-    ...tagStyles.container,
+  const containerInitialCss: SystemStyleObject = {
+    ...tagStyles.root,
+    colorPalette: optionColorPalette,
     display: "flex",
     alignItems: "center",
     minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
   };
-  const containerSx: SystemStyleObject = chakraStyles?.multiValue
-    ? chakraStyles.multiValue(containerInitialSx, props)
-    : containerInitialSx;
+  const containerCss = chakraStyles?.multiValue
+    ? chakraStyles.multiValue(containerInitialCss, props)
+    : containerInitialCss;
 
-  const labelInitialSx: SystemStyleObject = {
+  const labelInitialCss: SystemStyleObject = {
     ...tagStyles.label,
     overflow: "hidden",
     textOverflow:
@@ -101,19 +84,20 @@ export const MultiValue = <
         : undefined,
     whiteSpace: "nowrap",
   };
-  const labelSx = chakraStyles?.multiValueLabel
-    ? chakraStyles.multiValueLabel(labelInitialSx, props)
-    : labelInitialSx;
+  const labelCss = chakraStyles?.multiValueLabel
+    ? chakraStyles.multiValueLabel(labelInitialCss, props)
+    : labelInitialCss;
 
-  const removeInitialSx: SystemStyleObject = {
-    ...tagStyles.closeButton,
+  const removeInitialCss: SystemStyleObject = {
+    ...tagStyles.closeTrigger,
+    cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   };
-  const removeSx = chakraStyles?.multiValueRemove
-    ? chakraStyles.multiValueRemove(removeInitialSx, props)
-    : removeInitialSx;
+  const removeCss = chakraStyles?.multiValueRemove
+    ? chakraStyles.multiValueRemove(removeInitialCss, props)
+    : removeInitialCss;
 
   return (
     <Container
@@ -128,7 +112,7 @@ export const MultiValue = <
         ),
         ...innerProps,
       }}
-      sx={containerSx}
+      css={containerCss}
       selectProps={selectProps}
     >
       <Label
@@ -141,7 +125,7 @@ export const MultiValue = <
             className
           ),
         }}
-        sx={labelSx}
+        css={labelCss}
         selectProps={selectProps}
       >
         {children}
@@ -158,7 +142,7 @@ export const MultiValue = <
           "aria-label": `Remove ${children || "option"}`,
           ...removeProps,
         }}
-        sx={removeSx}
+        css={removeCss}
         selectProps={selectProps}
         isFocused={isFocused}
       />
@@ -173,10 +157,10 @@ export const MultiValueContainer = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, sx } = props;
+  const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} sx={sx}>
+    <chakra.span {...innerProps} css={css}>
       {children}
     </chakra.span>
   );
@@ -189,28 +173,14 @@ export const MultiValueLabel = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, sx } = props;
+  const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} sx={sx}>
+    <chakra.span {...innerProps} css={css}>
       {children}
     </chakra.span>
   );
 };
-
-/**
- * Borrowed from Chakra UI Tag source
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/tag/src/tag.tsx#L75}
- */
-const TagCloseIcon = (props: IconProps) => (
-  <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
-    <path
-      fill="currentColor"
-      d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
-    />
-  </Icon>
-);
 
 export const MultiValueRemove = <
   Option = unknown,
@@ -219,21 +189,17 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, isFocused, data, sx } = props;
-
-  if (hasIsFixed(data) && data.isFixed) {
-    return null;
-  }
+  const { children, innerProps, isFocused, css } = props;
 
   return (
     <Box
       {...innerProps}
       role="button"
-      sx={sx}
+      css={css}
       data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
     >
-      {children || <TagCloseIcon />}
+      {children || <CloseIcon />}
     </Box>
   );
 };

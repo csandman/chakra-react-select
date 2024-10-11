@@ -1,8 +1,4 @@
-import type {
-  ResponsiveObject,
-  SystemStyleObject,
-  ThemeTypings,
-} from "@chakra-ui/react";
+import type { SystemStyleObject, TagRootProps } from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -25,7 +21,7 @@ import type {
   ValueContainerProps,
 } from "react-select";
 
-export interface SizeProps<PropType = string | number> {
+export interface SizeProps<PropType extends string | number = string | number> {
   sm: PropType;
   md: PropType;
   lg: PropType;
@@ -33,20 +29,13 @@ export interface SizeProps<PropType = string | number> {
 
 export type Size = "sm" | "md" | "lg";
 
-export type SizeProp = Size | ResponsiveObject<Size> | Size[];
+export type SizeProp = Size | Record<string, Size> | Array<Size>;
 
-export type TagVariant = "subtle" | "solid" | "outline" | (string & {});
+export type TagVariant = TagRootProps["variant"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant =
-  | "outline"
-  | "filled"
-  | "flushed"
-  | "unstyled"
-  | (string & {});
-
-export type ColorScheme = ThemeTypings["colorSchemes"];
+export type Variant = "outline" | "filled";
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,
@@ -94,7 +83,6 @@ export interface ChakraStylesConfig<
 
 export interface OptionBase {
   variant?: string;
-  colorScheme?: string;
-  isFixed?: boolean;
+  colorPalette?: string;
   isDisabled?: boolean;
 }

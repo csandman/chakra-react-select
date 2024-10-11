@@ -1,4 +1,5 @@
-import { useFormControl, useTheme } from "@chakra-ui/react";
+import type { ColorPalette } from "@chakra-ui/react";
+import { useChakraContext, useFieldContext } from "@chakra-ui/react";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle } from "./types";
@@ -13,44 +14,37 @@ const useChakraSelectProps = <
   theme,
   size,
   isDisabled,
-  isInvalid,
-  isReadOnly,
+  invalid,
+  readOnly,
   required,
-  isRequired,
   inputId,
   selectedOptionStyle = "color",
-  selectedOptionColorScheme = "blue",
+  selectedOptionColorPalette = "blue",
   variant,
-  tagColorScheme,
   tagVariant,
-  focusBorderColor,
-  errorBorderColor,
+  tagColorPalette,
   chakraStyles = {},
   onFocus,
   onBlur,
   menuIsOpen,
+  menuPlacement = "auto",
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
-  const chakraTheme = useTheme();
-  const { variant: defaultVariant = "outline" } =
-    chakraTheme?.components?.Input?.defaultProps ?? {};
+  const chakraContext = useChakraContext();
+  const { variant: defaultVariant } =
+    chakraContext.getRecipe("input").defaultVariants;
   const {
-    colorScheme: defaultTagColorScheme = "gray",
     variant: defaultTagVariant = "subtle",
-  } = chakraTheme?.components?.Tag?.defaultProps ?? {};
+    colorPalette: defaultTagColorPalette = "gray",
+  } = chakraContext.getSlotRecipe("tag").defaultVariants ?? {};
 
   // Combine the props passed into the component with the props that can be set
   // on a surrounding form control to get the values of `isDisabled` and
   // `isInvalid`
-  const inputProps = useFormControl({
-    id: inputId,
-    isDisabled,
-    isInvalid,
-    isRequired,
-    isReadOnly,
-    onFocus,
-    onBlur,
-  });
+  const inputProps = useFieldContext();
+
+  // TODO: See if this is better than field context?
+  // const selectInputProps = useSelectContext();
 
   // Unless `menuIsOpen` is controlled, disable it if the select is readonly
   const realMenuIsOpen =
@@ -64,9 +58,10 @@ const useChakraSelectProps = <
   }
 
   // Ensure that the color used for the selected options is a string
-  let realSelectedOptionColorScheme: string = selectedOptionColorScheme;
-  if (typeof realSelectedOptionColorScheme !== "string") {
-    realSelectedOptionColorScheme = "blue";
+  let realSelectedOptionColorPalette: ColorPalette =
+    selectedOptionColorPalette || "blue";
+  if (typeof realSelectedOptionColorPalette !== "string") {
+    realSelectedOptionColorPalette = "blue";
   }
 
   const selectProps: Props<Option, IsMulti, Group> = {
@@ -78,26 +73,25 @@ const useChakraSelectProps = <
     // Custom select props
     size,
     selectedOptionStyle: realSelectedOptionStyle,
-    selectedOptionColorScheme: realSelectedOptionColorScheme,
+    selectedOptionColorPalette: realSelectedOptionColorPalette,
     variant: variant ?? defaultVariant,
-    tagColorScheme: tagColorScheme ?? defaultTagColorScheme,
+    tagColorPalette: tagColorPalette ?? defaultTagColorPalette,
     tagVariant: tagVariant ?? defaultTagVariant,
     chakraStyles,
-    focusBorderColor,
-    errorBorderColor,
     // Extract custom props from form control
-    onFocus: inputProps.onFocus,
-    onBlur: inputProps.onBlur,
-    isDisabled: inputProps.disabled,
-    isInvalid: !!inputProps["aria-invalid"],
-    inputId: inputProps.id,
-    isReadOnly: inputProps.readOnly,
-    required: required ?? inputProps.required,
+    onFocus,
+    onBlur,
+    isDisabled: isDisabled ?? inputProps.disabled,
+    invalid: invalid ?? inputProps.invalid,
+    inputId: inputId ?? inputProps.ids.control,
+    readOnly: readOnly ?? inputProps.readOnly,
+    required: required ?? required ?? inputProps.required,
     menuIsOpen: realMenuIsOpen,
+    menuPlacement,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
-    "aria-invalid": props["aria-invalid"] ?? inputProps["aria-invalid"],
+    "aria-invalid": props["aria-invalid"] ?? inputProps.invalid,
   };
 
   return selectProps;
