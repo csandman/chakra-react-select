@@ -1,5 +1,4 @@
 import type {
-  Pseudos,
   ResponsiveObject,
   SystemStyleObject,
   ThemeTypings,
@@ -25,16 +24,6 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
-
-/**
- * This is needed because Chakra improperly types their `SystemStyleObject` to not include pseudo selectors,
- * even though the objects actually include them.
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/issues/6261}
- */
-export type ThemeObject = SystemStyleObject & {
-  [K in keyof Pseudos]?: SystemStyleObject;
-};
 
 export interface SizeProps<PropType = string | number> {
   sm: PropType;

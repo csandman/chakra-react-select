@@ -3,26 +3,22 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "declaration": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "isolatedModules": true,
-    "jsx": "react-jsx",
     "noEmit": true,
+
+    /* JSX */
+    "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
+    "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }

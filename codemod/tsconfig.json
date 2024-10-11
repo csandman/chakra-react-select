@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "sourceMap": false,
+    "declarationMap": false,
+    "esModuleInterop": true,
+    "target": "es2015",
+    "downlevelIteration": true,
+    "preserveWatchOutput": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

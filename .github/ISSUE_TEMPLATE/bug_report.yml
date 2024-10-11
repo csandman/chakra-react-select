@@ -71,6 +71,17 @@ body:
         - label: "Linux"
         - label: "iOS/iPadOS"
         - label: "Android"
+  - type: dropdown
+    id: package-manager
+    attributes:
+      label: Package Manager
+      description: What package manager is your project set up with?
+      options:
+        - NPM
+        - Yarn
+        - PNPM
+        - Other/I don't know
+      default: 0
   - type: "textarea"
     id: "additional-information"
     attributes:
