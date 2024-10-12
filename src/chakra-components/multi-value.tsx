@@ -1,5 +1,5 @@
 import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
-import { Box, chakra, useSlotRecipe } from "@chakra-ui/react";
+import { Box, Span, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
@@ -160,9 +160,9 @@ export const MultiValueContainer = <
   const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} css={css}>
+    <Span {...innerProps} css={css}>
       {children}
-    </chakra.span>
+    </Span>
   );
 };
 
@@ -176,9 +176,9 @@ export const MultiValueLabel = <
   const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} css={css}>
+    <Span {...innerProps} css={css}>
       {children}
-    </chakra.span>
+    </Span>
   );
 };
 
