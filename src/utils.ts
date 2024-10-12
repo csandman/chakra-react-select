@@ -71,7 +71,8 @@ const getDefaultSize = (size: unknown): Size => {
 export const useSize = (size: SizeProp | undefined): Size => {
   const chakraContext = useChakraContext();
   const defaultSize = getDefaultSize(
-    chakraContext.getRecipe("select").defaultSize
+    // TODO: This doesn't seem to work as expected
+    chakraContext.getSlotRecipe("select")?.defaultSize
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
