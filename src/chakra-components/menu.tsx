@@ -130,7 +130,7 @@ export const LoadingMessage = <
   };
 
   const initialCss: SystemStyleObject = {
-    color: "chakra-subtle-text",
+    color: "fg.subtle",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
@@ -181,7 +181,7 @@ export const NoOptionsMessage = <
   };
 
   const initialCss: SystemStyleObject = {
-    color: "chakra-subtle-text",
+    color: "fg.subtle",
     textAlign: "center",
     paddingY: verticalPaddings[size],
     fontSize: size,
