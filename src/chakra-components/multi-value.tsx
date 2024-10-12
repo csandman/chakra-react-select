@@ -20,12 +20,6 @@ const hasVariant = (option: unknown): option is { variant: string } =>
   "variant" in option &&
   typeof option.variant === "string";
 
-const hasIsFixed = (option: unknown): option is { isFixed: boolean } =>
-  typeof option === "object" &&
-  option !== null &&
-  "isFixed" in option &&
-  typeof option.isFixed === "boolean";
-
 export const MultiValue = <
   Option = unknown,
   IsMulti extends boolean = boolean,
@@ -60,7 +54,6 @@ export const MultiValue = <
 
   let optionColorScheme = "";
   let optionVariant = "";
-  let optionIsFixed = false;
 
   if (hasColorScheme(data)) {
     optionColorScheme = data.colorScheme;
@@ -70,15 +63,10 @@ export const MultiValue = <
     optionVariant = data.variant;
   }
 
-  if (hasIsFixed(data)) {
-    optionIsFixed = data.isFixed;
-  }
-
   const tagStyles = useMultiStyleConfig("Tag", {
     size,
     colorScheme: optionColorScheme || tagColorScheme,
-    variant:
-      optionVariant || tagVariant || (optionIsFixed ? "solid" : "subtle"),
+    variant: optionVariant || tagVariant,
   });
 
   const containerInitialSx: SystemStyleObject = {
@@ -219,11 +207,7 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, isFocused, data, sx } = props;
-
-  if (hasIsFixed(data) && data.isFixed) {
-    return null;
-  }
+  const { children, innerProps, isFocused, sx } = props;
 
   return (
     <Box

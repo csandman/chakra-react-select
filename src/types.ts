@@ -95,6 +95,5 @@ export interface ChakraStylesConfig<
 export interface OptionBase {
   variant?: string;
   colorScheme?: string;
-  isFixed?: boolean;
   isDisabled?: boolean;
 }
