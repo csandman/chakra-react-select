@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useBreakpointValue, useChakraContext } from "@chakra-ui/react";
 import { useTheme } from "next-themes";
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
