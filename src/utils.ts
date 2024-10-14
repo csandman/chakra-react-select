@@ -1,4 +1,5 @@
-import { useBreakpointValue, useTheme } from "@chakra-ui/react";
+import { useBreakpointValue, useChakraContext } from "@chakra-ui/react";
+import { useTheme } from "next-themes";
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
 import type { Size, SizeProp } from "./types";
 
@@ -67,21 +68,34 @@ const getDefaultSize = (size: unknown): Size => {
 };
 
 export const useSize = (size: SizeProp | undefined): Size => {
-  const chakraTheme = useTheme();
+  const chakraContext = useChakraContext();
   const defaultSize = getDefaultSize(
-    chakraTheme.components.Input.defaultProps.size
+    // TODO: This doesn't seem to work as expected
+    chakraContext.getSlotRecipe("select")?.defaultSize
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
-  const definedSize: SizeProp = size ?? defaultSize;
+  const definedSize = size ?? defaultSize;
   // Or, if a breakpoint is passed, get the size based on the current screen size
-  const realSize: Size =
-    useBreakpointValue<Size>(
-      typeof definedSize === "string" ? [definedSize] : definedSize,
-      {
-        fallback: "md",
-      }
-    ) || defaultSize;
-
-  return realSize;
+  return (
+    // @ts-expect-error - I'm not sure why this is throwing an error - TODO: Figure this out
+    useBreakpointValue(definedSize, { fallback: defaultSize }) ?? defaultSize
+  );
 };
+
+export function useColorMode() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const toggleColorMode = () => {
+    setTheme(resolvedTheme === "light" ? "dark" : "light");
+  };
+  return {
+    colorMode: resolvedTheme,
+    setColorMode: setTheme,
+    toggleColorMode,
+  };
+}
+
+export function useColorModeValue<T>(light: T, dark: T) {
+  const { colorMode } = useColorMode();
+  return colorMode === "light" ? light : dark;
+}
