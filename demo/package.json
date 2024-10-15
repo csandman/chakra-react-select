@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
-    "dev": "vite",
+    "dev": "vite --port=5152",
     "lint": "eslint .",
     "preview": "vite preview"
   },
