@@ -6,3 +6,6 @@ tmp/
 # Codemod generated files
 codemod/**/*.js
 codemod/**/*.d.ts
+
+# Demo files
+demo/**/*
