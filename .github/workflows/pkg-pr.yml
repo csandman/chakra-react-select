@@ -1,5 +1,10 @@
-name: Publish Any Commit
-on: [push, pull_request]
+name: Publish Pull Requests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -21,4 +26,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      - run: npx pkg-pr-new publish --compact '.' --template './demo'
+      - run:
+          npx pkg-pr-new publish --compact '.' --no-template --template './demo'
