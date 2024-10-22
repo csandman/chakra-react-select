@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "crs-demo",
+  "name": "chakra-react-select-demo",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
