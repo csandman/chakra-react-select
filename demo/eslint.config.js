@@ -6,7 +6,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+const eslintConfig = tseslint.config(
   { ignores: ["dist"] },
   {
     settings: { react: { version: "18.3" } },
@@ -34,3 +34,5 @@ export default tseslint.config(
   },
   prettier
 );
+
+export default eslintConfig;
