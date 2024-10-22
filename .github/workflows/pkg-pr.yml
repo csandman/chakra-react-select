@@ -26,5 +26,4 @@ jobs:
       - name: Build
         run: npm run build
 
-      - run:
-          npx pkg-pr-new publish --compact '.' --no-template --template './demo'
+      - run: npx pkg-pr-new publish --compact '.' --template './demo'
