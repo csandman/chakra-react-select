@@ -10,6 +10,12 @@
 
 # chakra-react-select v5
 
+This component is a wrapper for the popular react component
+[React Select](https://react-select.com/home) made using the UI library
+[Chakra UI](https://v2.chakra-ui.com/).
+
+> [!IMPORTANT]
+>
 > This version of `chakra-react-select` is updated for
 > [Chakra UI v2](https://v2.chakra-ui.com/getting-started/migration) which works
 > exclusively with React v18. `chakra-react-select` v3, which is compatible with
@@ -31,10 +37,6 @@
 [![](https://img.shields.io/badge/Code_Style-prettier-c596c7.svg?logo=prettier "Code Style: Prettier")](https://github.com/prettier/prettier)
 [![](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
 
-This component is a wrapper for the popular react component
-[react-select](https://react-select.com/home) made using the UI library
-[Chakra UI](https://v2.chakra-ui.com/).
-
 |                     Light Mode                      |                     Dark Mode                     |
 | :-------------------------------------------------: | :-----------------------------------------------: |
 | ![Light Mode Demo](./.github/images/demo-light.png) | ![Dark Mode Demo](./.github/images/demo-dark.png) |
@@ -43,11 +45,13 @@ Check out the demo here:
 
 [![SB-TS]](https://stackblitz.com/edit/vitejs-vite-lzaqwr?file=src%2Fapp.tsx)
 
-**NOTE:** Before leaving an issue on this project, remember that this is just a
-_wrapper_ for `react-select`, not a standalone package. A large percentage of
-the questions people have end up being about how `react-select` itself works, so
-please read through their documentation to familiarize yourself with it!
-https://react-select.com/home
+> [!NOTE]
+>
+> Before leaving an issue on this project, remember that this is just a
+> _wrapper_ for `react-select`, not a standalone package. A large percentage of
+> the questions people have end up being about how `react-select` itself works,
+> so please read through their documentation to familiarize yourself with it!
+> https://react-select.com/home
 
 ## Contents
 
@@ -94,11 +98,13 @@ npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@
 yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
-**NOTE:** As of
-[`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3),
-your project will need to have a minimum of `@emotion/react@11.8.1` installed to
-avoid having multiple copies of `@emotion/react` installed. For more info, see
-[PR #115](https://github.com/csandman/chakra-react-select/pull/115).
+> [!NOTE]
+>
+> As of
+> [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3),
+> your project will need to have a minimum of `@emotion/react@11.8.1` installed
+> to avoid having multiple copies of `@emotion/react` installed. For more info,
+> see [PR #115](https://github.com/csandman/chakra-react-select/pull/115).
 
 After Chakra UI is set up,
 [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
@@ -683,8 +689,10 @@ or are themselves those components. As this package pulls directly from your
 Chakra theme, any changes you make to those components' themes will propagate to
 the components in this package.
 
-> **NOTE:** Some of the theme styles are manually overridden when this package
-> implements them. This is necessary for implementing styles for
+> [!NOTE]
+>
+> Some of the theme styles are manually overridden when this package implements
+> them. This is necessary for implementing styles for
 > [`size`](#size--options-responsivevaluesm--md--lg--default-md) variants in
 > components that do not natively have them in Chakra's default theme. This
 > mostly concerns components that make up the `Menu`, but there are a few other
@@ -714,9 +722,11 @@ Here is a list of all components that will be affected by changes to your theme:
 In addition to specific component styles, any changes you make to your global
 color scheme will also be reflected in these custom components.
 
-> **NOTE:** Only make changes to your global component themes if you want them
-> to appear in all instances of that component. Otherwise, just change the
-> individual components' styles using the `chakraStyles` prop.
+> [!NOTE]
+>
+> Only make changes to your global component themes if you want them to appear
+> in all instances of that component. Otherwise, just change the individual
+> components' styles using the `chakraStyles` prop.
 
 ### `className`
 
@@ -1101,9 +1111,10 @@ const GooglePlacesAutocomplete = () => {
 export default GooglePlacesAutocomplete;
 ```
 
-> **NOTE:** An API key would be needed to create a CodeSandbox example for this
-> so you will have to implement it in your own project if you'd like to test it
-> out.
+> [!NOTE]
+>
+> An API key would be needed to create a CodeSandbox example for this so you
+> will have to implement it in your own project if you'd like to test it out.
 
 ## Usage with React Form Libraries
 
@@ -1133,7 +1144,9 @@ component or [`useController`](https://react-hook-form.com/api/usecontroller)
 hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here
 are some examples using each:
 
-> **NOTE:** These examples still need to be updated to the newest version of
+> [!NOTE]
+>
+> These examples still need to be updated to the newest version of
 > `chakra-react-select` at some point, but they should still give you a good
 > idea of how to implement what you want.
 
@@ -1238,8 +1251,8 @@ issue using one of these templates:
 ### StackBlitz
 
 Recently, CodeSandbox severely limited their free tier, so this project has
-started to move away from it. Here are a couple StackBlitz templates you can use
-as an alternative.
+started to move away from it. Here are a couple
+[StackBlitz](https://stackblitz.com/) templates you can use as an alternative.
 
 - Vanilla JS Starter:
   https://stackblitz.com/edit/vitejs-vite-fatlrb?file=src%2Fapp.jsx
