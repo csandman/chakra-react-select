@@ -10,14 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/anatomy": "^2.3.4",
-    "@chakra-ui/react": "^2.10.2",
+    "@chakra-ui/react": "^3.0.0",
     "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
     "chakra-react-select": "file:..",
-    "framer-motion": "^11.11.9",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

@@ -1,15 +1,18 @@
 import { StrictMode } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, EnvironmentProvider } from "@chakra-ui/react";
+import { ThemeProvider } from "next-themes";
 import { createRoot } from "react-dom/client";
-import App from "./app";
-import ColorModeSwitch from "./components/color-mode-switch";
-import theme from "./theme";
+import App from "./app.tsx";
+import crsSystem from "./theme";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-      <ColorModeSwitch />
-    </ChakraProvider>
+    <EnvironmentProvider>
+      <ChakraProvider value={crsSystem}>
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          <App />
+        </ThemeProvider>
+      </ChakraProvider>
+    </EnvironmentProvider>
   </StrictMode>
 );

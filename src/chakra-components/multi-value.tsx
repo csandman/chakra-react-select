@@ -1,20 +1,23 @@
-import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
-import { Box, Icon, chakra, useMultiStyleConfig } from "@chakra-ui/react";
+import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
+import { Box, Span, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import { useSize } from "../utils";
+import type { TagVariant } from "../types";
+import { CloseIcon } from "./icons";
 
-const hasColorScheme = (option: unknown): option is { colorScheme: string } =>
+const hasColorPalette = (
+  option: unknown
+): option is { colorPalette: ColorPalette } =>
   typeof option === "object" &&
   option !== null &&
-  "colorScheme" in option &&
-  typeof option.colorScheme === "string";
+  "colorPalette" in option &&
+  typeof option.colorPalette === "string";
 
-const hasVariant = (option: unknown): option is { variant: string } =>
+const hasVariant = (option: unknown): option is { variant: TagVariant } =>
   typeof option === "object" &&
   option !== null &&
   "variant" in option &&
@@ -43,44 +46,34 @@ export const MultiValue = <
 
   const { Container, Label, Remove } = components;
 
-  const {
-    chakraStyles,
-    tagColorScheme,
-    tagVariant,
-    size: sizeProp,
-  } = selectProps;
+  const { chakraStyles, tagColorPalette, tagVariant, size } = selectProps;
 
-  const size = useSize(sizeProp);
-
-  let optionColorScheme = "";
-  let optionVariant = "";
-
-  if (hasColorScheme(data)) {
-    optionColorScheme = data.colorScheme;
+  let optionColorPalette: ColorPalette | undefined = tagColorPalette;
+  if (hasColorPalette(data)) {
+    optionColorPalette = data.colorPalette;
   }
 
+  let optionVariant: TagVariant;
   if (hasVariant(data)) {
     optionVariant = data.variant;
   }
 
-  const tagStyles = useMultiStyleConfig("Tag", {
+  const tagStyles = useSlotRecipe({ key: "tag" })({
     size,
-    colorScheme: optionColorScheme || tagColorScheme,
     variant: optionVariant || tagVariant,
   });
 
-  const containerInitialSx: SystemStyleObject = {
-    ...tagStyles.container,
-    display: "flex",
-    alignItems: "center",
+  const containerInitialCss: SystemStyleObject = {
+    ...tagStyles.root,
+    colorPalette: optionColorPalette,
     minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
   };
-  const containerSx: SystemStyleObject = chakraStyles?.multiValue
-    ? chakraStyles.multiValue(containerInitialSx, props)
-    : containerInitialSx;
+  const containerCss = chakraStyles?.multiValue
+    ? chakraStyles.multiValue(containerInitialCss, props)
+    : containerInitialCss;
 
-  const labelInitialSx: SystemStyleObject = {
+  const labelInitialCss: SystemStyleObject = {
     ...tagStyles.label,
     overflow: "hidden",
     textOverflow:
@@ -89,19 +82,16 @@ export const MultiValue = <
         : undefined,
     whiteSpace: "nowrap",
   };
-  const labelSx = chakraStyles?.multiValueLabel
-    ? chakraStyles.multiValueLabel(labelInitialSx, props)
-    : labelInitialSx;
+  const labelCss = chakraStyles?.multiValueLabel
+    ? chakraStyles.multiValueLabel(labelInitialCss, props)
+    : labelInitialCss;
 
-  const removeInitialSx: SystemStyleObject = {
-    ...tagStyles.closeButton,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+  const removeInitialCss: SystemStyleObject = {
+    ...tagStyles.closeTrigger,
   };
-  const removeSx = chakraStyles?.multiValueRemove
-    ? chakraStyles.multiValueRemove(removeInitialSx, props)
-    : removeInitialSx;
+  const removeCss = chakraStyles?.multiValueRemove
+    ? chakraStyles.multiValueRemove(removeInitialCss, props)
+    : removeInitialCss;
 
   return (
     <Container
@@ -116,7 +106,7 @@ export const MultiValue = <
         ),
         ...innerProps,
       }}
-      sx={containerSx}
+      css={containerCss}
       selectProps={selectProps}
     >
       <Label
@@ -129,7 +119,7 @@ export const MultiValue = <
             className
           ),
         }}
-        sx={labelSx}
+        css={labelCss}
         selectProps={selectProps}
       >
         {children}
@@ -146,7 +136,7 @@ export const MultiValue = <
           "aria-label": `Remove ${children || "option"}`,
           ...removeProps,
         }}
-        sx={removeSx}
+        css={removeCss}
         selectProps={selectProps}
         isFocused={isFocused}
       />
@@ -161,12 +151,12 @@ export const MultiValueContainer = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, sx } = props;
+  const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} sx={sx}>
+    <Span {...innerProps} css={css}>
       {children}
-    </chakra.span>
+    </Span>
   );
 };
 
@@ -177,28 +167,14 @@ export const MultiValueLabel = <
 >(
   props: MultiValueGenericProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, sx } = props;
+  const { children, innerProps, css } = props;
 
   return (
-    <chakra.span {...innerProps} sx={sx}>
+    <Span {...innerProps} css={css}>
       {children}
-    </chakra.span>
+    </Span>
   );
 };
-
-/**
- * Borrowed from Chakra UI Tag source
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/13c6d2e08b61e179773be4722bb81173dd599306/packages/tag/src/tag.tsx#L75}
- */
-const TagCloseIcon = (props: IconProps) => (
-  <Icon verticalAlign="inherit" viewBox="0 0 512 512" {...props}>
-    <path
-      fill="currentColor"
-      d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"
-    />
-  </Icon>
-);
 
 export const MultiValueRemove = <
   Option = unknown,
@@ -207,17 +183,17 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, isFocused, sx } = props;
+  const { children, innerProps, isFocused, css } = props;
 
   return (
     <Box
       {...innerProps}
       role="button"
-      sx={sx}
+      css={css}
       data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
     >
-      {children || <TagCloseIcon />}
+      {children || <CloseIcon />}
     </Box>
   );
 };
