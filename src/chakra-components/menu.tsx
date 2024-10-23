@@ -133,7 +133,7 @@ export const LoadingMessage = <
     color: "fg.subtle",
     textAlign: "center",
     paddingY: verticalPaddings[size],
-    fontSize: size,
+    fontSize: sizeProp,
   };
 
   const css = chakraStyles?.loadingMessage
@@ -184,7 +184,7 @@ export const NoOptionsMessage = <
     color: "fg.subtle",
     textAlign: "center",
     paddingY: verticalPaddings[size],
-    fontSize: size,
+    fontSize: sizeProp,
   };
 
   const css = chakraStyles?.noOptionsMessage
