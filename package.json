@@ -25,10 +25,16 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --clean",
+    "dev": "concurrently npm:dev:*",
+    "dev:demo": "cd demo && npm run dev",
+    "dev:src": "tsup --watch",
     "format": "concurrently npm:format:*",
-    "format:code": "prettier --write .",
     "format:package": "prettier-package-json --write",
+    "format:src": "prettier --write .",
+    "install:all": "npm install && npm run install:demo && npm run install:codemod",
+    "install:codemod": "cd codemod && npm install",
+    "install:demo": "cd demo && npm install",
     "lint": "concurrently npm:lint:*",
     "lint:exports": "attw --pack .",
     "lint:src": "eslint .",
@@ -36,8 +42,7 @@
     "lint-fix": "eslint --fix src",
     "prepare": "husky",
     "prepublishOnly": "npm run build && npm run lint",
-    "postpublish": "git push --tags",
-    "start": "tsup --watch"
+    "postpublish": "git push --tags"
   },
   "dependencies": {
     "react-select": "5.8.x"
@@ -50,9 +55,6 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
-    "@chakra-ui/react": "^2.10.2",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/react": "^18.3.11",
     "@typescript-eslint/eslint-plugin": "^7.14.1",
@@ -72,8 +74,6 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "prettier-package-json": "^2.8.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "tsup": "^8.3.0",
     "typescript": "^5.6.3"
   },
