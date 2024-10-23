@@ -7,6 +7,8 @@ const tagTheme = tagHelpers.defineMultiStyleConfig({
   defaultProps: {
     // Note: Uncomment this to show the solid variant as the default
     // variant: "solid",
+    // Note: Uncomment this to use "blue" as the default colorScheme
+    // colorScheme: "blue",
   },
 });
 

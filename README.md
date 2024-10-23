@@ -178,6 +178,8 @@ return (
 
 #### `tagColorScheme`
 
+> [!NOTE]
+>
 > Renamed from `colorScheme` in
 > [`v5.0.0`](https://github.com/csandman/chakra-react-select/releases/tag/v5.0.0)
 
