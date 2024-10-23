@@ -209,7 +209,6 @@ export const ClearIndicator = <
 
   return (
     <Box
-      role="button"
       className={cx(
         {
           indicator: true,
@@ -222,7 +221,13 @@ export const ClearIndicator = <
       asChild
       {...innerProps}
     >
-      <IconButton size="sm" variant="plain" pointerEvents="auto">
+      <IconButton
+        size="xs"
+        variant="plain"
+        focusVisibleRing="inside"
+        focusRingWidth="2px"
+        pointerEvents="auto"
+      >
         {children || <CloseIcon css={iconCss} />}
       </IconButton>
     </Box>
