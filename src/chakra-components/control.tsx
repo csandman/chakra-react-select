@@ -207,6 +207,7 @@ export const ClearIndicator = <
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
 
+  // TODO: Figure out the best way to render this clear indicator
   return (
     <Box
       className={cx(
