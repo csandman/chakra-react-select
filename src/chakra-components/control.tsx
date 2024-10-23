@@ -48,7 +48,6 @@ export const Control = <
     ...inputStyles,
     position: "relative",
     display: "flex",
-    paddingY: "2px",
     overflow: "hidden",
     height: "auto",
     cursor: "text",

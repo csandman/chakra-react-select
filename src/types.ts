@@ -35,7 +35,7 @@ export type TagVariant = TagRootProps["variant"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = "outline" | "filled";
+export type Variant = "outline" | "subtle";
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,

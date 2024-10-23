@@ -81,15 +81,7 @@ export const ValueContainer = <
     selectProps: { chakraStyles, controlShouldRenderValue },
   } = props;
 
-  // // Getting the css from input instead of select
-  // // to fit better with each of the variants
-  // const inputStyles = useRecipe({ key: "input" })({
-  //   size,
-  //   variant,
-  // });
-
   const initialCss: SystemStyleObject = {
-    // ...selectStyles.valueText,
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
     flex: 1,
@@ -97,6 +89,7 @@ export const ValueContainer = <
     WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
+    py: "2px",
   };
 
   const css = chakraStyles?.valueContainer

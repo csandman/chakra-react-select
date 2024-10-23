@@ -288,26 +288,6 @@ export const GroupHeading = <
   );
 };
 
-/**
- * The `CheckIcon` component from the Chakra UI Menu
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/eb0316ddf96dd259433724062e923c33e6eee729/packages/components/menu/src/menu-item-option.tcss#L10-L17}
- */
-// const CheckIcon = () => (
-//   <svg
-//     viewBox="0 0 14 14"
-//     width="1em"
-//     height="1em"
-//     focusable="false"
-//     aria-hidden="true"
-//   >
-//     <polygon
-//       fill="currentColor"
-//       points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-//     />
-//   </svg>
-// );
-
 const MenuIcon: React.FC<HTMLChakraProps<"span">> = (props) => (
   <Span {...props}>
     <CheckIcon />

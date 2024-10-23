@@ -88,6 +88,7 @@ const useChakraSelectProps = <
     required: required ?? required ?? inputProps.required,
     menuIsOpen: realMenuIsOpen,
     menuPlacement,
+    unstyled: true,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop

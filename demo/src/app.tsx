@@ -1,221 +1,200 @@
 import {
+  Select as ChakraSelect,
   Code,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Heading,
+  Field,
+  Flex,
+  IconButton,
+  Input,
+  Portal,
 } from "@chakra-ui/react";
 import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
+import { LuX } from "react-icons/lu";
+import { ColorModeButton } from "./components/color-mode";
+import { SelectValueText } from "./components/select";
+import animeMovies from "./data/anime-movies";
 import { colorOptions, groupedOptions } from "./data/options";
 
-const mappedcolorOptions = colorOptions.map((option) => ({
-  ...option,
-  colorScheme: option.value,
-}));
+const App = () => {
+  return (
+    <Container as="main" maxWidth="lg">
+      <Flex justifyContent="flex-end" p={4}>
+        <ColorModeButton alignSelf="flex-end" />
+      </Flex>
+      <Field.Root p={4}>
+        <Field.Label>Standard Input</Field.Label>
+        <Input />
+        <Field.HelperText>This is some helper text</Field.HelperText>
+      </Field.Root>
 
-const App = () => (
-  <Container mt={8} mb={24}>
-    <Heading as="h1" size="md" p={4}>
-      Chakra React Select Demo
-    </Heading>
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select Colors and Flavours <Code>size="sm"</Code>
-      </FormLabel>
-      <Select
-        id="color-select"
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
+      <ChakraSelect.Root
+        collection={animeMovies}
+        defaultValue={["spirited_away"]}
+        positioning={{ sameWidth: true }}
+        p={4}
+      >
+        <ChakraSelect.Label>
+          Built-in Chakra UI Select <Code>{'size="md"'}</Code>
+        </ChakraSelect.Label>
+
+        <ChakraSelect.Control>
+          <ChakraSelect.Trigger>
+            <SelectValueText placeholder="Select movie" />
+          </ChakraSelect.Trigger>
+          <ChakraSelect.IndicatorGroup>
+            <ChakraSelect.ClearTrigger asChild>
+              <IconButton
+                size="xs"
+                variant="plain"
+                focusVisibleRing="inside"
+                focusRingWidth="2px"
+                pointerEvents="auto"
+              >
+                <LuX />
+              </IconButton>
+            </ChakraSelect.ClearTrigger>
+            <ChakraSelect.Indicator />
+          </ChakraSelect.IndicatorGroup>
+        </ChakraSelect.Control>
+
+        <Portal>
+          <ChakraSelect.Positioner>
+            <ChakraSelect.Content>
+              <ChakraSelect.ItemGroup>
+                <ChakraSelect.ItemGroupLabel>
+                  Anime Movies
+                </ChakraSelect.ItemGroupLabel>
+                {animeMovies.items.map((movie) => (
+                  <ChakraSelect.Item key={movie.value} item={movie}>
+                    {movie.label}
+                    <ChakraSelect.ItemIndicator />
+                  </ChakraSelect.Item>
+                ))}
+              </ChakraSelect.ItemGroup>
+            </ChakraSelect.Content>
+          </ChakraSelect.Positioner>
+        </Portal>
+      </ChakraSelect.Root>
+
+      <ChakraSelect.Root
+        collection={animeMovies}
+        defaultValue={["spirited_away"]}
         size="sm"
-      />
-    </FormControl>
+        positioning={{ sameWidth: true }}
+        p={4}
+      >
+        <ChakraSelect.Label>
+          Built-in Chakra UI Select <Code>{'size="sm"'}</Code>
+        </ChakraSelect.Label>
+        <ChakraSelect.Control>
+          <ChakraSelect.Trigger>
+            <SelectValueText placeholder="Select movie" />
+          </ChakraSelect.Trigger>
+          <ChakraSelect.IndicatorGroup>
+            <ChakraSelect.ClearTrigger asChild>
+              <IconButton
+                size="xs"
+                variant="plain"
+                focusVisibleRing="inside"
+                focusRingWidth="2px"
+                pointerEvents="auto"
+              >
+                <LuX />
+              </IconButton>
+            </ChakraSelect.ClearTrigger>
+            <ChakraSelect.Indicator />
+          </ChakraSelect.IndicatorGroup>
+        </ChakraSelect.Control>
+        <Portal>
+          <ChakraSelect.Positioner>
+            <ChakraSelect.Content>
+              <ChakraSelect.ItemGroup>
+                <ChakraSelect.ItemGroupLabel>
+                  Anime Movies
+                </ChakraSelect.ItemGroupLabel>
+                {animeMovies.items.map((movie) => (
+                  <ChakraSelect.Item key={movie.value} item={movie}>
+                    {movie.label}
+                    <ChakraSelect.ItemIndicator />
+                  </ChakraSelect.Item>
+                ))}
+              </ChakraSelect.ItemGroup>
+            </ChakraSelect.Content>
+          </ChakraSelect.Positioner>
+        </Portal>
+      </ChakraSelect.Root>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours <Code>size="md" (default)</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+      <Field.Root p={4}>
+        <Field.Label>
+          Select Colors and Flavours <Code>{'size="sm"'}</Code>
+        </Field.Label>
+        <Select
+          name="colors"
+          options={groupedOptions}
+          placeholder="Select some colors..."
+          instanceId="colors-flavors"
+        />
+      </Field.Root>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours <Code>size="lg"</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        size="lg"
-      />
-    </FormControl>
+      <Field.Root p={4}>
+        <Field.Label>
+          Select a Color or Flavor<Code>{'size="sm"'}</Code>
+        </Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          instanceId="colors"
+          size="sm"
+          classNamePrefix="crs"
+          tagColorPalette="blue"
+        />
+      </Field.Root>
 
-    <FormControl p={4}>
-      <FormLabel>Async Select</FormLabel>
-      <AsyncSelect
-        isMulti
-        name="colors"
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        loadOptions={(inputValue, callback) => {
-          setTimeout(() => {
-            const values = colorOptions.filter((i) =>
-              i.label.toLowerCase().includes(inputValue.toLowerCase())
-            );
-            callback(values);
-          }, 3000);
-        }}
-      />
-    </FormControl>
+      <Field.Root p={4}>
+        <Field.Label>Async Select</Field.Label>
+        <AsyncSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          instanceId="colors"
+          classNamePrefix="crs"
+          tagColorPalette="blue"
+          loadOptions={(_inputValue, callback) => {
+            setTimeout(() => {
+              callback(colorOptions);
+            }, 3000);
+          }}
+        />
+      </Field.Root>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours (With global <Code>tagColorScheme</Code>)
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        tagColorScheme="purple"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+      <Field.Root p={4}>
+        <Field.Label>
+          Select Colors and Flavours <Code>{'size="sm"'}</Code>
+        </Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={groupedOptions}
+          placeholder="Select some colors..."
+          instanceId="colors"
+          isMulti
+          classNamePrefix="crs"
+        />
+      </Field.Root>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours (With <Code>colorScheme</Code> in each
-        option)
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={mappedcolorOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>Select with creatable options</FormLabel>
-      <CreatableSelect
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
-
-    <FormControl p={4} isDisabled>
-      <FormLabel>
-        Disabled select from the <Code>FormControl</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>
-        Disabled select from the <Code>Select</Code> element itself
-      </FormLabel>
-      <Select
-        isDisabled
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
-
-    <FormControl p={4} isInvalid>
-      <FormLabel>
-        Invalid select from the <Code>FormControl</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-      <FormErrorMessage>
-        This error message shows because of an invalid FormControl
-      </FormErrorMessage>
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>
-        Invalid select from the <Code>Select</Code> element itself
-      </FormLabel>
-      <Select
-        isInvalid
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-      <FormErrorMessage>
-        You can't see this error message because the isInvalid prop is set on
-        the select element instead of the form control
-      </FormErrorMessage>
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select with <Code>selectedOptionStyle="check"</Code>
-      </FormLabel>
-      <Select
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionStyle="check"
-      />
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select with <Code>selectedOptionColorScheme="green"</Code>
-      </FormLabel>
-      <Select
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionColorScheme="green"
-      />
-    </FormControl>
-
-    <FormControl p={4}>
-      <FormLabel>
-        Multi Select with <Code>selectedOptionColorScheme="green"</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionColorScheme="green"
-        hideSelectedOptions={false}
-      />
-    </FormControl>
-  </Container>
-);
+      <Field.Root p={4}>
+        <Field.Label>Check Style</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          classNamePrefix="crs"
+          selectedOptionStyle="check"
+          isClearable
+        />
+      </Field.Root>
+    </Container>
+  );
+};
 
 export default App;
