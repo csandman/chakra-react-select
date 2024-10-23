@@ -193,6 +193,19 @@ const App = () => {
           isClearable
         />
       </Field.Root>
+
+      <Field.Root p={4} invalid>
+        <Field.Label>Invalid from Field</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          classNamePrefix="crs"
+          selectedOptionStyle="check"
+          isClearable
+        />
+        <Field.ErrorText>This is an error from the field</Field.ErrorText>
+      </Field.Root>
     </Container>
   );
 };
