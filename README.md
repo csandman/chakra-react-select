@@ -431,9 +431,10 @@ elements.
 
 #### `useBasicStyles` (removed)
 
-This prop was removed in `v5.0.0`, as these styles are now the default styles
-applied to the component. If you'd like to keep the legacy styles, here are some
-examples (for each
+This prop was removed in
+[`v5.0.0`](https://github.com/csandman/chakra-react-select/releases/tag/v5.0.0),
+as these styles are now the default styles applied to the component. If you'd
+like to keep the legacy styles, here are some examples (for each
 [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline))
 of how you could accomplish that with the [`chakraStyles`](#chakrastyles) prop:
 
