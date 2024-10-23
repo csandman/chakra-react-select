@@ -227,6 +227,8 @@ export const ClearIndicator = <
         focusVisibleRing="inside"
         focusRingWidth="2px"
         pointerEvents="auto"
+        aria-label="Clear"
+        tabIndex={-1}
       >
         {children || <CloseIcon css={iconCss} />}
       </IconButton>
