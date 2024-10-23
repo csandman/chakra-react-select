@@ -337,7 +337,6 @@ export const Option = <
 
   const initialCss: SystemStyleObject = {
     ...selectStyles.item,
-    cursor: "pointer",
     ...(shouldHighlight
       ? {
           bg: selectedBg,

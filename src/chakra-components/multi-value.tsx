@@ -90,7 +90,6 @@ export const MultiValue = <
 
   const removeInitialCss: SystemStyleObject = {
     ...tagStyles.closeTrigger,
-    cursor: "pointer",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

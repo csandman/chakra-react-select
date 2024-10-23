@@ -27,6 +27,10 @@ const config = defineConfig({
     slotRecipes: {
       tag: tagSlotRecipe,
     },
+    // @ts-expect-error - This is a bug in the types?
+    cursor: {
+      button: { value: "pointer" },
+    },
   },
 });
 

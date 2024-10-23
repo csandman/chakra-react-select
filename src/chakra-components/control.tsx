@@ -50,7 +50,6 @@ export const Control = <
     display: "flex",
     overflow: "hidden",
     height: "auto",
-    cursor: "text",
     // TODO: figure out if this is the best way
     minHeight: "var(--select-trigger-height)",
     ...(isDisabled ? { pointerEvents: "none" } : {}),
