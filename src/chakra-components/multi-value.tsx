@@ -66,8 +66,6 @@ export const MultiValue = <
   const containerInitialCss: SystemStyleObject = {
     ...tagStyles.root,
     colorPalette: optionColorPalette,
-    display: "flex",
-    alignItems: "center",
     minWidth: 0, // resolves flex/text-overflow bug
     margin: "0.125rem",
   };
@@ -90,9 +88,6 @@ export const MultiValue = <
 
   const removeInitialCss: SystemStyleObject = {
     ...tagStyles.closeTrigger,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
   };
   const removeCss = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialCss, props)
