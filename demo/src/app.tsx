@@ -170,6 +170,33 @@ const App = () => {
 
       <Field.Root p={4}>
         <Field.Label>
+          Select Colors and Flavours <Code>{'size="lg"'}</Code>
+        </Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={groupedOptions}
+          placeholder="Select some colors..."
+          instanceId="colors"
+          isMulti
+          size="lg"
+          classNamePrefix="crs"
+        />
+      </Field.Root>
+
+      <Field.Root p={4}>
+        <Field.Label>Select Colors and Flavours</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={groupedOptions}
+          placeholder="Select some colors..."
+          instanceId="colors"
+          isMulti
+          classNamePrefix="crs"
+        />
+      </Field.Root>
+
+      <Field.Root p={4}>
+        <Field.Label>
           Select Colors and Flavours <Code>{'size="sm"'}</Code>
         </Field.Label>
         <CreatableSelect
@@ -178,6 +205,7 @@ const App = () => {
           placeholder="Select some colors..."
           instanceId="colors"
           isMulti
+          size="sm"
           classNamePrefix="crs"
         />
       </Field.Root>
