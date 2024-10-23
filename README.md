@@ -354,16 +354,19 @@ highlight color, you can pass the `selectedOptionColorScheme` prop to change it.
 This prop will accept any named color from your theme's color palette, and it
 will use the `500` value in light mode or the `300` value in dark mode.
 
-> **NOTE:** This prop can only be used for named colors from your theme, not
-> arbitrary hex/rgb colors. If you would like to use a specific color for the
-> background that's not a part of your theme, use the
-> [`chakraStyles`](#chakrastyles) prop to customize it (see
+> [!NOTE]
+>
+> This prop can only be used for named colors from your theme, not arbitrary
+> hex/rgb colors. If you would like to use a specific color for the background
+> that's not a part of your theme, use the [`chakraStyles`](#chakrastyles) prop
+> to customize it (see
 > [#99](https://github.com/csandman/chakra-react-select/discussions/99) for an
 > example).
 >
-> Prior to `v4.6.0` this prop was named `selectedOptionColor`, and it was
-> renamed to prevent confusion about its purpose. `selectedOptionColor` is still
-> available but will be removed in the next major version.
+> Prior to
+> [`v4.6.0`](https://github.com/csandman/chakra-react-select/releases/tag/v4.6.0)
+> this prop was named `selectedOptionColor`, and it was renamed to prevent
+> confusion about its purpose.
 
 ```tsx
 return (
