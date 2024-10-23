@@ -199,10 +199,7 @@ export const ClearIndicator = <
     ? chakraStyles.clearIndicator(initialCss, props)
     : initialCss;
 
-  const initialIconStyles: SystemStyleObject = {
-    width: "1em",
-    height: "1em",
-  };
+  const initialIconStyles: SystemStyleObject = {};
   const iconCss: SystemStyleObject = chakraStyles?.crossIcon
     ? chakraStyles.crossIcon(initialIconStyles, props)
     : initialIconStyles;
