@@ -19,7 +19,7 @@ export const Placeholder = <
 
   const initialCss: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",
-    color: "fg.subtle",
+    color: "fg.muted",
     mx: "0.125rem",
     userSelect: "none",
   };

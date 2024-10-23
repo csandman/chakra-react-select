@@ -23,7 +23,7 @@ const App = () => {
       </Flex>
       <Field.Root p={4}>
         <Field.Label>Standard Input</Field.Label>
-        <Input />
+        <Input placeholder="This is my placeholder" />
         <Field.HelperText>This is some helper text</Field.HelperText>
       </Field.Root>
 
@@ -196,6 +196,19 @@ const App = () => {
 
       <Field.Root p={4} invalid>
         <Field.Label>Invalid from Field</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          classNamePrefix="crs"
+          selectedOptionStyle="check"
+          isClearable
+        />
+        <Field.ErrorText>This is an error from the field</Field.ErrorText>
+      </Field.Root>
+
+      <Field.Root p={4} disabled>
+        <Field.Label>Disabled from Field</Field.Label>
         <CreatableSelect
           name="colors"
           options={colorOptions}
