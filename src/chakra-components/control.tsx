@@ -220,7 +220,9 @@ export const ClearIndicator = <
       {...innerProps}
     >
       <IconButton
-        size="xs"
+        size="sm"
+        boxSize={8}
+        minWidth="unset"
         variant="plain"
         focusVisibleRing="inside"
         focusRingWidth="2px"
