@@ -106,6 +106,12 @@ export const MenuList = <
   );
 };
 
+const messageVerticalPaddings: SizeProps = {
+  sm: "6px",
+  md: "8px",
+  lg: "10px",
+};
+
 export const LoadingMessage = <
   Option,
   IsMulti extends boolean,
@@ -123,16 +129,10 @@ export const LoadingMessage = <
 
   const size = useSize(sizeProp);
 
-  const verticalPaddings: SizeProps = {
-    sm: "6px",
-    md: "8px",
-    lg: "10px",
-  };
-
   const initialCss: SystemStyleObject = {
     color: "fg.subtle",
     textAlign: "center",
-    paddingY: verticalPaddings[size],
+    paddingY: messageVerticalPaddings[size],
     fontSize: sizeProp,
   };
 
@@ -174,16 +174,10 @@ export const NoOptionsMessage = <
 
   const size = useSize(sizeProp);
 
-  const verticalPaddings: SizeProps = {
-    sm: "6px",
-    md: "8px",
-    lg: "10px",
-  };
-
   const initialCss: SystemStyleObject = {
     color: "fg.subtle",
     textAlign: "center",
-    paddingY: verticalPaddings[size],
+    paddingY: messageVerticalPaddings[size],
     fontSize: sizeProp,
   };
 
@@ -266,7 +260,6 @@ export const GroupHeading = <
     selectProps: { chakraStyles, size, variant },
   } = props;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data, ...innerProps } = cleanCommonProps(props);
 
   const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
