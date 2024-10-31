@@ -526,9 +526,9 @@ The API for an individual style function looks like this:
 
 ```js
 /**
- * @param {CSSObject} provided -- The component's default Chakra styles
+ * @param {SystemStyleObject} provided -- The component's default Chakra styles
  * @param {Object} state -- The component's current state e.g. `isFocused` (this gives all of the same props that are passed into the component)
- * @returns {CSSObject} An output style object which is forwarded to the component's `sx` prop
+ * @returns {SystemStyleObject} An output style object which is forwarded to the component's `sx` prop
  */
 function option(provided, state) {
   return {
@@ -807,7 +807,7 @@ offered by this package:
   `chakraStyles` that can be passed to customize the component styles. This is
   almost identical to the built-in `StylesConfig` type, however, it uses
   Chakra's
-  [`CSSObject`](https://github.com/chakra-ui/chakra-ui/blob/790d2417a3f5d59e2d69229a027af671c2dc0cbc/packages/styled-system/src/system.types.ts#L81)
+  [`SystemStyleObject`](https://github.com/chakra-ui/chakra-ui/blob/v2/packages/styled-system/src/system.types.ts#L80)
   type instead of react-select's emotion styles. It also has the same three
   generics as your `Select` component which would be required if you define your
   styles separately from your component.
@@ -1042,7 +1042,7 @@ const App = () => (
     components={asyncComponents}
     loadOptions={(inputValue, callback) => {
       setTimeout(() => {
-        const values = colourOptions.filter((i) =>
+        const values = colorOptions.filter((i) =>
           i.label.toLowerCase().includes(inputValue.toLowerCase())
         );
         callback(values);
