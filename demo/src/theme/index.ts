@@ -16,7 +16,8 @@ export const inputRecipe = defineRecipe({
 export const tagSlotRecipe = defineSlotRecipe({
   slots: tagAnatomy.keys(),
   defaultVariants: {
-    colorPalette: "blue",
+    // Uncomment to modify the default colorPalette
+    // colorPalette: "blue",
     // TODO: Figure out how to make this work
     // variant: "subtle",
   },
