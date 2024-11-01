@@ -1,5 +1,5 @@
 import type { ColorPalette } from "@chakra-ui/react";
-import { useChakraContext, useFieldContext } from "@chakra-ui/react";
+import { useFieldContext } from "@chakra-ui/react";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
 import type { SelectedOptionStyle } from "./types";
@@ -12,7 +12,7 @@ const useChakraSelectProps = <
   components = {},
   // eslint-disable-next-line deprecation/deprecation
   theme,
-  size,
+  disabled,
   isDisabled,
   invalid,
   readOnly,
@@ -20,31 +20,14 @@ const useChakraSelectProps = <
   inputId,
   selectedOptionStyle = "color",
   selectedOptionColorPalette = "blue",
-  variant,
-  tagVariant,
-  tagColorPalette,
-  chakraStyles = {},
-  onFocus,
-  onBlur,
   menuIsOpen,
   menuPlacement = "auto",
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
-  const chakraContext = useChakraContext();
-  const { variant: defaultVariant } =
-    chakraContext.getRecipe("input").defaultVariants;
-  const {
-    variant: defaultTagVariant = "subtle",
-    colorPalette: defaultTagColorPalette = "gray",
-  } = chakraContext.getSlotRecipe("tag").defaultVariants ?? {};
-
   // Combine the props passed into the component with the props that can be set
-  // on a surrounding form control to get the values of `isDisabled` and
-  // `isInvalid`
+  // on a surrounding form control to get the values of `disabled`, `readOnly`,
+  // `isInvalid`, `required`, and `inputId`
   const inputProps = useFieldContext();
-
-  // TODO: See if this is better than field context?
-  // const selectInputProps = useSelectContext();
 
   // Unless `menuIsOpen` is controlled, disable it if the select is readonly
   const realMenuIsOpen =
@@ -71,17 +54,10 @@ const useChakraSelectProps = <
       ...components,
     },
     // Custom select props
-    size,
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColorPalette: realSelectedOptionColorPalette,
-    variant: variant ?? defaultVariant,
-    tagColorPalette: tagColorPalette ?? defaultTagColorPalette,
-    tagVariant: tagVariant ?? defaultTagVariant,
-    chakraStyles,
     // Extract custom props from form control
-    onFocus,
-    onBlur,
-    isDisabled: isDisabled ?? inputProps.disabled,
+    isDisabled: disabled ?? isDisabled ?? inputProps.disabled,
     invalid: invalid ?? inputProps.invalid,
     inputId: inputId ?? inputProps.ids.control,
     readOnly: readOnly ?? inputProps.readOnly,

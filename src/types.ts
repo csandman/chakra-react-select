@@ -31,11 +31,14 @@ export type Size = "sm" | "md" | "lg";
 
 export type SizeProp = Size | Record<string, Size> | Array<Size>;
 
+/**
+ * By default includes `"outline" | "subtle" | "solid" | "surface"`
+ */
 export type TagVariant = TagRootProps["variant"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = "outline" | "subtle";
+export type Variant = "outline" | "subtle" | "flushed";
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,

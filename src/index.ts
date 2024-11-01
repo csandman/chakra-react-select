@@ -39,7 +39,7 @@ declare module "react-select/base" {
      *
      * @defaultValue `md`
      * @see {@link https://github.com/csandman/chakra-react-select#size--options-responsivevaluesm--md--lg--default-md}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#sizes}
      */
     size?: SizeProp;
 
@@ -49,20 +49,27 @@ declare module "react-select/base" {
      *
      * If the `aria-invalid` prop is not passed, this prop will also set that
      *
-     * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
-     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#invalid}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#error-text}
      */
     invalid?: boolean;
 
     /**
+     * Whether the select is disabled. Overrides the `isDisabled` prop built-in to `react-select`.
+     *
+     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#disabled}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#disabled}
+     */
+    disabled?: boolean;
+
+    /**
      * If `true`, the form control will be `readonly`.
      *
-     * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
-     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#props}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#props}
      */
     readOnly?: boolean;
 
@@ -72,9 +79,9 @@ declare module "react-select/base" {
      *
      * The variable is passed to the theme key for the Chakra `Tag` component.
      *
-     * @defaultValue `"gray"`
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
-     * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/tag#colors}
+     * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
      */
     tagColorPalette?: ColorPalette;
 
@@ -83,21 +90,21 @@ declare module "react-select/base" {
      * which is represented by a chakra `Tag`. You can also use any custom
      * variants you have added to your theme.
      *
-     * Options: "subtle" | "solid" | "outline"
+     * Built-in options: `"outline" | "subtle" | "solid" | "surface"`
      *
-     * @defaultValue `subtle`
+     * @defaultValue Your theme default (default is `"surface"`)
      * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle--solid--outline--default-subtle}
-     * @see {@link https://v2.chakra-ui.com/docs/data-display/tag#props}
+     * @see {@link https://www.chakra-ui.com/docs/components/tag#variants}
      */
     tagVariant?: TagVariant;
 
     /**
      * Whether to style a selected option by highlighting it in a solid color
-     * or adding a check mark next to it like the chakra `Menu` component.
+     * or adding a check mark on the right hand side like the Chakra `Select` component.
      *
      * Options: `color` | `check`
      *
-     * @defaultValue `color`
+     * @defaultValue `check`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color--check--default-color}
      * @see {@link https://v2.chakra-ui.com/docs/components/menu#menu-option-groups}
      */
@@ -105,11 +112,12 @@ declare module "react-select/base" {
 
     /**
      * The color scheme to style an option with when using the
-     * `selectedOptionStyle="color"` prop.  Uses the `500` value in light mode
-     * and the `300` value in dark mode.
+     * `selectedOptionStyle="color"` prop.  Uses the `color.500` value in light mode
+     * and the `color.300` value in dark mode.
      *
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
+     * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
      */
     selectedOptionColorPalette?: ColorPalette;
 
@@ -127,17 +135,19 @@ declare module "react-select/base" {
      * from Chakra's `Input` component and any custom variants you have added to
      * your theme may be used.
      *
-     * Options: `outline` | `filled` | `flushed` | `unstyled`
+     * Options: `outline` | `subtle` | `flushed`
      *
      * @defaultValue `outline`
-     * @see {@link https://v2.chakra-ui.com/docs/components/select#changing-the-appearance}
+     * @see {@link https://www.chakra-ui.com/docs/components/input#variants}
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
 
     /**
-     * @deprecated This prop is not used in `chakra-react-select`, use
-     * {@link chakraStyles} instead.
+     * This prop is not used in `chakra-react-select`, use {@link chakraStyles} instead.
+     *
+     * The only exception is setting styles on the `menuPortal` component.
+     * @see {@link https://github.com/csandman/chakra-react-select#caveats}
      */
     styles: StylesConfig<Option, IsMulti, Group>;
 

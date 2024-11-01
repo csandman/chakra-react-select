@@ -1,5 +1,5 @@
 import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
-import { Box, Span, useSlotRecipe } from "@chakra-ui/react";
+import { Box, Span, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
@@ -48,19 +48,27 @@ export const MultiValue = <
 
   const { chakraStyles, tagColorPalette, tagVariant, size } = selectProps;
 
-  let optionColorPalette: ColorPalette | undefined = tagColorPalette;
+  const chakraContext = useChakraContext();
+  const { colorPalette: themeTagColorPalette, variant: defaultTagVariant } =
+    chakraContext.getSlotRecipe("tag").defaultVariants ?? {};
+
+  let optionColorPalette: ColorPalette | undefined = themeTagColorPalette;
   if (hasColorPalette(data)) {
     optionColorPalette = data.colorPalette;
+  } else if (tagColorPalette) {
+    optionColorPalette = tagColorPalette;
   }
 
-  let optionVariant: TagVariant;
+  let variant: TagVariant = defaultTagVariant;
   if (hasVariant(data)) {
-    optionVariant = data.variant;
+    variant = data.variant;
+  } else if (tagVariant) {
+    variant = tagVariant;
   }
 
   const tagStyles = useSlotRecipe({ key: "tag" })({
     size,
-    variant: optionVariant || tagVariant,
+    variant,
   });
 
   const containerInitialCss: SystemStyleObject = {
