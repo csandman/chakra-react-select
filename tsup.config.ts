@@ -5,8 +5,6 @@ export default defineConfig({
   entry: ["src/index.ts"],
   format: ["cjs", "esm"],
   target: "es2019",
-  sourcemap: true,
   dts: true,
-  minify: true,
   treeshake: true,
 });
