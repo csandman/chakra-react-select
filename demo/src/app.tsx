@@ -229,7 +229,6 @@ const App = () => {
           options={colorOptions}
           placeholder="Select some colors..."
           classNamePrefix="crs"
-          selectedOptionStyle="check"
           isClearable
         />
         <Field.ErrorText>This is an error from the field</Field.ErrorText>
@@ -242,8 +241,33 @@ const App = () => {
           options={colorOptions}
           placeholder="Select some colors..."
           classNamePrefix="crs"
-          selectedOptionStyle="check"
           isClearable
+        />
+        <Field.ErrorText>This is an error from the field</Field.ErrorText>
+      </Field.Root>
+
+      <Field.Root p={4}>
+        <Field.Label>Flushed Variant</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          classNamePrefix="crs"
+          isClearable
+          variant="flushed"
+        />
+        <Field.ErrorText>This is an error from the field</Field.ErrorText>
+      </Field.Root>
+
+      <Field.Root p={4}>
+        <Field.Label>Subtle Variant</Field.Label>
+        <CreatableSelect
+          name="colors"
+          options={colorOptions}
+          placeholder="Select some colors..."
+          classNamePrefix="crs"
+          isClearable
+          variant="subtle"
         />
         <Field.ErrorText>This is an error from the field</Field.ErrorText>
       </Field.Root>
