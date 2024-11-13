@@ -56,8 +56,7 @@
   "peerDependencies": {
     "@chakra-ui/react": "3.x",
     "next-themes": "^0.3.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
