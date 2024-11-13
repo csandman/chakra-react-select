@@ -7,6 +7,7 @@ import {
   IconButton,
   Input,
   Portal,
+  Separator,
 } from "@chakra-ui/react";
 import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
 import { LuX } from "react-icons/lu";
@@ -26,6 +27,8 @@ const App = () => {
         <Input placeholder="This is my placeholder" />
         <Field.HelperText>This is some helper text</Field.HelperText>
       </Field.Root>
+
+      <Separator m={4} w="unset" />
 
       <ChakraSelect.Root
         collection={animeMovies}
@@ -123,6 +126,8 @@ const App = () => {
           </ChakraSelect.Positioner>
         </Portal>
       </ChakraSelect.Root>
+
+      <Separator m={4} w="unset" />
 
       <Field.Root p={4}>
         <Field.Label>
@@ -242,19 +247,6 @@ const App = () => {
           placeholder="Select some colors..."
           classNamePrefix="crs"
           isClearable
-        />
-        <Field.ErrorText>This is an error from the field</Field.ErrorText>
-      </Field.Root>
-
-      <Field.Root p={4}>
-        <Field.Label>Flushed Variant</Field.Label>
-        <CreatableSelect
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          classNamePrefix="crs"
-          isClearable
-          variant="flushed"
         />
         <Field.ErrorText>This is an error from the field</Field.ErrorText>
       </Field.Root>
