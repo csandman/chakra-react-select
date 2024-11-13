@@ -48,7 +48,7 @@
     "lint-fix": "eslint --fix src",
     "prepare": "husky",
     "prepublishOnly": "npm run build && npm run lint",
-    "postpublish": "git push --tags"
+    "postpublish": "git push --follow-tags"
   },
   "dependencies": {
     "react-select": "5.8.x"
