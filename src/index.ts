@@ -132,13 +132,13 @@ declare module "react-select/base" {
 
     /**
      * The main style variant of the `Select` component. This will use styles
-     * from Chakra's `Input` component and any custom variants you have added to
+     * from Chakra's `Select` component and any custom variants you have added to
      * your theme may be used.
      *
-     * Options: `outline` | `subtle` | `flushed`
+     * Options: `outline` | `subtle`
      *
      * @defaultValue `outline`
-     * @see {@link https://www.chakra-ui.com/docs/components/input#variants}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#variants}
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
