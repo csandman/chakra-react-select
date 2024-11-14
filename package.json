@@ -55,8 +55,8 @@
   },
   "peerDependencies": {
     "@chakra-ui/react": "3.x",
-    "next-themes": "^0.3.0",
-    "react": "^18.0.0"
+    "next-themes": "0.x",
+    "react": "^18"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
@@ -76,7 +76,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
-    "next-themes": "^0.3.0",
     "prettier": "^3.3.3",
     "prettier-package-json": "^2.8.0",
     "tsup": "^8.3.0",
