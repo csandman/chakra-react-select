@@ -58,12 +58,11 @@ Check out the demo here:
 - [Usage](#usage)
 - [Extra Props](#extra-props)
   - [`size`](#size--options-responsivevaluesm--md--lg--default-md)
-  - [`tagColorScheme`](#tagcolorscheme)
+  - [`tagColorPalette`](#tagcolorpalette)
   - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
-  - [`isInvalid` / `isReadOnly`](#isinvalid--default-false--isreadonly---default-false)
-  - [`focusBorderColor` / `errorBorderColor`](#focusbordercolor--default-blue500--errorbordercolor--default-red500)
+  - [`invalid` / `readOnly`](#invalid--default-false--readonly---default-false)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
-  - [`selectedOptionColorScheme`](#selectedoptioncolorscheme--default-blue)
+  - [`selectedOptionColorPalette`](#selectedoptioncolorpalette--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
   - [`useBasicStyles` (removed)](#usebasicstyles-removed)
 - [Styling](#styling)
@@ -176,33 +175,28 @@ return (
 
 ---
 
-#### `tagColorScheme`
+#### `tagColorPalette`
 
-> [!NOTE]
->
-> Renamed from `colorScheme` in
-> [`v5.0.0`](https://github.com/csandman/chakra-react-select/releases/tag/v5.0.0)
-
-You can pass the `tagColorScheme` prop to the select component to change all of
+You can pass the `tagColorPalette` prop to the select component to change all of
 the selected options tags' colors. You can view the whole list of available
 color schemes in
 [the Chakra docs](https://v2.chakra-ui.com/docs/components/tag/props), or if you
 have a custom color palette, any of the custom color names in that will be
 available instead.
 
-Alternatively, you can add the `colorScheme` key to any of your options objects
+Alternatively, you can add the `colorPalette` key to any of your options objects
 and it will only style that option when selected.
 
 ```tsx
 return (
   <Select
     {/* The global tag color scheme */}
-    tagColorScheme="purple"
+    tagColorPalette="purple"
     options={[
       {
         label: "I am red",
         value: "i-am-red",
-        colorScheme: "red", // The option color scheme overrides the global
+        colorPalette: "red", // The option color scheme overrides the global
       },
       {
         label: "I fallback to purple",
@@ -257,29 +251,29 @@ return (
 
 ---
 
-#### `isInvalid` — Default: `false` | `isReadOnly` - Default: `false`
+#### `invalid` — Default: `false` | `readOnly` - Default: `false`
 
-You can pass `isInvalid` to the select component to style it like the Chakra
+You can pass `invalid` to the select component to style it like the Chakra
 `Input` is styled when it receives the same prop. Alternatively, you can pass
-`isReadOnly` to make the component non-interactive in the same way Chakra's
+`readOnly` to make the component non-interactive in the same way Chakra's
 `Input` does.
 
-You can pass also pass `isInvalid`, `isDisabled`, or `isReadOnly` into a
-wrapping `<FormControl />` to achieve the same result as passing these props
-into the `Select` component.
+You can pass also pass `invalid`, `disabled`, or `readOnly` into a wrapping
+`<FormControl />` to achieve the same result as passing these props into the
+`Select` component.
 
 ```tsx
 return (
   <>
     {/* This will show up with a red border */}
-    <Select isInvalid />
+    <Select invalid />
 
     {/* This will show up normally but will not be interactive */}
-    <Select isReadOnly />
+    <Select readOnly />
 
     {/* This will show up grayed out and will not be interactive */}
     {/* Additionally, it will have a red border and the error message will be shown */}
-    <FormControl isInvalid isDisabled>
+    <FormControl invalid disabled>
       <FormLabel>Invalid & Disabled Select</FormLabel>
       <Select />
       <FormErrorMessage>
@@ -293,27 +287,6 @@ return (
 ![Invalid/Disabled States](./.github/images/invalid-disabled.png)
 
 [![SB-TS]](https://stackblitz.com/edit/vitejs-vite-xqdhav?file=src%2Fapp.tsx)
-
----
-
-#### `focusBorderColor` — Default: `blue.500` | `errorBorderColor` — Default: `red.500`
-
-The props `focusBorderColor` and `errorBorderColor` can be passed with Chakra
-color strings which will emulate the respective props being passed to
-[Chakra's `<Input />` component](https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors).
-
-```tsx
-return (
-  <>
-    <Select errorBorderColor="orange.500" isInvalid />
-    <Select focusBorderColor="green.500" />
-  </>
-);
-```
-
-![Orange errorBorderColor](./.github/images/custom-borders.png)
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-vhcvmv?file=src%2Fapp.tsx)
 
 ---
 
@@ -346,13 +319,13 @@ return (
 
 ---
 
-#### `selectedOptionColorScheme` — Default: `blue`
+#### `selectedOptionColorPalette` — Default: `blue`
 
 If you choose to stick with the default `selectedOptionStyle="color"`, you have
 one additional styling option. If you do not like the default of blue for the
-highlight color, you can pass the `selectedOptionColorScheme` prop to change it.
-This prop will accept any named color from your theme's color palette, and it
-will use the `500` value in light mode or the `300` value in dark mode.
+highlight color, you can pass the `selectedOptionColorPalette` prop to change
+it. This prop will accept any named color from your theme's color palette, and
+it will use the `500` value in light mode or the `300` value in dark mode.
 
 > [!NOTE]
 >
@@ -362,17 +335,12 @@ will use the `500` value in light mode or the `300` value in dark mode.
 > to customize it (see
 > [#99](https://github.com/csandman/chakra-react-select/discussions/99) for an
 > example).
->
-> Prior to
-> [`v4.6.0`](https://github.com/csandman/chakra-react-select/releases/tag/v4.6.0)
-> this prop was named `selectedOptionColor`, and it was renamed to prevent
-> confusion about its purpose.
 
 ```tsx
 return (
   <>
-    <Select selectedOptionColorScheme="blue" /> {/* Default */}
-    <Select selectedOptionColorScheme="purple" />
+    <Select selectedOptionColorPalette="blue" /> {/* Default */}
+    <Select selectedOptionColorPalette="purple" />
   </>
 );
 ```
@@ -420,7 +388,7 @@ One thing to note is that the default styling for `variant="filled"` and
 background color when the select is not focused. The easiest solution for this
 is to pass the
 [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle) or
-[`colorScheme`](#colorscheme) prop to add some contrast between the two
+[`colorPalette`](#colorscheme) prop to add some contrast between the two
 elements.
 
 ![filled variant](./.github/images/filled-variant.png)
@@ -835,8 +803,8 @@ import { GroupBase, OptionBase, Select } from "chakra-react-select";
  * ```
  * interface OptionBase {
  *   variant?: string;
- *   colorScheme?: string;
- *   isDisabled?: boolean;
+ *   colorPalette?: string;
+ *   disabled?: boolean;
  * };
  * ```
  */
@@ -849,7 +817,7 @@ const colorOptions = [
   {
     label: "Red",
     value: "red",
-    colorScheme: "red", // This is allowed because of the key in the `OptionBase` type
+    colorPalette: "red", // This is allowed because of the key in the `OptionBase` type
   },
   {
     label: "Blue",
