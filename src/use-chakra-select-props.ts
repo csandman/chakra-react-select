@@ -29,9 +29,10 @@ const useChakraSelectProps = <
   // `isInvalid`, `required`, and `inputId`
   const inputProps = useFieldContext();
 
+  const realReadOnly = readOnly ?? inputProps?.readOnly;
+
   // Unless `menuIsOpen` is controlled, disable it if the select is readonly
-  const realMenuIsOpen =
-    menuIsOpen ?? (inputProps.readOnly ? false : undefined);
+  const realMenuIsOpen = menuIsOpen ?? (realReadOnly ? false : undefined);
 
   // Ensure that the selected option style is either `color` or `check`
   let realSelectedOptionStyle: SelectedOptionStyle = selectedOptionStyle;
@@ -57,18 +58,18 @@ const useChakraSelectProps = <
     selectedOptionStyle: realSelectedOptionStyle,
     selectedOptionColorPalette: realSelectedOptionColorPalette,
     // Extract custom props from form control
-    isDisabled: disabled ?? isDisabled ?? inputProps.disabled,
-    invalid: invalid ?? inputProps.invalid,
-    inputId: inputId ?? inputProps.ids.control,
-    readOnly: readOnly ?? inputProps.readOnly,
-    required: required ?? required ?? inputProps.required,
+    isDisabled: disabled ?? isDisabled ?? inputProps?.disabled,
+    invalid: invalid ?? inputProps?.invalid,
+    inputId: inputId ?? inputProps?.ids?.control,
+    readOnly: realReadOnly,
+    required: required ?? required ?? inputProps?.required,
     menuIsOpen: realMenuIsOpen,
     menuPlacement,
     unstyled: true,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
-    "aria-invalid": props["aria-invalid"] ?? inputProps.invalid,
+    "aria-invalid": props["aria-invalid"] ?? inputProps?.invalid,
   };
 
   return selectProps;

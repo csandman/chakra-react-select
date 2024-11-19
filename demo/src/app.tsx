@@ -8,6 +8,7 @@ import {
   Input,
   Portal,
   Separator,
+  Text,
 } from "@chakra-ui/react";
 import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
 import { LuX } from "react-icons/lu";
@@ -143,7 +144,7 @@ const App = () => {
 
       <Field.Root p={4}>
         <Field.Label>
-          Select a Color or Flavor<Code>{'size="sm"'}</Code>
+          Select a Color or Flavor <Code>{'size="sm"'}</Code>
         </Field.Label>
         <CreatableSelect
           name="colors"
@@ -177,7 +178,7 @@ const App = () => {
         <Field.Label>
           Select Colors and Flavours <Code>{'size="lg"'}</Code>
         </Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={groupedOptions}
           placeholder="Select some colors..."
@@ -190,7 +191,7 @@ const App = () => {
 
       <Field.Root p={4}>
         <Field.Label>Select Colors and Flavours</Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={groupedOptions}
           placeholder="Select some colors..."
@@ -204,7 +205,7 @@ const App = () => {
         <Field.Label>
           Select Colors and Flavours <Code>{'size="sm"'}</Code>
         </Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={groupedOptions}
           placeholder="Select some colors..."
@@ -217,7 +218,7 @@ const App = () => {
 
       <Field.Root p={4}>
         <Field.Label>Check Style</Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={colorOptions}
           placeholder="Select some colors..."
@@ -229,7 +230,7 @@ const App = () => {
 
       <Field.Root p={4} invalid>
         <Field.Label>Invalid from Field</Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={colorOptions}
           placeholder="Select some colors..."
@@ -241,7 +242,7 @@ const App = () => {
 
       <Field.Root p={4} disabled>
         <Field.Label>Disabled from Field</Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={colorOptions}
           placeholder="Select some colors..."
@@ -253,7 +254,7 @@ const App = () => {
 
       <Field.Root p={4}>
         <Field.Label>Subtle Variant</Field.Label>
-        <CreatableSelect
+        <Select
           name="colors"
           options={colorOptions}
           placeholder="Select some colors..."
@@ -263,6 +264,18 @@ const App = () => {
         />
         <Field.ErrorText>This is an error from the field</Field.ErrorText>
       </Field.Root>
+
+      <Flex direction="column" gap={1} p={4}>
+        <Text fontSize="sm" fontWeight="medium">
+          Not wrapped in a <Code>Field.Root</Code>
+        </Text>
+        <Select
+          name="colors"
+          options={groupedOptions}
+          placeholder="Select some colors..."
+          instanceId="colors-flavors"
+        />
+      </Flex>
     </Container>
   );
 };
