@@ -1,4 +1,8 @@
-import type { SystemStyleObject, TagRootProps } from "@chakra-ui/react";
+import type {
+  SystemStyleObject,
+  TagRootProps,
+  useFieldContext,
+} from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ContainerProps,
@@ -89,3 +93,10 @@ export interface OptionBase {
   colorPalette?: string;
   isDisabled?: boolean;
 }
+
+/**
+ * If the `useFieldContext` hook is called outside of a `Field.Root` wrapper,
+ * the value will be `undefined`. This type is used to ensure that we don't
+ * attempt to access properties on `undefined`.
+ */
+export type UseFieldReturn = ReturnType<typeof useFieldContext> | undefined;
