@@ -132,32 +132,23 @@ export const MultiValue = <
       >
         {children}
       </Label>
-      <Box
-        css={tagStyles.endElement}
-        className={cx(
-          {
-            "multi-value__end-element": true,
-          },
-          className
-        )}
-      >
-        <Remove
-          data={data}
-          innerProps={{
-            className: cx(
-              {
-                "multi-value__remove": true,
-              },
-              className
-            ),
-            "aria-label": `Remove ${children || "option"}`,
-            ...removeProps,
-          }}
-          css={removeCss}
-          selectProps={selectProps}
-          isFocused={isFocused}
-        />
-      </Box>
+
+      <Remove
+        data={data}
+        innerProps={{
+          className: cx(
+            {
+              "multi-value__remove": true,
+            },
+            className
+          ),
+          "aria-label": `Remove ${children || "option"}`,
+          ...removeProps,
+        }}
+        css={removeCss}
+        selectProps={selectProps}
+        isFocused={isFocused}
+      />
     </Container>
   );
 };
@@ -201,16 +192,29 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, isFocused, css } = props;
+  const {
+    children,
+    innerProps,
+    isFocused,
+    css,
+    selectProps: { size, variant },
+  } = props;
+
+  const tagStyles = useSlotRecipe({ key: "tag" })({
+    size,
+    variant,
+  });
 
   return (
-    <Box
-      {...innerProps}
-      role="button"
-      css={css}
-      data-focus-visible={isFocused ? true : undefined}
-    >
-      {children || <CloseIcon />}
+    <Box css={tagStyles.endElement}>
+      <Box
+        {...innerProps}
+        role="button"
+        css={css}
+        data-focus-visible={isFocused ? true : undefined}
+      >
+        {children || <CloseIcon />}
+      </Box>
     </Box>
   );
 };
