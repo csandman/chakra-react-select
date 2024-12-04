@@ -9,7 +9,7 @@ import {
 import { ThemeProvider } from "next-themes";
 import { createRoot } from "react-dom/client";
 import App from "./app.tsx";
-import { ColorModeButton } from "./components/color-mode.tsx";
+import { ColorModeButton } from "./components/ui/color-mode";
 import crsSystem from "./theme";
 
 createRoot(document.getElementById("root")!).render(

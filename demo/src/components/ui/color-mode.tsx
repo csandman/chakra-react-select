@@ -1,12 +1,17 @@
 "use client";
 
-import { forwardRef } from "react";
+import * as React from "react";
 import type { IconButtonProps } from "@chakra-ui/react";
 import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
-import { ThemeProvider, type ThemeProviderProps, useTheme } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
+import type { ThemeProviderProps } from "next-themes";
 import { LuMoon, LuSun } from "react-icons/lu";
 
-export function ColorModeProvider(props: ThemeProviderProps) {
+/* eslint-disable react-refresh/only-export-components */
+
+export type ColorModeProviderProps = ThemeProviderProps;
+
+export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
   );
@@ -36,7 +41,7 @@ export function ColorModeIcon() {
 
 type ColorModeButtonProps = Omit<IconButtonProps, "aria-label">;
 
-export const ColorModeButton = forwardRef<
+export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
   ColorModeButtonProps
 >(function ColorModeButton(props, ref) {
@@ -52,7 +57,8 @@ export const ColorModeButton = forwardRef<
         {...props}
         css={{
           _icon: {
-            boxSize: 5,
+            width: "5",
+            height: "5",
           },
         }}
       >
