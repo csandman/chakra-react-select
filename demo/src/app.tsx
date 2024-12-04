@@ -15,6 +15,7 @@ import { Field } from "./components/ui/field";
 import {
   SelectContent,
   SelectItem,
+  SelectItemGroup,
   SelectLabel,
   SelectRoot,
   SelectTrigger,
@@ -27,6 +28,13 @@ const mappedColorOptions = colorOptions.map((option) => ({
   ...option,
   colorPalette: option.value,
 }));
+
+const tagVariantOptions = [
+  { value: "surface", label: "Surface (default)", variant: "surface" },
+  { value: "solid", label: "Solid", variant: "solid" },
+  { value: "outline", label: "Outline", variant: "outline" },
+  { value: "subtle", label: "Subtle", variant: "subtle" },
+];
 
 const App = () => {
   return (
@@ -56,11 +64,13 @@ const App = () => {
                 <SelectValueText placeholder="Select movie" />
               </SelectTrigger>
               <SelectContent>
-                {animeMovies.items.map((movie) => (
-                  <SelectItem item={movie} key={movie.value}>
-                    {movie.label}
-                  </SelectItem>
-                ))}
+                <SelectItemGroup label="Anime Movies">
+                  {animeMovies.items.map((movie) => (
+                    <SelectItem item={movie} key={movie.value}>
+                      {movie.label}
+                    </SelectItem>
+                  ))}
+                </SelectItemGroup>
               </SelectContent>
             </SelectRoot>
           )}
@@ -71,7 +81,7 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select Colors and Flavors <Code>{'size="sm"'}</Code>
+              Select with <Code>{'size="sm"'}</Code>
             </Span>
           }
         >
@@ -86,7 +96,7 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select Colors and Flavors <Code>{'size="md" (default)'}</Code>
+              Select with <Code>{'size="md" (default)'}</Code>
             </Span>
           }
         >
@@ -101,7 +111,7 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select Colors and Flavors <Code>{'size="lg"'}</Code>
+              Select with <Code>{'size="lg"'}</Code>
             </Span>
           }
         >
@@ -137,7 +147,21 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select Colors (With global <Code>tagColorPalette</Code>)
+              Select with <Code>focusRingColor="blue.600"</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            focusRingColor="blue.600"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with global <Code>tagColorPalette</Code>
             </Span>
           }
         >
@@ -152,7 +176,7 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select Colors (With <Code>colorPalette</Code> in each option)
+              Select with <Code>colorPalette</Code> in each option
             </Span>
           }
         >
@@ -160,6 +184,35 @@ const App = () => {
             isMulti
             options={mappedColorOptions}
             placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with global <Code>tagVariant</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            tagVariant="outline"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with individual option <Code>variant</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={tagVariantOptions}
+            placeholder="Select some tag variants..."
           />
         </Field>
 
@@ -255,6 +308,36 @@ const App = () => {
             options={colorOptions}
             placeholder="Select some colors..."
             selectedOptionStyle="check"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'variant="outline" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            variant="outline"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'variant="subtle"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            variant="subtle"
           />
         </Field>
 
