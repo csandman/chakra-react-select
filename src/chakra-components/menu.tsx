@@ -30,11 +30,7 @@ export const Menu = <
     selectProps: { chakraStyles },
   } = props;
 
-  // const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
-
   const initialCss: SystemStyleObject = {
-    // TODO: Make this work
-    // ...selectStyles.positioner,
     position: "absolute",
     ...(placement === "top" ? { bottom: "100%" } : { top: "100%" }),
     marginY: "8px",
@@ -223,9 +219,13 @@ export const Group = <
     getClassNames,
   } = props;
 
-  const { chakraStyles } = selectProps;
+  const { chakraStyles, size, variant } = selectProps;
 
-  const initialCss: SystemStyleObject = {};
+  const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
+
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.itemGroup,
+  };
   const css = chakraStyles?.group
     ? chakraStyles.group(initialCss, props)
     : initialCss;
