@@ -132,22 +132,32 @@ export const MultiValue = <
       >
         {children}
       </Label>
-      <Remove
-        data={data}
-        innerProps={{
-          className: cx(
-            {
-              "multi-value__remove": true,
-            },
-            className
-          ),
-          "aria-label": `Remove ${children || "option"}`,
-          ...removeProps,
-        }}
-        css={removeCss}
-        selectProps={selectProps}
-        isFocused={isFocused}
-      />
+      <Box
+        css={tagStyles.endElement}
+        className={cx(
+          {
+            "multi-value__end-element": true,
+          },
+          className
+        )}
+      >
+        <Remove
+          data={data}
+          innerProps={{
+            className: cx(
+              {
+                "multi-value__remove": true,
+              },
+              className
+            ),
+            "aria-label": `Remove ${children || "option"}`,
+            ...removeProps,
+          }}
+          css={removeCss}
+          selectProps={selectProps}
+          isFocused={isFocused}
+        />
+      </Box>
     </Container>
   );
 };
@@ -198,7 +208,6 @@ export const MultiValueRemove = <
       {...innerProps}
       role="button"
       css={css}
-      data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
     >
       {children || <CloseIcon />}

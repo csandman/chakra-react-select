@@ -2,19 +2,17 @@ import {
   createSystem,
   defaultConfig,
   defineConfig,
-  defineRecipe,
   defineSlotRecipe,
 } from "@chakra-ui/react";
 import { tagAnatomy } from "@chakra-ui/react/anatomy";
 
-export const inputRecipe = defineRecipe({
-  defaultVariants: {
-    colorPalette: "blue",
-  },
-});
-
-export const tagSlotRecipe = defineSlotRecipe({
+const tagSlotRecipe = defineSlotRecipe({
   slots: tagAnatomy.keys(),
+  base: {
+    closeTrigger: {
+      cursor: "pointer",
+    },
+  },
   defaultVariants: {
     // Uncomment to modify the default colorPalette
     // colorPalette: "blue",
