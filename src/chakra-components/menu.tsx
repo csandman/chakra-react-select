@@ -126,10 +126,9 @@ export const LoadingMessage = <
   const size = useSize(sizeProp);
 
   const initialCss: SystemStyleObject = {
-    color: "fg.subtle",
+    color: "fg.muted",
     textAlign: "center",
     paddingY: messageVerticalPaddings[size],
-    fontSize: sizeProp,
   };
 
   const css = chakraStyles?.loadingMessage
@@ -171,10 +170,9 @@ export const NoOptionsMessage = <
   const size = useSize(sizeProp);
 
   const initialCss: SystemStyleObject = {
-    color: "fg.subtle",
+    color: "fg.muted",
     textAlign: "center",
     paddingY: messageVerticalPaddings[size],
-    fontSize: sizeProp,
   };
 
   const css = chakraStyles?.noOptionsMessage
