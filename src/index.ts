@@ -213,7 +213,10 @@ declare module "react-select" {
      * The color of the filled in area of the spinner.
      *
      * Defaults to your Chakra theme's text color.
-     *
+     * @example
+     * ```jsx
+     * <Spinner color="blue.600"/>
+     * ```
      * @see {@link https://www.chakra-ui.com/docs/components/spinner#custom-color}
      */
     color?: string;
@@ -223,6 +226,10 @@ declare module "react-select" {
      *
      * This prop populates the CSS variable `--spinner-track-color`
      *
+     * @example
+     * ```jsx
+     * <Spinner trackColor="colors.blue.100"/>
+     * ```
      * @see {@link https://www.chakra-ui.com/docs/components/spinner#track-color}
      */
     trackColor?: string;

@@ -10,7 +10,15 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
+import {
+  AsyncSelect,
+  CreatableSelect,
+  GroupBase,
+  LoadingIndicatorProps,
+  Select,
+  chakraComponents,
+} from "chakra-react-select";
+import { useColorModeValue } from "./components/ui/color-mode";
 import { Field } from "./components/ui/field";
 import {
   SelectContent,
@@ -22,7 +30,7 @@ import {
   SelectValueText,
 } from "./components/ui/select";
 import animeMovies from "./data/anime-movies";
-import { colorOptions, groupedOptions } from "./data/options";
+import { ColorOption, colorOptions, groupedOptions } from "./data/options";
 
 const mappedColorOptions = colorOptions.map((option) => ({
   ...option,
@@ -35,6 +43,35 @@ const tagVariantOptions = [
   { value: "outline", label: "Outline", variant: "outline" },
   { value: "subtle", label: "Subtle", variant: "subtle" },
 ];
+
+const asyncComponents = {
+  LoadingIndicator: (
+    props: LoadingIndicatorProps<ColorOption, true, GroupBase<ColorOption>>
+  ) => {
+    const { color, trackColor } = useColorModeValue(
+      {
+        color: "colorPalette.500",
+        trackColor: "colors.colorPalette.100",
+      },
+      {
+        color: "colorPalette.300",
+        trackColor: "colors.colorPalette.800",
+      }
+    );
+
+    return (
+      <chakraComponents.LoadingIndicator
+        colorPalette="blue"
+        color={color}
+        trackColor={trackColor}
+        animationDuration="750ms"
+        spinnerSize="md"
+        borderWidth="3px"
+        {...props}
+      />
+    );
+  },
+};
 
 const App = () => {
   return (
@@ -131,6 +168,17 @@ const App = () => {
             loadOptions={(_inputValue, callback) => {
               setTimeout(() => callback(colorOptions), 1500);
             }}
+          />
+        </Field>
+
+        <Field label="Async Select with Custom Spinner">
+          <AsyncSelect
+            placeholder="Select some colors..."
+            loadOptions={(_inputValue, callback) => {
+              setTimeout(() => callback(colorOptions), 10000);
+            }}
+            components={asyncComponents}
+            isLoading
           />
         </Field>
 
