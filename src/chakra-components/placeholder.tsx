@@ -19,7 +19,9 @@ export const Placeholder = <
 
   const initialCss: SystemStyleObject = {
     gridArea: "1 / 1 / 2 / 3",
-    color: "fg.muted",
+    // Matches the color for the default placeholder styles from the Chakra theme
+    // https://github.com/chakra-ui/chakra-ui/blob/080fb8a/packages/react/src/theme/global-css.ts#L49-L51
+    color: "fg.muted/80",
     mx: "0.125rem",
     userSelect: "none",
   };
