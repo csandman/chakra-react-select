@@ -35,7 +35,14 @@ export const Control = <
     isDisabled,
     isFocused,
     menuIsOpen,
-    selectProps: { chakraStyles, size, variant, invalid, readOnly },
+    selectProps: {
+      chakraStyles,
+      size,
+      variant,
+      invalid,
+      readOnly,
+      focusRingColor,
+    },
   } = props;
 
   const inputRecipe = useRecipe({ key: "input" });
@@ -73,6 +80,7 @@ export const Control = <
       )}
       css={css}
       {...innerProps}
+      focusRingColor={focusRingColor}
       data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
       data-invalid={invalid ? true : undefined}
@@ -248,6 +256,10 @@ export const LoadingIndicator = <
     innerProps,
     selectProps: { chakraStyles, size: sizeProp },
     color,
+    colorPalette,
+    trackColor,
+    animationDuration,
+    borderWidth,
     spinnerSize: propsSpinnerSize,
   } = props;
 
@@ -259,7 +271,10 @@ export const LoadingIndicator = <
   };
   const spinnerSize = spinnerSizes[size];
 
-  const initialCss: SystemStyleObject = { marginRight: 3 };
+  const initialCss: SystemStyleObject = {
+    marginRight: 3,
+    ...(trackColor ? { "--spinner-track-color": trackColor } : {}),
+  };
 
   const css = chakraStyles?.loadingIndicator
     ? chakraStyles.loadingIndicator(initialCss, props)
@@ -277,7 +292,10 @@ export const LoadingIndicator = <
       css={css}
       {...innerProps}
       size={propsSpinnerSize || spinnerSize}
+      colorPalette={colorPalette}
       color={color}
+      animationDuration={animationDuration}
+      borderWidth={borderWidth}
     />
   );
 };

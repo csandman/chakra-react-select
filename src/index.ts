@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { BoxProps, ColorPalette } from "@chakra-ui/react";
+import type {
+  ColorPalette,
+  SpinnerProps,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
@@ -106,20 +110,29 @@ declare module "react-select/base" {
      *
      * @defaultValue `check`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color--check--default-color}
-     * @see {@link https://v2.chakra-ui.com/docs/components/menu#menu-option-groups}
+     * @see {@link https://www.chakra-ui.com/docs/components/select}
      */
     selectedOptionStyle?: SelectedOptionStyle;
 
     /**
-     * The color scheme to style an option with when using the
+     * The color palette to style an option with when using the
      * `selectedOptionStyle="color"` prop.  Uses the `color.500` value in light mode
      * and the `color.300` value in dark mode.
      *
      * @defaultValue `blue`
-     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
-     * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorpalette--default-blue}
+     * @see {@link https://www.chakra-ui.com/docs/theming/customization/colors}
      */
     selectedOptionColorPalette?: ColorPalette;
+
+    /**
+     * The color value to style the border of the `Control` with when the
+     * select is focused.
+     *
+     * @see {@link https://github.com/csandman/chakra-react-select#focusringcolor}
+     * @see {@link https://www.chakra-ui.com/docs/styling/focus-ring}
+     */
+    focusRingColor?: string;
 
     /**
      * Style transformation methods for each of the rendered components using,
@@ -137,7 +150,6 @@ declare module "react-select/base" {
      *
      * Options: `outline` | `subtle`
      *
-     * @defaultValue `outline`
      * @see {@link https://www.chakra-ui.com/docs/components/select#variants}
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
@@ -165,7 +177,7 @@ declare module "react-select" {
     IsMulti extends boolean = boolean,
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
-    css: BoxProps["css"];
+    css: SystemStyleObject;
   }
 
   export interface MultiValueGenericProps<
@@ -173,7 +185,7 @@ declare module "react-select" {
     IsMulti extends boolean = boolean,
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
-    css: BoxProps["css"];
+    css: SystemStyleObject;
   }
 
   export interface MultiValueRemoveProps<
@@ -182,7 +194,7 @@ declare module "react-select" {
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     isFocused: boolean;
-    css: BoxProps["css"];
+    css: SystemStyleObject;
   }
 
   export interface LoadingIndicatorProps<
@@ -191,22 +203,65 @@ declare module "react-select" {
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     /**
+     * The color palette of the filled in area of the spinner.
+     *
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#colors}
+     */
+    colorPalette?: ColorPalette;
+
+    /**
      * The color of the filled in area of the spinner.
      *
      * Defaults to your Chakra theme's text color.
      *
-     * @defaultValue Light mode: `gray.700` | Dark mode: `whiteAlpha.900`
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#custom-color}
      */
     color?: string;
+
+    /**
+     * The color of the empty area in the spinner.
+     *
+     * This prop populates the CSS variable `--spinner-track-color`
+     *
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#track-color}
+     */
+    trackColor?: string;
 
     /**
      * The size prop for the Chakra `<Spinner />` component.
      *
      * Defaults to one size smaller than the overall Select's size.
      *
-     * @see {@link https://v2.chakra-ui.com/docs/components/spinner#spinner-with-different-size}
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#sizes}
      */
-    spinnerSize?: "xs" | "sm" | "md" | "lg" | "xl";
+    spinnerSize?: SpinnerProps["size"];
+
+    /**
+     * The speed of the spinner represented by the time it takes to make one full rotation.
+     *
+     * This speed is represented by a
+     * [CSS `<time>`](https://developer.mozilla.org/en-US/docs/Web/CSS/time)
+     * variable which uses either seconds or milliseconds.
+     *
+     * @example
+     * ```jsx
+     * <Spinner animationDuration="0.2s"/>
+     * ```
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#custom-speed}
+     */
+    animationDuration?: string;
+
+    /**
+     * The thickness of the spinner.
+     *
+     * @defaultValue `2px`
+     * @example
+     * ```jsx
+     * <Spinner borderWidth="4px"/>
+     * ```
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#thickness}
+     */
+    borderWidth?: string;
   }
 }
 
