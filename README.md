@@ -913,7 +913,7 @@ const asyncComponents = {
       // Defaults to one size smaller than the Select's size
       spinnerSize="md"
       // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
-      animationDuration="0.45s"
+      animationDuration="500ms"
       // A CSS size string representing the thickness of the spinner's line
       borderWidth="2px"
       // Don't forget to forward the props!
