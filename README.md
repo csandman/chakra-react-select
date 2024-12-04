@@ -8,7 +8,7 @@
   https://developer.stackblitz.com/img/open_in_stackblitz.svg
   "StackBlitz Demo"
 
-# chakra-react-select v5
+# chakra-react-select v6
 
 This component is a wrapper for the popular react component
 [React Select](https://react-select.com/home) made using the UI library
@@ -17,15 +17,12 @@ This component is a wrapper for the popular react component
 > [!IMPORTANT]
 >
 > This version of `chakra-react-select` is updated for
-> [Chakra UI v2](https://v2.chakra-ui.com/getting-started/migration) which works
-> exclusively with React v18. `chakra-react-select` v3, which is compatible with
-> Chakra UI v1, will be maintained until the majority of users have migrated. If
-> you're still using Chakra UI v1 check
-> [the docs for chakra-react-select v3 here](https://github.com/csandman/chakra-react-select/tree/v3).
->
-> This version also includes some breaking changes from v4, but there is a
-> codemod included to help make migrating painless!
-> [Check out the guide on using the provided codemod here](codemod/README.md).
+> [Chakra UI v3](https://www.chakra-ui.com/docs/get-started/installation) which
+> works exclusively with React version 18 or above. `chakra-react-select` v5,
+> which is compatible with [Chakra UI v2](https://v2.chakra-ui.com/), will be
+> maintained for the foreseeable future. If you're still using Chakra UI v2
+> check
+> [the docs for chakra-react-select v5 here](https://github.com/csandman/chakra-react-select/tree/v5).
 
 [![](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml/badge.svg?branch=main "Lint Status")](https://github.com/csandman/chakra-react-select/actions/workflows/lint.yml?query=branch%3Amain)
 [![](https://img.shields.io/npm/v/chakra-react-select "chakra-react-select npm")](https://www.npmjs.com/package/chakra-react-select)
@@ -61,10 +58,10 @@ Check out the demo here:
   - [`tagColorPalette`](#tagcolorpalette)
   - [`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle)
   - [`invalid` / `readOnly`](#invalid--default-false--readonly---default-false)
+  - [`focusRingColor`](#focusringcolor)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColorPalette`](#selectedoptioncolorpalette--default-blue)
   - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
-  - [`useBasicStyles` (removed)](#usebasicstyles-removed)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
@@ -84,26 +81,14 @@ Check out the demo here:
 
 ## Usage
 
-To use this package, you'll need to have `@chakra-ui/react@2` set up
-[like in the guide in their docs](https://v2.chakra-ui.com/getting-started). If
-you already have `@chakra-ui/react@1` set up you can follow the steps in
-[the official migration guide](https://v2.chakra-ui.com/getting-started/migration)
-to update to v2. If you don't have Chakra UI installed already, you can install
-it like this:
+To use this package, you'll need to have `@chakra-ui/react@3` set up
+[like in the guide in their docs](https://www.chakra-ui.com/docs/get-started/installation).
 
 ```sh
-npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+npm i @chakra-ui/react @emotion/react
 # ...or...
-yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+yarn add @chakra-ui/react @emotion/react
 ```
-
-> [!NOTE]
->
-> As of
-> [`v3.3.3`](https://github.com/csandman/chakra-react-select/releases/tag/v3.3.3),
-> your project will need to have a minimum of `@emotion/react@11.8.1` installed
-> to avoid having multiple copies of `@emotion/react` installed. For more info,
-> see [PR #115](https://github.com/csandman/chakra-react-select/pull/115).
 
 After Chakra UI is set up,
 [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
@@ -146,13 +131,13 @@ react-select" and just swap out `react-select` for `chakra-react-select`.
 
 ## Extra Props
 
-#### `size` — Options: `ResponsiveValue<"sm" | "md" | "lg">` — Default: `md`
+### `size` — Options: `ResponsiveValue<"sm" | "md" | "lg">` — Default: `md`
 
 You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`).
 These will reflect the sizes available on the
-[Chakra `<Input />` component](https://v2.chakra-ui.com/docs/components/input#changing-the-size-of-the-input)
+[Chakra `<Input />` component](https://www.chakra-ui.com/docs/components/input)
 (except for `xs` because it's too small to work). Alternatively, you can pass a
-[responsive style array or object](https://v2.chakra-ui.com/docs/styled-system/responsive-styles)
+[responsive style array or object](https://www.chakra-ui.com/docs/styling/responsive-design)
 of `size` values to allow it to change depending on your theme's breakpoints.
 
 If no `size` is passed, it will default to `defaultProps.size` from the theme
@@ -171,18 +156,16 @@ return (
 
 ![Sizes](./.github/images/sizes.png)
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-yt6kde?file=src%2Fapp.tsx)
-
 ---
 
-#### `tagColorPalette`
+### `tagColorPalette`
 
 You can pass the `tagColorPalette` prop to the select component to change all of
 the selected options tags' colors. You can view the whole list of available
-color schemes in
-[the Chakra docs](https://v2.chakra-ui.com/docs/components/tag/props), or if you
-have a custom color palette, any of the custom color names in that will be
-available instead.
+color palettes in
+[the Chakra docs](https://www.chakra-ui.com/docs/theming/colors), or if you have
+a custom color palette, any of the custom color names in that will be available
+instead.
 
 Alternatively, you can add the `colorPalette` key to any of your options objects
 and it will only style that option when selected.
@@ -190,13 +173,13 @@ and it will only style that option when selected.
 ```tsx
 return (
   <Select
-    {/* The global tag color scheme */}
+    {/* The global tag color palette */}
     tagColorPalette="purple"
     options={[
       {
         label: "I am red",
         value: "i-am-red",
-        colorPalette: "red", // The option color scheme overrides the global
+        colorPalette: "red", // The option color palette overrides the global
       },
       {
         label: "I fallback to purple",
@@ -207,17 +190,15 @@ return (
 );
 ```
 
-![Tag Color Schemes](./.github/images/tag-color-schemes.png)
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-dt4uk2?file=src%2Fapp.tsx)
+![Tag Color Palettes](./.github/images/tag-color-palettes.png)
 
 ---
 
-#### `tagVariant` — Options: `subtle` | `solid` | `outline` — Default: `subtle`
+### `tagVariant` — Options: `subtle` | `solid` | `outline` — Default: `subtle`
 
 You can pass the `tagVariant` prop with either `subtle`, `solid`, or `outline`
 (default is `subtle`). These will reflect the `variant` prop available on the
-[Chakra `<Tag />` component](https://v2.chakra-ui.com/docs/components/tag/props).
+[Chakra `<Tag />` component](https://www.chakra-ui.com/docs/components/tag).
 Alternatively, if you have added any custom variants to your theme, you can use
 those instead.
 
@@ -247,11 +228,9 @@ return (
 
 ![Tag Variants](./.github/images/tag-variants.png)
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-mvdnnv?file=src%2Fapp.tsx)
-
 ---
 
-#### `invalid` — Default: `false` | `readOnly` - Default: `false`
+### `invalid` — Default: `false` | `readOnly` - Default: `false`
 
 You can pass `invalid` to the select component to style it like the Chakra
 `Input` is styled when it receives the same prop. Alternatively, you can pass
@@ -290,14 +269,29 @@ return (
 
 ---
 
-#### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
+### `focusRingColor`
+
+The prop `focusRingColor` can be passed with Chakra color tokens which will
+emulate style the control component when focused.
+
+```tsx
+return (
+  <Select focusRingColor="blue.600" />
+);
+```
+
+![Orange errorBorderColor](./.github/images/custom-borders.png)
+
+---
+
+### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
 
 As of `v1.3.0` you can pass the prop `selectedOptionStyle` with either `"color"`
 or `"check"`. The default option `"color"` will style a selected option similar
 to how react-select does it, by highlighting the selected option in the color
 blue. Alternatively, if you pass `"check"` for the value, the selected option
 will be styled like the
-[Chakra UI Menu component](https://v2.chakra-ui.com/docs/components/menu#menu-option-groups)
+[Chakra UI `<Select />` component](https://www.chakra-ui.com/docs/components/select)
 and include a check icon next to the selected option(s). If `isMulti` and
 `selectedOptionStyle="check"` are passed, space will only be added for the check
 marks if `hideSelectedOptions={false}` is also passed.
@@ -315,11 +309,9 @@ return (
 
 ![Check Highlighted Selected Option](./.github/images/check-selected-option.png)
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-eugrxc?file=src%2Fapp.tsx)
-
 ---
 
-#### `selectedOptionColorPalette` — Default: `blue`
+### `selectedOptionColorPalette` — Default: `blue`
 
 If you choose to stick with the default `selectedOptionStyle="color"`, you have
 one additional styling option. If you do not like the default of blue for the
@@ -349,24 +341,22 @@ return (
 
 ![Purple Selected Option Color (dark mode)](./.github/images/purple-selected-option-dark.png)
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-m5qlmg?file=package.json,src%2Fapp.tsx)
-
 ---
 
-#### `variant` — Options: `outline` | `filled` | `flushed` | `unstyled` — Default: `outline`
+### `variant` — Options: `outline` | `subtle` — Default: `outline`
 
-You can pass the `variant` prop with any of `outline`, `filled`, `flushed`, or
-`unstyled` to change the overall styling of the `Select`. These will reflect the
-various appearances available for
-[Chakra's `<Input />` component](https://v2.chakra-ui.com/docs/components/input#changing-the-size-of-the-input).
+You can pass the `variant` prop with `outline` or `subtle` to change the overall
+styling of the `Select`. These will reflect the various appearances available
+for
+[Chakra's `<Select />` component](https://www.chakra-ui.com/docs/components/select).
 Alternatively, if you've added any custom variants to your Chakra theme you can
 use those instead. However, it is not guaranteed all styles will be applied how
 you intend them to as there are some differences in the structure of the
 Select's input component.
 
 If no `variant` is passed, it will default to `defaultProps.variant` from the
-theme for Chakra's `Input` component. If your component theme for `Input` is not
-modified, it will be `outline`.
+theme for Chakra's `Select` component. If your component recipe for `Select` is
+not modified, it will be `outline`.
 
 ```tsx
 return (
@@ -383,87 +373,10 @@ return (
 
 ![variant in dark mode](./.github/images/variant-dark.png)
 
-One thing to note is that the default styling for `variant="filled"` and
-`isMulti` results in the select and selected option tags having the same
-background color when the select is not focused. The easiest solution for this
-is to pass the
-[`tagVariant`](#tagvariant--options-subtle--solid--outline--default-subtle) or
-[`colorPalette`](#colorscheme) prop to add some contrast between the two
-elements.
-
-![filled variant](./.github/images/filled-variant.png)
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-ghaked?file=package.json,src%2Fapp.tsx)
-
 ---
 
-#### `useBasicStyles` (removed)
-
-This prop was removed in
-[`v5.0.0`](https://github.com/csandman/chakra-react-select/releases/tag/v5.0.0),
-as these styles are now the default styles applied to the component. If you'd
-like to keep the legacy styles, here are some examples (for each
-[`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline))
-of how you could accomplish that with the [`chakraStyles`](#chakrastyles) prop:
-
-```tsx
-const App = () => (
-  <Box>
-    <Select
-      variant="outline" // default
-      chakraStyles={{
-        indicatorSeparator: (base) => ({
-          ...base,
-          display: "block",
-        }),
-        dropdownIndicator: (base) => ({
-          ...base,
-          width: "auto",
-          margin: 0,
-          paddingX: 4, // or 3 for size="sm"
-          background: "gray.100",
-          _dark: {
-            background: "whiteAlpha.300",
-          },
-        }),
-      }}
-    />
-
-    <Select
-      variant="filled"
-      chakraStyles={{
-        dropdownIndicator: (base) => ({
-          ...base,
-          width: "auto",
-          margin: 0,
-          paddingX: 4, // or 3 for size="sm"
-          background: "gray.100",
-          _dark: {
-            background: "whiteAlpha.300",
-          },
-        }),
-      }}
-    />
-
-    <Select
-      variant="flushed" // or variant="unstyled"
-      chakraStyles={{
-        dropdownIndicator: (base) => ({
-          ...base,
-          width: "auto",
-          margin: 0,
-          paddingX: 4, // or 3 for size="sm"
-        }),
-      }}
-    />
-  </Box>
-);
-```
-
----
-
-If you have any other requests for Chakra-like features that could be added, or
-problems with the current features,
+If you have any other requests for Chakra-like features that could be added via
+custom props, or problems with the current features,
 [please start a discussion](https://github.com/csandman/chakra-react-select/discussions/categories/ideas)!
 
 ## Styling
@@ -485,7 +398,7 @@ To use the `chakraStyles` prop, first, check the documentation for
 [the original `styles` prop from the react-select docs](https://react-select.com/styles#style-object).
 This package offers an identical API for the `chakraStyles` prop, however, the
 `provided` and output style objects use
-[Chakra's `sx` prop](https://v2.chakra-ui.com/docs/styled-system/the-sx-prop)
+[Chakra's `css` prop](https://v2.chakra-ui.com/docs/styled-system/the-sx-prop)
 instead of the default emotion styles the original package offers. This allows
 you to both use the shorthand styling props you'd normally use to style Chakra
 components, as well as tokens from your theme such as named colors.
@@ -515,28 +428,33 @@ Most of the components rendered by this package use the basic
 a few exceptions. Here are the style keys offered and the corresponding Chakra
 component that is rendered:
 
-- `clearIndicator` - `Box` (uses theme styles for Chakra's `CloseButton`)
-- `container` - `Box`
-- `control` - `Box` (uses theme styles for Chakra's `Input`)
+- `clearIndicator` - `Box` (uses theme styles for Chakra's
+  `select.clearTrigger`)
+- `container` - `Box` (uses theme styles for Chakra's `select.root`)
+- `control` - `Box` (uses theme styles for Chakra's `input`)
 - `dropdownIndicator` - `Box` (uses theme styles for Chrakra's
-  `InputRightAddon`)
-- `downChevron` - `Icon`
-- `crossIcon` - `Icon`
-- `group` - `Box`
-- `groupHeading` - `Box` (uses theme styles for Chakra's `Menu` group title)
-- `indicatorsContainer` - `Box`
-- `indicatorSeparator` - `Divider`
+  `select.indicator`)
+- `downChevron` - `chakra.svg` (copied from
+  [`icons.tsx`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/components/icons.tsx))
+- `crossIcon` - `chakra.svg` (copied from
+  [`icons.tsx`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/components/icons.tsx))
+- `group` - `Box` (uses theme styles for Chakra's `select.itemGroup`)
+- `groupHeading` - `Box` (uses theme styles for Chakra's
+  `select.itemGroupLabel`)
+- `indicatorsContainer` - `Box` (uses theme styles for Chakra's
+  `select.indicatorGroup`)
+- `indicatorSeparator` - `Separator`
 - `input` - `chakra.input` (wrapped in a `Box`)
 - `inputContainer` - `Box`
 - `loadingIndicator` - `Spinner`
 - `loadingMessage` - `Box`
 - `menu` - `Box`
-- `menuList` - `Box` (uses theme styles for Chakra's `Menu`)
-- `multiValue` - `chakra.span` (uses theme styles for Chakra's `Tag`)
-- `multiValueLabel` - `chakra.span` (uses theme styles for Chakra's `TagLabel`)
-- `multiValueRemove` - `Box` (uses theme styles for Chakra's `TagCloseButton`)
+- `menuList` - `Box` (uses theme styles for Chakra's `select.content`)
+- `multiValue` - `Span` (uses theme styles for Chakra's `tag.root`)
+- `multiValueLabel` - `Span` (uses theme styles for Chakra's `tag.label`)
+- `multiValueRemove` - `Box` (uses theme styles for Chakra's `tag.closeTrigger`)
 - `noOptionsMessage` - `Box`
-- `option` - `Box` (uses theme styles for Chakra's `MenuItem`)
+- `option` - `Box` (uses theme styles for Chakra's `select.item`)
 - `placeholder` - `Box`
 - `singleValue` - `Box`
 - `valueContainer` - `Box`
@@ -544,7 +462,7 @@ component that is rendered:
 If you're using TypeScript, the `chakraStyles` prop is defined by the exported
 `ChakraStylesConfig` interface.
 
-```ts
+```tsx
 import { ChakraStylesConfig, Select } from "chakra-react-select";
 
 const App: React.FC = () => {
@@ -658,7 +576,7 @@ Dropdown menu attached to control example:
 
 As mentioned above, a few of the custom components this package implements
 either use styles from the global
-[Chakra component theme](https://v2.chakra-ui.com/docs/styled-system/customize-theme#customizing-component-styles)
+[Chakra component recipes](https://www.chakra-ui.com/docs/theming/customization/recipes)
 or are themselves those components. As this package pulls directly from your
 Chakra theme, any changes you make to those components' themes will propagate to
 the components in this package.
@@ -666,35 +584,34 @@ the components in this package.
 > [!NOTE]
 >
 > Some of the theme styles are manually overridden when this package implements
-> them. This is necessary for implementing styles for
-> [`size`](#size--options-responsivevaluesm--md--lg--default-md) variants in
-> components that do not natively have them in Chakra's default theme. This
-> mostly concerns components that make up the `Menu`, but there are a few other
+> them. This is not as common as it used to be with Chakra V2 due to most styles
+> being pulled from the `Select` slot recipe now, but there are a few other
 > cases where this exception applies. There is no alternative to this currently,
 > so if your custom theme styles are not being applied correctly please use
 > [`chakraStyles`](#chakrastyles) to style your components instead.
 > `chakraStyles` always takes the highest priority in overriding the styles of a
-> component. See
-> [#194](https://github.com/csandman/chakra-react-select/issues/194) for more
-> info.
+> component.
 
 Here is a list of all components that will be affected by changes to your theme:
 
-| `react-select` component | `chakra-ui` component styles                                                                                               |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| `ClearIndicator`         | [`CloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/close-button.ts) |
-| `Control`                | [`Input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts)              |
-| `DropdownIndicator`      | [`InputRightAddon`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/input.ts)    |
-| `GroupHeading`           | [`Menu` group title](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)    |
-| `LoadingIndicator`       | [`Spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/spinner.ts)          |
-| `MenuList`               | [`MenuList`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)            |
-| `MultiValueContainer`    | [`Tag`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)                  |
-| `MultiValueLabel`        | [`TagLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)             |
-| `MultiValueRemove`       | [`TagCloseButton`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/tag.ts)       |
-| `Option`                 | [`MenuItem`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/components/menu.ts)            |
+| `react-select` component | `chakra-ui`                                                                                                            |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| `ClearIndicator`         | [`select.clearTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)   |
+| `Control`                | [`input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/input.ts)                  |
+| `DropdownIndicator`      | [`select.indicator`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)      |
+| `Group`                  | [`select.itemGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)      |
+| `GroupHeading`           | [`select.itemGroupLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts) |
+| `IndicatorsContainer`    | [`select.indicatorGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts) |
+| `LoadingIndicator`       | [`spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/spinner.ts)              |
+| `MenuList`               | [`select.content`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)        |
+| `MultiValueContainer`    | [`tag.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                 |
+| `MultiValueLabel`        | [`tag.label`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                |
+| `MultiValueRemove`       | [`tag.closeTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)         |
+| `Option`                 | [`select.item`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)           |
+| `SelectContainer`        | [`select.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)           |
 
 In addition to specific component styles, any changes you make to your global
-color scheme will also be reflected in these custom components.
+color palette will also be reflected in these custom components.
 
 > [!NOTE]
 >
@@ -984,18 +901,21 @@ import { AsyncSelect, chakraComponents } from "chakra-react-select";
 const asyncComponents = {
   LoadingIndicator: (props) => (
     <chakraComponents.LoadingIndicator
+      // The color palette of the filled in area of the spinner (there is no default)
+      // colorPalette="gray"
+
       // The color of the main line which makes up the spinner
       // This could be accomplished using `chakraStyles` but it is also available as a custom prop
       color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
       // The color of the remaining space that makes up the spinner
-      emptyColor="transparent"
+      trackColor="transparent"
       // The `size` prop on the Chakra spinner
       // Defaults to one size smaller than the Select's size
       spinnerSize="md"
       // A CSS <time> variable (s or ms) which determines the time it takes for the spinner to make one full rotation
-      speed="0.45s"
+      animationDuration="0.45s"
       // A CSS size string representing the thickness of the spinner's line
-      thickness="2px"
+      borderWidth="2px"
       // Don't forget to forward the props!
       {...props}
     />
@@ -1014,7 +934,7 @@ const App = () => (
           i.label.toLowerCase().includes(inputValue.toLowerCase())
         );
         callback(values);
-      }, 3000);
+      }, 1500);
     }}
   />
 );
