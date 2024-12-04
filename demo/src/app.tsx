@@ -1,281 +1,276 @@
 import {
-  Select as ChakraSelect,
   Code,
   Container,
-  Field,
   Flex,
-  IconButton,
+  For,
+  Heading,
   Input,
-  Portal,
   Separator,
+  Span,
+  Stack,
   Text,
 } from "@chakra-ui/react";
 import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
-import { LuX } from "react-icons/lu";
-import { ColorModeButton } from "./components/color-mode";
-import { SelectValueText } from "./components/select";
+import { Field } from "./components/ui/field";
+import {
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+} from "./components/ui/select";
 import animeMovies from "./data/anime-movies";
 import { colorOptions, groupedOptions } from "./data/options";
 
+const mappedColorOptions = colorOptions.map((option) => ({
+  ...option,
+  colorPalette: option.value,
+}));
+
 const App = () => {
   return (
-    <Container as="main" maxWidth="lg">
-      <Flex justifyContent="flex-end" p={4}>
-        <ColorModeButton alignSelf="flex-end" />
-      </Flex>
-      <Field.Root p={4}>
-        <Field.Label>Standard Input</Field.Label>
-        <Input placeholder="This is my placeholder" />
-        <Field.HelperText>This is some helper text</Field.HelperText>
-      </Field.Root>
+    <Container as="main" maxWidth="lg" mt={8} mb={16}>
+      <Heading as="h1" p={4}>
+        Chakra React Select Demo
+      </Heading>
 
-      <Separator m={4} w="unset" />
+      <Stack px={4} gap={5}>
+        <Field
+          label="Standard Input"
+          helperText="This is some helper text"
+          errorText="This is an error"
+        >
+          <Input placeholder="This is my placeholder" />
+        </Field>
 
-      <ChakraSelect.Root
-        collection={animeMovies}
-        defaultValue={["spirited_away"]}
-        positioning={{ sameWidth: true }}
-        p={4}
-      >
-        <ChakraSelect.Label>
-          Built-in Chakra UI Select <Code>{'size="md"'}</Code>
-        </ChakraSelect.Label>
+        <Separator my={2} />
 
-        <ChakraSelect.Control>
-          <ChakraSelect.Trigger>
-            <SelectValueText placeholder="Select movie" />
-          </ChakraSelect.Trigger>
-          <ChakraSelect.IndicatorGroup>
-            <ChakraSelect.ClearTrigger asChild>
-              <IconButton
-                size="xs"
-                variant="plain"
-                focusVisibleRing="inside"
-                focusRingWidth="2px"
-                pointerEvents="auto"
-              >
-                <LuX />
-              </IconButton>
-            </ChakraSelect.ClearTrigger>
-            <ChakraSelect.Indicator />
-          </ChakraSelect.IndicatorGroup>
-        </ChakraSelect.Control>
-
-        <Portal>
-          <ChakraSelect.Positioner>
-            <ChakraSelect.Content>
-              <ChakraSelect.ItemGroup>
-                <ChakraSelect.ItemGroupLabel>
-                  Anime Movies
-                </ChakraSelect.ItemGroupLabel>
+        <For each={["sm", "md", "lg"]}>
+          {(size) => (
+            <SelectRoot key={size} size={size} collection={animeMovies}>
+              <SelectLabel>
+                Built-in Chakra UI Select <Code>{`size="${size}"`}</Code>
+              </SelectLabel>
+              <SelectTrigger clearable>
+                <SelectValueText placeholder="Select movie" />
+              </SelectTrigger>
+              <SelectContent>
                 {animeMovies.items.map((movie) => (
-                  <ChakraSelect.Item key={movie.value} item={movie}>
+                  <SelectItem item={movie} key={movie.value}>
                     {movie.label}
-                    <ChakraSelect.ItemIndicator />
-                  </ChakraSelect.Item>
+                  </SelectItem>
                 ))}
-              </ChakraSelect.ItemGroup>
-            </ChakraSelect.Content>
-          </ChakraSelect.Positioner>
-        </Portal>
-      </ChakraSelect.Root>
+              </SelectContent>
+            </SelectRoot>
+          )}
+        </For>
 
-      <ChakraSelect.Root
-        collection={animeMovies}
-        defaultValue={["spirited_away"]}
-        size="sm"
-        positioning={{ sameWidth: true }}
-        p={4}
-      >
-        <ChakraSelect.Label>
-          Built-in Chakra UI Select <Code>{'size="sm"'}</Code>
-        </ChakraSelect.Label>
-        <ChakraSelect.Control>
-          <ChakraSelect.Trigger>
-            <SelectValueText placeholder="Select movie" />
-          </ChakraSelect.Trigger>
-          <ChakraSelect.IndicatorGroup>
-            <ChakraSelect.ClearTrigger asChild>
-              <IconButton
-                size="xs"
-                variant="plain"
-                focusVisibleRing="inside"
-                focusRingWidth="2px"
-                pointerEvents="auto"
-              >
-                <LuX />
-              </IconButton>
-            </ChakraSelect.ClearTrigger>
-            <ChakraSelect.Indicator />
-          </ChakraSelect.IndicatorGroup>
-        </ChakraSelect.Control>
-        <Portal>
-          <ChakraSelect.Positioner>
-            <ChakraSelect.Content>
-              <ChakraSelect.ItemGroup>
-                <ChakraSelect.ItemGroupLabel>
-                  Anime Movies
-                </ChakraSelect.ItemGroupLabel>
-                {animeMovies.items.map((movie) => (
-                  <ChakraSelect.Item key={movie.value} item={movie}>
-                    {movie.label}
-                    <ChakraSelect.ItemIndicator />
-                  </ChakraSelect.Item>
-                ))}
-              </ChakraSelect.ItemGroup>
-            </ChakraSelect.Content>
-          </ChakraSelect.Positioner>
-        </Portal>
-      </ChakraSelect.Root>
+        <Separator my={2} />
 
-      <Separator m={4} w="unset" />
+        <Field
+          label={
+            <Span>
+              Select Colors and Flavors <Code>{'size="sm"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="sm"
+          />
+        </Field>
 
-      <Field.Root p={4}>
-        <Field.Label>
-          Select Colors and Flavours <Code>{'size="sm"'}</Code>
-        </Field.Label>
-        <Select
-          name="colors"
-          options={groupedOptions}
-          placeholder="Select some colors..."
-          instanceId="colors-flavors"
-        />
-      </Field.Root>
+        <Field
+          label={
+            <Span>
+              Select Colors and Flavors <Code>{'size="md" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="md"
+          />
+        </Field>
 
-      <Field.Root p={4}>
-        <Field.Label>
-          Select a Color or Flavor <Code>{'size="sm"'}</Code>
-        </Field.Label>
-        <CreatableSelect
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          instanceId="colors"
-          size="sm"
-          classNamePrefix="crs"
-          tagColorPalette="blue"
-        />
-      </Field.Root>
+        <Field
+          label={
+            <Span>
+              Select Colors and Flavors <Code>{'size="lg"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="lg"
+          />
+        </Field>
 
-      <Field.Root p={4}>
-        <Field.Label>Async Select</Field.Label>
-        <AsyncSelect
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          instanceId="colors"
-          classNamePrefix="crs"
-          tagColorPalette="blue"
-          loadOptions={(_inputValue, callback) => {
-            setTimeout(() => {
-              callback(colorOptions);
-            }, 3000);
-          }}
-        />
-      </Field.Root>
+        <Separator my={2} />
 
-      <Field.Root p={4}>
-        <Field.Label>
-          Select Colors and Flavours <Code>{'size="lg"'}</Code>
-        </Field.Label>
-        <Select
-          name="colors"
-          options={groupedOptions}
-          placeholder="Select some colors..."
-          instanceId="colors"
-          isMulti
-          size="lg"
-          classNamePrefix="crs"
-        />
-      </Field.Root>
+        <Field label="Async Select">
+          <AsyncSelect
+            placeholder="Select some colors..."
+            loadOptions={(_inputValue, callback) => {
+              setTimeout(() => callback(colorOptions), 1500);
+            }}
+          />
+        </Field>
 
-      <Field.Root p={4}>
-        <Field.Label>Select Colors and Flavours</Field.Label>
-        <Select
-          name="colors"
-          options={groupedOptions}
-          placeholder="Select some colors..."
-          instanceId="colors"
-          isMulti
-          classNamePrefix="crs"
-        />
-      </Field.Root>
+        <Field label="Select with Creatable Options">
+          <CreatableSelect
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
 
-      <Field.Root p={4}>
-        <Field.Label>
-          Select Colors and Flavours <Code>{'size="sm"'}</Code>
-        </Field.Label>
-        <Select
-          name="colors"
-          options={groupedOptions}
-          placeholder="Select some colors..."
-          instanceId="colors"
-          isMulti
-          size="sm"
-          classNamePrefix="crs"
-        />
-      </Field.Root>
+        <Separator my={2} />
 
-      <Field.Root p={4}>
-        <Field.Label>Check Style</Field.Label>
-        <Select
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          classNamePrefix="crs"
-          selectedOptionStyle="check"
-          isClearable
-        />
-      </Field.Root>
+        <Field
+          label={
+            <Span>
+              Select Colors (With global <Code>tagColorPalette</Code>)
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            tagColorPalette="purple"
+          />
+        </Field>
 
-      <Field.Root p={4} invalid>
-        <Field.Label>Invalid from Field</Field.Label>
-        <Select
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          classNamePrefix="crs"
-          isClearable
-        />
-        <Field.ErrorText>This is an error from the field</Field.ErrorText>
-      </Field.Root>
+        <Field
+          label={
+            <Span>
+              Select Colors (With <Code>colorPalette</Code> in each option)
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={mappedColorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
 
-      <Field.Root p={4} disabled>
-        <Field.Label>Disabled from Field</Field.Label>
-        <Select
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          classNamePrefix="crs"
-          isClearable
-        />
-        <Field.ErrorText>This is an error from the field</Field.ErrorText>
-      </Field.Root>
+        <Separator my={2} />
 
-      <Field.Root p={4}>
-        <Field.Label>Subtle Variant</Field.Label>
-        <Select
-          name="colors"
-          options={colorOptions}
-          placeholder="Select some colors..."
-          classNamePrefix="crs"
-          isClearable
-          variant="subtle"
-        />
-        <Field.ErrorText>This is an error from the field</Field.ErrorText>
-      </Field.Root>
+        <Field
+          disabled
+          label={
+            <Span>
+              Disabled Select from the <Code>Field.Root</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
 
-      <Flex direction="column" gap={1} p={4}>
-        <Text fontSize="sm" fontWeight="medium">
-          Not wrapped in a <Code>Field.Root</Code>
-        </Text>
-        <Select
-          name="colors"
-          options={groupedOptions}
-          placeholder="Select some colors..."
-          instanceId="colors-flavors"
-        />
-      </Flex>
+        <Field
+          label={
+            <Span>
+              Disabled Select from the <Code>Select</Code> element
+            </Span>
+          }
+        >
+          <Select
+            disabled
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          invalid
+          errorText="This error message shows because of an invalid Field.Root"
+          label={
+            <Span>
+              Invalid Select from the <Code>Field.Root</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          errorText="You can't see this error message because the isInvalid prop is set on the select element instead of the form control"
+          label={
+            <Span>
+              Invalid Select from the <Code>Select</Code> element
+            </Span>
+          }
+        >
+          <Select
+            invalid
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Field
+          label={
+            <Span>
+              Single Select with{" "}
+              <Code>{'selectedOptionStyle="color" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            selectedOptionStyle="color"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Single Select with <Code>{'selectedOptionStyle="check"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            selectedOptionStyle="check"
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Flex direction="column" gap={1}>
+          <Text fontSize="sm" fontWeight="medium">
+            Select Not wrapped in a <Code>Field.Root</Code>
+          </Text>
+          <Select
+            name="colors"
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Flex>
+      </Stack>
     </Container>
   );
 };

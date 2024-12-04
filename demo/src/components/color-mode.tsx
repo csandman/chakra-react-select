@@ -3,8 +3,7 @@
 import { forwardRef } from "react";
 import type { IconButtonProps } from "@chakra-ui/react";
 import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
-import { ThemeProvider, useTheme } from "next-themes";
-import type { ThemeProviderProps } from "next-themes/dist/types";
+import { ThemeProvider, type ThemeProviderProps, useTheme } from "next-themes";
 import { LuMoon, LuSun } from "react-icons/lu";
 
 export function ColorModeProvider(props: ThemeProviderProps) {
@@ -53,8 +52,7 @@ export const ColorModeButton = forwardRef<
         {...props}
         css={{
           _icon: {
-            width: "5",
-            height: "5",
+            boxSize: 5,
           },
         }}
       >
