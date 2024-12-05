@@ -265,8 +265,6 @@ return (
 
 ![Invalid/Disabled States](./.github/images/invalid-disabled.png)
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-xqdhav?file=src%2Fapp.tsx)
-
 ---
 
 ### `focusRingColor`
@@ -450,9 +448,10 @@ component that is rendered:
 - `loadingMessage` - `Box`
 - `menu` - `Box`
 - `menuList` - `Box` (uses theme styles for Chakra's `select.content`)
-- `multiValue` - `Span` (uses theme styles for Chakra's `tag.root`)
-- `multiValueLabel` - `Span` (uses theme styles for Chakra's `tag.label`)
-- `multiValueRemove` - `Box` (uses theme styles for Chakra's `tag.closeTrigger`)
+- `multiValue` - `Tag.Root`
+- `multiValueLabel` - `Tag.Label`
+- `multiValueRemove` - `Tag.EndElement` (there is a `Tag.CloseTrigger` rendered
+  inside of it, so you can target it using a nested selector)
 - `noOptionsMessage` - `Box`
 - `option` - `Box` (uses theme styles for Chakra's `select.item`)
 - `placeholder` - `Box`
@@ -594,21 +593,21 @@ the components in this package.
 
 Here is a list of all components that will be affected by changes to your theme:
 
-| `react-select` component | `chakra-ui`                                                                                                                                                                                                                                                             |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ClearIndicator`         | [`select.clearTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                    |
-| `Control`                | [`input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/input.ts)                                                                                                                                                                   |
-| `DropdownIndicator`      | [`select.indicator`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                       |
-| `Group`                  | [`select.itemGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                       |
-| `GroupHeading`           | [`select.itemGroupLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                  |
-| `IndicatorsContainer`    | [`select.indicatorGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                  |
-| `LoadingIndicator`       | [`spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/spinner.ts)                                                                                                                                                               |
-| `MenuList`               | [`select.content`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                         |
-| `MultiValueContainer`    | [`tag.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                  |
-| `MultiValueLabel`        | [`tag.label`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                 |
-| `MultiValueRemove`       | [`tag.closeTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts) (this is a special case, as the close trigger is wrapped with a `Box` with the `tag.endElement` styles on it, which provides necessary placement styles) |
-| `Option`                 | [`select.item`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                            |
-| `SelectContainer`        | [`select.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                            |
+| `react-select` component | `chakra-ui`                                                                                                                                                                                                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ClearIndicator`         | [`select.clearTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                |
+| `Control`                | [`input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/input.ts)                                                                                                                                                                               |
+| `DropdownIndicator`      | [`select.indicator`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                   |
+| `Group`                  | [`select.itemGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                   |
+| `GroupHeading`           | [`select.itemGroupLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                              |
+| `IndicatorsContainer`    | [`select.indicatorGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                              |
+| `LoadingIndicator`       | [`spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/spinner.ts)                                                                                                                                                                           |
+| `MenuList`               | [`select.content`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                     |
+| `MultiValueContainer`    | [`tag.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                              |
+| `MultiValueLabel`        | [`tag.label`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                             |
+| `MultiValueRemove`       | [`tag.endElement` / `tag.closeTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts) (this is a special case, because the `MultiValueRemove` renders both the `Tag.EndElement` as well as the `Tag.CloseTrigger` as it's direct child) |
+| `Option`                 | [`select.item`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                        |
+| `SelectContainer`        | [`select.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                        |
 
 In addition to specific component styles, any changes you make to your global
 color palette will also be reflected in these custom components.
@@ -940,7 +939,7 @@ const App = () => (
 );
 ```
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-1tqrma?file=src%2Fapp.tsx)
+[![SB-TS]](https://stackblitz.com/edit/lyyatb?file=src%2Fapp.tsx)
 
 ## `useChakraSelectProps`
 

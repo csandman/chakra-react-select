@@ -1,5 +1,5 @@
 import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
-import { Box, Span, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
+import { Tag, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
@@ -95,7 +95,7 @@ export const MultiValue = <
     : labelInitialCss;
 
   const removeInitialCss: SystemStyleObject = {
-    ...tagStyles.closeTrigger,
+    ...tagStyles.endElement,
   };
   const removeCss = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialCss, props)
@@ -163,9 +163,9 @@ export const MultiValueContainer = <
   const { children, innerProps, css } = props;
 
   return (
-    <Span {...innerProps} css={css}>
+    <Tag.Root {...innerProps} css={css}>
       {children}
-    </Span>
+    </Tag.Root>
   );
 };
 
@@ -179,9 +179,9 @@ export const MultiValueLabel = <
   const { children, innerProps, css } = props;
 
   return (
-    <Span {...innerProps} css={css}>
+    <Tag.Label {...innerProps} css={css}>
       {children}
-    </Span>
+    </Tag.Label>
   );
 };
 
@@ -192,29 +192,13 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const {
-    children,
-    innerProps,
-    isFocused,
-    css,
-    selectProps: { size, variant },
-  } = props;
-
-  const tagStyles = useSlotRecipe({ key: "tag" })({
-    size,
-    variant,
-  });
+  const { children, innerProps, isFocused, css } = props;
 
   return (
-    <Box css={tagStyles.endElement}>
-      <Box
-        {...innerProps}
-        role="button"
-        css={css}
-        data-focus-visible={isFocused ? true : undefined}
-      >
+    <Tag.EndElement css={css} {...innerProps}>
+      <Tag.CloseTrigger data-focus-visible={isFocused ? true : undefined}>
         {children || <CloseIcon />}
-      </Box>
-    </Box>
+      </Tag.CloseTrigger>
+    </Tag.EndElement>
   );
 };
