@@ -1,7 +1,7 @@
 import type {
-  ResponsiveObject,
   SystemStyleObject,
-  ThemeTypings,
+  TagRootProps,
+  useFieldContext,
 } from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
@@ -25,7 +25,7 @@ import type {
   ValueContainerProps,
 } from "react-select";
 
-export interface SizeProps<PropType = string | number> {
+export interface SizeProps<PropType extends string | number = string | number> {
   sm: PropType;
   md: PropType;
   lg: PropType;
@@ -33,20 +33,16 @@ export interface SizeProps<PropType = string | number> {
 
 export type Size = "sm" | "md" | "lg";
 
-export type SizeProp = Size | ResponsiveObject<Size> | Size[];
+export type SizeProp = Size | Record<string, Size> | Array<Size>;
 
-export type TagVariant = "subtle" | "solid" | "outline" | (string & {});
+/**
+ * By default includes `"outline" | "subtle" | "solid" | "surface"`
+ */
+export type TagVariant = TagRootProps["variant"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant =
-  | "outline"
-  | "filled"
-  | "flushed"
-  | "unstyled"
-  | (string & {});
-
-export type ColorScheme = ThemeTypings["colorSchemes"];
+export type Variant = "outline" | "subtle";
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,
@@ -94,6 +90,13 @@ export interface ChakraStylesConfig<
 
 export interface OptionBase {
   variant?: string;
-  colorScheme?: string;
+  colorPalette?: string;
   isDisabled?: boolean;
 }
+
+/**
+ * If the `useFieldContext` hook is called outside of a `Field.Root` wrapper,
+ * the value will be `undefined`. This type is used to ensure that we don't
+ * attempt to access properties on `undefined`.
+ */
+export type UseFieldReturn = ReturnType<typeof useFieldContext> | undefined;

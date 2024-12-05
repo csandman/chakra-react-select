@@ -1,7 +1,6 @@
 # Core files
 node_modules/
 dist/
-tmp/
 
 # Codemod generated files
 codemod/**/*.js
