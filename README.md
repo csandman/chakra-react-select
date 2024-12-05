@@ -901,8 +901,7 @@ const asyncComponents = {
   LoadingIndicator: (props) => (
     <chakraComponents.LoadingIndicator
       // The color palette of the filled in area of the spinner (there is no default)
-      // colorPalette="gray"
-
+      colorPalette="gray"
       // The color of the main line which makes up the spinner
       // This could be accomplished using `chakraStyles` but it is also available as a custom prop
       color="currentColor" // <-- This default's to your theme's text color (Light mode: gray.700 | Dark mode: whiteAlpha.900)
@@ -973,6 +972,12 @@ const CustomSelect = () => {
   return <Select {...selectProps} />;
 };
 ```
+
+One important thing to note however, is that this hook generally adds no benefit
+if you're just going to pass the props it returns into the core `Select`
+component from this package. The only time it really becomes useful is if you're
+passing the resulting props into the core `react-select` component, or another
+component that wraps it.
 
 One example of how you might use this is to customize the component
 `react-google-places-autocomplete`, which is an autocomplete dropdown for Google
