@@ -1130,17 +1130,6 @@ customizations.
 When submitting a bug report, please include a minimum reproduction of your
 issue using one of these templates:
 
-### CodeSandbox
-
-- React Vanilla JS Starter:
-  https://codesandbox.io/s/chakra-react-select-vsvr0?file=/example.js
-- React Typescript Starter:
-  https://codesandbox.io/s/chakra-react-select-typescript-4sce1?file=/app.tsx
-- Next.js Vanilla JS Starter:
-  https://codesandbox.io/s/chakra-react-select-next-js-dtnsm?file=/pages/index.js
-- Next.js Typescript Starter:
-  https://codesandbox.io/s/chakra-react-select-next-js-typescript-kscuf?file=/pages/index.tsx
-
 ### StackBlitz
 
 Recently, CodeSandbox severely limited their free tier, so this project has
