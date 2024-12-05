@@ -1,4 +1,4 @@
-import { type KeyboardEventHandler, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Icon } from "@chakra-ui/react";
 import {
   ChakraStylesConfig,
@@ -71,6 +71,7 @@ const SelectPopoverExample = () => {
 
   return (
     <PopoverRoot
+      positioning={{ placement: "bottom-start" }}
       open={open}
       onOpenChange={(changeDetails) => setOpen(changeDetails.open)}
       autoFocus={false}
