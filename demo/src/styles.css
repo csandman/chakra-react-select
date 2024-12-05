@@ -1,0 +1,14 @@
+.crs .crs__value-container,
+.crs .crs__value-container:hover {
+  min-height: 40px;
+  background: var(--chakra-colors-background);
+}
+
+.crs .crs__control {
+  border-color: var(--chakra-colors-blue-600);
+  background-color: var(--chakra-colors-teal-50);
+}
+
+.crs .crs__indicators .crs__clear-indicator {
+  color: var(--chakra-colors-blue-500);
+}

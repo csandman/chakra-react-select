@@ -18,6 +18,10 @@ import {
   Select,
   chakraComponents,
 } from "chakra-react-select";
+import ConnectedSelectMenuExample from "./components/advanced-examples/connected-select-menu-example";
+import CustomIndicatorIconsExample from "./components/advanced-examples/custom-indicator-icons-example";
+import OptionsWithIconsExample from "./components/advanced-examples/options-with-icons-example";
+import SelectPopoverExample from "./components/advanced-examples/select-popover-example";
 import { useColorModeValue } from "./components/ui/color-mode";
 import { Field } from "./components/ui/field";
 import {
@@ -75,12 +79,12 @@ const asyncComponents = {
 
 const App = () => {
   return (
-    <Container as="main" maxWidth="lg" mt={8} mb={16}>
-      <Heading as="h1" p={4}>
+    <Container as="main" maxWidth="lg" mt={8} mb={48}>
+      <Heading as="h1" py={4}>
         Chakra React Select Demo
       </Heading>
 
-      <Stack px={4} gap={5}>
+      <Stack gap={5}>
         <Field
           label="Standard Input"
           helperText="This is some helper text"
@@ -401,6 +405,66 @@ const App = () => {
             placeholder="Select some colors..."
           />
         </Flex>
+
+        <Separator my={2} />
+
+        <Heading>Advanced Examples</Heading>
+
+        <Field label="Select in a Popover">
+          <SelectPopoverExample />
+        </Field>
+
+        <Field label="Select with Custom Options">
+          <OptionsWithIconsExample />
+        </Field>
+
+        <Field label="Select Styled with CSS">
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            className="crs"
+            classNamePrefix="crs"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Dropdown Indicator Flip Using <Code>chakraStyles</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            chakraStyles={{
+              dropdownIndicator: (prev, { selectProps: { menuIsOpen } }) => ({
+                ...prev,
+                "& > svg": {
+                  transitionProperty: "transform",
+                  transitionDuration: "moderate",
+                  transform: `rotate(${menuIsOpen ? -180 : 0}deg)`,
+                },
+              }),
+            }}
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Connected Dropdown Using <Code>chakraStyles</Code>
+            </Span>
+          }
+        >
+          <ConnectedSelectMenuExample />
+        </Field>
+
+        <Field label="Custom Indicator Icons">
+          <CustomIndicatorIconsExample />
+        </Field>
       </Stack>
     </Container>
   );
