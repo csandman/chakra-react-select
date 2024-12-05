@@ -1130,12 +1130,6 @@ customizations.
 When submitting a bug report, please include a minimum reproduction of your
 issue using one of these templates:
 
-### StackBlitz
-
-Recently, CodeSandbox severely limited their free tier, so this project has
-started to move away from it. Here are a couple
-[StackBlitz](https://stackblitz.com/) templates you can use as an alternative.
-
 - Vanilla JS Starter:
   https://stackblitz.com/edit/vitejs-vite-fatlrb?file=src%2Fapp.jsx
 - TypeScript Starter:
