@@ -1,22 +1,40 @@
-import { createMultiStyleConfigHelpers, extendTheme } from "@chakra-ui/react";
-import { tagAnatomy } from "@chakra-ui/anatomy";
+import {
+  createSystem,
+  defaultConfig,
+  defineConfig,
+  defineSlotRecipe,
+} from "@chakra-ui/react";
+import { tagAnatomy } from "@chakra-ui/react/anatomy";
 
-const tagHelpers = createMultiStyleConfigHelpers(tagAnatomy.keys);
-
-const tagTheme = tagHelpers.defineMultiStyleConfig({
-  defaultProps: {
-    // Note: Uncomment this to show the solid variant as the default
-    // variant: "solid",
-    // Note: Uncomment this to use "blue" as the default colorScheme
-    // colorScheme: "blue",
+const tagSlotRecipe = defineSlotRecipe({
+  slots: tagAnatomy.keys(),
+  base: {
+    closeTrigger: {
+      cursor: "pointer",
+    },
+  },
+  defaultVariants: {
+    // Uncomment to modify the default colorPalette
+    // colorPalette: "blue",
+    // TODO: Figure out how to make this work
+    // variant: "subtle",
   },
 });
 
-const theme = extendTheme({
-  colors: {},
-  components: {
-    Tag: tagTheme,
+const config = defineConfig({
+  theme: {
+    slotRecipes: {
+      tag: tagSlotRecipe,
+    },
+    tokens: {
+      cursor: {
+        button: { value: "pointer" },
+        option: { value: "pointer" },
+      },
+    },
   },
 });
 
-export default theme;
+const crsSystem = createSystem(defaultConfig, config);
+
+export default crsSystem;
