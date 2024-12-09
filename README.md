@@ -237,9 +237,19 @@ You can pass `invalid` to the select component to style it like the Chakra
 `readOnly` to make the component non-interactive in the same way Chakra's
 `Input` does.
 
-You can pass also pass `invalid`, `disabled`, or `readOnly` into a wrapping
-`<FormControl />` to achieve the same result as passing these props into the
-`Select` component.
+You can pass also pass `invalid`, `disabled`, `readOnly`, or `required` into a
+wrapping `Field.Root` (or `Field` if using the snippet) to achieve the same
+result as passing these props into the `Select` component. However, if you pass
+these props into the `Select` component itself, that will override the props
+passed into the `Field.Root`.
+
+In the migration to
+[Chakra v3](https://www.chakra-ui.com/docs/get-started/migration#input-select-textarea),
+they ended up removing the `invalid` prop from the `Input`, `Select`, and
+`Textarea` components themselves in favor of always having the user pass it into
+the wrapping `Field.Root` instead, but I felt that it wouldn't hurt to keep the
+prop on this component as well, as users don't always wrap their components in a
+`Field.Root` in the first place.
 
 ```tsx
 return (
@@ -252,13 +262,26 @@ return (
 
     {/* This will show up grayed out and will not be interactive */}
     {/* Additionally, it will have a red border and the error message will be shown */}
-    <FormControl invalid disabled>
-      <FormLabel>Invalid & Disabled Select</FormLabel>
+    <Field
+      label="Invalid & Disabled Select"
+      invalid
+      disabled
+      invalidText="This error message shows because of an invalid Field.Root"
+    >
       <Select />
-      <FormErrorMessage>
-        This error message shows because of an invalid FormControl
-      </FormErrorMessage>
-    </FormControl>
+    </Field>
+
+    {/* Or here's an example without using the snippet */}
+    <Field.Root invalid disabled required>
+      <Field.Label>
+        Invalid & Disabled Select
+        <Field.RequiredIndicator />
+      </Field.Label>
+      <Select />
+      <Field.ErrorText>
+        This error message shows because of an invalid Field.Root
+      </Field.ErrorText>
+    </Field.Root>
   </>
 );
 ```
@@ -284,11 +307,11 @@ return (
 
 ### `selectedOptionStyle` — Options: `color` | `check` — Default: `color`
 
-As of `v1.3.0` you can pass the prop `selectedOptionStyle` with either `"color"`
-or `"check"`. The default option `"color"` will style a selected option similar
-to how react-select does it, by highlighting the selected option in the color
-blue. Alternatively, if you pass `"check"` for the value, the selected option
-will be styled like the
+You can pass the prop `selectedOptionStyle` with either `"color"` or `"check"`.
+The default option `"color"` will style a selected option similar to how
+react-select does it, by highlighting the selected option in the color blue.
+Alternatively, if you pass `"check"` for the value, the selected option will be
+styled like the
 [Chakra UI `<Select />` component](https://www.chakra-ui.com/docs/components/select)
 and include a check icon next to the selected option(s). If `isMulti` and
 `selectedOptionStyle="check"` are passed, space will only be added for the check
@@ -448,10 +471,11 @@ component that is rendered:
 - `loadingMessage` - `Box`
 - `menu` - `Box`
 - `menuList` - `Box` (uses theme styles for Chakra's `select.content`)
-- `multiValue` - `Tag.Root`
-- `multiValueLabel` - `Tag.Label`
-- `multiValueRemove` - `Tag.EndElement` (there is a `Tag.CloseTrigger` rendered
-  inside of it, so you can target it using a nested selector)
+- `multiValue` - `Span` (uses theme styles for Chakra's `tag.root`)
+- `multiValueLabel` - `Span` (uses theme styles for Chakra's `tag.label`)
+- `multiValueRemove` - `Box` (uses theme styles for Chakra's `tag.endElement`,
+  and wraps a `Box` with the `tag.closeTrigger` styles on it as it's direct
+  child)
 - `noOptionsMessage` - `Box`
 - `option` - `Box` (uses theme styles for Chakra's `select.item`)
 - `placeholder` - `Box`
@@ -593,21 +617,21 @@ the components in this package.
 
 Here is a list of all components that will be affected by changes to your theme:
 
-| `react-select` component | `chakra-ui`                                                                                                                                                                                                                                                                         |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ClearIndicator`         | [`select.clearTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                |
-| `Control`                | [`input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/input.ts)                                                                                                                                                                               |
-| `DropdownIndicator`      | [`select.indicator`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                   |
-| `Group`                  | [`select.itemGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                   |
-| `GroupHeading`           | [`select.itemGroupLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                              |
-| `IndicatorsContainer`    | [`select.indicatorGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                              |
-| `LoadingIndicator`       | [`spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/spinner.ts)                                                                                                                                                                           |
-| `MenuList`               | [`select.content`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                     |
-| `MultiValueContainer`    | [`tag.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                              |
-| `MultiValueLabel`        | [`tag.label`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                             |
-| `MultiValueRemove`       | [`tag.endElement` / `tag.closeTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts) (this is a special case, because the `MultiValueRemove` renders both the `Tag.EndElement` as well as the `Tag.CloseTrigger` as it's direct child) |
-| `Option`                 | [`select.item`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                        |
-| `SelectContainer`        | [`select.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                        |
+| `react-select` component | `chakra-ui`                                                                                                                                                                                                                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ClearIndicator`         | [`select.clearTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                       |
+| `Control`                | [`input`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/input.ts)                                                                                                                                                                                                                                      |
+| `DropdownIndicator`      | [`select.indicator`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                          |
+| `Group`                  | [`select.itemGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                          |
+| `GroupHeading`           | [`select.itemGroupLabel`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                     |
+| `IndicatorsContainer`    | [`select.indicatorGroup`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                     |
+| `LoadingIndicator`       | [`spinner`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/spinner.ts)                                                                                                                                                                                                                                  |
+| `MenuList`               | [`select.content`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                            |
+| `MultiValueContainer`    | [`tag.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                                                                                     |
+| `MultiValueLabel`        | [`tag.label`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts)                                                                                                                                                                                                                                    |
+| `MultiValueRemove`       | [`tag.endElement` / `tag.closeTrigger`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/tag.ts) (this is a special case, because the `MultiValueRemove` renders both the a `Box` with the `tag.endElement` styles on it, as well as a box with the `tag.closeTrigger` styles on it as it's direct child) |
+| `Option`                 | [`select.item`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                               |
+| `SelectContainer`        | [`select.root`](https://github.com/chakra-ui/chakra-ui/blob/main/packages/react/src/theme/recipes/select.ts)                                                                                                                                                                                                                               |
 
 In addition to specific component styles, any changes you make to your global
 color palette will also be reflected in these custom components.

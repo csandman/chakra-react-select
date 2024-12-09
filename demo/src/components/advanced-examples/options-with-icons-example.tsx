@@ -1,4 +1,4 @@
-import { Box, Icon, Tag } from "@chakra-ui/react";
+import { Box, Icon, useSlotRecipe } from "@chakra-ui/react";
 import {
   type GroupBase,
   Select,
@@ -59,14 +59,17 @@ const customComponents: SelectComponentsConfig<
       <Box flexGrow={1}>{children}</Box>
     </chakraComponents.Option>
   ),
-  MultiValueContainer: ({ children, ...props }) => (
-    <chakraComponents.MultiValueContainer {...props}>
-      <Tag.StartElement color={props.data.iconColor}>
-        <props.data.Icon />
-      </Tag.StartElement>
-      {children}
-    </chakraComponents.MultiValueContainer>
-  ),
+  MultiValueContainer: ({ children, ...props }) => {
+    const tagStyles = useSlotRecipe({ key: "tag" })();
+    return (
+      <chakraComponents.MultiValueContainer {...props}>
+        <Box css={tagStyles.startElement} color={props.data.iconColor}>
+          <props.data.Icon />
+        </Box>
+        {children}
+      </chakraComponents.MultiValueContainer>
+    );
+  },
 };
 
 const OptionsWithIconsExample = () => (

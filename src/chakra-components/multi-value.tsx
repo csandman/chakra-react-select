@@ -1,5 +1,5 @@
 import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
-import { Tag, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
+import { Span, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
   MultiValueGenericProps,
@@ -96,6 +96,7 @@ export const MultiValue = <
 
   const removeInitialCss: SystemStyleObject = {
     ...tagStyles.endElement,
+    cursor: "pointer",
   };
   const removeCss = chakraStyles?.multiValueRemove
     ? chakraStyles.multiValueRemove(removeInitialCss, props)
@@ -163,9 +164,9 @@ export const MultiValueContainer = <
   const { children, innerProps, css } = props;
 
   return (
-    <Tag.Root {...innerProps} css={css}>
+    <Span {...innerProps} css={css}>
       {children}
-    </Tag.Root>
+    </Span>
   );
 };
 
@@ -179,9 +180,9 @@ export const MultiValueLabel = <
   const { children, innerProps, css } = props;
 
   return (
-    <Tag.Label {...innerProps} css={css}>
+    <Span {...innerProps} css={css}>
       {children}
-    </Tag.Label>
+    </Span>
   );
 };
 
@@ -195,10 +196,10 @@ export const MultiValueRemove = <
   const { children, innerProps, isFocused, css } = props;
 
   return (
-    <Tag.EndElement css={css} {...innerProps}>
-      <Tag.CloseTrigger data-focus-visible={isFocused ? true : undefined}>
+    <Span css={css} {...innerProps}>
+      <Span data-focus-visible={isFocused ? true : undefined}>
         {children || <CloseIcon />}
-      </Tag.CloseTrigger>
-    </Tag.EndElement>
+      </Span>
+    </Span>
   );
 };
