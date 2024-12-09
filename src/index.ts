@@ -194,6 +194,7 @@ declare module "react-select" {
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     isFocused: boolean;
+    endElementCss: SystemStyleObject;
     css: SystemStyleObject;
   }
 

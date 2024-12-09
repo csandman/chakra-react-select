@@ -80,6 +80,9 @@ export interface ChakraStylesConfig<
   menuList?: StylesFunction<MenuListProps<Option, IsMulti, Group>>;
   multiValue?: StylesFunction<MultiValueProps<Option, IsMulti, Group>>;
   multiValueLabel?: StylesFunction<MultiValueProps<Option, IsMulti, Group>>;
+  multiValueEndElement?: StylesFunction<
+    MultiValueProps<Option, IsMulti, Group>
+  >;
   multiValueRemove?: StylesFunction<MultiValueProps<Option, IsMulti, Group>>;
   noOptionsMessage?: StylesFunction<NoticeProps<Option, IsMulti, Group>>;
   option?: StylesFunction<OptionProps<Option, IsMulti, Group>>;

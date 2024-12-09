@@ -94,8 +94,15 @@ export const MultiValue = <
     ? chakraStyles.multiValueLabel(labelInitialCss, props)
     : labelInitialCss;
 
-  const removeInitialCss: SystemStyleObject = {
+  const endElementInitialCss: SystemStyleObject = {
     ...tagStyles.endElement,
+  };
+  const endElementCss = chakraStyles?.multiValueEndElement
+    ? chakraStyles.multiValueEndElement(endElementInitialCss, props)
+    : endElementInitialCss;
+
+  const removeInitialCss: SystemStyleObject = {
+    ...tagStyles.closeTrigger,
     cursor: "pointer",
   };
   const removeCss = chakraStyles?.multiValueRemove
@@ -146,6 +153,7 @@ export const MultiValue = <
           "aria-label": `Remove ${children || "option"}`,
           ...removeProps,
         }}
+        endElementCss={endElementCss}
         css={removeCss}
         selectProps={selectProps}
         isFocused={isFocused}
@@ -193,11 +201,15 @@ export const MultiValueRemove = <
 >(
   props: MultiValueRemoveProps<Option, IsMulti, Group>
 ) => {
-  const { children, innerProps, isFocused, css } = props;
+  const { children, innerProps, isFocused, endElementCss, css } = props;
 
   return (
-    <Span css={css} {...innerProps}>
-      <Span data-focus-visible={isFocused ? true : undefined}>
+    <Span css={endElementCss} {...innerProps}>
+      <Span
+        role="button"
+        css={css}
+        data-focus-visible={isFocused ? true : undefined}
+      >
         {children || <CloseIcon />}
       </Span>
     </Span>
