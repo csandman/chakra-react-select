@@ -80,7 +80,6 @@ export const ValueContainer = <
     alignItems: "center",
     flex: 1,
     flexWrap: "wrap",
-    WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
     py: "2px",

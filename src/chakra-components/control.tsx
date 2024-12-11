@@ -53,11 +53,8 @@ export const Control = <
 
   const initialCss: SystemStyleObject = {
     ...inputStyles,
-    position: "relative",
     display: "flex",
-    overflow: "hidden",
     height: "auto",
-    // TODO: figure out if this is the best way
     minHeight: "var(--select-trigger-height)",
     ...(isDisabled ? { pointerEvents: "none" } : {}),
   };
@@ -145,9 +142,6 @@ export const DropdownIndicator = <
 
   const initialDropdownIndicatorCss: SystemStyleObject = {
     ...selectStyles.indicator,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
   };
   const dropdownIndicatorCss = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialDropdownIndicatorCss, props)
@@ -227,8 +221,6 @@ export const ClearIndicator = <
         boxSize={8}
         minWidth="unset"
         variant="plain"
-        focusVisibleRing="inside"
-        focusRingWidth="2px"
         pointerEvents="auto"
         tabIndex={-1}
       >

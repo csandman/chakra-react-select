@@ -77,7 +77,6 @@ export const MenuList = <
   const initialCss: SystemStyleObject = {
     ...selectStyles.content,
     maxHeight: `${maxHeight}px`,
-    WebkitOverflowScrolling: "touch",
   };
 
   const css = chakraStyles?.menuList
