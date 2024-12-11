@@ -32,6 +32,7 @@ export const SelectContainer = <
   const initialCss: SystemStyleObject = {
     ...selectStyles.root,
     gap: 0,
+    position: "relative",
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
