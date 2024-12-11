@@ -80,10 +80,10 @@ export const ValueContainer = <
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
     flex: 1,
+    paddingY: "2px",
     flexWrap: "wrap",
     position: "relative",
     overflow: "hidden",
-    py: "2px",
   };
 
   const css = chakraStyles?.valueContainer
