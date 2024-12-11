@@ -19,8 +19,6 @@ interface SvgProps extends HTMLChakraProps<"svg"> {}
 
 export const CheckIcon = (props: SvgProps) => (
   <chakra.svg
-    width="1em"
-    height="1em"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -35,8 +33,6 @@ export const CheckIcon = (props: SvgProps) => (
 
 export const ChevronDownIcon = (props: SvgProps) => (
   <chakra.svg
-    width="1em"
-    height="1em"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -50,13 +46,7 @@ export const ChevronDownIcon = (props: SvgProps) => (
 );
 
 export const CloseIcon = (props: SvgProps) => (
-  <chakra.svg
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    {...props}
-  >
+  <chakra.svg viewBox="0 0 24 24" fill="currentColor" {...props}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"

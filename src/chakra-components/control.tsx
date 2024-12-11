@@ -153,12 +153,7 @@ export const DropdownIndicator = <
     ? chakraStyles.dropdownIndicator(initialDropdownIndicatorCss, props)
     : initialDropdownIndicatorCss;
 
-  const initialDownChevronCss: SystemStyleObject = {
-    ...selectStyles.indicator,
-    height: "1em",
-    width: "1em",
-    fontSize: "1.2em",
-  };
+  const initialDownChevronCss: SystemStyleObject = {};
   const downChevronCss = chakraStyles?.downChevron
     ? chakraStyles.downChevron(initialDownChevronCss, props)
     : initialDownChevronCss;
