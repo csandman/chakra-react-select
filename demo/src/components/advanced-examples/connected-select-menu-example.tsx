@@ -17,11 +17,6 @@ const ConnectedSelectMenuExample = () => {
       closeMenuOnSelect={false}
       focusRingColor={outlineColor}
       chakraStyles={{
-        dropdownIndicator: (provided) => ({
-          ...provided,
-          p: 0,
-          w: "40px",
-        }),
         control: (provided, state) => ({
           ...provided,
           borderBottomRadius: state.menuIsOpen ? "none" : "sm",
