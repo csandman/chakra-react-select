@@ -1,6 +1,6 @@
 {
   "name": "chakra-react-select",
-  "version": "5.0.2",
+  "version": "6.0.0-rc.2",
   "description": "A Chakra UI wrapper for the popular library React Select",
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
@@ -48,16 +48,15 @@
     "lint-fix": "eslint --fix src",
     "prepare": "husky",
     "prepublishOnly": "npm run build && npm run lint",
-    "postpublish": "git push --tags"
+    "postpublish": "git push --follow-tags"
   },
   "dependencies": {
     "react-select": "5.8.x"
   },
   "peerDependencies": {
-    "@chakra-ui/react": "2.x",
-    "@emotion/react": "^11.8.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "@chakra-ui/react": "3.x",
+    "next-themes": "0.x",
+    "react": ">=18"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
@@ -66,7 +65,6 @@
     "@typescript-eslint/eslint-plugin": "^7.14.1",
     "@typescript-eslint/parser": "^7.14.1",
     "concurrently": "^9.0.1",
-    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
@@ -99,7 +97,8 @@
   ],
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "tag": "rc"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",

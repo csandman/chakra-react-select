@@ -1,221 +1,473 @@
 import {
   Code,
   Container,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
+  Flex,
+  For,
   Heading,
+  Input,
+  Separator,
+  Span,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
-import { AsyncSelect, CreatableSelect, Select } from "chakra-react-select";
-import { colorOptions, groupedOptions } from "./data/options";
+import {
+  AsyncSelect,
+  CreatableSelect,
+  GroupBase,
+  LoadingIndicatorProps,
+  Select,
+  chakraComponents,
+} from "chakra-react-select";
+import ConnectedSelectMenuExample from "./components/advanced-examples/connected-select-menu-example";
+import CustomIndicatorIconsExample from "./components/advanced-examples/custom-indicator-icons-example";
+import OptionsWithIconsExample from "./components/advanced-examples/options-with-icons-example";
+import SelectPopoverExample from "./components/advanced-examples/select-popover-example";
+import { useColorModeValue } from "./components/ui/color-mode";
+import { Field } from "./components/ui/field";
+import {
+  SelectContent,
+  SelectItem,
+  SelectItemGroup,
+  SelectLabel,
+  SelectRoot,
+  SelectTrigger,
+  SelectValueText,
+} from "./components/ui/select";
+import animeMovies from "./data/anime-movies";
+import { ColorOption, colorOptions, groupedOptions } from "./data/options";
 
-const mappedcolorOptions = colorOptions.map((option) => ({
+const mappedColorOptions = colorOptions.map((option) => ({
   ...option,
-  colorScheme: option.value,
+  colorPalette: option.value,
 }));
 
-const App = () => (
-  <Container mt={8} mb={24}>
-    <Heading as="h1" size="md" p={4}>
-      Chakra React Select Demo
-    </Heading>
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select Colors and Flavours <Code>size="sm"</Code>
-      </FormLabel>
-      <Select
-        id="color-select"
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        size="sm"
-      />
-    </FormControl>
+const tagVariantOptions = [
+  { value: "surface", label: "Surface (default)", variant: "surface" },
+  { value: "solid", label: "Solid", variant: "solid" },
+  { value: "outline", label: "Outline", variant: "outline" },
+  { value: "subtle", label: "Subtle", variant: "subtle" },
+];
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours <Code>size="md" (default)</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+const asyncComponents = {
+  LoadingIndicator: (
+    props: LoadingIndicatorProps<ColorOption, true, GroupBase<ColorOption>>
+  ) => {
+    const { color, trackColor } = useColorModeValue(
+      {
+        color: "colorPalette.500",
+        trackColor: "colors.colorPalette.100",
+      },
+      {
+        color: "colorPalette.300",
+        trackColor: "colors.colorPalette.800",
+      }
+    );
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours <Code>size="lg"</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        size="lg"
+    return (
+      <chakraComponents.LoadingIndicator
+        colorPalette="blue"
+        color={color}
+        trackColor={trackColor}
+        animationDuration="750ms"
+        spinnerSize="md"
+        borderWidth="3px"
+        {...props}
       />
-    </FormControl>
+    );
+  },
+};
 
-    <FormControl p={4}>
-      <FormLabel>Async Select</FormLabel>
-      <AsyncSelect
-        isMulti
-        name="colors"
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        loadOptions={(inputValue, callback) => {
-          setTimeout(() => {
-            const values = colorOptions.filter((i) =>
-              i.label.toLowerCase().includes(inputValue.toLowerCase())
-            );
-            callback(values);
-          }, 3000);
-        }}
-      />
-    </FormControl>
+const App = () => {
+  return (
+    <Container as="main" maxWidth="lg" mt={8} mb={48}>
+      <Heading as="h1" py={4}>
+        Chakra React Select Demo
+      </Heading>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours (With global <Code>tagColorScheme</Code>)
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        tagColorScheme="purple"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+      <Stack gap={5}>
+        <Field
+          label="Standard Input"
+          helperText="This is some helper text"
+          errorText="This is an error"
+        >
+          <Input placeholder="This is my placeholder" />
+        </Field>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Select Colors and Flavours (With <Code>colorScheme</Code> in each
-        option)
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={mappedcolorOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+        <Separator my={2} />
 
-    <FormControl p={4}>
-      <FormLabel>Select with creatable options</FormLabel>
-      <CreatableSelect
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+        <For each={["sm", "md", "lg"]}>
+          {(size) => (
+            <SelectRoot key={size} size={size} collection={animeMovies}>
+              <SelectLabel>
+                Built-in Chakra UI Select <Code>{`size="${size}"`}</Code>
+              </SelectLabel>
+              <SelectTrigger clearable>
+                <SelectValueText placeholder="Select movie" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItemGroup label="Anime Movies">
+                  {animeMovies.items.map((movie) => (
+                    <SelectItem item={movie} key={movie.value}>
+                      {movie.label}
+                    </SelectItem>
+                  ))}
+                </SelectItemGroup>
+              </SelectContent>
+            </SelectRoot>
+          )}
+        </For>
 
-    <FormControl p={4} isDisabled>
-      <FormLabel>
-        Disabled select from the <Code>FormControl</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+        <Separator my={2} />
 
-    <FormControl p={4}>
-      <FormLabel>
-        Disabled select from the <Code>Select</Code> element itself
-      </FormLabel>
-      <Select
-        isDisabled
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-    </FormControl>
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'size="sm"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="sm"
+          />
+        </Field>
 
-    <FormControl p={4} isInvalid>
-      <FormLabel>
-        Invalid select from the <Code>FormControl</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-      <FormErrorMessage>
-        This error message shows because of an invalid FormControl
-      </FormErrorMessage>
-    </FormControl>
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'size="md" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="md"
+          />
+        </Field>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Invalid select from the <Code>Select</Code> element itself
-      </FormLabel>
-      <Select
-        isInvalid
-        isMulti
-        name="colors"
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-      />
-      <FormErrorMessage>
-        You can't see this error message because the isInvalid prop is set on
-        the select element instead of the form control
-      </FormErrorMessage>
-    </FormControl>
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'size="lg"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={groupedOptions}
+            placeholder="Select some colors and flavors..."
+            size="lg"
+          />
+        </Field>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select with <Code>selectedOptionStyle="check"</Code>
-      </FormLabel>
-      <Select
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionStyle="check"
-      />
-    </FormControl>
+        <Separator my={2} />
 
-    <FormControl p={4}>
-      <FormLabel>
-        Single Select with <Code>selectedOptionColorScheme="green"</Code>
-      </FormLabel>
-      <Select
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionColorScheme="green"
-      />
-    </FormControl>
+        <Field label="Async Select">
+          <AsyncSelect
+            placeholder="Select some colors..."
+            loadOptions={(_inputValue, callback) => {
+              setTimeout(() => callback(colorOptions), 1500);
+            }}
+          />
+        </Field>
 
-    <FormControl p={4}>
-      <FormLabel>
-        Multi Select with <Code>selectedOptionColorScheme="green"</Code>
-      </FormLabel>
-      <Select
-        isMulti
-        options={groupedOptions}
-        placeholder="Select some colors..."
-        closeMenuOnSelect={false}
-        selectedOptionColorScheme="green"
-        hideSelectedOptions={false}
-      />
-    </FormControl>
-  </Container>
-);
+        <Field label="Async Select with Custom Spinner">
+          <AsyncSelect
+            placeholder="Select some colors..."
+            loadOptions={(_inputValue, callback) => {
+              setTimeout(() => callback(colorOptions), 10000);
+            }}
+            components={asyncComponents}
+            isLoading
+          />
+        </Field>
+
+        <Field label="Select with Creatable Options">
+          <CreatableSelect
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>focusRingColor="blue.600"</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            focusRingColor="blue.600"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with global <Code>tagColorPalette</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            tagColorPalette="purple"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>colorPalette</Code> in each option
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={mappedColorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with global <Code>tagVariant</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            tagVariant="outline"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with individual option <Code>variant</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={tagVariantOptions}
+            placeholder="Select some tag variants..."
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Field
+          disabled
+          label={
+            <Span>
+              Disabled Select from the <Code>Field.Root</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Disabled Select from the <Code>Select</Code> element
+            </Span>
+          }
+        >
+          <Select
+            disabled
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          invalid
+          errorText="This error message shows because of an invalid Field.Root"
+          label={
+            <Span>
+              Invalid Select from the <Code>Field.Root</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Field
+          errorText="You can't see this error message because the isInvalid prop is set on the select element instead of the form control"
+          label={
+            <Span>
+              Invalid Select from the <Code>Select</Code> element
+            </Span>
+          }
+        >
+          <Select
+            invalid
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Field
+          label={
+            <Span>
+              Single Select with{" "}
+              <Code>{'selectedOptionStyle="color" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            selectedOptionStyle="color"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Single Select with <Code>{'selectedOptionStyle="check"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            options={colorOptions}
+            placeholder="Select some colors..."
+            selectedOptionStyle="check"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'variant="outline" (default)'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            variant="outline"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Select with <Code>{'variant="subtle"'}</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            variant="subtle"
+          />
+        </Field>
+
+        <Separator my={2} />
+
+        <Flex direction="column" gap={1}>
+          <Text fontSize="sm" fontWeight="medium">
+            Select Not wrapped in a <Code>Field.Root</Code>
+          </Text>
+          <Select
+            name="colors"
+            options={colorOptions}
+            placeholder="Select some colors..."
+          />
+        </Flex>
+
+        <Separator my={2} />
+
+        <Heading>Advanced Examples</Heading>
+
+        <Field label="Select in a Popover">
+          <SelectPopoverExample />
+        </Field>
+
+        <Field label="Select with Custom Options">
+          <OptionsWithIconsExample />
+        </Field>
+
+        <Field label="Select Styled with CSS">
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            className="crs"
+            classNamePrefix="crs"
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Dropdown Indicator Flip Using <Code>chakraStyles</Code>
+            </Span>
+          }
+        >
+          <Select
+            isMulti
+            options={colorOptions}
+            placeholder="Select some colors..."
+            chakraStyles={{
+              dropdownIndicator: (prev, { selectProps: { menuIsOpen } }) => ({
+                ...prev,
+                "& > svg": {
+                  transitionProperty: "transform",
+                  transitionDuration: "moderate",
+                  transform: `rotate(${menuIsOpen ? -180 : 0}deg)`,
+                },
+              }),
+            }}
+          />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Connected Dropdown Using <Code>chakraStyles</Code>
+            </Span>
+          }
+        >
+          <ConnectedSelectMenuExample />
+        </Field>
+
+        <Field label="Custom Indicator Icons">
+          <CustomIndicatorIconsExample />
+        </Field>
+      </Stack>
+    </Container>
+  );
+};
 
 export default App;
