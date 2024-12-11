@@ -30,14 +30,7 @@ export const SelectContainer = <
   });
 
   const initialCss: SystemStyleObject = {
-    // TODO: Figure out how to get the selectStyles.root to work properly
-    // Note: The selectStyles.root is actually supposed to apply to the field that wraps the select, not the select itself
-    // so this may not be correct.
     ...selectStyles.root,
-    position: "relative",
-    width: "100%",
-    // Without this, there is a weird bottom spacing on the select, due to a hidden div wrapping a dummy input
-    gap: 0,
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
@@ -139,7 +132,7 @@ export const IndicatorsContainer = <
     // TODO: Figure out if this should be allowed to be position: "absolute"
     // That's the built-in default, but it's causing the tags to overlap the indicators
     position: "static",
-    // This needs to be overridden otherwise, becuase the padding is already on the control
+    // This needs to be overridden otherwise, because the padding is already on the control
     paddingRight: 0,
   };
 
