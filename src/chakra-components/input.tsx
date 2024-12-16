@@ -2,6 +2,8 @@ import { Box, type SystemStyleObject, chakra } from "@chakra-ui/react";
 import type { GroupBase, InputProps } from "react-select";
 import { cleanCommonProps } from "../utils";
 
+const BaseInput = chakra("input");
+
 export const Input = <
   Option,
   IsMulti extends boolean,
@@ -67,7 +69,7 @@ export const Input = <
       data-value={value || ""}
       css={containerCss}
     >
-      <chakra.input
+      <BaseInput
         className={cx({ input: true }, inputClassName)}
         ref={innerRef}
         css={inputCss}
