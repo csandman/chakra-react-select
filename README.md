@@ -127,7 +127,8 @@ how you'd normally use [react-select](https://react-select.com/home). It will
 accept all of the props that the original package does, with a few additions and
 exceptions listed below. So if you have a question on basic usage, your best bet
 is to check the original docs or google "How to (some functionality) with
-react-select" and just swap out `react-select` for `chakra-react-select`.
+react-select" and just swap out `react-select` with `chakra-react-select` in
+your code.
 
 ## Extra Props
 
@@ -247,9 +248,9 @@ In the migration to
 [Chakra v3](https://www.chakra-ui.com/docs/get-started/migration#input-select-textarea),
 they ended up removing the `invalid` prop from the `Input`, `Select`, and
 `Textarea` components themselves in favor of always having the user pass it into
-the wrapping `Field.Root` instead, but I felt that it wouldn't hurt to keep the
-prop on this component as well, as users don't always wrap their components in a
-`Field.Root` in the first place.
+the wrapping `Field.Root` instead. However, it was decided that it wouldn't hurt
+to keep the prop on this component as well, as users don't always wrap their
+components in a `Field.Root` in the first place.
 
 ```tsx
 return (
