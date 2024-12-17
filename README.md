@@ -40,7 +40,7 @@ This component is a wrapper for the popular react component
 
 Check out the demo here:
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-lzaqwr?file=src%2Fapp.tsx)
+[![SB-TS]](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx)
 
 > [!NOTE]
 >
@@ -532,8 +532,6 @@ const chakraStyles = {
 };
 ```
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-o6ugku?file=src%2Fapp.tsx)
-
 Additionally, there is one key that is available in the `styles` prop that does
 not exist in the `chakraStyles` object; `menuPortal`. This key applies to the
 `MenuPortal` element which is only used when the
@@ -553,7 +551,11 @@ return (
   <Select
     menuPortalTarget={document.body}
     styles={{
-      menuPortal: (provided) => ({ ...provided, zIndex: 100 }),
+      menuPortal: (provided) => ({
+        ...provided,
+        // This is the z-index of the normal select in Chakra.
+        zIndex: "var(--chakra-z-index-dropdown)",
+      }),
     }}
     chakraStyles={{
       // All other component styles
@@ -581,7 +583,7 @@ return (
 /* styles.css */
 
 .crs__menu-portal {
-  z-index: 100;
+  z-index: var(--chakra-z-index-dropdown);
 }
 ```
 
@@ -589,12 +591,6 @@ If anyone has any suggestions for how to fully replace the `MenuPortal`
 component, please leave a comment on
 [this issue](https://github.com/csandman/chakra-react-select/issues/55) or
 submit a pull request.
-
-#### Examples
-
-Dropdown menu attached to control example:
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-nh58wg?file=src%2Fapp.tsx)
 
 ### Theme Styles
 
