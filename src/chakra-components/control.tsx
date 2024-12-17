@@ -15,8 +15,6 @@ import type {
   IndicatorSeparatorProps,
   LoadingIndicatorProps,
 } from "react-select";
-import type { SizeProps } from "../types";
-import { useSize } from "../utils";
 import { ChevronDownIcon, CloseIcon } from "./icons";
 
 export const Control = <
@@ -241,22 +239,14 @@ export const LoadingIndicator = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps: { chakraStyles },
     color,
     colorPalette,
     trackColor,
     animationDuration,
     borderWidth,
-    spinnerSize: propsSpinnerSize,
+    spinnerSize,
   } = props;
-
-  const size = useSize(sizeProp);
-  const spinnerSizes: SizeProps<"sm" | "md" | "lg" | "xl" | "xs"> = {
-    sm: "xs",
-    md: "sm",
-    lg: "md",
-  };
-  const spinnerSize = spinnerSizes[size];
 
   const initialCss: SystemStyleObject = {
     marginRight: 3,
@@ -278,7 +268,7 @@ export const LoadingIndicator = <
       )}
       css={css}
       {...innerProps}
-      size={propsSpinnerSize || spinnerSize}
+      size={spinnerSize}
       colorPalette={colorPalette}
       color={color}
       animationDuration={animationDuration}
