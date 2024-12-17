@@ -43,7 +43,7 @@ export const cleanCommonProps = <
   return { ...innerProps };
 };
 
-/** A typeguard to ensure the default size on the Input component is valid. */
+/** A type guard to ensure the default size on the Input component is valid. */
 const isSize = (size: unknown): size is Size => {
   const isString = typeof size === "string";
   return isString && ["sm", "md", "lg"].includes(size);
@@ -70,17 +70,16 @@ const getDefaultSize = (size: unknown): Size => {
 export const useSize = (size: SizeProp | undefined): Size => {
   const chakraContext = useChakraContext();
   const defaultSize = getDefaultSize(
-    // TODO: This doesn't seem to work as expected
-    chakraContext.getSlotRecipe("select")?.defaultSize
+    chakraContext.getSlotRecipe("select")?.defaultVariants?.size
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
-  const definedSize = size ?? defaultSize;
   // Or, if a breakpoint is passed, get the size based on the current screen size
-  return (
-    // @ts-expect-error - I'm not sure why this is throwing an error - TODO: Figure this out
-    useBreakpointValue(definedSize, { fallback: defaultSize }) ?? defaultSize
-  );
+  const responsiveSize = (typeof size === "string" ? [size] : size) ?? [
+    defaultSize,
+  ];
+
+  return useBreakpointValue(responsiveSize) ?? defaultSize;
 };
 
 export function useColorMode() {
