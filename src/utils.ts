@@ -22,7 +22,6 @@ export const cleanCommonProps = <
   AdditionalProps,
   keyof CommonPropsAndClassName<Option, IsMulti, Group>
 > => {
-  // className
   const {
     className, // not listed in commonProps documentation, needs to be removed to allow Emotion to generate classNames
     clearValue,

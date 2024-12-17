@@ -10,8 +10,6 @@ const useChakraSelectProps = <
   Group extends GroupBase<Option> = GroupBase<Option>,
 >({
   components = {},
-  // eslint-disable-next-line deprecation/deprecation
-  theme,
   disabled,
   isDisabled,
   invalid,
@@ -22,6 +20,8 @@ const useChakraSelectProps = <
   selectedOptionColorPalette = "blue",
   menuIsOpen,
   menuPlacement = "auto",
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
+  theme,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {
   // Combine the props passed into the component with the props that can be set

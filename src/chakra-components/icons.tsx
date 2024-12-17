@@ -7,7 +7,7 @@ import { chakra } from "@chakra-ui/react";
  * @see {@link https://github.com/chakra-ui/chakra-ui/blob/d0f502f/packages/react/src/components/icons.tsx}
  */
 
-interface SvgProps extends HTMLChakraProps<"svg"> {}
+type SvgProps = HTMLChakraProps<"svg">;
 
 const Svg = chakra("svg");
 
