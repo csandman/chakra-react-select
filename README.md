@@ -1140,17 +1140,6 @@ https://github.com/csandman/chakra-react-select/discussions/111
 - Vanilla JS: _coming soon_
 - TypeScript: _coming soon_
 
-## Advanced Examples
-
-There are some pretty interesting ways you can customize an instance of
-`chakra-react-select`, so here are a few examples of some of the more advanced
-customizations.
-
-- Select in a Popover:
-  https://stackblitz.com/edit/vitejs-vite-cf6hiq?file=src%2Fapp.tsx
-- Drag to Reorder Tags Multi Select (WIP):
-  https://stackblitz.com/edit/vitejs-vite-wykymv?file=src%2Fmulti-select-sort.tsx
-
 ## Templates
 
 When submitting a bug report, please include a minimum reproduction of your
