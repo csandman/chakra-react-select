@@ -4,7 +4,7 @@ import {
   defineConfig,
   defineSlotRecipe,
 } from "@chakra-ui/react";
-import { tagAnatomy } from "@chakra-ui/react/anatomy";
+import { selectAnatomy, tagAnatomy } from "@chakra-ui/react/anatomy";
 
 const tagSlotRecipe = defineSlotRecipe({
   slots: tagAnatomy.keys(),
@@ -21,10 +21,19 @@ const tagSlotRecipe = defineSlotRecipe({
   },
 });
 
+const selectSlotRecipe = defineSlotRecipe({
+  slots: selectAnatomy.keys(),
+  defaultVariants: {
+    // Uncomment to modify the default size of the select
+    // size: "sm",
+  },
+});
+
 const config = defineConfig({
   theme: {
     slotRecipes: {
       tag: tagSlotRecipe,
+      select: selectSlotRecipe,
     },
     tokens: {
       cursor: {
