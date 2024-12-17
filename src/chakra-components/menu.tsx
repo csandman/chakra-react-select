@@ -102,9 +102,9 @@ export const MenuList = <
 };
 
 const messageVerticalPaddings: SizeProps = {
-  sm: "6px",
-  md: "8px",
-  lg: "10px",
+  sm: 1.5,
+  md: 2,
+  lg: 2.5,
 };
 
 export const LoadingMessage = <
