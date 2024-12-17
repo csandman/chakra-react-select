@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import type { MutableRefObject, ReactElement, RefAttributes } from "react";
+import type { ReactElement, RefAttributes, RefObject } from "react";
 import type { GroupBase, SelectInstance } from "react-select";
 import AsyncCreatableReactSelect from "react-select/async-creatable";
 import type { AsyncCreatableProps } from "react-select/async-creatable";
@@ -19,7 +19,7 @@ const AsyncCreatableSelect = forwardRef(
     props: AsyncCreatableProps<Option, IsMulti, Group>,
     ref:
       | ((instance: SelectInstance<Option, IsMulti, Group> | null) => void)
-      | MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
+      | RefObject<SelectInstance<Option, IsMulti, Group> | null>
       | null
   ) => {
     const chakraSelectProps = useChakraSelectProps(props);
