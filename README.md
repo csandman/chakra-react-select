@@ -16,9 +16,10 @@ This component is a wrapper for the popular react component
 
 > [!IMPORTANT]
 >
-> This version of `chakra-react-select` is updated for
+> This version of Chakra React Select is updated for
 > [Chakra UI v3](https://www.chakra-ui.com/docs/get-started/installation) which
-> works exclusively with React version 18 or above. `chakra-react-select` v5,
+> works exclusively with React version 18 or above.
+> [Chakra React Select v5](https://github.com/csandman/chakra-react-select/tree/v5),
 > which is compatible with [Chakra UI v2](https://v2.chakra-ui.com/), will be
 > maintained for the foreseeable future. If you're still using Chakra UI v2
 > check
