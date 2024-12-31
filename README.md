@@ -133,17 +133,25 @@ your code.
 
 ## Extra Props
 
+All of the props from the original `react-select` package are also available in
+this package, with a few exceptions. There are also some extra props that have
+been added to make this component behave/appear more like the built-in Chakra UI
+components.
+
+There are examples of all of the extra props below included in
+[the demo here](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx).
+
 ### `size` — Options: `ResponsiveValue<"sm" | "md" | "lg">` — Default: `md`
 
-You can pass the `size` prop with either `sm`, `md`, or `lg` (default is `md`).
-These will reflect the sizes available on the
-[Chakra `<Input />` component](https://www.chakra-ui.com/docs/components/input)
+You can pass the `size` prop with either `sm`, `md`, or `lg`. These will reflect
+the sizes available on the
+[Chakra `<Input />` component](https://www.chakra-ui.com/docs/components/select)
 (except for `xs` because it's too small to work). Alternatively, you can pass a
 [responsive style array or object](https://www.chakra-ui.com/docs/styling/responsive-design)
 of `size` values to allow it to change depending on your theme's breakpoints.
 
-If no `size` is passed, it will default to `defaultProps.size` from the theme
-for Chakra's `Input` component. If your component theme for `Input` is not
+If no `size` is passed, it will default to `defaultVariants.size` from the theme
+for Chakra's `Select` component. If your component theme for `Select` is not
 modified, it will be `md`.
 
 ```tsx
@@ -315,9 +323,7 @@ react-select does it, by highlighting the selected option in the color blue.
 Alternatively, if you pass `"check"` for the value, the selected option will be
 styled like the
 [Chakra UI `<Select />` component](https://www.chakra-ui.com/docs/components/select)
-and include a check icon next to the selected option(s). If `isMulti` and
-`selectedOptionStyle="check"` are passed, space will only be added for the check
-marks if `hideSelectedOptions={false}` is also passed.
+and include a check icon on the right side of the selected option(s).
 
 ```js
 return (
@@ -596,12 +602,12 @@ submit a pull request.
 
 ### Theme Styles
 
-As mentioned above, a few of the custom components this package implements
-either use styles from the global
-[Chakra component recipes](https://www.chakra-ui.com/docs/theming/customization/recipes)
-or are themselves those components. As this package pulls directly from your
-Chakra theme, any changes you make to those components' themes will propagate to
-the components in this package.
+As mentioned above, most of the custom components this package implements either
+use styles from the global
+[Chakra component recipes](https://www.chakra-ui.com/docs/theming/customization/recipes).
+As this package pulls directly from your Chakra theme, any changes you make to
+those components' themes will modify the styles of the components in this
+package.
 
 > [!NOTE]
 >
@@ -781,9 +787,10 @@ function CustomMultiSelect() {
 Like the original `react-select`, this package exports all of the custom
 components that make up the overall select. However, instead of being exported
 as `components` they are exported as `chakraComponents` to leave the original
-`components` export from react-select alone (you can export that as well if
-you'd like). When implementing this component, you have the option to wrap these
-components and alter their state and the children they return
+`components` export from react-select alone (you can import that as well if
+you'd like, however there shouldn't be any reason to). When implementing this
+component, you have the option to wrap these components and alter their state
+and the children they return
 [in the same way the original does](https://react-select.com/components#defining-components).
 
 It's important to note, however, that there are 3 components offered in the
@@ -812,8 +819,6 @@ const components: SelectComponentsConfig<Option, true, GroupBase<Option>> = {
   ),
 };
 ```
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-a8zme3?file=src%2Fapp.tsx)
 
 Here's a complete example of how you might use custom components to create a
 select with a custom `Option`:
@@ -903,7 +908,8 @@ const App = () => (
 );
 ```
 
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-jgfakl?file=src%2Fapp.tsx)
+Demos of both of the above examples can be found in
+[the main demo StackBlitz](<[demo/README.md](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx)>).
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
@@ -960,8 +966,6 @@ const App = () => (
   />
 );
 ```
-
-[![SB-TS]](https://stackblitz.com/edit/lyyatb?file=src%2Fapp.tsx)
 
 ## `useChakraSelectProps`
 
