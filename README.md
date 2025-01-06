@@ -62,7 +62,7 @@ Check out the demo here:
   - [`focusRingColor`](#focusringcolor)
   - [`selectedOptionStyle`](#selectedoptionstyle--options-color--check--default-color)
   - [`selectedOptionColorPalette`](#selectedoptioncolorpalette--default-blue)
-  - [`variant`](#variant--options-outline--filled--flushed--unstyled--default-outline)
+  - [`variant`](#variant--options-outline--subtle--default-outline)
 - [Styling](#styling)
   - [`chakraStyles`](#chakrastyles)
     - [Caveats](#caveats)
@@ -387,13 +387,17 @@ If no `variant` is passed, it will default to `defaultProps.variant` from the
 theme for Chakra's `Select` component. If your component recipe for `Select` is
 not modified, it will be `outline`.
 
+The typing for this prop is actually pulled directly from your Chakra theme
+props, so if you have any custom variants defined in your theme, you can use
+those instead, and the typing will still work. That is, as long as you have run
+[the `typegen` command](https://www.chakra-ui.com/docs/theming/slot-recipes#typescript-2)
+to generate the new types.
+
 ```tsx
 return (
   <>
     <Select variant="outline" /> {/* Default */}
-    <Select variant="filled" />
-    <Select variant="flushed" />
-    <Select variant="unstyled" />
+    <Select variant="subtle" />
   </>
 );
 ```

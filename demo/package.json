@@ -6,7 +6,8 @@
     "build": "tsc -b && vite build",
     "dev": "vite --port=5152",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typegen": "npx @chakra-ui/cli typegen ./src/theme/index.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.2.3",

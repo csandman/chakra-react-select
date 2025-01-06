@@ -1,4 +1,5 @@
 import type {
+  SelectRootProps,
   SystemStyleObject,
   TagRootProps,
   useFieldContext,
@@ -42,7 +43,7 @@ export type TagVariant = TagRootProps["variant"];
 
 export type SelectedOptionStyle = "color" | "check";
 
-export type Variant = "outline" | "subtle";
+export type Variant = SelectRootProps["variant"];
 
 export type StylesFunction<ComponentProps> = (
   provided: SystemStyleObject,
