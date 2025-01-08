@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { SystemStyleObject } from "@chakra-ui/react";
+import type {
+  ColorPalette,
+  SpinnerProps,
+  SystemStyleObject,
+} from "@chakra-ui/react";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
-  ColorScheme,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -40,7 +43,7 @@ declare module "react-select/base" {
      *
      * @defaultValue `md`
      * @see {@link https://github.com/csandman/chakra-react-select#size--options-responsivevaluesm--md--lg--default-md}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-size-of-the-input}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#sizes}
      */
     size?: SizeProp;
 
@@ -50,36 +53,29 @@ declare module "react-select/base" {
      *
      * If the `aria-invalid` prop is not passed, this prop will also set that
      *
-     * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
-     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#invalid}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#error-text}
      */
-    isInvalid?: boolean;
+    invalid?: boolean;
+
+    /**
+     * Whether the select is disabled. Overrides the `isDisabled` prop built-in to `react-select`.
+     *
+     * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#disabled}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#disabled}
+     */
+    disabled?: boolean;
 
     /**
      * If `true`, the form control will be `readonly`.
      *
-     * @defaultValue `false`
      * @see {@link https://github.com/csandman/chakra-react-select#isinvalid--default-false--isreadonly---default-false}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
-     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#props}
+     * @see {@link https://www.chakra-ui.com/docs/components/field#props}
      */
-    isReadOnly?: boolean;
-
-    /**
-     * If true, the form control will be required. This has 2 side effects:
-     *
-     * - The hidden input element will get the required attribute, triggering native form validation on submit
-     * - The combobox input will have `aria-required` set to true
-     *
-     * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
-     * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
-	@@ -86,7 +87,7 @@ declare module "react-select/base" {
-     * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
-     * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
-     */
-    isRequired?: boolean;
+    readOnly?: boolean;
 
     /**
      * A color name that matches a key from your chakra theme and will
@@ -87,66 +83,56 @@ declare module "react-select/base" {
      *
      * The variable is passed to the theme key for the Chakra `Tag` component.
      *
-     * @defaultValue `"gray"`
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
-     * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/tag#colors}
+     * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
      */
-    tagColorScheme?: ColorScheme;
+    tagColorPalette?: ColorPalette;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
      * which is represented by a chakra `Tag`. You can also use any custom
      * variants you have added to your theme.
      *
-     * Options: "subtle" | "solid" | "outline"
+     * Built-in options: `"outline" | "subtle" | "solid" | "surface"`
      *
-     * @defaultValue `subtle`
+     * @defaultValue Your theme default (default is `"surface"`)
      * @see {@link https://github.com/csandman/chakra-react-select#tagvariant--options-subtle--solid--outline--default-subtle}
-     * @see {@link https://v2.chakra-ui.com/docs/data-display/tag#props}
+     * @see {@link https://www.chakra-ui.com/docs/components/tag#variants}
      */
     tagVariant?: TagVariant;
 
     /**
      * Whether to style a selected option by highlighting it in a solid color
-     * or adding a check mark next to it like the chakra `Menu` component.
+     * or adding a check mark on the right hand side like the Chakra `Select` component.
      *
      * Options: `color` | `check`
      *
-     * @defaultValue `color`
+     * @defaultValue `check`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptionstyle--options-color--check--default-color}
-     * @see {@link https://v2.chakra-ui.com/docs/components/menu#menu-option-groups}
+     * @see {@link https://www.chakra-ui.com/docs/components/select}
      */
     selectedOptionStyle?: SelectedOptionStyle;
 
     /**
-     * The color scheme to style an option with when using the
-     * `selectedOptionStyle="color"` prop.  Uses the `500` value in light mode
-     * and the `300` value in dark mode.
+     * The color palette to style an option with when using the
+     * `selectedOptionStyle="color"` prop.  Uses the `color.500` value in light mode
+     * and the `color.300` value in dark mode.
      *
      * @defaultValue `blue`
-     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorscheme--default-blue}
+     * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorpalette--default-blue}
+     * @see {@link https://www.chakra-ui.com/docs/theming/customization/colors}
      */
-    selectedOptionColorScheme?: ColorScheme;
+    selectedOptionColorPalette?: ColorPalette;
 
     /**
      * The color value to style the border of the `Control` with when the
      * select is focused.
      *
-     * @defaultValue Light mode: `blue.500` | Dark mode: `blue.300`
-     * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
+     * @see {@link https://github.com/csandman/chakra-react-select#focusringcolor}
+     * @see {@link https://www.chakra-ui.com/docs/styling/focus-ring}
      */
-    focusBorderColor?: string;
-
-    /**
-     * The color value to style the border of the `Control` with when
-     * `isInvalid` is passed to the select.
-     *
-     * @defaultValue Light mode: `red.500` | Dark mode: `red.300`
-     * @see {@link https://github.com/csandman/chakra-react-select#focusbordercolor--default-blue500--errorbordercolor--default-red500}
-     * @see {@link https://v2.chakra-ui.com/docs/components/input#changing-the-focus-and-error-border-colors}
-     */
-    errorBorderColor?: string;
+    focusRingColor?: string;
 
     /**
      * Style transformation methods for each of the rendered components using,
@@ -159,20 +145,21 @@ declare module "react-select/base" {
 
     /**
      * The main style variant of the `Select` component. This will use styles
-     * from Chakra's `Input` component and any custom variants you have added to
+     * from Chakra's `Select` component and any custom variants you have added to
      * your theme may be used.
      *
-     * Options: `outline` | `filled` | `flushed` | `unstyled`
+     * Options: `outline` | `subtle`
      *
-     * @defaultValue `outline`
-     * @see {@link https://v2.chakra-ui.com/docs/components/select#changing-the-appearance}
+     * @see {@link https://www.chakra-ui.com/docs/components/select#variants}
      * @see {@link https://github.com/csandman/chakra-react-select#variant--options-outline--filled--flushed--unstyled--default-outline}
      */
     variant?: Variant;
 
     /**
-     * @deprecated This prop is not used in `chakra-react-select`, use
-     * {@link chakraStyles} instead.
+     * This prop is not used in `chakra-react-select`, use {@link chakraStyles} instead.
+     *
+     * The only exception is setting styles on the `menuPortal` component.
+     * @see {@link https://github.com/csandman/chakra-react-select#caveats}
      */
     styles: StylesConfig<Option, IsMulti, Group>;
 
@@ -190,7 +177,7 @@ declare module "react-select" {
     IsMulti extends boolean = boolean,
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
-    sx: SystemStyleObject;
+    css: SystemStyleObject;
   }
 
   export interface MultiValueGenericProps<
@@ -198,7 +185,7 @@ declare module "react-select" {
     IsMulti extends boolean = boolean,
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
-    sx: SystemStyleObject;
+    css: SystemStyleObject;
   }
 
   export interface MultiValueRemoveProps<
@@ -207,7 +194,8 @@ declare module "react-select" {
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     isFocused: boolean;
-    sx: SystemStyleObject;
+    endElementCss: SystemStyleObject;
+    css: SystemStyleObject;
   }
 
   export interface LoadingIndicatorProps<
@@ -216,30 +204,45 @@ declare module "react-select" {
     Group extends GroupBase<Option> = GroupBase<Option>,
   > {
     /**
+     * The color palette of the filled in area of the spinner.
+     *
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#colors}
+     */
+    colorPalette?: ColorPalette;
+
+    /**
      * The color of the filled in area of the spinner.
      *
      * Defaults to your Chakra theme's text color.
-     *
-     * @defaultValue Light mode: `gray.700` | Dark mode: `whiteAlpha.900`
+     * @example
+     * ```jsx
+     * <Spinner color="blue.600"/>
+     * ```
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#custom-color}
      */
     color?: string;
 
     /**
      * The color of the empty area in the spinner.
      *
-     * @defaultValue `transparent`
-     * @see {@link https://v2.chakra-ui.com/docs/components/spinner#spinner-with-empty-area-color}
+     * This prop populates the CSS variable `--spinner-track-color`
+     *
+     * @example
+     * ```jsx
+     * <Spinner trackColor="colors.blue.100"/>
+     * ```
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#track-color}
      */
-    emptyColor?: string;
+    trackColor?: string;
 
     /**
      * The size prop for the Chakra `<Spinner />` component.
      *
      * Defaults to one size smaller than the overall Select's size.
      *
-     * @see {@link https://v2.chakra-ui.com/docs/components/spinner#spinner-with-different-size}
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#sizes}
      */
-    spinnerSize?: "xs" | "sm" | "md" | "lg" | "xl";
+    spinnerSize?: SpinnerProps["size"];
 
     /**
      * The speed of the spinner represented by the time it takes to make one full rotation.
@@ -248,14 +251,13 @@ declare module "react-select" {
      * [CSS `<time>`](https://developer.mozilla.org/en-US/docs/Web/CSS/time)
      * variable which uses either seconds or milliseconds.
      *
-     * @defaultValue `0.45s`
      * @example
      * ```jsx
-     * <Spinner speed="0.2s"/>
+     * <Spinner animationDuration="0.2s"/>
      * ```
-     * @see {@link https://v2.chakra-ui.com/docs/components/spinner/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#custom-speed}
      */
-    speed?: string;
+    animationDuration?: string;
 
     /**
      * The thickness of the spinner.
@@ -263,11 +265,11 @@ declare module "react-select" {
      * @defaultValue `2px`
      * @example
      * ```jsx
-     * <Spinner thickness="4px"/>
+     * <Spinner borderWidth="4px"/>
      * ```
-     * @see {@link https://v2.chakra-ui.com/docs/components/spinner/props}
+     * @see {@link https://www.chakra-ui.com/docs/components/spinner#thickness}
      */
-    thickness?: string;
+    borderWidth?: string;
   }
 }
 
@@ -290,7 +292,6 @@ export type {
   TagVariant,
   Variant,
   SelectedOptionStyle,
-  ColorScheme,
   StylesFunction,
   ChakraStylesConfig,
   OptionBase,

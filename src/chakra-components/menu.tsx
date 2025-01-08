@@ -1,13 +1,6 @@
-import {
-  Box,
-  Menu as ChakraMenu,
-  MenuIcon,
-  useColorModeValue,
-  useMultiStyleConfig,
-} from "@chakra-ui/react";
-import type { PropsOf, SystemStyleObject } from "@chakra-ui/react";
+import { Box, Span, useSlotRecipe } from "@chakra-ui/react";
+import type { HTMLChakraProps, SystemStyleObject } from "@chakra-ui/react";
 import type {
-  CoercedMenuPlacement,
   GroupBase,
   GroupHeadingProps,
   GroupProps,
@@ -17,12 +10,8 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps } from "../types";
-import { cleanCommonProps, useSize } from "../utils";
-
-const alignToControl = (placement: CoercedMenuPlacement) => {
-  const placementToCSSProp = { bottom: "top", top: "bottom" };
-  return placement ? placementToCSSProp[placement] : "top";
-};
+import { cleanCommonProps, useColorModeValue, useSize } from "../utils";
+import { CheckIcon } from "./icons";
 
 export const Menu = <
   Option,
@@ -41,29 +30,27 @@ export const Menu = <
     selectProps: { chakraStyles },
   } = props;
 
-  const initialSx: SystemStyleObject = {
+  const initialCss: SystemStyleObject = {
     position: "absolute",
-    [alignToControl(placement)]: "100%",
+    ...(placement === "top" ? { bottom: "100%" } : { top: "100%" }),
     marginY: "8px",
     width: "100%",
     zIndex: 1,
   };
 
-  const sx = chakraStyles?.menu
-    ? chakraStyles.menu(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.menu
+    ? chakraStyles.menu(initialCss, props)
+    : initialCss;
 
   return (
-    <ChakraMenu>
-      <Box
-        {...innerProps}
-        ref={innerRef}
-        className={cx({ menu: true }, className)}
-        sx={sx}
-      >
-        {children}
-      </Box>
-    </ChakraMenu>
+    <Box
+      {...innerProps}
+      ref={innerRef}
+      className={cx({ menu: true }, className)}
+      css={css}
+    >
+      {children}
+    </Box>
   );
 };
 
@@ -82,44 +69,19 @@ export const MenuList = <
     maxHeight,
     isMulti,
     innerProps,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-    },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
-  const menuStyles = useMultiStyleConfig("Menu");
+  const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
 
-  // We're pulling in the border radius from the theme for the input component
-  // so we can match the menu lists' border radius to it, but in 2.8.0 the value
-  // was changed to being pulled from a theme variable instead of being hardcoded
-  const size = useSize(sizeProp);
-  const inputStyles = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
-  });
-  const fieldStyles = inputStyles.field as Record<string, string>;
-
-  const initialSx: SystemStyleObject = {
-    ...menuStyles.list,
-    minW: "100%",
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.content,
     maxHeight: `${maxHeight}px`,
-    overflowY: "auto",
-    // This is hacky, but it works. May be removed in the future
-    "--input-border-radius": fieldStyles?.["--input-border-radius"],
-    borderRadius: fieldStyles?.borderRadius || menuStyles.list?.borderRadius,
-    position: "relative", // required for offset[Height, Top] > keyboard scroll
-    WebkitOverflowScrolling: "touch",
   };
 
-  const sx = chakraStyles?.menuList
-    ? chakraStyles.menuList(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.menuList
+    ? chakraStyles.menuList(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -131,12 +93,18 @@ export const MenuList = <
         },
         className
       )}
-      sx={sx}
+      css={css}
       ref={innerRef}
     >
       {children}
     </Box>
   );
+};
+
+const messageVerticalPaddings: SizeProps = {
+  sm: 1.5,
+  md: 2,
+  lg: 2.5,
 };
 
 export const LoadingMessage = <
@@ -156,22 +124,15 @@ export const LoadingMessage = <
 
   const size = useSize(sizeProp);
 
-  const verticalPaddings: SizeProps = {
-    sm: "6px",
-    md: "8px",
-    lg: "10px",
-  };
-
-  const initialSx: SystemStyleObject = {
-    color: "chakra-subtle-text",
+  const initialCss: SystemStyleObject = {
+    color: "fg.muted",
     textAlign: "center",
-    paddingY: verticalPaddings[size],
-    fontSize: size,
+    paddingY: messageVerticalPaddings[size],
   };
 
-  const sx = chakraStyles?.loadingMessage
-    ? chakraStyles.loadingMessage(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.loadingMessage
+    ? chakraStyles.loadingMessage(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -183,7 +144,7 @@ export const LoadingMessage = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>
@@ -207,22 +168,15 @@ export const NoOptionsMessage = <
 
   const size = useSize(sizeProp);
 
-  const verticalPaddings: SizeProps = {
-    sm: "6px",
-    md: "8px",
-    lg: "10px",
-  };
-
-  const initialSx: SystemStyleObject = {
-    color: "chakra-subtle-text",
+  const initialCss: SystemStyleObject = {
+    color: "fg.muted",
     textAlign: "center",
-    paddingY: verticalPaddings[size],
-    fontSize: size,
+    paddingY: messageVerticalPaddings[size],
   };
 
-  const sx = chakraStyles?.noOptionsMessage
-    ? chakraStyles.noOptionsMessage(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.noOptionsMessage
+    ? chakraStyles.noOptionsMessage(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -234,7 +188,7 @@ export const NoOptionsMessage = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>
@@ -262,15 +216,19 @@ export const Group = <
     getClassNames,
   } = props;
 
-  const { chakraStyles } = selectProps;
+  const { chakraStyles, size, variant } = selectProps;
 
-  const initialSx: SystemStyleObject = {};
-  const sx = chakraStyles?.group
-    ? chakraStyles.group(initialSx, props)
-    : initialSx;
+  const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
+
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.itemGroup,
+  };
+  const css = chakraStyles?.group
+    ? chakraStyles.group(initialCss, props)
+    : initialCss;
 
   return (
-    <Box {...innerProps} className={cx({ group: true }, className)} sx={sx}>
+    <Box {...innerProps} className={cx({ group: true }, className)} css={css}>
       <Heading
         {...headingProps}
         selectProps={selectProps}
@@ -296,58 +254,34 @@ export const GroupHeading = <
   const {
     cx,
     className,
-    selectProps: { chakraStyles, size: sizeProp },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
   const { data, ...innerProps } = cleanCommonProps(props);
 
-  const menuStyles = useMultiStyleConfig("Menu");
+  const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
 
-  const size = useSize(sizeProp);
-
-  const fontSizes: SizeProps = {
-    sm: "xs",
-    md: "sm",
-    lg: "md",
-  };
-  const paddings: SizeProps = {
-    sm: "0.4rem 0.8rem",
-    md: "0.5rem 1rem",
-    lg: "0.6rem 1.2rem",
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.itemGroupLabel,
   };
 
-  const initialSx: SystemStyleObject = {
-    ...menuStyles.groupTitle,
-    fontSize: fontSizes[size],
-    padding: paddings[size],
-    margin: 0,
-  };
-
-  const sx = chakraStyles?.groupHeading
-    ? chakraStyles.groupHeading(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.groupHeading
+    ? chakraStyles.groupHeading(initialCss, props)
+    : initialCss;
 
   return (
     <Box
       {...innerProps}
       className={cx({ "group-heading": true }, className)}
-      sx={sx}
+      css={css}
     />
   );
 };
 
-/**
- * The `CheckIcon` component from the Chakra UI Menu
- *
- * @see {@link https://github.com/chakra-ui/chakra-ui/blob/eb0316ddf96dd259433724062e923c33e6eee729/packages/components/menu/src/menu-item-option.tsx#L10-L17}
- */
-const CheckIcon: React.FC<PropsOf<"svg">> = (props) => (
-  <svg viewBox="0 0 14 14" width="1em" height="1em" {...props}>
-    <polygon
-      fill="currentColor"
-      points="5.5 11.9993304 14 3.49933039 12.5 2 5.5 8.99933039 1.5 4.9968652 0 6.49933039"
-    />
-  </svg>
+const MenuIcon: React.FC<HTMLChakraProps<"span">> = (props) => (
+  <Span {...props}>
+    <CheckIcon />
+  </Span>
 );
 
 export const Option = <
@@ -368,27 +302,16 @@ export const Option = <
     isSelected,
     selectProps: {
       chakraStyles,
-      size: sizeProp,
       isMulti,
       hideSelectedOptions,
       selectedOptionStyle,
-      selectedOptionColorScheme,
+      selectedOptionColorPalette,
+      size,
+      variant,
     },
   } = props;
 
-  const menuItemStyles = useMultiStyleConfig("Menu").item;
-
-  const size = useSize(sizeProp);
-  const horizontalPaddingOptions: SizeProps = {
-    sm: "0.6rem",
-    md: "0.8rem",
-    lg: "1rem",
-  };
-  const verticalPaddingOptions: SizeProps = {
-    sm: "0.3rem",
-    md: "0.4rem",
-    lg: "0.5rem",
-  };
+  const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
 
   /**
    * Use the same selected color as the border/shadow of the select/input components
@@ -396,8 +319,8 @@ export const Option = <
    * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/theme/src/components/input.ts#L92-L93}
    */
   const selectedBg = useColorModeValue(
-    `${selectedOptionColorScheme}.500`,
-    `${selectedOptionColorScheme}.300`
+    `${selectedOptionColorPalette}.500`,
+    `${selectedOptionColorPalette}.300`
   );
   const selectedColor = useColorModeValue("white", "black");
 
@@ -409,16 +332,8 @@ export const Option = <
 
   const shouldHighlight = selectedOptionStyle === "color" && isSelected;
 
-  const initialSx: SystemStyleObject = {
-    ...menuItemStyles,
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    textAlign: "start",
-    fontSize: size,
-    paddingX: horizontalPaddingOptions[size],
-    paddingY: verticalPaddingOptions[size],
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.item,
     ...(shouldHighlight
       ? {
           bg: selectedBg,
@@ -428,9 +343,10 @@ export const Option = <
       : {}),
   };
 
-  const sx = chakraStyles?.option
-    ? chakraStyles.option(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.option
+    ? chakraStyles.option(initialCss, props)
+    : initialCss;
+
   return (
     <Box
       {...innerProps}
@@ -443,22 +359,18 @@ export const Option = <
         },
         className
       )}
-      sx={sx}
+      css={css}
       ref={innerRef}
-      data-focus={isFocused ? true : undefined}
+      data-highlighted={isFocused ? true : undefined}
       aria-disabled={isDisabled ? true : undefined}
       aria-selected={isSelected}
     >
+      {children}
       {showCheckIcon && (
-        <MenuIcon
-          fontSize="0.8em"
-          marginEnd="0.75rem"
-          opacity={isSelected ? 1 : 0}
-        >
+        <MenuIcon css={{ ...selectStyles.itemIndicator }} hidden={!isSelected}>
           <CheckIcon />
         </MenuIcon>
       )}
-      {children}
     </Box>
   );
 };

@@ -1,4 +1,5 @@
-import { useBreakpointValue, useTheme } from "@chakra-ui/react";
+import { useBreakpointValue, useChakraContext } from "@chakra-ui/react";
+import { useTheme } from "next-themes";
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
 import type { Size, SizeProp } from "./types";
 
@@ -21,7 +22,6 @@ export const cleanCommonProps = <
   AdditionalProps,
   keyof CommonPropsAndClassName<Option, IsMulti, Group>
 > => {
-  // className
   const {
     className, // not listed in commonProps documentation, needs to be removed to allow Emotion to generate classNames
     clearValue,
@@ -42,7 +42,7 @@ export const cleanCommonProps = <
   return { ...innerProps };
 };
 
-/** A typeguard to ensure the default size on the Input component is valid. */
+/** A type guard to ensure the default size on the Input component is valid. */
 const isSize = (size: unknown): size is Size => {
   const isString = typeof size === "string";
   return isString && ["sm", "md", "lg"].includes(size);
@@ -67,21 +67,33 @@ const getDefaultSize = (size: unknown): Size => {
 };
 
 export const useSize = (size: SizeProp | undefined): Size => {
-  const chakraTheme = useTheme();
+  const chakraContext = useChakraContext();
   const defaultSize = getDefaultSize(
-    chakraTheme.components.Input.defaultProps.size
+    chakraContext.getSlotRecipe("select")?.defaultVariants?.size
   );
 
   // Ensure that the size used is one of the options, either `sm`, `md`, or `lg`
-  const definedSize: SizeProp = size ?? defaultSize;
   // Or, if a breakpoint is passed, get the size based on the current screen size
-  const realSize: Size =
-    useBreakpointValue<Size>(
-      typeof definedSize === "string" ? [definedSize] : definedSize,
-      {
-        fallback: "md",
-      }
-    ) || defaultSize;
+  const responsiveSize = (typeof size === "string" ? [size] : size) ?? [
+    defaultSize,
+  ];
 
-  return realSize;
+  return useBreakpointValue(responsiveSize) ?? defaultSize;
 };
+
+export function useColorMode() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const toggleColorMode = () => {
+    setTheme(resolvedTheme === "light" ? "dark" : "light");
+  };
+  return {
+    colorMode: resolvedTheme,
+    setColorMode: setTheme,
+    toggleColorMode,
+  };
+}
+
+export function useColorModeValue<T>(light: T, dark: T) {
+  const { colorMode } = useColorMode();
+  return colorMode === "light" ? light : dark;
+}

@@ -1,12 +1,10 @@
-import { Box, useMultiStyleConfig } from "@chakra-ui/react";
-import type { SystemStyleObject } from "@chakra-ui/react";
+import { Box, type SystemStyleObject, useSlotRecipe } from "@chakra-ui/react";
 import type {
   ContainerProps,
   GroupBase,
   IndicatorsContainerProps,
   ValueContainerProps,
 } from "react-select";
-import { useSize } from "../utils";
 
 export const SelectContainer = <
   Option,
@@ -23,18 +21,25 @@ export const SelectContainer = <
     isDisabled,
     isRtl,
     hasValue,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
-  const initialSx: SystemStyleObject = {
+  const selectStyles = useSlotRecipe({ key: "select" })({
+    size,
+    variant,
+  });
+
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.root,
+    gap: 0,
     position: "relative",
     direction: isRtl ? "rtl" : undefined,
     ...(isDisabled ? { cursor: "not-allowed" } : {}),
   };
 
-  const sx = chakraStyles?.container
-    ? chakraStyles.container(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.container
+    ? chakraStyles.container(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -47,7 +52,7 @@ export const SelectContainer = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>
@@ -68,42 +73,22 @@ export const ValueContainer = <
     isMulti,
     hasValue,
     innerProps,
-    selectProps: {
-      chakraStyles,
-      size: sizeProp,
-      variant,
-      focusBorderColor,
-      errorBorderColor,
-      controlShouldRenderValue,
-    },
+    selectProps: { chakraStyles, controlShouldRenderValue },
   } = props;
 
-  const size = useSize(sizeProp);
-
-  // Getting the css from input instead of select
-  // to fit better with each of the variants
-  const inputStyles = useMultiStyleConfig("Input", {
-    size,
-    variant,
-    focusBorderColor,
-    errorBorderColor,
-  });
-
-  const initialSx: SystemStyleObject = {
+  const initialCss: SystemStyleObject = {
     display: isMulti && hasValue && controlShouldRenderValue ? "flex" : "grid",
     alignItems: "center",
     flex: 1,
     paddingY: "2px",
-    paddingX: inputStyles.field.px,
     flexWrap: "wrap",
-    WebkitOverflowScrolling: "touch",
     position: "relative",
     overflow: "hidden",
   };
 
-  const sx = chakraStyles?.valueContainer
-    ? chakraStyles.valueContainer(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.valueContainer
+    ? chakraStyles.valueContainer(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -116,7 +101,7 @@ export const ValueContainer = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>
@@ -135,19 +120,26 @@ export const IndicatorsContainer = <
     className,
     cx,
     innerProps,
-    selectProps: { chakraStyles },
+    selectProps: { chakraStyles, size, variant },
   } = props;
 
-  const initialSx: SystemStyleObject = {
-    display: "flex",
-    alignItems: "center",
-    alignSelf: "stretch",
-    flexShrink: 0,
+  const selectStyles = useSlotRecipe({ key: "select" })({
+    size,
+    variant,
+  });
+
+  const initialCss: SystemStyleObject = {
+    ...selectStyles.indicatorGroup,
+    // TODO: Figure out if this should be allowed to be position: "absolute"
+    // That's the built-in default, but it's causing the tags to overlap the indicators
+    position: "static",
+    // This needs to be overridden otherwise, because the padding is already on the control
+    paddingRight: 0,
   };
 
-  const sx = chakraStyles?.indicatorsContainer
-    ? chakraStyles.indicatorsContainer(initialSx, props)
-    : initialSx;
+  const css = chakraStyles?.indicatorsContainer
+    ? chakraStyles.indicatorsContainer(initialCss, props)
+    : initialCss;
 
   return (
     <Box
@@ -158,7 +150,7 @@ export const IndicatorsContainer = <
         },
         className
       )}
-      sx={sx}
+      css={css}
     >
       {children}
     </Box>
