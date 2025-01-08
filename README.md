@@ -41,7 +41,7 @@ This component is a wrapper for the popular react component
 
 Check out the demo here:
 
-[![SB-TS]](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx)
+[![SB-TS]](https://stackblitz.com/edit/crs-v6-demo?file=src%2Fapp.tsx)
 
 > [!NOTE]
 >
@@ -139,7 +139,7 @@ been added to make this component behave/appear more like the built-in Chakra UI
 components.
 
 There are examples of all of the extra props below included in
-[the demo here](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx).
+[the demo here](https://stackblitz.com/edit/crs-v6-demo?file=src%2Fapp.tsx).
 
 ### `size` — Options: `ResponsiveValue<"sm" | "md" | "lg">` — Default: `md`
 
@@ -807,18 +807,27 @@ to replace them would be to use a custom `DropdownIndicator` or `ClearIndicator`
 and pass custom icons in as children:
 
 ```tsx
-import { CloseIcon, TriangleDownIcon } from "@chakra-ui/icons";
-import { chakraComponents } from "chakra-react-select";
+import {
+  type GroupBase,
+  type SelectComponentsConfig,
+  chakraComponents,
+} from "chakra-react-select";
+import { LuArrowDown, LuCircleX } from "react-icons/lu";
+
+interface Option {
+  label: string;
+  value: string;
+}
 
 const components: SelectComponentsConfig<Option, true, GroupBase<Option>> = {
   ClearIndicator: (props) => (
     <chakraComponents.ClearIndicator {...props}>
-      <CloseIcon />
+      <LuCircleX />
     </chakraComponents.ClearIndicator>
   ),
   DropdownIndicator: (props) => (
     <chakraComponents.DropdownIndicator {...props}>
-      <TriangleDownIcon />
+      <LuArrowDown />
     </chakraComponents.DropdownIndicator>
   ),
 };
@@ -828,7 +837,7 @@ Here's a complete example of how you might use custom components to create a
 select with a custom `Option`:
 
 ```tsx
-import { Icon, TagLeftIcon } from "@chakra-ui/react";
+import { Box, Icon, useSlotRecipe } from "@chakra-ui/react";
 import {
   type GroupBase,
   Select,
@@ -883,28 +892,28 @@ const customComponents: SelectComponentsConfig<
 > = {
   Option: ({ children, ...props }) => (
     <chakraComponents.Option {...props}>
-      <Icon
-        as={props.data.Icon}
-        color={props.data.iconColor}
-        mr={2}
-        h={5}
-        w={5}
-      />
-      {children}
+      <Icon color={props.data.iconColor} boxSize={4}>
+        <props.data.Icon />
+      </Icon>
+      <Box flexGrow={1}>{children}</Box>
     </chakraComponents.Option>
   ),
-  MultiValueContainer: ({ children, ...props }) => (
-    <chakraComponents.MultiValueContainer {...props}>
-      <TagLeftIcon as={props.data.Icon} color={props.data.iconColor} />
-      {children}
-    </chakraComponents.MultiValueContainer>
-  ),
+  MultiValueContainer: ({ children, ...props }) => {
+    const tagStyles = useSlotRecipe({ key: "tag" })();
+    return (
+      <chakraComponents.MultiValueContainer {...props}>
+        <Box css={tagStyles.startElement} color={props.data.iconColor}>
+          <props.data.Icon />
+        </Box>
+        {children}
+      </chakraComponents.MultiValueContainer>
+    );
+  },
 };
 
-const App = () => (
+const OptionsWithIconsExample = () => (
   <Select
     isMulti
-    name="flavors"
     options={flavorOptions}
     placeholder="Select some flavors..."
     components={customComponents}
@@ -913,7 +922,7 @@ const App = () => (
 ```
 
 Demos of both of the above examples can be found in
-[the main demo StackBlitz](<[demo/README.md](https://stackblitz.com/edit/hrqv9vlv?file=src%2Fapp.tsx)>).
+[the main demo StackBlitz](https://stackblitz.com/edit/crs-v6-demo?file=src%2Fapp.tsx).
 
 ### Custom `LoadingIndicator` (Chakra `Spinner`)
 
@@ -975,11 +984,10 @@ const App = () => (
 
 Being a wrapper for `react-select`, all of the customizations done to
 react-select are passed in as props. There is a hook,
-[`useChakraSelectProps`](https://github.com/csandman/chakra-react-select/blob/main/src/use-chakra-select-props.ts)
-that handles merging any extra customizations from the end user with the
-customizations done by this package. In some cases you may simply want to use
-this hook to get the custom props and pass them into a `react-select` instance
-yourself.
+[`useChakraSelectProps`](./src/use-chakra-select-props.ts) that handles merging
+any extra customizations from the end user with the customizations done by this
+package. In some cases you may simply want to use this hook to get the custom
+props and pass them into a `react-select` instance yourself.
 
 To do so, simply import the hook from this package, and call it by passing in
 any extra custom props you'd like into it and spread it onto a base
@@ -1073,7 +1081,7 @@ component or [`useController`](https://react-hook-form.com/api/usecontroller)
 hook in order to keep the value(s) tracked in `react-hook-form`'s state. Here
 are some examples using each:
 
-> [!NOTE]
+> [!WARNING]
 >
 > These examples still need to be updated to the newest version of
 > `chakra-react-select` at some point, but they should still give you a good
@@ -1155,7 +1163,5 @@ https://github.com/csandman/chakra-react-select/discussions/111
 When submitting a bug report, please include a minimum reproduction of your
 issue using one of these templates:
 
-- Vanilla JS Starter:
-  https://stackblitz.com/edit/vitejs-vite-fatlrb?file=src%2Fapp.jsx
-- TypeScript Starter:
-  https://stackblitz.com/edit/vitejs-vite-evghcw?file=src%2Fapp.tsx
+- Vanilla JS Starter: https://stackblitz.com/edit/crs-v6-js?file=src%2Fapp.jsx
+- TypeScript Starter: https://stackblitz.com/edit/crs-v6-ts?file=src%2Fapp.tsx
