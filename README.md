@@ -77,8 +77,6 @@ Check out the demo here:
   - [`react-hook-form`](#react-hook-form)
   - [`formik`](#formik)
 - [Templates](#templates)
-  - [CodeSandbox](#codesandbox)
-  - [StackBlitz](#stackblitz)
 
 ## Usage
 
