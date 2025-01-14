@@ -12,7 +12,7 @@
 
 This component is a wrapper for the popular react component
 [React Select](https://react-select.com/home) made using the UI library
-[Chakra UI](https://v2.chakra-ui.com/).
+[Chakra UI](https://www.chakra-ui.com/).
 
 > [!IMPORTANT]
 >
@@ -29,8 +29,8 @@ This component is a wrapper for the popular react component
 [![](https://img.shields.io/npm/v/chakra-react-select "chakra-react-select npm")](https://www.npmjs.com/package/chakra-react-select)
 [![](https://badgen.net/bundlephobia/min/chakra-react-select "Minified Bundle Size")](https://bundlephobia.com/result?p=chakra-react-select)
 [![](https://badgen.net/bundlephobia/minzip/chakra-react-select "Minzipped Bundle Size")](https://bundlephobia.com/result?p=chakra-react-select)
-[![](https://badgen.net/npm/dt/chakra-react-select?color=blue&icon=npm "Total NPM Downloads")](https://npm-stat.com/charts.html?package=chakra-react-select&from=2021-09-13)
-[![](https://badgen.net/npm/dw/chakra-react-select?color=blue&icon=npm "Weekly NPM Downloads")](https://npm-stat.com/charts.html?package=chakra-react-select&from=2021-09-13)
+[![](https://img.shields.io/npm/dy/chakra-react-select?logo=npm&color=blue "NPM Downloads Per Year")](https://npm-stat.com/charts.html?package=chakra-react-select&from=2021-09-13)
+[![](https://img.shields.io/npm/dw/chakra-react-select?logo=npm&color=blue "Weekly NPM Downloads")](https://npm-stat.com/charts.html?package=chakra-react-select&from=2021-09-13)
 [![](https://snyk.io/test/github/csandman/chakra-react-select/badge.svg "Known Vulnerabilities")](https://snyk.io/test/github/csandman/chakra-react-select)
 [![](https://img.shields.io/badge/Code_Style-prettier-c596c7.svg?logo=prettier "Code Style: Prettier")](https://github.com/prettier/prettier)
 [![](https://badgen.net/github/license/csandman/chakra-react-select "MIT License")](LICENSE.md)
@@ -684,10 +684,6 @@ describing how it works:
 > styling via CSS classes. This ensures compatibility with
 > [styled components](https://www.styled-components.com/),
 > [CSS modules](https://github.com/css-modules/css-modules) and other libraries.
-
-Here is an example of using classNames to style the components:
-
-[![SB-TS]](https://stackblitz.com/edit/vitejs-vite-zupcmm?file=src%2Fapp.tsx,src%2Fstyles.css)
 
 ## TypeScript Support
 

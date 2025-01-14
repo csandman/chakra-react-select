@@ -36,7 +36,7 @@ declare module "react-select/base" {
   > {
     /**
      * The size of the base control; matches the sizes of the chakra Input
-     * component with the exception of `xs`. A [responsive style array/object](https://v2.chakra-ui.com/docs/features/responsive-styles) can
+     * component with the exception of `xs`. A [responsive style array/object](https://www.chakra-ui.com/docs/styling/responsive-design) can
      * also be passed.
      *
      * Options: `sm` | `md` | `lg`
