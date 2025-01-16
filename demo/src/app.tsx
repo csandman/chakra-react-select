@@ -220,6 +220,7 @@ const App = () => {
           <Select
             isMulti
             options={colorOptions}
+            defaultValue={colorOptions[0]}
             placeholder="Select some colors..."
             tagColorPalette="purple"
           />
@@ -236,6 +237,7 @@ const App = () => {
             isMulti
             options={mappedColorOptions}
             placeholder="Select some colors..."
+            defaultValue={mappedColorOptions.slice(0, 3)}
           />
         </Field>
 
@@ -251,6 +253,7 @@ const App = () => {
             options={colorOptions}
             placeholder="Select some colors..."
             tagVariant="outline"
+            defaultValue={colorOptions.slice(0, 2)}
           />
         </Field>
 
@@ -265,6 +268,7 @@ const App = () => {
             isMulti
             options={tagVariantOptions}
             placeholder="Select some tag variants..."
+            defaultValue={tagVariantOptions}
           />
         </Field>
 
