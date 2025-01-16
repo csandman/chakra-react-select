@@ -20,6 +20,7 @@ import {
 } from "chakra-react-select";
 import ConnectedSelectMenuExample from "./components/advanced-examples/connected-select-menu-example";
 import CustomIndicatorIconsExample from "./components/advanced-examples/custom-indicator-icons-example";
+import MenuPortalTargetExample from "./components/advanced-examples/menu-portal-target-example";
 import OptionsWithIconsExample from "./components/advanced-examples/options-with-icons-example";
 import SelectPopoverExample from "./components/advanced-examples/select-popover-example";
 import { useColorModeValue } from "./components/ui/color-mode";
@@ -468,6 +469,10 @@ const App = () => {
 
         <Field label="Custom Indicator Icons">
           <CustomIndicatorIconsExample />
+        </Field>
+
+        <Field label="Menu Portal Target">
+          <MenuPortalTargetExample />
         </Field>
       </Stack>
     </Container>
