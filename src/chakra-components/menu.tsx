@@ -77,6 +77,7 @@ export const MenuList = <
   const initialCss: SystemStyleObject = {
     ...selectStyles.content,
     maxHeight: `${maxHeight}px`,
+    position: "relative", // required for offset[Height, Top] > keyboard scroll
   };
 
   const css = chakraStyles?.menuList
