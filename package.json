@@ -51,7 +51,7 @@
     "postpublish": "git push --tags"
   },
   "dependencies": {
-    "react-select": "5.8.x"
+    "react-select": "5.10.0"
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.x",
