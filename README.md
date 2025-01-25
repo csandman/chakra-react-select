@@ -93,9 +93,9 @@ to update to v2. If you don't have Chakra UI installed already, you can install
 it like this:
 
 ```sh
-npm i @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+npm i @chakra-ui/react@2 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 # ...or...
-yarn add @chakra-ui/react @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+yarn add @chakra-ui/react@2 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
 ```
 
 > [!NOTE]
@@ -110,9 +110,9 @@ After Chakra UI is set up,
 [install this package from NPM](https://www.npmjs.com/package/chakra-react-select):
 
 ```sh
-npm i chakra-react-select
+npm i chakra-react-select@chakra2 # or @5
 # ...or...
-yarn add chakra-react-select
+yarn add chakra-react-select@chakra2 # or @5
 ```
 
 Once installed, you can import the base select package, the async select, the
