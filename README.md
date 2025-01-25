@@ -93,9 +93,9 @@ to update to v2. If you don't have Chakra UI installed already, you can install
 it like this:
 
 ```sh
-npm i @chakra-ui/react@2 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
 # ...or...
-yarn add @chakra-ui/react@2 @emotion/react@^11.8.1 @emotion/styled@^11 framer-motion@^6
+yarn add @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
 ```
 
 > [!NOTE]
