@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import type {
   ColorPalette,
+  ConditionalValue,
   SpinnerProps,
   SystemStyleObject,
 } from "@chakra-ui/react";
@@ -87,7 +88,7 @@ declare module "react-select/base" {
      * @see {@link https://www.chakra-ui.com/docs/components/tag#colors}
      * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
      */
-    tagColorPalette?: ColorPalette;
+    tagColorPalette?: ConditionalValue<ColorPalette | string>;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -123,7 +124,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorpalette--default-blue}
      * @see {@link https://www.chakra-ui.com/docs/theming/customization/colors}
      */
-    selectedOptionColorPalette?: ColorPalette;
+    selectedOptionColorPalette?: ConditionalValue<ColorPalette | string>;
 
     /**
      * The color value to style the border of the `Control` with when the
@@ -208,7 +209,7 @@ declare module "react-select" {
      *
      * @see {@link https://www.chakra-ui.com/docs/components/spinner#colors}
      */
-    colorPalette?: ColorPalette;
+    colorPalette?: ConditionalValue<ColorPalette | string>;
 
     /**
      * The color of the filled in area of the spinner.
