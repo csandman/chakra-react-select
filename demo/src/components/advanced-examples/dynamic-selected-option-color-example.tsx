@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Select } from "chakra-react-select";
-import { ColorOption, colorOptions } from "../../data/options";
+import type { ColorOption } from "../../data/options";
+import { colorOptions } from "../../data/options";
 
 const DynamicSelectedOptionColorExample = () => {
   const [selectedOptionColorPalette, setSelectedOptionColorPalette] =

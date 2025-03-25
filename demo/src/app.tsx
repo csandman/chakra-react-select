@@ -10,11 +10,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import type { GroupBase, LoadingIndicatorProps } from "chakra-react-select";
 import {
   AsyncSelect,
   CreatableSelect,
-  GroupBase,
-  LoadingIndicatorProps,
   Select,
   chakraComponents,
 } from "chakra-react-select";
@@ -36,7 +35,8 @@ import {
   SelectValueText,
 } from "./components/ui/select";
 import animeMovies from "./data/anime-movies";
-import { ColorOption, colorOptions, groupedOptions } from "./data/options";
+import type { ColorOption } from "./data/options";
+import { colorOptions, groupedOptions } from "./data/options";
 
 const mappedColorOptions = colorOptions.map((option) => ({
   ...option,

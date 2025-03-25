@@ -1,5 +1,5 @@
-import { ColorPalette } from "@chakra-ui/react";
-import { OptionBase } from "chakra-react-select";
+import type { ColorPalette } from "@chakra-ui/react";
+import type { OptionBase } from "chakra-react-select";
 
 export interface ColorOption extends OptionBase {
   label: string;

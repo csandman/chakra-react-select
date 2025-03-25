@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Stack } from "@chakra-ui/react";
-import { Select, Props as SelectProps } from "chakra-react-select";
+import type { Props as SelectProps } from "chakra-react-select";
+import { Select } from "chakra-react-select";
 import { colorOptions } from "../../data/options";
 import { Button } from "../ui/button";
 import {
