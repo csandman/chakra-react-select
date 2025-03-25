@@ -1,4 +1,6 @@
 import type {
+  ColorPalette,
+  ConditionalValue,
   SelectRootProps,
   SystemStyleObject,
   TagRootProps,
@@ -25,6 +27,14 @@ import type {
   SingleValueProps,
   ValueContainerProps,
 } from "react-select";
+
+export type CssVars = `var(--${string})`;
+
+export type AnyString = string & {};
+
+export type ColorPaletteProp = ConditionalValue<
+  ColorPalette | CssVars | AnyString
+>;
 
 export interface SizeProps<PropType extends string | number = string | number> {
   sm: PropType;
