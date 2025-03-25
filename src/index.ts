@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type {
-  ColorPalette,
-  ConditionalValue,
-  SpinnerProps,
-  SystemStyleObject,
-} from "@chakra-ui/react";
+import type { SpinnerProps, SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {
   ChakraStylesConfig,
+  ColorPaletteProp,
   SelectedOptionStyle,
   SizeProp,
   TagVariant,
@@ -87,8 +83,9 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://www.chakra-ui.com/docs/components/tag#colors}
      * @see {@link https://www.chakra-ui.com/docs/styling/virtual-color}
+     * @see {@link https://github.com/chakra-ui/chakra-ui/blob/9ecae5c/packages/react/src/styled-system/generated/system.gen.ts#L688}
      */
-    tagColorPalette?: ConditionalValue<ColorPalette | string>;
+    tagColorPalette?: ColorPaletteProp;
 
     /**
      * The `variant` prop that will be forwarded to your `MultiValue` component
@@ -123,8 +120,9 @@ declare module "react-select/base" {
      * @defaultValue `blue`
      * @see {@link https://github.com/csandman/chakra-react-select#selectedoptioncolorpalette--default-blue}
      * @see {@link https://www.chakra-ui.com/docs/theming/customization/colors}
+     * @see {@link https://github.com/chakra-ui/chakra-ui/blob/9ecae5c/packages/react/src/styled-system/generated/system.gen.ts#L688}
      */
-    selectedOptionColorPalette?: ConditionalValue<ColorPalette | string>;
+    selectedOptionColorPalette?: ColorPaletteProp;
 
     /**
      * The color value to style the border of the `Control` with when the
@@ -208,8 +206,9 @@ declare module "react-select" {
      * The color palette of the filled in area of the spinner.
      *
      * @see {@link https://www.chakra-ui.com/docs/components/spinner#colors}
+     * @see {@link https://github.com/chakra-ui/chakra-ui/blob/9ecae5c/packages/react/src/styled-system/generated/system.gen.ts#L688}
      */
-    colorPalette?: ConditionalValue<ColorPalette | string>;
+    colorPalette?: ColorPaletteProp;
 
     /**
      * The color of the filled in area of the spinner.

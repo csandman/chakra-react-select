@@ -1,4 +1,4 @@
-import type { ColorPalette, SystemStyleObject } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import { Span, useChakraContext, useSlotRecipe } from "@chakra-ui/react";
 import type {
   GroupBase,
@@ -6,12 +6,12 @@ import type {
   MultiValueProps,
   MultiValueRemoveProps,
 } from "react-select";
-import type { TagVariant } from "../types";
+import type { ColorPaletteProp, TagVariant } from "../types";
 import { CloseIcon } from "./icons";
 
 const hasColorPalette = (
   option: unknown
-): option is { colorPalette: ColorPalette } =>
+): option is { colorPalette: ColorPaletteProp } =>
   typeof option === "object" &&
   option !== null &&
   "colorPalette" in option &&
@@ -52,7 +52,7 @@ export const MultiValue = <
   const { colorPalette: themeTagColorPalette, variant: defaultTagVariant } =
     chakraContext.getSlotRecipe("tag").defaultVariants ?? {};
 
-  let optionColorPalette: ColorPalette | undefined = themeTagColorPalette;
+  let optionColorPalette: ColorPaletteProp = themeTagColorPalette;
   if (hasColorPalette(data)) {
     optionColorPalette = data.colorPalette;
   } else if (tagColorPalette) {

@@ -1,8 +1,11 @@
-import type { ColorPalette } from "@chakra-ui/react";
 import { useFieldContext } from "@chakra-ui/react";
 import type { GroupBase, Props } from "react-select";
 import chakraComponents from "./chakra-components";
-import type { SelectedOptionStyle, UseFieldReturn } from "./types";
+import type {
+  ColorPaletteProp,
+  SelectedOptionStyle,
+  UseFieldReturn,
+} from "./types";
 
 const useChakraSelectProps = <
   Option,
@@ -42,7 +45,7 @@ const useChakraSelectProps = <
   }
 
   // Ensure that the color used for the selected options is a string
-  let realSelectedOptionColorPalette: ColorPalette =
+  let realSelectedOptionColorPalette: ColorPaletteProp =
     selectedOptionColorPalette || "blue";
   if (typeof realSelectedOptionColorPalette !== "string") {
     realSelectedOptionColorPalette = "blue";
