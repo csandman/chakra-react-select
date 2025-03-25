@@ -10,7 +10,7 @@ import type {
   OptionProps,
 } from "react-select";
 import type { SizeProps } from "../types";
-import { cleanCommonProps, useColorModeValue, useSize } from "../utils";
+import { cleanCommonProps, useSize } from "../utils";
 import { CheckIcon } from "./icons";
 
 export const Menu = <
@@ -314,17 +314,6 @@ export const Option = <
 
   const selectStyles = useSlotRecipe({ key: "select" })({ size, variant });
 
-  /**
-   * Use the same selected color as the border/shadow of the select/input components
-   *
-   * @see {@link https://github.com/chakra-ui/chakra-ui/blob/61f965a/packages/components/theme/src/components/input.ts#L92-L93}
-   */
-  const selectedBg = useColorModeValue(
-    `${selectedOptionColorPalette}.500`,
-    `${selectedOptionColorPalette}.300`
-  );
-  const selectedColor = useColorModeValue("white", "black");
-
   // Don't create exta space for the checkmark if using a multi select with
   // options that dissapear when they're selected
   const showCheckIcon =
@@ -337,9 +326,9 @@ export const Option = <
     ...selectStyles.item,
     ...(shouldHighlight
       ? {
-          bg: selectedBg,
-          color: selectedColor,
-          _active: { bg: selectedBg },
+          color: "colorPalette.contrast",
+          bg: "colorPalette.solid",
+          _active: { bg: "colorPalette.solid" },
         }
       : {}),
   };
@@ -351,6 +340,7 @@ export const Option = <
   return (
     <Box
       {...innerProps}
+      colorPalette={selectedOptionColorPalette}
       className={cx(
         {
           option: true,

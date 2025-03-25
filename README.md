@@ -344,7 +344,13 @@ If you choose to stick with the default `selectedOptionStyle="color"`, you have
 one additional styling option. If you do not like the default of blue for the
 highlight color, you can pass the `selectedOptionColorPalette` prop to change
 it. This prop will accept any named color from your theme's color palette, and
-it will use the `500` value in light mode or the `300` value in dark mode.
+it will use `colorPalette.solid` for the background, and `colorPalette.contrast`
+for the text.
+
+If you'd like to use a custom color palette for this prop, ensure that you have
+properly set up the custom color, including the `solid` and `contrast` semantic
+tokens, accoring to
+[the official guide](https://www.chakra-ui.com/guides/theming-custom-colors).
 
 > [!NOTE]
 >
