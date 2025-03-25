@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
 import { Icon } from "@chakra-ui/react";
-import {
+import type {
   ChakraStylesConfig,
-  Select,
   SelectInstance,
   SingleValue,
 } from "chakra-react-select";
+import { Select } from "chakra-react-select";
 import { LuChevronDown, LuSearch } from "react-icons/lu";
-import { StateOption, stateOptions } from "../../data/options";
+import type { StateOption } from "../../data/options";
+import { stateOptions } from "../../data/options";
 import { Button } from "../ui/button";
 import {
   PopoverBody,

@@ -1,18 +1,23 @@
-import { OptionBase } from "chakra-react-select";
+import type { ColorPalette } from "@chakra-ui/react";
+import type { OptionBase } from "chakra-react-select";
 
 export interface ColorOption extends OptionBase {
   label: string;
-  value: string;
-  color: string;
+  value: ColorPalette;
 }
 
 export const colorOptions: ColorOption[] = [
-  { value: "blue", label: "Blue", color: "#0052CC" },
-  { value: "purple", label: "Purple", color: "#5243AA" },
-  { value: "red", label: "Red", color: "#FF5630" },
-  { value: "orange", label: "Orange", color: "#FF8B00" },
-  { value: "yellow", label: "Yellow", color: "#FFC400" },
-  { value: "green", label: "Green", color: "#36B37E" },
+  { value: "gray", label: "Gray" },
+  { value: "red", label: "Red" },
+  { value: "pink", label: "Pink" },
+  { value: "purple", label: "Purple" },
+  { value: "cyan", label: "Cyan" },
+  { value: "blue", label: "Blue" },
+  { value: "teal", label: "Teal" },
+  { value: "green", label: "Green" },
+  { value: "yellow", label: "Yellow" },
+  { value: "orange", label: "Orange" },
+  { value: "brand", label: "Brand" },
 ];
 
 export interface FlavorOption extends OptionBase {

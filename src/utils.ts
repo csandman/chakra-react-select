@@ -1,5 +1,4 @@
 import { useBreakpointValue, useChakraContext } from "@chakra-ui/react";
-import { useTheme } from "next-themes";
 import type { CommonPropsAndClassName, GroupBase } from "react-select";
 import type { Size, SizeProp } from "./types";
 
@@ -80,20 +79,3 @@ export const useSize = (size: SizeProp | undefined): Size => {
 
   return useBreakpointValue(responsiveSize) ?? defaultSize;
 };
-
-export function useColorMode() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const toggleColorMode = () => {
-    setTheme(resolvedTheme === "light" ? "dark" : "light");
-  };
-  return {
-    colorMode: resolvedTheme,
-    setColorMode: setTheme,
-    toggleColorMode,
-  };
-}
-
-export function useColorModeValue<T>(light: T, dark: T) {
-  const { colorMode } = useColorMode();
-  return colorMode === "light" ? light : dark;
-}

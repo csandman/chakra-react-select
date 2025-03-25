@@ -1,9 +1,5 @@
-import {
-  GroupBase,
-  Select,
-  SelectComponentsConfig,
-  chakraComponents,
-} from "chakra-react-select";
+import type { GroupBase, SelectComponentsConfig } from "chakra-react-select";
+import { Select, chakraComponents } from "chakra-react-select";
 import { LuArrowDown, LuCircleX } from "react-icons/lu";
 import { groupedOptions } from "../../data/options";
 

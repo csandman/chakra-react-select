@@ -25,6 +25,13 @@ const eslintConfig = tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
       ...reactHooks.configs.recommended.rules,
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
+        {
+          prefer: "type-imports",
+          disallowTypeAnnotations: true,
+        },
+      ],
       "react/prop-types": "off",
       "react-refresh/only-export-components": [
         "warn",

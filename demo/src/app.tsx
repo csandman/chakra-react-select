@@ -10,16 +10,16 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import type { GroupBase, LoadingIndicatorProps } from "chakra-react-select";
 import {
   AsyncSelect,
   CreatableSelect,
-  GroupBase,
-  LoadingIndicatorProps,
   Select,
   chakraComponents,
 } from "chakra-react-select";
 import ConnectedSelectMenuExample from "./components/advanced-examples/connected-select-menu-example";
 import CustomIndicatorIconsExample from "./components/advanced-examples/custom-indicator-icons-example";
+import DynamicSelectedOptionColorExample from "./components/advanced-examples/dynamic-selected-option-color-example";
 import MenuPortalTargetExample from "./components/advanced-examples/menu-portal-target-example";
 import OptionsWithIconsExample from "./components/advanced-examples/options-with-icons-example";
 import SelectPopoverExample from "./components/advanced-examples/select-popover-example";
@@ -35,7 +35,8 @@ import {
   SelectValueText,
 } from "./components/ui/select";
 import animeMovies from "./data/anime-movies";
-import { ColorOption, colorOptions, groupedOptions } from "./data/options";
+import type { ColorOption } from "./data/options";
+import { colorOptions, groupedOptions } from "./data/options";
 
 const mappedColorOptions = colorOptions.map((option) => ({
   ...option,
@@ -352,6 +353,16 @@ const App = () => {
             placeholder="Select some colors..."
             selectedOptionStyle="color"
           />
+        </Field>
+
+        <Field
+          label={
+            <Span>
+              Single Select with dynamic <Code>selectedOptionColorPalette</Code>
+            </Span>
+          }
+        >
+          <DynamicSelectedOptionColorExample />
         </Field>
 
         <Field

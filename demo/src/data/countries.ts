@@ -1,4 +1,4 @@
-import { GroupBase, OptionBase } from "chakra-react-select";
+import type { GroupBase, OptionBase } from "chakra-react-select";
 
 export interface CountryOption extends OptionBase {
   label: string;
