@@ -75,7 +75,6 @@ declare module "react-select/base" {
      *
      * @see {@link https://v2.chakra-ui.com/docs/components/input/props}
      * @see {@link https://v2.chakra-ui.com/docs/components/form-control/props}
-	@@ -86,7 +87,7 @@ declare module "react-select/base" {
      * @see {@link https://github.com/csandman/chakra-react-select#colorscheme}
      * @see {@link https://v2.chakra-ui.com/docs/components/tag/props}
      */
@@ -171,8 +170,10 @@ declare module "react-select/base" {
     variant?: Variant;
 
     /**
-     * @deprecated This prop is not used in `chakra-react-select`, use
-     * {@link chakraStyles} instead.
+     * This prop is not used in `chakra-react-select` except for the `menuPortal` styles.
+     * For all other style customizations, use {@link chakraStyles} instead.
+     *
+     * @see {@link https://github.com/csandman/chakra-react-select/issues/55}
      */
     styles: StylesConfig<Option, IsMulti, Group>;
 
