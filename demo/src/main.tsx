@@ -13,7 +13,7 @@ import { ColorModeButton } from "./components/ui/color-mode";
 import "./styles.css";
 import crsSystem from "./theme";
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.querySelector("#root")!).render(
   <StrictMode>
     <EnvironmentProvider>
       <ChakraProvider value={crsSystem}>

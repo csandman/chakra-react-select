@@ -17,7 +17,6 @@ export const colorOptions: ColorOption[] = [
   { value: "green", label: "Green" },
   { value: "yellow", label: "Yellow" },
   { value: "orange", label: "Orange" },
-  { value: "brand", label: "Brand" },
 ];
 
 export interface FlavorOption extends OptionBase {

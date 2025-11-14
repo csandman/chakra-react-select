@@ -181,7 +181,7 @@ const App = () => {
           <AsyncSelect
             placeholder="Select some colors..."
             loadOptions={(_inputValue, callback) => {
-              setTimeout(() => callback(colorOptions), 10000);
+              setTimeout(() => callback(colorOptions), 10_000);
             }}
             components={asyncComponents}
             isLoading
@@ -201,7 +201,7 @@ const App = () => {
         <Field
           label={
             <Span>
-              Select with <Code>focusRingColor="blue.600"</Code>
+              Select with <Code>focusRingColor=&quot;blue.600&quot;</Code>
             </Span>
           }
         >

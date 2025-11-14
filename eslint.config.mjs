@@ -1,26 +1,31 @@
+// @ts-check
 import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
+import unicorn from "eslint-plugin-unicorn";
+import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
-  {
-    ignores: [
-      "**/node_modules/",
-      "**/dist/",
-      "codemod/**/*.js",
-      "codemod/**/*.d.ts",
-      "demo/**/*",
-      "eslint.config.mjs",
-    ],
-  },
+export default defineConfig(
+  globalIgnores([
+    "**/node_modules/",
+    "**/dist/",
+    "codemod/**/*",
+    "demo/**/*",
+    "eslint.config.mjs",
+  ]),
   {
     settings: {
-      react: { version: "19" },
+      react: { version: "detect" },
     },
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      unicorn.configs.recommended,
+      reactHooks.configs.flat.recommended,
+    ],
     languageOptions: {
       globals: globals.browser,
       ecmaVersion: 2020,
@@ -34,7 +39,6 @@ export default tseslint.config(
     },
     plugins: {
       react,
-      "react-hooks": reactHooks,
     },
     rules: {
       ...react.configs.recommended.rules,
@@ -70,6 +74,8 @@ export default tseslint.config(
           ignoreRestSiblings: true,
         },
       ],
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/no-null": "off",
     },
   },
   {
