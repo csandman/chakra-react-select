@@ -94,6 +94,10 @@ const useChakraSelectProps = <
     isReadOnly: inputProps.readOnly,
     required: required ?? inputProps.required,
     menuIsOpen: realMenuIsOpen,
+    // Match the default flipping behavior of the Chakra Menu and Popover components
+    // by automatically placing the menu above or below the control based on the available space.
+    menuPlacement: "auto",
+    unstyled: true,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
     // override the `isInvalid` prop
