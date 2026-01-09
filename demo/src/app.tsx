@@ -21,7 +21,7 @@ const App = () => (
     </Heading>
     <FormControl p={4}>
       <FormLabel>
-        Single Select Colors and Flavours <Code>size="sm"</Code>
+        Single Select Colors and Flavours <Code>{`size="sm"`}</Code>
       </FormLabel>
       <Select
         id="color-select"
@@ -35,7 +35,7 @@ const App = () => (
 
     <FormControl p={4}>
       <FormLabel>
-        Select Colors and Flavours <Code>size="md" (default)</Code>
+        Select Colors and Flavours <Code>{`size="md" (default)`}</Code>
       </FormLabel>
       <Select
         isMulti
@@ -48,7 +48,7 @@ const App = () => (
 
     <FormControl p={4}>
       <FormLabel>
-        Select Colors and Flavours <Code>size="lg"</Code>
+        Select Colors and Flavours <Code>{`size="lg"`}</Code>
       </FormLabel>
       <Select
         isMulti
@@ -173,14 +173,14 @@ const App = () => (
         closeMenuOnSelect={false}
       />
       <FormErrorMessage>
-        You can't see this error message because the isInvalid prop is set on
-        the select element instead of the form control
+        You can&apos;t see this error message because the isInvalid prop is set
+        on the select element instead of the form control
       </FormErrorMessage>
     </FormControl>
 
     <FormControl p={4}>
       <FormLabel>
-        Single Select with <Code>selectedOptionStyle="check"</Code>
+        Single Select with <Code>{`selectedOptionStyle="check"`}</Code>
       </FormLabel>
       <Select
         options={groupedOptions}
@@ -192,7 +192,7 @@ const App = () => (
 
     <FormControl p={4}>
       <FormLabel>
-        Single Select with <Code>selectedOptionColorScheme="green"</Code>
+        Single Select with <Code>{`selectedOptionColorScheme="green"`}</Code>
       </FormLabel>
       <Select
         options={groupedOptions}
@@ -204,7 +204,7 @@ const App = () => (
 
     <FormControl p={4}>
       <FormLabel>
-        Multi Select with <Code>selectedOptionColorScheme="green"</Code>
+        Multi Select with <Code>{`selectedOptionColorScheme="green"`}</Code>
       </FormLabel>
       <Select
         isMulti
