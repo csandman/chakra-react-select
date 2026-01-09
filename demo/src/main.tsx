@@ -5,7 +5,7 @@ import App from "./app";
 import ColorModeSwitch from "./components/color-mode-switch";
 import theme from "./theme";
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.querySelector("#root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
       <App />
