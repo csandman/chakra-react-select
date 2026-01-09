@@ -19,6 +19,7 @@ const AsyncSelect = forwardRef(
     props: AsyncProps<Option, IsMulti, Group>,
     ref:
       | ((instance: SelectInstance<Option, IsMulti, Group> | null) => void)
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       | MutableRefObject<SelectInstance<Option, IsMulti, Group> | null>
       | null
   ) => {
