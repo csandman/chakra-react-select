@@ -1,6 +1,7 @@
 // @ts-check
 import js from "@eslint/js";
 import prettier from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import unicorn from "eslint-plugin-unicorn";
@@ -16,9 +17,14 @@ export default defineConfig(
     "demo/**/*",
     "eslint.config.mjs",
   ]),
+  importPlugin.flatConfigs.recommended,
   {
     settings: {
       react: { version: "detect" },
+      "import/resolver": {
+        typescript: true,
+        node: true,
+      },
     },
     extends: [
       js.configs.recommended,
