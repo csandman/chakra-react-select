@@ -2,16 +2,35 @@
   "name": "chakra-react-select",
   "version": "5.1.0",
   "description": "A Chakra UI wrapper for the popular library React Select",
+  "keywords": [
+    "accessibility",
+    "chakra",
+    "chakra-ui",
+    "combobox",
+    "dropdown",
+    "input",
+    "listbox",
+    "menu",
+    "multi-select",
+    "react",
+    "react-select",
+    "select"
+  ],
+  "homepage": "https://github.com/csandman/chakra-react-select#readme",
+  "bugs": {
+    "url": "https://github.com/csandman/chakra-react-select/issues"
+  },
   "license": "MIT",
   "author": "Chris Sandvik <chris.sandvik@gmail.com>",
-  "homepage": "https://github.com/csandman/chakra-react-select#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/csandman/chakra-react-select.git"
   },
-  "bugs": {
-    "url": "https://github.com/csandman/chakra-react-select/issues"
-  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "exports": {
     ".": {
       "import": {
@@ -25,19 +44,17 @@
     },
     "./package.json": "./package.json"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "chakra2"
+  },
   "scripts": {
     "build": "tsup --clean",
     "dev": "concurrently npm:dev:*",
     "dev:demo": "cd demo && npm run dev",
     "dev:src": "tsup --watch",
-    "format": "concurrently npm:format:*",
-    "format:package": "prettier-package-json --write",
-    "format:src": "prettier --write .",
+    "format": "oxfmt",
     "install:all": "npm install && npm run install:demo && npm run install:codemod",
     "install:codemod": "cd codemod && npm install",
     "install:demo": "cd demo && npm install",
@@ -53,21 +70,13 @@
   "dependencies": {
     "react-select": "5.10.x"
   },
-  "peerDependencies": {
-    "@chakra-ui/react": "2.x",
-    "@emotion/react": "^11.8.1",
-    "react": ">=18",
-    "react-dom": ">=18"
-  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@chakra-ui/react": "^2.10.9",
     "@eslint/js": "^9.39.2",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/react": "^19.2.7",
     "concurrently": "^9.2.1",
     "eslint": "^9.39.2",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",
@@ -76,34 +85,19 @@
     "globals": "^17.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
-    "prettier-package-json": "^2.8.0",
+    "oxfmt": "^0.x",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.52.0"
   },
-  "keywords": [
-    "accessibility",
-    "chakra",
-    "chakra-ui",
-    "combobox",
-    "dropdown",
-    "input",
-    "listbox",
-    "menu",
-    "multi-select",
-    "react",
-    "react-select",
-    "select"
-  ],
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "tag": "chakra2"
+  "peerDependencies": {
+    "@chakra-ui/react": "2.x",
+    "@emotion/react": "^11.8.1",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*": "prettier --ignore-unknown --write",
-    "package.json": "prettier-package-json --write"
+    "*": "oxfmt"
   }
 }

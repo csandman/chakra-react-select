@@ -1,6 +1,5 @@
 // @ts-check
 import js from "@eslint/js";
-import prettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -96,6 +95,5 @@ export default defineConfig(
       "no-console": "off",
       "@typescript-eslint/no-require-imports": "off",
     },
-  },
-  prettier
+  }
 );
