@@ -60,9 +60,9 @@
     "install:demo": "cd demo && npm install",
     "lint": "concurrently npm:lint:*",
     "lint:exports": "attw --pack .",
-    "lint:src": "eslint .",
+    "lint:src": "oxlint -c .oxlintrc.json",
     "lint:types": "tsc",
-    "lint-fix": "eslint --fix src",
+    "lint-fix": "oxlint -c .oxlintrc.json --fix",
     "prepare": "husky",
     "prepublishOnly": "npm run build && npm run lint",
     "postpublish": "git push --tags"
@@ -73,22 +73,15 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@chakra-ui/react": "^2.10.9",
-    "@eslint/js": "^9.39.2",
     "@types/react": "^19.2.7",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.2",
-    "eslint-import-resolver-typescript": "^4.4.4",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-unicorn": "^62.0.0",
-    "globals": "^17.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "oxfmt": "^0.x",
+    "oxlint": "^1.57.0",
+    "oxlint-tsgolint": "^0.17.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.52.0"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.x",
@@ -97,7 +90,7 @@
     "react-dom": ">=18"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx}": "oxlint --fix",
     "*": "oxfmt"
   }
 }

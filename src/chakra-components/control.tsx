@@ -62,7 +62,7 @@ export const Control = <
    *
    * @see {@link https://github.com/chakra-ui/chakra-ui/releases/tag/%40chakra-ui%2Ftheme%403.2.0}
    */
-  const minH = height || h;
+  const minH = height ?? h;
 
   const initialSx: SystemStyleObject = {
     ...fieldStyles,
@@ -217,7 +217,7 @@ export const DropdownIndicator = <
       )}
       sx={dropdownIndicatorSx}
     >
-      {children || <DownChevron sx={downChevronSx} />}
+      {children ?? <DownChevron sx={downChevronSx} />}
     </Box>
   );
 };
@@ -291,7 +291,7 @@ export const ClearIndicator = <
       aria-label="Clear selected options"
       {...innerProps}
     >
-      {children || <CrossIcon sx={iconSx} />}
+      {children ?? <CrossIcon sx={iconSx} />}
     </Box>
   );
 };
@@ -340,7 +340,7 @@ export const LoadingIndicator = <
       )}
       sx={sx}
       {...innerProps}
-      size={propsSpinnerSize || spinnerSize}
+      size={propsSpinnerSize ?? spinnerSize}
       color={color}
       emptyColor={emptyColor}
       speed={speed}

@@ -81,7 +81,7 @@ export const useSize = (size: SizeProp | undefined): Size => {
       {
         fallback: "md",
       }
-    ) || defaultSize;
+    ) ?? defaultSize;
 
   return realSize;
 };
