@@ -73,15 +73,15 @@
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@chakra-ui/react": "^2.10.9",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.14",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.4.0",
     "oxfmt": "^0.x",
     "oxlint": "^1.57.0",
     "oxlint-tsgolint": "^0.17.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
     "@chakra-ui/react": "2.x",
