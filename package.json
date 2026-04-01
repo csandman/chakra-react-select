@@ -90,7 +90,8 @@
     "react-dom": ">=18"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "oxlint --fix",
+    "demo/**/*.{js,jsx,ts,tsx}": "oxlint -c demo/.oxlintrc.json --disable-nested-config --fix",
+    "*.{js,jsx,ts,tsx}": "oxlint -c .oxlintrc.json --disable-nested-config --fix",
     "*": "oxfmt"
   }
 }
