@@ -5,7 +5,12 @@ import App from "./app";
 import ColorModeSwitch from "./components/color-mode-switch";
 import theme from "./theme";
 
-createRoot(document.querySelector("#root")!).render(
+const rootEl = document.querySelector("#root");
+if (!rootEl) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootEl).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
       <App />
