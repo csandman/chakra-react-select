@@ -29,7 +29,7 @@
     "browser": true,
     "es2026": true
   },
-  "ignorePatterns": ["codemod/", "demo/"],
+  "ignorePatterns": ["codemod/", "demo/", "src/tests/"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": [
       "warn",
