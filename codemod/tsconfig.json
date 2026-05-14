@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2022",
     "sourceMap": false,
     "declarationMap": false,
     "esModuleInterop": true,
-    "target": "es2015",
-    "downlevelIteration": true,
     "preserveWatchOutput": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "skipLibCheck": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "tests"]
 }
