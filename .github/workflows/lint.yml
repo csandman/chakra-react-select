@@ -2,7 +2,7 @@ name: Lint
 
 on:
   push:
-    branches: [main, v5]
+    branches: [v5]
   pull_request:
 
 permissions: {}
