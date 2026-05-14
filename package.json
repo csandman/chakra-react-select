@@ -29,6 +29,8 @@
   "files": [
     "dist"
   ],
+  "type": "commonjs",
+  "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "exports": {
@@ -61,7 +63,8 @@
     "lint-fix": "oxlint -c .oxlintrc.json --fix",
     "prepare": "husky",
     "prepublishOnly": "pnpm build && pnpm lint",
-    "postpublish": "git push --follow-tags"
+    "postpublish": "git push --follow-tags",
+    "lint:publish": "publint"
   },
   "dependencies": {
     "react-select": "^5.10.2"
@@ -77,6 +80,7 @@
     "oxfmt": "^0.49.0",
     "oxlint": "^1.64.0",
     "oxlint-tsgolint": "^0.22.1",
+    "publint": "^0.3.21",
     "react": "^19.2.6",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3"
