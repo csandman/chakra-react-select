@@ -2,7 +2,7 @@ name: Test
 
 on:
   push:
-    branches: [main, v5]
+    branches: [main]
   pull_request:
 
 permissions: {}
