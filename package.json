@@ -32,26 +32,23 @@
   ],
   "scripts": {
     "build": "tsup --clean",
-    "dev": "concurrently npm:dev:*",
-    "dev:demo": "cd demo && npm run dev",
+    "dev": "concurrently pnpm:dev:*",
+    "dev:demo": "pnpm --filter chakra-react-select-demo dev",
     "dev:src": "tsup --watch",
-    "format": "concurrently npm:format:*",
+    "format": "concurrently pnpm:format:*",
     "format:package": "prettier-package-json --write",
     "format:src": "prettier --write .",
-    "install:all": "npm install && npm run install:demo && npm run install:codemod",
-    "install:codemod": "cd codemod && npm install",
-    "install:demo": "cd demo && npm install",
-    "lint": "concurrently npm:lint:*",
+    "lint": "concurrently pnpm:lint:*",
     "lint:exports": "attw --pack .",
     "lint:src": "eslint .",
     "lint:types": "tsc",
     "lint-fix": "eslint --fix src",
     "prepare": "husky",
-    "prepublishOnly": "npm run build && npm run lint",
+    "prepublishOnly": "pnpm build && pnpm lint",
     "postpublish": "git push --follow-tags"
   },
   "dependencies": {
-    "react-select": "^5.10.0"
+    "react-select": "^5.10.2"
   },
   "peerDependencies": {
     "@chakra-ui/react": "3.x",
@@ -60,27 +57,27 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
-    "@chakra-ui/react": "^3.29.0",
-    "@eslint/js": "^9.39.1",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@types/react": "^19.2.4",
+    "@chakra-ui/react": "~3.35.0",
+    "@eslint/js": "^9.39.4",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/react": "^19.2.14",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-unicorn": "^62.0.0",
-    "globals": "^16.5.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-unicorn": "^64.0.0",
+    "globals": "^17.6.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.6",
-    "next-themes": "^0.4.6",
-    "prettier": "^3.6.2",
+    "lint-staged": "^17.0.4",
+    "next-themes": "~0.4.6",
+    "prettier": "^3.8.3",
     "prettier-package-json": "^2.8.0",
-    "react": "^19.2.0",
+    "react": "^19.2.6",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.4"
+    "typescript-eslint": "^8.59.3"
   },
   "keywords": [
     "accessibility",
@@ -104,5 +101,6 @@
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
     "*": "prettier --ignore-unknown --write",
     "package.json": "prettier-package-json --write"
-  }
+  },
+  "packageManager": "pnpm@11.1.1+sha512.d1fdf5f73c617b64fa1a56a81c3c8dfe0e966e33a6010aa256b517ae77be21d93e05affc0de1a83b0e4f29d569f68b446ae8f068cd7247c0bb3df0fb4d7bdf9a"
 }

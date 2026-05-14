@@ -29,6 +29,7 @@ const eslintConfig = defineConfig(
       sourceType: "module",
       parserOptions: {
         project: ["./tsconfig.app.json", "./tsconfig.node.json"],
+        tsconfigRootDir: import.meta.dirname,
         ecmaFeatures: {
           jsx: true,
         },
