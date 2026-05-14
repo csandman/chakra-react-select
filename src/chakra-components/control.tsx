@@ -46,6 +46,7 @@ export const Control = <
   const inputRecipe = useRecipe({ key: "input" });
   const inputStyles = inputRecipe({
     size,
+    // @ts-expect-error Chakra 3.35+ split Select and Input recipe variant unions; the select-level variant is still forwarded by value.
     variant,
   });
 

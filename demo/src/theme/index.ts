@@ -27,7 +27,7 @@ const selectSlotRecipe = defineSlotRecipe({
     // Uncomment to modify the default size of the select
     // size: "sm",
   },
-  // Uncomment this and run `npm run typegen` to generate the new variant, usable as the main variant prop
+  // Uncomment this and run `pnpm typegen` to generate the new variant, usable as the main variant prop
   // variants: {
   //   variant: {
   //     flushed: {},

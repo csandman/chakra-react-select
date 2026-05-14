@@ -5,13 +5,13 @@ welcome, from issue reports to PRs and documentation / write-ups.
 
 Before you open a PR:
 
-- In development, run `npm run install:all` to setup the dependencies for the
-  core package and the demo.
-- Run `npm run dev` to build (and watch) the package source, as well as run the
+- In development, run `pnpm install` to setup the dependencies for the core
+  package and the demo.
+- Run `pnpm dev` to build (and watch) the package source, as well as run the
   demo project which can be viewed at http://localhost:5152.
 - Please ensure all the examples work correctly after your change.
-- Also run `npm run lint` to ensure that the change meets the projects code
-  style setup.
+- Also run `pnpm lint` to ensure that the change meets the projects code style
+  setup.
 - Make sure there's an issue open for any work you take on and intend to submit
   as a pull request - it helps core members review your concept and direction
   early and is a good way to discuss what you're planning to do.

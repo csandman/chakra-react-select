@@ -18,23 +18,23 @@
     "prebuild": "rimraf **/*.{d.ts,js}",
     "build": "tsc -d -p tsconfig.json",
     "dev": "tsc -d -w -p tsconfig.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "execa": "^4.1.0",
-    "globby": "^11.1.0",
-    "inquirer": "^7.3.3",
+    "execa": "^9.6.1",
+    "globby": "^16.2.0",
+    "inquirer": "^13.4.3",
     "is-git-clean": "^1.1.0",
-    "jscodeshift": "^0.15.0",
-    "meow": "^7.1.1",
-    "picocolors": "^1.0.0"
+    "jscodeshift": "^17.3.0",
+    "meow": "^14.1.0",
+    "picocolors": "^1.1.1"
   },
   "devDependencies": {
-    "@types/inquirer": "^7.3.3",
-    "@types/is-git-clean": "^1.1.0",
-    "@types/jscodeshift": "^0.11.7",
-    "@types/node": "^20.8.4",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.2.2"
+    "@types/inquirer": "^9.0.9",
+    "@types/is-git-clean": "^1.1.2",
+    "@types/jscodeshift": "^17.3.0",
+    "@types/node": "^25.7.0",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.9.3"
   }
 }
