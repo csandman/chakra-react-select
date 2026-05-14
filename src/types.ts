@@ -44,7 +44,7 @@ export interface SizeProps<PropType extends string | number = string | number> {
 
 export type Size = "sm" | "md" | "lg";
 
-export type SizeProp = Size | Record<string, Size> | Array<Size>;
+export type SizeProp = Size | Record<string, Size> | Size[];
 
 /**
  * By default includes `"outline" | "subtle" | "solid" | "surface"`

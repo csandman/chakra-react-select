@@ -13,7 +13,12 @@ import { ColorModeButton } from "./components/ui/color-mode";
 import "./styles.css";
 import crsSystem from "./theme";
 
-createRoot(document.querySelector("#root")!).render(
+const rootElement = document.querySelector("#root");
+if (!rootElement) {
+  throw new Error("Root element with id 'root' not found");
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <EnvironmentProvider>
       <ChakraProvider value={crsSystem}>

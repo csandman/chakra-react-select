@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { SpinnerProps, SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, StylesConfig, ThemeConfig } from "react-select";
 import type {

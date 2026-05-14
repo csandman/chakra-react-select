@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "oxc.oxc-vscode",
+    "zizmor.zizmor-vscode",
+    "editorconfig.editorconfig",
+    "github.vscode-github-actions"
+  ]
+}

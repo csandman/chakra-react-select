@@ -30,7 +30,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             </ChakraSwitch.Indicator>
           )}
         </ChakraSwitch.Control>
-        {children != null && (
+        {children !== null && children !== undefined && (
           <ChakraSwitch.Label>{children}</ChakraSwitch.Label>
         )}
       </ChakraSwitch.Root>

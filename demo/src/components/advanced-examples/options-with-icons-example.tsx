@@ -1,10 +1,6 @@
 import { Box, Icon, useSlotRecipe } from "@chakra-ui/react";
-import {
-  type GroupBase,
-  Select,
-  type SelectComponentsConfig,
-  chakraComponents,
-} from "chakra-react-select";
+import { Select, chakraComponents } from "chakra-react-select";
+import type { GroupBase, SelectComponentsConfig } from "chakra-react-select";
 import {
   GiCherry,
   GiChocolateBar,

@@ -358,7 +358,7 @@ export const Option = <
     >
       {children}
       {showCheckIcon && (
-        <MenuIcon css={{ ...selectStyles.itemIndicator }} hidden={!isSelected}>
+        <MenuIcon css={selectStyles.itemIndicator} hidden={!isSelected}>
           <CheckIcon />
         </MenuIcon>
       )}

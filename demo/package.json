@@ -1,12 +1,12 @@
 {
-  "private": true,
   "name": "chakra-react-select-demo",
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
     "dev": "vite --port=5152",
-    "lint": "eslint .",
+    "lint": "oxlint -c .oxlintrc.json",
     "preview": "vite preview",
     "typegen": "npx @chakra-ui/cli typegen ./src/theme/index.ts"
   },
@@ -20,21 +20,13 @@
     "react-icons": "^5.6.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "^9.39.4",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "eslint-plugin-unicorn": "^64.0.0",
-    "globals": "^17.6.0",
-    "prettier": "^3.8.3",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.59.3",
+    "oxlint": "^1.64.0",
+    "oxlint-tsgolint": "^0.22.1",
+    "typescript": "^6.0.3",
     "vite": "^8.0.12"
   }
 }

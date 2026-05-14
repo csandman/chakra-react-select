@@ -23,7 +23,7 @@ const useChakraSelectProps = <
   selectedOptionColorPalette = "blue",
   menuIsOpen,
   menuPlacement = "auto",
-  // eslint-disable-next-line @typescript-eslint/no-deprecated
+  // oxlint-disable-next-line typescript/no-deprecated
   theme,
   ...props
 }: Props<Option, IsMulti, Group>): Props<Option, IsMulti, Group> => {

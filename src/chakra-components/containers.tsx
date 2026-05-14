@@ -1,4 +1,5 @@
-import { Box, type SystemStyleObject, useSlotRecipe } from "@chakra-ui/react";
+import { Box, useSlotRecipe } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import type {
   ContainerProps,
   GroupBase,
