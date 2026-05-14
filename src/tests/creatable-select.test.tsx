@@ -1,3 +1,10 @@
+// Ported from react-select@5.10.2:
+//   https://github.com/JedWatson/react-select/blob/react-select%405.10.2/packages/react-select/src/__tests__/Creatable.test.tsx
+// When bumping the react-select dep, diff upstream at the new tag against
+// this file and port relevant additions/changes. Wrapper-specific
+// adaptations (Chakra render wrapper, userEvent v14 async, jsdom
+// workarounds) should remain. Chakra-specific tests live in
+// ./chakra-specific.test.tsx.
 import { expect, test, vi } from "vitest";
 import { CreatableSelect as Creatable } from "../index";
 import cases from "./cases";

@@ -1,3 +1,8 @@
+// Ported verbatim from react-select@5.10.2:
+//   https://github.com/JedWatson/react-select/blob/react-select%405.10.2/packages/react-select/src/__tests__/constants.ts
+// Kept bit-identical with upstream so test bodies don't drift. When the
+// upstream fixture changes, copy it over wholesale.
+
 export interface Option {
   readonly label: string;
   readonly value: string;
