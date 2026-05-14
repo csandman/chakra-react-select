@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import type { IconProps, SystemStyleObject } from "@chakra-ui/react";
 import { Box, Icon, chakra, useMultiStyleConfig } from "@chakra-ui/react";
 import type {
@@ -103,32 +104,56 @@ export const MultiValue = <
     ? chakraStyles.multiValueRemove(removeInitialSx, props)
     : removeInitialSx;
 
+  const containerInnerProps = useMemo(
+    () => ({
+      className: cx(
+        {
+          "multi-value": true,
+          "multi-value--is-disabled": isDisabled,
+        },
+        className
+      ),
+      ...innerProps,
+    }),
+    [cx, isDisabled, className, innerProps]
+  );
+
+  const labelInnerProps = useMemo(
+    () => ({
+      className: cx(
+        {
+          "multi-value__label": true,
+        },
+        className
+      ),
+    }),
+    [cx, className]
+  );
+
+  const removeInnerProps = useMemo(
+    () => ({
+      className: cx(
+        {
+          "multi-value__remove": true,
+        },
+        className
+      ),
+      "aria-label": `Remove ${typeof children === "string" && !!children ? children : "option"}`,
+      ...removeProps,
+    }),
+    [cx, className, children, removeProps]
+  );
+
   return (
     <Container
       data={data}
-      innerProps={{
-        className: cx(
-          {
-            "multi-value": true,
-            "multi-value--is-disabled": isDisabled,
-          },
-          className
-        ),
-        ...innerProps,
-      }}
+      innerProps={containerInnerProps}
       sx={containerSx}
       selectProps={selectProps}
     >
       <Label
         data={data}
-        innerProps={{
-          className: cx(
-            {
-              "multi-value__label": true,
-            },
-            className
-          ),
-        }}
+        innerProps={labelInnerProps}
         sx={labelSx}
         selectProps={selectProps}
       >
@@ -136,16 +161,7 @@ export const MultiValue = <
       </Label>
       <Remove
         data={data}
-        innerProps={{
-          className: cx(
-            {
-              "multi-value__remove": true,
-            },
-            className
-          ),
-          "aria-label": `Remove ${children || "option"}`,
-          ...removeProps,
-        }}
+        innerProps={removeInnerProps}
         sx={removeSx}
         selectProps={selectProps}
         isFocused={isFocused}
@@ -217,7 +233,7 @@ export const MultiValueRemove = <
       data-focus={isFocused ? true : undefined}
       data-focus-visible={isFocused ? true : undefined}
     >
-      {children || <TagCloseIcon />}
+      {children ?? <TagCloseIcon />}
     </Box>
   );
 };

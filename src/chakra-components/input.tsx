@@ -65,7 +65,7 @@ export const Input = <
   return (
     <Box
       className={cx({ "input-container": true }, className)}
-      data-value={value || ""}
+      data-value={value ?? ""}
       sx={containerSx}
     >
       <chakra.input

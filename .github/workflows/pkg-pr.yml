@@ -2,9 +2,9 @@ name: Publish Pull Requests
 
 on:
   push:
-    branches: [main]
+    branches: [v5]
   pull_request:
-    branches: [main]
+    branches: [v5]
 
 jobs:
   build:
