@@ -6,7 +6,10 @@ welcome, from issue reports to PRs and documentation / write-ups.
 Before you open a PR:
 
 - In development, run `pnpm install` to setup the dependencies for the core
-  package and the demo.
+  package and the demo. Dependency lifecycle scripts (`postinstall`, etc.)
+  are disabled via `.npmrc` for supply-chain safety — pnpm still runs the
+  workspace's own `prepare` script, so husky installs the git hooks
+  automatically.
 - Run `pnpm dev` to build (and watch) the package source, as well as run the
   demo project which can be viewed at http://localhost:5152.
 - Please ensure all the examples work correctly after your change.
