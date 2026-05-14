@@ -19,6 +19,9 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Package size report
         uses: pkg-size/action@v1
         env:
