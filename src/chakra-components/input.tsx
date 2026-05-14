@@ -1,4 +1,5 @@
-import { Box, type SystemStyleObject, chakra } from "@chakra-ui/react";
+import { Box, chakra } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, InputProps } from "react-select";
 import { cleanCommonProps } from "../utils";
 
@@ -66,7 +67,7 @@ export const Input = <
   return (
     <Box
       className={cx({ "input-container": true }, className)}
-      data-value={value || ""}
+      data-value={value ?? ""}
       css={containerCss}
     >
       <BaseInput

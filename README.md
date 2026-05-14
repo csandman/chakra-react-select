@@ -1,12 +1,6 @@
-[CS-TS]:
-  https://img.shields.io/badge/CodeSandbox-TypeScript-047bd4?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB
-  "CodeSandbox TypeScript Demo"
-[CS-JS]:
-  https://img.shields.io/badge/CodeSandbox-JavaScript-f4dc1b?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB
-  "CodeSandbox JavaScript Demo"
-[SB-TS]:
-  https://developer.stackblitz.com/img/open_in_stackblitz.svg
-  "StackBlitz Demo"
+[CS-TS]: https://img.shields.io/badge/CodeSandbox-TypeScript-047bd4?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB "CodeSandbox TypeScript Demo"
+[CS-JS]: https://img.shields.io/badge/CodeSandbox-JavaScript-f4dc1b?logo=codesandbox&style=flat&labelColor=040404&logoColor=DBDBDB "CodeSandbox JavaScript Demo"
+[SB-TS]: https://developer.stackblitz.com/img/open_in_stackblitz.svg "StackBlitz Demo"
 
 # chakra-react-select v6
 
@@ -304,9 +298,7 @@ The prop `focusRingColor` can be passed with Chakra color tokens which will
 emulate style the control component when focused.
 
 ```tsx
-return (
-  <Select focusRingColor="blue.600" />
-);
+return <Select focusRingColor="blue.600" />;
 ```
 
 ![Orange errorBorderColor](./.github/images/custom-borders.png)
@@ -573,9 +565,11 @@ return (
         zIndex: "var(--chakra-z-index-dropdown)",
       }),
     }}
-    chakraStyles={{
-      // All other component styles
-    }}
+    chakraStyles={
+      {
+        // All other component styles
+      }
+    }
   />
 );
 ```
@@ -587,12 +581,7 @@ return (
 // example.js
 import "styles.css";
 
-return (
-  <Select
-    menuPortalTarget={document.body}
-    classNamePrefix="crs"
-  />
-);
+return <Select menuPortalTarget={document.body} classNamePrefix="crs" />;
 ```
 
 ```css

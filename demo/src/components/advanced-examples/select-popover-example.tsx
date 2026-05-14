@@ -47,7 +47,7 @@ const DropdownIndicator = () => (
 );
 
 const SelectPopoverExample = () => {
-  const selectRef = useRef<SelectInstance<StateOption, false>>(null);
+  const selectRef = useRef<SelectInstance<StateOption>>(null);
 
   const [open, setOpen] = useState(false);
 
@@ -74,7 +74,9 @@ const SelectPopoverExample = () => {
     <PopoverRoot
       positioning={{ placement: "bottom-start" }}
       open={open}
-      onOpenChange={(changeDetails) => setOpen(changeDetails.open)}
+      onOpenChange={(changeDetails) => {
+        setOpen(changeDetails.open);
+      }}
       autoFocus={false}
     >
       <PopoverTrigger asChild>

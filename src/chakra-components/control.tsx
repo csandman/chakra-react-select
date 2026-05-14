@@ -3,10 +3,10 @@ import {
   IconButton,
   Separator,
   Spinner,
-  type SystemStyleObject,
   useRecipe,
   useSlotRecipe,
 } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import type {
   ClearIndicatorProps,
   ControlProps,
@@ -163,7 +163,7 @@ export const DropdownIndicator = <
       )}
       css={dropdownIndicatorCss}
     >
-      {children || <ChevronDownIcon css={downChevronCss} />}
+      {children ?? <ChevronDownIcon css={downChevronCss} />}
     </Box>
   );
 };
@@ -223,7 +223,7 @@ export const ClearIndicator = <
         pointerEvents="auto"
         tabIndex={-1}
       >
-        {children || <CloseIcon css={iconCss} />}
+        {children ?? <CloseIcon css={iconCss} />}
       </IconButton>
     </Box>
   );

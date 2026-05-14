@@ -1,4 +1,5 @@
-import { Box, type SystemStyleObject } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import type { SystemStyleObject } from "@chakra-ui/react";
 import type { GroupBase, SingleValueProps } from "react-select";
 
 export const SingleValue = <
