@@ -16,15 +16,19 @@ const filterLintable = (files) =>
     return !IGNORED.some((prefix) => rel.startsWith(prefix));
   });
 
-export default {
+const config = {
   "demo/**/*.{js,jsx,ts,tsx}":
     "oxlint -c demo/.oxlintrc.json --disable-nested-config --fix",
   "!(demo|codemod)/**/*.{js,jsx,ts,tsx}": (files) => {
     const lintable = filterLintable(files);
-    if (lintable.length === 0) return [];
+    if (lintable.length === 0) {
+      return [];
+    }
     return `oxlint -c .oxlintrc.json --disable-nested-config --fix ${lintable
       .map((f) => JSON.stringify(f))
       .join(" ")}`;
   },
   "*": "oxfmt",
 };
+
+export default config;

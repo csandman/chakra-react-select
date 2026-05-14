@@ -124,5 +124,15 @@
     "sort-keys": "off",
     "unicorn/no-null": "off"
   },
-  "overrides": []
+  "overrides": [
+    {
+      "files": ["*.mjs"],
+      "rules": {
+        "import/no-nodejs-modules": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-return": "off"
+      }
+    }
+  ]
 }
