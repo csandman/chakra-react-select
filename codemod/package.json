@@ -18,7 +18,7 @@
     "prebuild": "rimraf **/*.{d.ts,js}",
     "build": "tsc -d -p tsconfig.json",
     "dev": "tsc -d -w -p tsconfig.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "execa": "^4.1.0",
