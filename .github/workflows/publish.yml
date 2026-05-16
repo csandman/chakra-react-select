@@ -70,15 +70,15 @@ jobs:
         run: pnpm build
 
       - name: Align package.json version with release tag
-        run: npm version $TAG_NAME --git-tag-version=false --allow-same-version
         env:
           TAG_NAME: ${{ github.ref_name }}
+        run: npm version "$TAG_NAME" --git-tag-version=false --allow-same-version
 
       - name: Pack tarball
         id: pack
         run: |
           TARBALL=$(npm pack)
-          echo "tarball=$TARBALL" >> $GITHUB_OUTPUT
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
 
       - name: Upload tarball artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -109,4 +109,4 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish to npm
-        run: npm publish --provenance --access public --tag chakra2 $TARBALL
+        run: npm publish --provenance --access public --tag chakra2 "$TARBALL"

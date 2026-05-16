@@ -1,9 +1,7 @@
 {
+  "typescript.tsdk": "node_modules/typescript/lib",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-  "files.associations": {
-    ".npmrc": "ini"
-  },
   "[json]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
