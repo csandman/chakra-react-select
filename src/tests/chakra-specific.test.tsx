@@ -1,15 +1,16 @@
 import { Field } from "@chakra-ui/react";
 import { renderHook } from "@testing-library/react";
-import { describe, expect, it, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import chakraComponents from "../chakra-components";
 import { Select, useChakraSelectProps } from "../index";
 import type { ColorPaletteProp, SizeProp, TagVariant, Variant } from "../types";
-import { OPTIONS, type Option } from "./constants";
+import { OPTIONS } from "./constants";
+import type { Option } from "./constants";
 import { Wrapper, render } from "./render";
 
 describe("chakra-react-select specifics", () => {
   describe("size prop", () => {
-    it.each(["sm", "md", "lg"] as const)(
+    test.each(["sm", "md", "lg"] as const)(
       "forwards size=%s to chakra components via selectProps",
       (size) => {
         let captured: SizeProp | undefined;
@@ -29,7 +30,7 @@ describe("chakra-react-select specifics", () => {
       }
     );
 
-    it("accepts a responsive size object", () => {
+    test("accepts a responsive size object", () => {
       const responsive = { base: "sm", md: "lg" } as const;
       let captured: SizeProp | undefined;
       render(
@@ -44,12 +45,12 @@ describe("chakra-react-select specifics", () => {
           }}
         />
       );
-      expect(captured).toEqual(responsive);
+      expect(captured).toStrictEqual(responsive);
     });
   });
 
   describe("variant prop", () => {
-    it.each(["outline", "subtle"] as const)(
+    test.each(["outline", "subtle"] as const)(
       "forwards variant=%s to chakra components via selectProps",
       (variant) => {
         let captured: Variant | undefined;
@@ -139,7 +140,7 @@ describe("chakra-react-select specifics", () => {
         />
       );
       expect(controlSpy).toHaveBeenCalled();
-      const providedArg = controlSpy.mock.calls[0]![0] as Record<
+      const providedArg = controlSpy.mock.calls[0][0] as Record<
         string,
         unknown
       >;
@@ -164,11 +165,11 @@ describe("chakra-react-select specifics", () => {
     });
 
     test("receives full state and props for each component slot", () => {
-      type OptionState = {
+      interface OptionState {
         isSelected: boolean;
         isFocused: boolean;
         data: unknown;
-      };
+      }
       const optionSpy = vi.fn(
         (provided: object, _state: OptionState) => provided
       );
@@ -190,7 +191,7 @@ describe("chakra-react-select specifics", () => {
         data: expect.any(Object),
       });
       // Exactly one of the rendered options should be the selected one.
-      expect(states.filter((s) => s.isSelected).length).toBe(1);
+      expect(states.filter((s) => s.isSelected)).toHaveLength(1);
     });
   });
 
@@ -330,7 +331,7 @@ describe("chakra-react-select specifics", () => {
 
   describe("useChakraSelectProps hook", () => {
     test("returns props consumable by an external Select", () => {
-      const onChange = vi.fn();
+      const onChange = vi.fn<() => void>();
       const { result } = renderHook(
         () =>
           useChakraSelectProps<Option, true>({
@@ -359,7 +360,7 @@ describe("chakra-react-select specifics", () => {
       // Caller props pass through.
       expect(props.isMulti).toBe(true);
       expect(props.options).toBe(OPTIONS);
-      expect(props.value).toEqual([OPTIONS[0]]);
+      expect(props.value).toStrictEqual([OPTIONS[0]]);
       expect(props.onChange).toBe(onChange);
     });
 

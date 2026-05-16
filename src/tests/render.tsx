@@ -1,9 +1,7 @@
 import type { ReactElement, ReactNode } from "react";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
-import {
-  render as rtlRender,
-  type RenderOptions,
-} from "@testing-library/react";
+import { render as rtlRender } from "@testing-library/react";
+import type { RenderOptions } from "@testing-library/react";
 
 export const Wrapper = ({ children }: { children: ReactNode }) => (
   <ChakraProvider value={defaultSystem}>{children}</ChakraProvider>

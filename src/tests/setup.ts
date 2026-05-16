@@ -1,3 +1,6 @@
+// Side-effect import — augments vitest's `expect` with jest-dom matchers
+// (`toBeInTheDocument`, `toHaveClass`, etc.). No named export to consume.
+// oxlint-disable-next-line import/no-unassigned-import
 import "@testing-library/jest-dom/vitest";
 import { cleanup } from "@testing-library/react";
 import { afterEach, vi } from "vitest";
@@ -5,6 +8,9 @@ import { afterEach, vi } from "vitest";
 // `@testing-library/react` only auto-registers `cleanup()` after each test
 // when `afterEach` is on the global (i.e. when `globals: true`). With
 // explicit imports we wire cleanup up manually so test DOMs don't leak.
+// This is a vitest setupFile, not a test file — there's no describe() block
+// to host the hook in, which is what vitest/require-top-level-describe wants.
+// oxlint-disable-next-line vitest/require-top-level-describe
 afterEach(() => {
   cleanup();
 });
@@ -36,10 +42,10 @@ if (typeof window !== "undefined" && !window.matchMedia) {
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
+    addListener: vi.fn<() => void>(),
+    removeListener: vi.fn<() => void>(),
+    addEventListener: vi.fn<() => void>(),
+    removeEventListener: vi.fn<() => void>(),
     dispatchEvent: vi.fn(() => false),
   });
 }

@@ -11,7 +11,8 @@
     "jsdoc",
     "jsx-a11y",
     "node",
-    "promise"
+    "promise",
+    "vitest"
   ],
   "categories": {
     "correctness": "error",
@@ -29,7 +30,7 @@
     "browser": true,
     "es2026": true
   },
-  "ignorePatterns": ["codemod/", "demo/", "src/tests/"],
+  "ignorePatterns": ["codemod/", "demo/"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": [
       "warn",
@@ -58,7 +59,15 @@
     "no-proto": "error",
     "no-regex-spaces": "warn",
     "no-sequences": "error",
-    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true,
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "no-var": "error",
     "no-void": "warn",
     "prefer-const": "error",
@@ -94,6 +103,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "capitalized-comments": "off",
     "id-length": "off",
+    "init-declarations": "off",
     "import/exports-last": "off",
     "import/group-exports": "off",
     "import/no-named-export": "off",
@@ -122,7 +132,27 @@
     "react-perf/jsx-no-new-function-as-prop": "off",
     "sort-imports": "off",
     "sort-keys": "off",
-    "unicorn/no-null": "off"
+    "unicorn/no-null": "off",
+
+    "vitest/consistent-test-it": [
+      "error",
+      { "fn": "test", "withinDescribe": "test" }
+    ],
+    "vitest/max-expects": "off",
+    "vitest/no-conditional-in-test": "off",
+    "vitest/no-hooks": "off",
+    "vitest/no-importing-vitest-globals": "off",
+    "vitest/no-standalone-expect": "off",
+    "vitest/prefer-called-times": "off",
+    "vitest/prefer-called-with": "off",
+    "vitest/prefer-expect-assertions": "off",
+    "vitest/prefer-lowercase-title": "off",
+    "vitest/prefer-strict-boolean-matchers": "off",
+    "vitest/prefer-to-be": "off",
+    "vitest/prefer-to-be-falsy": "off",
+    "vitest/prefer-to-be-truthy": "off",
+    "vitest/require-hook": "off",
+    "vitest/require-mock-type-parameters": "off"
   },
   "overrides": [
     {
@@ -132,6 +162,29 @@
         "@typescript-eslint/no-unsafe-argument": "off",
         "@typescript-eslint/no-unsafe-call": "off",
         "@typescript-eslint/no-unsafe-return": "off"
+      }
+    },
+    {
+      "files": ["src/tests/**/*.{ts,tsx}"],
+      "rules": {
+        // ─── TS strictness relaxed for spy/mock-style test code ───
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-useless-default-assignment": "off",
+
+        // ─── General style/correctness rules tests legitimately break ───
+        "no-console": "off",
+        "no-param-reassign": "off",
+        "no-underscore-dangle": "off",
+
+        // ─── JSX/a11y/perf rules not applicable to test fixtures ───
+        "jsx-a11y/no-autofocus": "off",
+        "react-perf/jsx-no-new-array-as-prop": "off",
+        "react-perf/jsx-no-new-object-as-prop": "off",
+
+        // ─── Unicorn opinions that don't fit test patterns ───
+        "unicorn/consistent-function-scoping": "off",
+        "unicorn/prefer-at": "off",
+        "unicorn/prefer-global-this": "off"
       }
     }
   ]
