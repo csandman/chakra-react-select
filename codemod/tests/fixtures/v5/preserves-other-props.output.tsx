@@ -6,6 +6,5 @@ export const Example = () => (
     placeholder="Select an option"
     options={[{ label: "A", value: "a" }]}
     selectedOptionColorScheme="blue"
-    onChange={(value) => console.log(value)}
-  />
+    onChange={(value) => console.log(value)} />
 );
