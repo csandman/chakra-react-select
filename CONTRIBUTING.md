@@ -5,10 +5,10 @@ welcome, from issue reports to PRs and documentation / write-ups.
 
 Before you open a PR:
 
-- In development, run `pnpm install` to setup the dependencies for the
-  core package and the demo. On a fresh clone, also run `pnpm prepare` once
-  to install the git hooks (lifecycle scripts are disabled via `.npmrc` for
-  supply-chain safety, so husky doesn't auto-install).
+- In development, run `pnpm install` to setup the dependencies for the core
+  package and the demo. Dependency install scripts are gated by pnpm's
+  [`allowBuilds`](./pnpm-workspace.yaml) whitelist for supply-chain safety;
+  husky's `prepare` script runs automatically on install.
 - Run `pnpm dev` to build (and watch) the package source, as well as run the
   demo project which can be viewed at http://localhost:5152.
 - Please ensure all the examples work correctly after your change.
