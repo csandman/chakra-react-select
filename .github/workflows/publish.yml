@@ -82,7 +82,7 @@ jobs:
       - name: Pack tarball
         id: pack
         run: |
-          TARBALL=$(npm pack)
+          TARBALL=$(npm pack --ignore-scripts)
           echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
 
       - name: Upload tarball artifact
