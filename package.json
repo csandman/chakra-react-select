@@ -62,8 +62,6 @@
     "lint:types": "tsc",
     "lint-fix": "oxlint -c .oxlintrc.json --fix",
     "prepare": "husky",
-    "prepublishOnly": "pnpm build && pnpm lint && pnpm test",
-    "postpublish": "git push --follow-tags",
     "lint:publish": "publint",
     "test": "vitest run",
     "test:watch": "vitest"
