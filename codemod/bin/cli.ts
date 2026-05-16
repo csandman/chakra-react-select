@@ -4,15 +4,23 @@
  *
  * @see {@link https://github.com/vercel/next.js/blob/dc9f30c/packages/next-codemod/bin/cli.ts}
  */
-import execa from "execa";
-import globby from "globby";
-import inquirer from "inquirer";
+import { execaSync } from "execa";
+import { globbySync } from "globby";
+import inquirer, { type DistinctQuestion } from "inquirer";
 import isGitClean from "is-git-clean";
-import meow from "meow";
-import path from "path";
-import { yellow } from "picocolors";
+import meow, { type AnyFlags } from "meow";
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import pc from "picocolors";
 
-export const jscodeshiftExecutable = require.resolve(".bin/jscodeshift");
+const { yellow } = pc;
+
+const require = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export const jscodeshiftExecutable =
+  require.resolve("jscodeshift/bin/jscodeshift.js");
 export const transformerDirectory = path.join(__dirname, "../", "transforms");
 
 export function checkGitStatus(force: boolean) {
@@ -21,8 +29,12 @@ export function checkGitStatus(force: boolean) {
   try {
     clean = isGitClean.sync(process.cwd());
     errorMessage = "Git directory is not clean";
-  } catch (err) {
-    if (err && err.stderr && err.stderr.includes("Not a git repository")) {
+  } catch (err: unknown) {
+    const stderr =
+      err && typeof err === "object" && "stderr" in err
+        ? String((err as { stderr: unknown }).stderr)
+        : "";
+    if (stderr.includes("Not a git repository")) {
       clean = true;
     }
   }
@@ -45,12 +57,26 @@ export function checkGitStatus(force: boolean) {
   }
 }
 
-export async function runTransform({ files, flags, transformer }) {
+interface RunTransformOptions {
+  files: string[];
+  transformer: string;
+  dry?: boolean;
+  print?: boolean;
+  runInBand?: boolean;
+  jscodeshift?: readonly string[];
+}
+
+export function runTransform({
+  files,
+  transformer,
+  dry,
+  print,
+  runInBand,
+  jscodeshift,
+}: RunTransformOptions) {
   const transformerPath = path.join(transformerDirectory, `${transformer}.js`);
 
-  let args = [];
-
-  const { dry, print, runInBand } = flags;
+  const args: string[] = [];
 
   if (dry) {
     args.push("--dry");
@@ -69,17 +95,17 @@ export async function runTransform({ files, flags, transformer }) {
 
   args.push("--extensions=tsx,ts,jsx,js");
 
-  args = args.concat(["--transform", transformerPath]);
+  args.push("--transform", transformerPath);
 
-  if (flags.jscodeshift) {
-    args = args.concat(flags.jscodeshift);
+  if (jscodeshift) {
+    args.push(...jscodeshift);
   }
 
-  args = args.concat(files);
+  args.push(...files);
 
   console.log(`Executing command: jscodeshift ${args.join(" ")}`);
 
-  const result = execa.sync(jscodeshiftExecutable, args, {
+  const result = execaSync(jscodeshiftExecutable, args, {
     stdio: "inherit",
     stripFinalNewline: false,
   });
@@ -96,17 +122,32 @@ const TRANSFORMER_INQUIRER_CHOICES = [
   },
 ];
 
-function expandFilePathsIfNeeded(filesBeforeExpansion) {
+function expandFilePathsIfNeeded(filesBeforeExpansion: string[]) {
   const shouldExpandFiles = filesBeforeExpansion.some((file) =>
     file.includes("*")
   );
   return shouldExpandFiles
-    ? globby.sync(filesBeforeExpansion)
+    ? globbySync(filesBeforeExpansion)
     : filesBeforeExpansion;
+}
+
+const flagsSchema = {
+  force: { type: "boolean" },
+  dry: { type: "boolean" },
+  print: { type: "boolean" },
+  runInBand: { type: "boolean" },
+  jscodeshift: { type: "string", isMultiple: true },
+  help: { type: "boolean", shortFlag: "h" },
+} as const satisfies AnyFlags;
+
+interface PromptAnswers {
+  files?: string;
+  transformer?: string;
 }
 
 export function run() {
   const cli = meow({
+    importMeta: import.meta,
     description: "Codemods for updating chakra-react-select in applications.",
     help: `
     Usage
@@ -119,14 +160,8 @@ export function run() {
       --print            Print transformed files to your terminal
       --jscodeshift  (Advanced) Pass options directly to jscodeshift
     `,
-    flags: {
-      boolean: ["force", "dry", "print", "help"],
-      string: ["_"],
-      alias: {
-        h: "help",
-      },
-    },
-  } as meow.Options<meow.AnyFlags>);
+    flags: flagsSchema,
+  });
 
   if (!cli.flags.dry) {
     checkGitStatus(!!cli.flags.force);
@@ -143,44 +178,54 @@ export function run() {
     process.exit(1);
   }
 
-  inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "files",
-        message: "On which files or directory should the codemods be applied?",
-        when: !cli.input[1],
-        default: ".",
-        filter: (files) => files.trim(),
-      },
-      {
-        type: "list",
-        name: "transformer",
-        message: "Which transform would you like to apply?",
-        when: !cli.input[0],
-        pageSize: TRANSFORMER_INQUIRER_CHOICES.length,
-        choices: TRANSFORMER_INQUIRER_CHOICES,
-      },
-    ])
-    .then((answers) => {
-      const { files, transformer } = answers;
+  const questions: DistinctQuestion<PromptAnswers>[] = [
+    {
+      type: "input",
+      name: "files",
+      message: "On which files or directory should the codemods be applied?",
+      when: !cli.input[1],
+      default: ".",
+      filter: (files: string) => files.trim(),
+    },
+    {
+      type: "select",
+      name: "transformer",
+      message: "Which transform would you like to apply?",
+      when: !cli.input[0],
+      pageSize: TRANSFORMER_INQUIRER_CHOICES.length,
+      choices: TRANSFORMER_INQUIRER_CHOICES,
+    },
+  ];
 
-      const filesBeforeExpansion = cli.input[1] || files;
-      const filesExpanded = expandFilePathsIfNeeded([filesBeforeExpansion]);
+  inquirer.prompt<PromptAnswers>(questions).then((answers) => {
+    const { files, transformer } = answers;
 
-      const selectedTransformer = cli.input[0] || transformer;
+    const filesBeforeExpansion = cli.input[1] || files;
+    if (!filesBeforeExpansion) {
+      console.log("No files or directory provided.");
+      return null;
+    }
 
-      if (!filesExpanded.length) {
-        console.log(
-          `No files found matching ${filesBeforeExpansion.join(" ")}`
-        );
-        return null;
-      }
+    const filesExpanded = expandFilePathsIfNeeded([filesBeforeExpansion]);
 
-      return runTransform({
-        files: filesExpanded,
-        flags: cli.flags,
-        transformer: selectedTransformer,
-      });
+    const selectedTransformer = cli.input[0] || transformer;
+    if (!selectedTransformer) {
+      console.log("No transformer selected.");
+      return null;
+    }
+
+    if (!filesExpanded.length) {
+      console.log(`No files found matching ${filesBeforeExpansion}`);
+      return null;
+    }
+
+    return runTransform({
+      files: filesExpanded,
+      transformer: selectedTransformer,
+      dry: cli.flags.dry,
+      print: cli.flags.print,
+      runInBand: cli.flags.runInBand,
+      jscodeshift: cli.flags.jscodeshift,
     });
+  });
 }
