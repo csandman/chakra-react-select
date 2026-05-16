@@ -71,8 +71,9 @@ const useChakraSelectProps = <
     unstyled: true,
     ...props,
     // aria-invalid can be passed to react-select, so we allow that to
-    // override the `isInvalid` prop
-    "aria-invalid": props["aria-invalid"] ?? field?.invalid,
+    // override. Otherwise, mirror whatever `invalid` value the user chose
+    // (direct prop or inherited from a wrapping <Field.Root invalid>).
+    "aria-invalid": props["aria-invalid"] ?? invalid ?? field?.invalid,
   };
 
   return selectProps;
