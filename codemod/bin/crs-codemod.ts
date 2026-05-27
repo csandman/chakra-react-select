@@ -6,4 +6,6 @@
  *
  * @see {@link https://github.com/vercel/next.js/blob/dc9f30c1064ea72aef2fd046da2f1d2722b89735/packages/next-codemod/bin/next-codemod.ts}
  */
-require("./cli").run();
+import { run } from "./cli.js";
+
+run();
