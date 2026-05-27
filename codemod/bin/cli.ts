@@ -4,15 +4,14 @@
  *
  * @see {@link https://github.com/vercel/next.js/blob/dc9f30c/packages/next-codemod/bin/cli.ts}
  */
-import { execaSync } from "execa";
+import { Command } from "commander";
 import { globbySync } from "globby";
-import inquirer, { type DistinctQuestion } from "inquirer";
-import isGitClean from "is-git-clean";
-import meow, { type AnyFlags } from "meow";
+import { execFileSync, spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
+import prompts from "prompts";
 
 const { yellow } = pc;
 
@@ -27,7 +26,11 @@ export function checkGitStatus(force: boolean) {
   let clean = false;
   let errorMessage = "Unable to determine if git directory is clean";
   try {
-    clean = isGitClean.sync(process.cwd());
+    const stdout = execFileSync("git", ["status", "--porcelain"], {
+      cwd: process.cwd(),
+      encoding: "utf8",
+    });
+    clean = stdout.trim().length === 0;
     errorMessage = "Git directory is not clean";
   } catch (err: unknown) {
     const stderr =
@@ -63,7 +66,7 @@ interface RunTransformOptions {
   dry?: boolean;
   print?: boolean;
   runInBand?: boolean;
-  jscodeshift?: readonly string[];
+  jscodeshift?: string[];
 }
 
 export function runTransform({
@@ -89,6 +92,7 @@ export function runTransform({
   }
 
   args.push("--verbose=2");
+  args.push("--parser=tsx");
 
   args.push("--ignore-pattern=**/node_modules/**");
   args.push("--ignore-pattern=**/.next/**");
@@ -105,19 +109,19 @@ export function runTransform({
 
   console.log(`Executing command: jscodeshift ${args.join(" ")}`);
 
-  const result = execaSync(jscodeshiftExecutable, args, {
-    stdio: "inherit",
-    stripFinalNewline: false,
-  });
+  const result = spawnSync(jscodeshiftExecutable, args, { stdio: "inherit" });
 
-  if (result.failed) {
-    throw new Error(`jscodeshift exited with code ${result.exitCode}`);
+  if (result.error) {
+    throw result.error;
+  }
+  if (result.status !== 0) {
+    throw new Error(`jscodeshift exited with code ${result.status}`);
   }
 }
 
-const TRANSFORMER_INQUIRER_CHOICES = [
+const TRANSFORMER_CHOICES = [
   {
-    name: "v5: Remove or replace deprecated props",
+    title: "v5: Remove or replace deprecated props",
     value: "v5",
   },
 ];
@@ -131,101 +135,92 @@ function expandFilePathsIfNeeded(filesBeforeExpansion: string[]) {
     : filesBeforeExpansion;
 }
 
-const flagsSchema = {
-  force: { type: "boolean" },
-  dry: { type: "boolean" },
-  print: { type: "boolean" },
-  runInBand: { type: "boolean" },
-  jscodeshift: { type: "string", isMultiple: true },
-  help: { type: "boolean", shortFlag: "h" },
-} as const satisfies AnyFlags;
-
-interface PromptAnswers {
-  files?: string;
-  transformer?: string;
+interface ProgramOptions {
+  force?: boolean;
+  dry?: boolean;
+  print?: boolean;
+  runInBand?: boolean;
+  jscodeshift?: string[];
 }
 
-export function run() {
-  const cli = meow({
-    importMeta: import.meta,
-    description: "Codemods for updating chakra-react-select in applications.",
-    help: `
-    Usage
-      $ npx crs-codemod <transform> <path> <...options>
-        transform    One of the choices from https://github.com/vercel/next.js/tree/canary/packages/next-codemod
-        path         Files or directory to transform. Can be a glob like pages/**.js
-    Options
-      --force            Bypass Git safety checks and forcibly run codemods
-      --dry              Dry run (no changes are made to files)
-      --print            Print transformed files to your terminal
-      --jscodeshift  (Advanced) Pass options directly to jscodeshift
-    `,
-    flags: flagsSchema,
-  });
+export async function run() {
+  const program = new Command()
+    .description("Codemods for updating chakra-react-select in applications.")
+    .argument("[transform]", "codemod transform to apply")
+    .argument("[path]", "files or directory to transform (supports globs)")
+    .option("--force", "bypass Git safety checks and forcibly run codemods")
+    .option("--dry", "dry run (no changes are made to files)")
+    .option("--print", "print transformed files to your terminal")
+    .option(
+      "--run-in-band",
+      "run in a single process (slower but useful for debugging)"
+    )
+    .option(
+      "--jscodeshift <options...>",
+      "(advanced) pass options directly to jscodeshift"
+    )
+    .parse(process.argv);
 
-  if (!cli.flags.dry) {
-    checkGitStatus(!!cli.flags.force);
+  const opts = program.opts<ProgramOptions>();
+  const [inputTransform, inputPath] = program.args;
+
+  if (!opts.dry) {
+    checkGitStatus(!!opts.force);
   }
 
   if (
-    cli.input[0] &&
-    !TRANSFORMER_INQUIRER_CHOICES.find((x) => x.value === cli.input[0])
+    inputTransform &&
+    !TRANSFORMER_CHOICES.find((x) => x.value === inputTransform)
   ) {
     console.error("Invalid transform choice, pick one of:");
-    console.error(
-      TRANSFORMER_INQUIRER_CHOICES.map((x) => `- ${x.value}`).join("\n")
-    );
+    console.error(TRANSFORMER_CHOICES.map((x) => `- ${x.value}`).join("\n"));
     process.exit(1);
   }
 
-  const questions: DistinctQuestion<PromptAnswers>[] = [
-    {
-      type: "input",
-      name: "files",
-      message: "On which files or directory should the codemods be applied?",
-      when: !cli.input[1],
-      default: ".",
-      filter: (files: string) => files.trim(),
-    },
-    {
-      type: "select",
-      name: "transformer",
-      message: "Which transform would you like to apply?",
-      when: !cli.input[0],
-      pageSize: TRANSFORMER_INQUIRER_CHOICES.length,
-      choices: TRANSFORMER_INQUIRER_CHOICES,
-    },
-  ];
+  const answers = await prompts(
+    [
+      {
+        type: inputPath ? null : "text",
+        name: "files",
+        message: "On which files or directory should the codemods be applied?",
+        initial: ".",
+        format: (val: string) => val.trim(),
+      },
+      {
+        type: inputTransform ? null : "select",
+        name: "transformer",
+        message: "Which transform would you like to apply?",
+        choices: TRANSFORMER_CHOICES,
+      },
+    ],
+    { onCancel: () => process.exit(1) }
+  );
 
-  inquirer.prompt<PromptAnswers>(questions).then((answers) => {
-    const { files, transformer } = answers;
+  const filesBeforeExpansion = inputPath ?? answers.files;
+  if (!filesBeforeExpansion) {
+    console.log("No files or directory provided.");
+    return;
+  }
 
-    const filesBeforeExpansion = cli.input[1] || files;
-    if (!filesBeforeExpansion) {
-      console.log("No files or directory provided.");
-      return null;
-    }
+  const selectedTransformer = inputTransform ?? answers.transformer;
+  if (!selectedTransformer) {
+    console.log("No transformer selected.");
+    return;
+  }
 
-    const filesExpanded = expandFilePathsIfNeeded([filesBeforeExpansion]);
+  const filesExpanded = expandFilePathsIfNeeded([filesBeforeExpansion]);
 
-    const selectedTransformer = cli.input[0] || transformer;
-    if (!selectedTransformer) {
-      console.log("No transformer selected.");
-      return null;
-    }
+  if (!filesExpanded.length) {
+    console.log(`No files found matching ${filesBeforeExpansion}`);
+    return;
+  }
 
-    if (!filesExpanded.length) {
-      console.log(`No files found matching ${filesBeforeExpansion}`);
-      return null;
-    }
-
-    return runTransform({
-      files: filesExpanded,
-      transformer: selectedTransformer,
-      dry: cli.flags.dry,
-      print: cli.flags.print,
-      runInBand: cli.flags.runInBand,
-      jscodeshift: cli.flags.jscodeshift,
-    });
+  runTransform({
+    files: filesExpanded,
+    transformer: selectedTransformer,
+    dry: opts.dry,
+    print: opts.print,
+    runInBand: opts.runInBand,
+    jscodeshift: opts.jscodeshift,
   });
 }

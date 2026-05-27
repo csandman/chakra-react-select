@@ -8,4 +8,4 @@
  */
 import { run } from "./cli.js";
 
-run();
+run().catch(console.error);
