@@ -15,17 +15,17 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "chakra-react-select": "workspace:*",
-    "framer-motion": "^12.38.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "framer-motion": "^12.40.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "oxlint": "^1",
+    "@vitejs/plugin-react": "^6.0.2",
+    "oxlint": "^1.67.0",
     "oxlint-tsgolint": "latest",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.12"
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
   }
 }
