@@ -43,6 +43,9 @@ jobs:
       - name: Lint publish (publint)
         run: pnpm lint:publish
 
+      - name: Run tests
+        run: pnpm test
+
   build:
     runs-on: ubuntu-latest
     permissions:

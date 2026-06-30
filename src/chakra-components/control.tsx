@@ -191,7 +191,7 @@ export const DropdownIndicator = <
     position: "static",
     marginRight: 2,
     marginLeft: 1,
-    pointerEvents: "none",
+    pointerEvents: "auto",
   };
   const dropdownIndicatorSx = chakraStyles?.dropdownIndicator
     ? chakraStyles.dropdownIndicator(initialDropdownIndicatorSx, props)
